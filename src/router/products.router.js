@@ -101,11 +101,12 @@ router.put('/:id', (req,res)=>{
     if (indexProduct < 0){
         return res.status(404).json({error: 'product not found'})
     } else{
-        product.id===id
+        product.id=id
         products[indexProduct] = product
+       
+     
     }
    
-    
     // products.id == id
     res.json ({status:'succes', message: 'product updated'})
 })
