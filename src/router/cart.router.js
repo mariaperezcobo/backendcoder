@@ -32,7 +32,7 @@ const router = Router()
 
 router.get('/', (req,res)=>{
 res.send(carts)
-console.log(carts)
+
 })
 
 router.get('/:cid', async (req,res)=>{
@@ -50,22 +50,24 @@ router.get('/:cid', async (req,res)=>{
 
 let cart=[]
 
+
 //crear carrito
 router.post('/', (req,res)=>{
     try{
-        const cart = req.body
+        const id = carts.length + 1
+        let pid = 0
+        let products =[]
+       
+        const cart ={"id": id, "productos": products}
+       
+      
 
-        if(!cart.title || cart.price || cart.stock || cart.description || cart.code || cart.status || cart.code || cart.id ){
-            return res.status(400).send({error: 'datos incorrectos'})
-        }
-        cart.id = carts.length + 1
         carts.push(cart)
         res.send(carts)
         // res.status(201).send({status: 'succes', message: 'carrito creado'})
         
-
-    }catch{
-        res.status(400).send({error: 'faltan datos'})
+    }catch (err){
+        res.status(500).json({error: 'error del servicor'})
     }
 })
 
@@ -88,9 +90,10 @@ router.post('/:cid/products/:pid', async (req,res)=>{
             return res.status(400).json({error: 'no se encontro producto!'})
         }
         
-        if(!carts[indexCart].products){
-            carts[indexCart].products = []
-        }
+        //si no hay productos en el carrito, inicio un array de productos
+        // if(!carts[indexCart].products){
+        //     carts[indexCart].products = []
+        // }
         
         const productoBuscado = carts[indexCart].products.find(p=> p.pid === pid)
         
@@ -105,7 +108,7 @@ router.post('/:cid/products/:pid', async (req,res)=>{
         res.send(carts)
 
     } catch (err) {
-        res.status(400).json({error: 'no se puede agregar el producto al carrito'})
+        res.status(500).json({error: 'no se puede agregar el producto al carrito'})
         console.error(err);
     }
     
