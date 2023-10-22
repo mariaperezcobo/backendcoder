@@ -4,8 +4,6 @@
     "description":"Calzas estampadas",
     "price":20000,
     "thumbnail":".img.jpg",
-    "category": "calzas",
-    "status": true,
     "code":61,
     "stock":29},
 
@@ -15,8 +13,6 @@
     "price":28000,
     "thumbnail":".img.jpg",
     "code":2,
-    "category": "calzas",
-    "status": true,
     "stock":15},
 
     {"id":3,
@@ -25,8 +21,6 @@
     "price":16000,
     "thumbnail":".img.jpg",
     "code":52,
-    "category": "calzas",
-    "status": true,
     "stock":22},
 
     {"id":4,
@@ -34,8 +28,6 @@
     "description":"Remera banca y gris",
     "price":16000,
     "thumbnail":".img.jpg",
-    "category": "remeras",
-    "status": true,
     "code":15,
     "stock":22},
 
@@ -44,8 +36,6 @@
     "description":"Remera rosa",
     "price":16000,
     "thumbnail":".img.jpg",
-    "category": "remeras",
-    "status": true,
     "code":53,
     "stock":22}
 ]

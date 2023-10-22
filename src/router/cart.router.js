@@ -1,14 +1,31 @@
 import { Router } from "express"
+import ProductManager from "../managers/productManager.js"
+
+const productManager = new ProductManager()
 
 let carts = 
 [
-    {"id":2,
-    "title":"Calzas Madrid"},
-    
-    {"id":2,
-    "title":"Calzas Madrid"},
-    {"id":3,
-    "title":"Calzas Madrid"}
+    {
+    "id":1,
+    "products":[
+        { "pid":1,
+        "quantity":1}
+        ]
+    },
+    {
+    "id":2,
+    "products":[
+        { "pid":2,
+        "quantity":1}
+        ]
+    },
+    {
+    "id":3,
+    "products":[
+        { "pid":1,
+        "quantity":1}
+        ]
+    } 
 ]
 
 const router = Router()
@@ -22,7 +39,7 @@ router.get('/:cid', async (req,res)=>{
     try{
         const cid = parseInt(req.params.cid)
 
-        const cartBuscado = carts.find(c => c.id === cid)
+        const cartBuscado = carts.find(c => c.id = cid)
 
         res.send(cartBuscado)
 
@@ -32,11 +49,13 @@ router.get('/:cid', async (req,res)=>{
 })
 
 let cart=[]
+
+//crear carrito
 router.post('/', (req,res)=>{
     try{
         const cart = req.body
 
-        if(!cart.title || cart.price || cart.stock || cart.description || cart.code || cart.status || cart.code){
+        if(!cart.title || cart.price || cart.stock || cart.description || cart.code || cart.status || cart.code || cart.id ){
             return res.status(400).send({error: 'datos incorrectos'})
         }
         cart.id = carts.length + 1
@@ -50,29 +69,47 @@ router.post('/', (req,res)=>{
     }
 })
 
-
-router.post('/:cid/products/:pid', (req,res)=>{
+//para agregar un producto al carrito
+router.post('/:cid/products/:pid', async (req,res)=>{
     try{
+        const products = await productManager.getProducts()
+
         const pid = parseInt(req.params.pid)
         const cid = parseInt(req.params.cid)
 
-        const carritoBuscado = carts.find(c=> c.id === cid)
+        const indexCart = carts.findIndex(c=> c.id === cid)
 
-        if(carritoBuscado){
-            const productAgregar = products.find (p=>p.id ===pid)
-            if(!productAgregar){
-                return res.status(400).send({error: 'datos incorrectos'})
+        if(indexCart<0){
+                return res.status(400).json({error: 'carrito no encontrado'})
             }
-            carritoBuscado.push(productAgregar)
+
+        const productAgregar = products.find (p=>p.id === pid)
+        if(!productAgregar){
+            return res.status(400).json({error: 'no se encontro producto!'})
         }
         
-       console.log(productAgregar)
-       
-        res.status(201).send({status: 'succes', message: 'product agregado al carrito'})
-        res.send(cart[cid])
-    }catch{
-        res.status(400).json({error: 'faltan datos'})
+        if(!carts[indexCart].products){
+            carts[indexCart].products = []
+        }
+        
+        const productoBuscado = carts[indexCart].products.find(p=> p.pid === pid)
+        
+            
+       if (productoBuscado) {
+        productoBuscado.quantity ++
+       }
+         else{
+            carts[indexCart].products.push({pid: pid, quantity: 1})
+            
+        }
+        res.send(carts)
+
+    } catch (err) {
+        res.status(400).json({error: 'no se puede agregar el producto al carrito'})
+        console.error(err);
     }
-})
+    
+}
+)
 
 export default router

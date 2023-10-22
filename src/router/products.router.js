@@ -1,48 +1,19 @@
 import {Router} from 'express'
 import ProductManager from '../managers/productManager.js'
+import fs from 'fs'
 
 const productManager = new ProductManager()
 
 const router = Router()
 
-let products = [
-    {"id":1,
-    "title":"Calzas Lisboa",
-    "description":"Calzas estampadas",
-    "price":20000,
-    "thumbnail":".img.jpg",
-    "category": "calzas",
-    "status": true,
-    "code":61,
-    "stock":29},
 
-    {"id":2,
-    "title":"Calzas Londres",
-    "description":"Calzas grises",
-    "price":28000,
-    "thumbnail":".img.jpg",
-    "code":2,
-    "category": "calzas",
-    "status": true,
-    "stock":15},
-
-    {"id":3,
-    "title":"Calzas Madrid",
-    "description":"Calzas estampadas blancas y azules",
-    "price":16000,
-    "thumbnail":".img.jpg",
-    "code":52,
-    "category": "calzas",
-    "status": true,
-    "stock":22},
-]
-
-router.get('/', (req,res)=> res.json(products))
-
+//para ver un producto
 router.get('/', async (req,res)=>{
-    const limit = parseInt(req.query.limit)
-    
+    // const limit = parseInt(req.query.limit)
     try{
+
+        const products = await productManager.getProducts()
+        const limit = parseInt(req.query.limit)
         if(limit){
             const product = products.slice (0,limit)
             res.json(product)
@@ -55,28 +26,35 @@ router.get('/', async (req,res)=>{
         }
     })
 
-router.post('/',  (req, res)=>{
+    //para agregar un producto
+router.post('/', async (req, res)=>{
     try{
+        const products = await productManager.getProducts()
         const product = req.body
 
-    if (!product.title || !product.price || !product.stock || !product.description || !product.code || !product.status || !product.code){
+    if (!product.title || !product.price || !product.stock || !product.description || !product.category || !product.status || !product.code){
         return res.status(400).json({error: 'faltan datos'})
     }
     product.id = products.length + 1
     products.push(product)
 
-    res.status(201).send({status: 'succes', message: 'product created'})
-    res.send(products)
+    try {
+        await fs.promises.writeFile('./files/products.json', JSON.stringify(products));
+        res.status(201).json({ status: 'success', message: 'Producto creado' });
+    } catch (err) {
+        console.error(err); // Registra el error en la consola para depuración
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
 
-    } catch (err){
-        res.send('error')
+    } catch (err) {
+        res.status(500).json({ error: 'Error interno del servidor' })
     }   
     })
 
     router.get('/:id', async (req, res)=>{
        try{
         const id = parseInt(req.params.id)
-    
+        const products = await productManager.getProducts()
         const product = products.find (product => product.id === id)
         // res.json(product)
         res.send(product)
@@ -88,12 +66,13 @@ router.post('/',  (req, res)=>{
     )
 
    
-
-router.put('/:id', (req,res)=>{
+//para actualizar un producto
+router.put('/:id', async (req,res)=>{
+    const products = await productManager.getProducts()
     const id = parseInt(req.params.id)
     const product = req.body
 
-    if (!product.title || !product.price || !product.stock || !product.description || !product.code || !product.status || !product.code){
+    if (!product.title || !product.price || !product.stock || !product.description || !product.code || !product.status || !product.category){
         return res.status(400).json({error: 'faltan datos'})
     }
 
@@ -103,27 +82,42 @@ router.put('/:id', (req,res)=>{
     } else{
         product.id=id
         products[indexProduct] = product
-       
-     
+     try {
+            await fs.promises.writeFile('./files/products.json', JSON.stringify(products));
+            res.status(201).json({ status: 'success', message: 'Producto creado' });
+        } catch (err) {
+            console.error(err); // Registra el error en la consola para depuración
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
     }
    
-    // products.id == id
     res.json ({status:'succes', message: 'product updated'})
 })
 
 
-
+//para eliminar un producto
 router.delete('/:id', async (req, res)=>{
    try{
+
+    let products = await productManager.getProducts()
     const id = parseInt(req.params.id)
+
     if (!products.some(p=> p.id == id)){
         return res.status(404).json({error: 'product not found'})
     }
   products = products.filter (p=> p.id !== id)
 
-  res.send({status:'succes', message:'product deleted'})
+  try {
+    await fs.promises.writeFile('./files/products.json', JSON.stringify(products));
+
+    res.status(201).json({ status: 'success', message: 'Producto eliminado' });
+} catch (err) {
+    console.error(err); // Registra el error en la consola para depuración
+    res.status(500).json({ error: 'Error interno del servidor' });
+}
+
    } catch{
-    res.status(404).json({error: 'product not found'})
+    res.status(404).json({error: 'product not found!!'})
    } 
 })
 
