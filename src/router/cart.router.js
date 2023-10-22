@@ -1,42 +1,55 @@
 import { Router } from "express"
 import ProductManager from "../managers/productManager.js"
+import CartManager from '../managers/cartManager.js'
 
+import fs from 'fs'
+
+const cartManager = new CartManager()
 const productManager = new ProductManager()
 
-let carts = 
-[
-    {
-    "id":1,
-    "products":[
-        { "pid":1,
-        "quantity":1}
-        ]
-    },
-    {
-    "id":2,
-    "products":[
-        { "pid":2,
-        "quantity":1}
-        ]
-    },
-    {
-    "id":3,
-    "products":[
-        { "pid":1,
-        "quantity":1}
-        ]
-    } 
-]
+// let carts = 
+// [
+//     {
+//     "id":1,
+//     "products":[
+//         { "pid":1,
+//         "quantity":1}
+//         ]
+//     },
+//     {
+//     "id":2,
+//     "products":[
+//         { "pid":2,
+//         "quantity":1}
+//         ]
+//     },
+//     {
+//     "id":3,
+//     "products":[
+//         { "pid":1,
+//         "quantity":1}
+//         ]
+//     } 
+// ]
 
 const router = Router()
 
-router.get('/', (req,res)=>{
-res.send(carts)
+router.get('/', async (req,res)=>{
+try{
+    const carts = await cartManager.getCarts()
 
-})
+    res.send(carts)
+}catch (err){
+    res.send('error')
+}
+}
+)
+
 
 router.get('/:cid', async (req,res)=>{
     try{
+        const carts = await cartManager.getCarts()
+
         const cid = parseInt(req.params.cid)
 
         const cartBuscado = carts.find(c => c.id === cid)
@@ -56,18 +69,26 @@ let cart=[]
 
 
 //crear carrito
-router.post('/', (req,res)=>{
+router.post('/', async(req,res)=>{
     try{
+        const carts = await cartManager.getCarts()
+
         const id = carts.length + 1
         let pid = 0
         let products =[]
        
         const cart ={"id": id, "productos": products}
-       
-      
 
         carts.push(cart)
-        res.send(carts)
+
+        try {
+            await fs.promises.writeFile('./files/carts.json', JSON.stringify(carts));
+            res.status(201).json({ status: 'success', message: 'cart creado' });
+        } catch (err) {
+            console.error(err); // Registra el error en la consola para depuración
+            res.status(500).json({ error: 'Error interno del servidor' });
+        }
+        // res.send(carts)
         // res.status(201).send({status: 'succes', message: 'carrito creado'})
         
     }catch (err){
@@ -79,6 +100,7 @@ router.post('/', (req,res)=>{
 router.post('/:cid/products/:pid', async (req,res)=>{
     try{
         const products = await productManager.getProducts()
+        const carts = await cartManager.getCarts()
 
         const pid = parseInt(req.params.pid)
         const cid = parseInt(req.params.cid)
@@ -108,6 +130,14 @@ router.post('/:cid/products/:pid', async (req,res)=>{
          else{
             carts[indexCart].products.push({pid: pid, quantity: 1})
             
+        }
+
+        try {
+            await fs.promises.writeFile('./files/carts.json', JSON.stringify(carts));
+            res.status(201).json({ status: 'success', message: 'prod agregado al carrito' });
+        } catch (err) {
+            console.error(err); // Registra el error en la consola para depuración
+            res.status(500).json({ error: 'Error interno del servidor' });
         }
         res.send(carts)
 
