@@ -39,12 +39,16 @@ router.get('/:cid', async (req,res)=>{
     try{
         const cid = parseInt(req.params.cid)
 
-        const cartBuscado = carts.find(c => c.id = cid)
-
-        res.send(cartBuscado)
+        const cartBuscado = carts.find(c => c.id === cid)
+        if(!cartBuscado){
+            res.status(404).json({error: 'cart not found'})
+        }else{
+            res.send(cartBuscado)
+        }
+        
 
     }catch{
-        res.status(404).json({error: 'product not found'})
+        res.status(404).json({error: 'cart not found'})
        }  
 })
 
