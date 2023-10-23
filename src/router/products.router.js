@@ -56,13 +56,17 @@ router.post('/', async (req, res)=>{
         const id = parseInt(req.params.id)
         const products = await productManager.getProducts()
         const product = products.find (product => product.id === id)
-        // res.json(product)
-        res.send(product)
-       }catch{
+
+        if(product){
+            res.send(product)
+        }else{
+            res.status(404).json({error: 'product not found'})
+        }
+        
+       }catch {
         res.status(404).json({error: 'product not found'})
        } 
         }
-        
     )
 
    

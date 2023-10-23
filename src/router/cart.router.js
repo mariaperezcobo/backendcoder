@@ -139,11 +139,11 @@ router.post('/:cid/products/:pid', async (req,res)=>{
             console.error(err); // Registra el error en la consola para depuración
             res.status(500).json({ error: 'Error interno del servidor' });
         }
-        res.send(carts)
+        // res.send(carts)
 
     } catch (err) {
         res.status(500).json({error: 'no se puede agregar el producto al carrito'})
-        console.error(err);
+       
     }
     
 }

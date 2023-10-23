@@ -43,70 +43,70 @@ async getProducts(limit){
     }
     }
 
-getProductById = async (idProduct)=>{
+// getProductById = async (idProduct)=>{
 
-    try{
-        const products = await this.getProducts()
+//     try{
+//         const products = await this.getProducts()
 
-        const validarID = await products.find(product => product.id === idProduct)
-        if (!validarID) {console.log("el producto no existe")}
-         else {
-            console.log('el producto buscado es', {validarID})
+//         const validarID = await products.find(product => product.id === idProduct)
+//         if (!validarID) {console.log("el producto no existe")}
+//          else {
+//             console.log('el producto buscado es', {validarID})
             
-         } 
-         return validarID
+//          } 
+//          return validarID
 
-    }catch (error){
-        console.error('error', error)
-        return []
+//     }catch (error){
+//         console.error('error', error)
+//         return []
  
-    }
+//     }
 
-}
+// }
 
-getNextID = () => {
-    const count = this.products.length
-    if (count === 0) return 1
-    const lastProduct = this.products[count-1]
-    return lastProduct.id + 1
-}
+// getNextID = () => {
+//     const count = this.products.length
+//     if (count === 0) return 1
+//     const lastProduct = this.products[count-1]
+//     return lastProduct.id + 1
+// }
 
-createProduct= async (title, description, price, thumbnail, code, stock) =>{
+// createProduct= async (title, description, price, thumbnail, code, stock) =>{
        
-    const products = await this.getProducts()
+//     const products = await this.getProducts()
 
-    if (!title || !description || !price || !thumbnail || !code || !stock ) return console.log("Campos incompletos")
+//     if (!title || !description || !price || !thumbnail || !code || !stock ) return console.log("Campos incompletos")
     
-    if (this.products.some((product)=> product.code === code)) return console.log ("El producto ya existe")
+//     if (this.products.some((product)=> product.code === code)) return console.log ("El producto ya existe")
 
-const id = this.getNextID()
+// const id = this.getNextID()
 
-const newProduct={
-    id,
-    title,
-    description, 
-    price, 
-    thumbnail, 
-    code, 
-    stock
-}
-this.products.push(newProduct)
+// const newProduct={
+//     id,
+//     title,
+//     description, 
+//     price, 
+//     thumbnail, 
+//     code, 
+//     stock
+// }
+// this.products.push(newProduct)
 
-try{
-    await fs.promises.writeFile(this.filename, JSON.stringify(products))
-    console.log('producto creado')
+// try{
+//     await fs.promises.writeFile(this.filename, JSON.stringify(products))
+//     console.log('producto creado')
         
-}catch (error){
-    console.error(error)
-}
+// }catch (error){
+//     console.error(error)
+// }
 
-try{
-   const products = await fs.promises.readFile(this.filename, this.format)
-    this.products = JSON.parse(products)
-}catch (error){
-    console.error(error)
-}
+// try{
+//    const products = await fs.promises.readFile(this.filename, this.format)
+//     this.products = JSON.parse(products)
+// }catch (error){
+//     console.error(error)
+// }
 
-} 
+// } 
 }
 
