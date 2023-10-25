@@ -88,7 +88,7 @@ router.put('/:id', async (req,res)=>{
         products[indexProduct] = product
      try {
             await fs.promises.writeFile('./files/products.json', JSON.stringify(products));
-            res.status(201).json({ status: 'success', message: 'Producto creado' });
+            res.status(201).json({ status: 'success', message: 'Producto modificado' });
         } catch (err) {
             console.error(err); // Registra el error en la consola para depuración
             res.status(500).json({ error: 'Error interno del servidor' });
