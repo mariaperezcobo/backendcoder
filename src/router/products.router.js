@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import ProductManager from '../managers/productManager.js'
 import fs from 'fs'
+import __dirname from '../utils.js'
 
 const productManager = new ProductManager()
 
@@ -39,7 +40,7 @@ router.post('/', async (req, res)=>{
     products.push(product)
 
     try {
-        await fs.promises.writeFile('./files/products.json', JSON.stringify(products));
+        await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
         res.status(201).json({ status: 'success', message: 'Producto creado' });
     } catch (err) {
         console.error(err); // Registra el error en la consola para depuración
@@ -87,7 +88,7 @@ router.put('/:id', async (req,res)=>{
         product.id=id
         products[indexProduct] = product
      try {
-            await fs.promises.writeFile('./files/products.json', JSON.stringify(products));
+            await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
             res.status(201).json({ status: 'success', message: 'Producto modificado' });
         } catch  {
             
@@ -112,7 +113,7 @@ router.delete('/:id', async (req, res)=>{
   products = products.filter (p=> p.id !== id)
 
   try {
-    await fs.promises.writeFile('./files/products.json', JSON.stringify(products));
+    await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
 
     res.status(201).json({ status: 'success', message: 'Producto eliminado' });
 } catch (err) {

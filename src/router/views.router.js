@@ -10,8 +10,6 @@ const foods = [
 ]
 
 router.get ('/', (req, res)=> {
-  
-    
     const user={
         name: 'maria',
         isAdmin: true
@@ -20,8 +18,13 @@ router.get ('/', (req, res)=> {
     res.render('index',{
         user,
         title: 'my page',
+        style: 'index.css',
         foods
     })
+})
+
+router.get('/register', (req, res)=>{
+    res.render('register',{})
 })
 
 export default router

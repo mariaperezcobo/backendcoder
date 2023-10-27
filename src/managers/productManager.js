@@ -1,11 +1,11 @@
 
 import fs from 'fs'
-
+import __dirname from '../utils.js'
 
 export default class ProductManager {
 
     constructor () {
-        this.filename = './files/products.json'
+        this.filename = __dirname + '/files/products.json'
         this.format = 'utf-8'
         this.loadProducts()
         

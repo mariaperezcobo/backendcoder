@@ -1,9 +1,10 @@
 import fs from 'fs'
+import __dirname from '../utils.js'
 
 export default class CartManager {
 
     constructor () {
-        this.filename = './files/carts.json'
+        this.filename = __dirname + '/files/carts.json'
         this.format = 'utf-8'
         this.loadCarts()
         
