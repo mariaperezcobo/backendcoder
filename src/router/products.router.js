@@ -17,13 +17,16 @@ router.get('/', async (req,res)=>{
         const limit = parseInt(req.query.limit)
         if(limit){
             const product = products.slice (0,limit)
-            res.json(product)
+            res.send(product)
+            // res.render(products)
          }else{
             res.send(products)
+           
             console.log(req.params)
          }
         } catch (err){
             res.send('error')
+            // res.render('error')
         }
     })
 

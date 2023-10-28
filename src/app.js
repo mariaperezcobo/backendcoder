@@ -4,6 +4,9 @@ import routerCarts from './router/cart.router.js'
 import handlebars from 'express-handlebars'
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
+import userRouter from './router/users.router.js'
+// import {Server} from 'socket.io'
+
 
 const app = express()
 
@@ -21,6 +24,9 @@ app.use('/api/carts', routerCarts)
 
 app.use('/', viewsRouter)
 
-
+app.use('/api/user', userRouter)
+// app.use('/api/home', homeRouter)
 
 app.listen (8080, ()=> console.log('running..'))
+
+// const socketServer = new Server (httpServer)
