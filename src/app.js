@@ -5,7 +5,9 @@ import handlebars from 'express-handlebars'
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
 import userRouter from './router/users.router.js'
-// import {Server} from 'socket.io'
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import Card from 'react-bootstrap/Card'
+import {Server} from 'socket.io'
 
 
 const app = express()
@@ -27,6 +29,20 @@ app.use('/', viewsRouter)
 app.use('/api/user', userRouter)
 // app.use('/api/home', homeRouter)
 
-app.listen (8080, ()=> console.log('running..'))
+// app.listen (8080, ()=> console.log('running..'))
+const httpServer = app.listen (8080, ()=> console.log('running..'))
+const socketServer = new Server (httpServer)
 
-// const socketServer = new Server (httpServer)
+socketServer.on('connection', socket =>{
+    console.log('nuevo cliente conectado')
+
+    socket.on('message', data =>{
+        console.log(data)
+
+        // socket.emit('response', 'mensaje recibido')
+        // socket.broadcast.emit('mensaje al resto', data)
+        socketServer.emit('all', data)
+
+    })
+
+})

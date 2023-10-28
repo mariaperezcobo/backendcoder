@@ -7,5 +7,40 @@
 </head>
 <body>
     my page
+
+<input type="text" id="mensaje">
+<button id="sendMensaje"> enviar mensaje</button>
+<hr>
+<div id="box">
+
+</div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    
+    <script>
+        const socket = io()
+        console.log('io conectado')
+
+        document.querySelector('#sendMensaje').onclick = () =>{
+        
+        const value = document.querySelector('#mensaje').value
+        console.log(value)
+        socket.emit('message', value)
+
+        }
+
+        // socket.on('mensaje al resto', (data)=>{
+        //     console.log(data)
+        // })
+        // socket.on('response', (data)=>{
+        //     console.log(data)
+        // })
+        socket.on('all', (data)=>{
+            console.log(data)
+            document.querySelector('#box').innerHTML += `<p>${data}</p>`
+        })
+
+    </script>
+
 </body>
 </html>

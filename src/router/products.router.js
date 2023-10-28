@@ -18,7 +18,7 @@ router.get('/', async (req,res)=>{
         if(limit){
             const product = products.slice (0,limit)
             res.send(product)
-            // res.render(products)
+            
          }else{
             res.send(products)
            
@@ -26,7 +26,7 @@ router.get('/', async (req,res)=>{
          }
         } catch (err){
             res.send('error')
-            // res.render('error')
+            
         }
     })
 
