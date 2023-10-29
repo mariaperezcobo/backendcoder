@@ -1,3 +1,4 @@
+
 import express from 'express'
 import routerProducts from './router/products.router.js'
 import routerCarts from './router/cart.router.js'
@@ -5,8 +6,8 @@ import handlebars from 'express-handlebars'
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
 import userRouter from './router/users.router.js'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Card from 'react-bootstrap/Card'
+
+
 import {Server} from 'socket.io'
 
 

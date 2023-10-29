@@ -2,6 +2,24 @@ b{
     color:blue;
 }
 
-p{
-    color:red;
-}
+
+
+.titulo_card {
+    font-size: 18px;
+    height: 45px;
+  }
+
+  .contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+  }
+
+
+
+  .container{
+    margin: 20px;
+  }
+

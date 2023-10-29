@@ -1,18 +1,28 @@
 <div>
-    <h2>hola {{user.name}}</h2>
-      
+    <h2>Remeras y Calzas</h2>
+   <div class="contenedorprincipal">
+    <div class="contenedor">
+      {{#each products}}
 
-        {{#each products}}
-            <div>
-                <p>{{this.title}}</p>
-                <p><b>{{this.price}}</b></p>
-                <hr>
-            </div>
+             
+   <div class="card container" style="width: 25rem;">
+          <img src="{{this.thumbnail}}" class="card-img-top" alt="Placeholder Image">
+          <div class="card-body">
+        
+            <h5 class="card-title">{{this.title}}</h5>
+            <p class="card-text">${{this.price}}</p>
+            <a href="#" class="btn btn-primary">Ver</a>
+          </div>
+        </div>
 
 
+        
 
         {{/each}}
 
+    </div>
+
+   </div>   
 
 
 </div>
