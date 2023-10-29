@@ -23,3 +23,31 @@ b{
     margin: 20px;
   }
 
+  .contenedorTituloPrincipal{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(172, 171, 171);
+    height: 100px;
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+  .formatoTituloPrincipal{
+    align-items: center;
+    
+  }
+  .color--barranav {
+    background-color: rgb(180, 196, 196);
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 15px;
+  
+    
+  } 
+  
+.logo{
+  color: white;
+  margin: 15px
+}
