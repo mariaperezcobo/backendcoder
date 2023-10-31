@@ -2,6 +2,7 @@ import {Router} from 'express'
 import ProductManager from '../managers/productManager.js'
 import fs from 'fs'
 import __dirname from '../utils.js'
+import {io} from '../app.js'
 
 const productManager = new ProductManager()
 
@@ -45,6 +46,9 @@ router.post('/', async (req, res)=>{
     try {
         await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
         res.status(201).json({ status: 'success', message: 'Producto creado' });
+
+        io.emit('actualizarProductos', product)
+
     } catch (err) {
         console.error(err); // Registra el error en la consola para depuración
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -119,6 +123,9 @@ router.delete('/:id', async (req, res)=>{
     await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
 
     res.status(201).json({ status: 'success', message: 'Producto eliminado' });
+    
+    io.emit('eliminarProducto', products)
+
 } catch (err) {
     
     res.status(500).json({ error: 'Error interno del servidor' });

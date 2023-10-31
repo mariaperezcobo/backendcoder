@@ -4,8 +4,15 @@
     <div class="contenedorTituloPrincipal">
  <h2>Remeras y Calzas</h2>
   </div>
+
+      {{!-- <div>
+        <input type="'text" id="chatinput">
+    </div>
+    <div id="chatbox">
+
+    </div> --}}
     <div class="contenedorprincipal">
-        <div class="contenedor">
+        <div class="contenedorProductos" >
         
         {{#each products}}
 
@@ -23,25 +30,14 @@
 
         </div>
 
+
     </div>   
 
     </div>
-    
-    <div id="box1">
 
-    </div>
     
 <script src="/socket.io/socket.io.js"></script>
-<script>
-        const socket = io()
-        console.log('io conectado')
 
-        socket.on('all', (data)=>{
-            console.log(data)
-            document.querySelector('#box').innerHTML += `<p>${data}</p>`
-        })
-
-    </script>
-
-
+   
+<script src="/static/js/index.js"></script>
 </div>

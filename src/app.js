@@ -32,18 +32,31 @@ app.use('/api/user', userRouter)
 
 // app.listen (8080, ()=> console.log('running..'))
 const httpServer = app.listen (8080, ()=> console.log('running..'))
-const socketServer = new Server (httpServer)
+const io = new Server (httpServer)
 
-socketServer.on('connection', socket =>{
+const messages= []
+
+io.on('connection', async socket =>{
     console.log('nuevo cliente conectado')
 
-    socket.on('message', data =>{
-        console.log(data)
+    // socket.on('message', data =>{
+    //     console.log(data)
 
-        // socket.emit('response', 'mensaje recibido')
-        // socket.broadcast.emit('mensaje al resto', data)
-        socketServer.emit('all', data)
+    //     // socket.emit('response', 'mensaje recibido')
+    //     // socket.broadcast.emit('mensaje al resto', data)
+    //     socketServer.emit('all', data)
+        
+    // })
 
-    })
+
+    //cuando lleguen, los agrego a la base de datos y los emito a los demas
+    // socket.on('message', data=>{
+    //     console.log(data)
+    //     messages.push(data) //
+    //     io.emit('logs', messages)//para emitir a los demas
+    // })
 
 })
+
+export {io}
+
