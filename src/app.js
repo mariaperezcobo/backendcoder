@@ -6,8 +6,6 @@ import handlebars from 'express-handlebars'
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
 import userRouter from './router/users.router.js'
-
-
 import {Server} from 'socket.io'
 
 
@@ -28,13 +26,13 @@ app.use('/api/carts', routerCarts)
 app.use('/', viewsRouter)
 
 app.use('/api/user', userRouter)
-// app.use('/api/home', homeRouter)
 
-// app.listen (8080, ()=> console.log('running..'))
+
 const httpServer = app.listen (8080, ()=> console.log('running..'))
 const io = new Server (httpServer)
 
-const messages= []
+const messages = []
+
 
 io.on('connection', async socket =>{
     console.log('nuevo cliente conectado')
@@ -48,13 +46,15 @@ io.on('connection', async socket =>{
         
     // })
 
+    //  cuando lleguen, los agrego a la base de datos y los emito a los demas
+    socket.on('message', data=>{
+        messages.push(data)
+        io.emit('logs', messages)
+        console.log(data)
 
-    //cuando lleguen, los agrego a la base de datos y los emito a los demas
-    // socket.on('message', data=>{
-    //     console.log(data)
-    //     messages.push(data) //
-    //     io.emit('logs', messages)//para emitir a los demas
-    // })
+    })
+
+ 
 
 })
 

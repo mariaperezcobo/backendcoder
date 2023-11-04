@@ -11,6 +11,8 @@ const foods = [
     {name:'prod a', price:10},
 ]
 
+
+
 const productManager = new ProductManager()
 router.get('/home', async (req,res)=>{
     
@@ -49,7 +51,19 @@ router.get ('/', (req, res)=> {
 })
 
 router.get('/register', (req, res)=>{
-    res.render('register',{})
+    res.render('register',{
+        style: 'index.css',
+    })
+})
+
+
+const messages=[]
+router.get('/chat', (req, res)=>{
+    res.render('chat',{
+        style: 'index.css',
+       messages
+        
+    })
 })
 
 

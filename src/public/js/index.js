@@ -1,34 +1,45 @@
 console.log('cargado desde public')
 
-
-
 const socket = io()
 
+const messages = []
 
-// const user = prompt('name')
-// document.querySelector('#chatinput').addEventListener('keyup', event =>{
-//     if(event.key === 'Enter' && event.currentTarget.value.trim().length>0){
-//         sendMessage(event.currentTarget.value)
-//     }
+if(window.location.pathname === '/chat'){
+
+    const user = prompt('name')
+
+
+    console.log(user)
     
-// })
+    document.querySelector('#chatinput').addEventListener('keyup', event =>{
+        if(event.key === 'Enter' && event.currentTarget.value.trim().length>0){
+            sendMessage(event.currentTarget.value)
+        }
+        
+    })
+    
+    function sendMessage(message){
+        socket.emit('message', {user, message })
+        console.log(user, message)
+    }
+    
+    
+    socket.on('logs', messages =>{
+        console.log(messages)
+        const box = document.querySelector('#chatbox')
+        let html =''
+    
+        messages.reverse().forEach(message => {
+            html += `<p><i>${message.user}</i> ${message.message}</p>`
+        });
+    
+        box.innerHTML = html
+        
+    
+    })
 
-// function sendMessage(message){
-//     socket.emit('message', {user, message })
-// }
+}
 
-
-// socket.on('logs', messages =>{
-//     const box = document.querySelector('#chatbox')
-//     let html =''
-
-//     messages.forEach(message => {
-//         html += `<p>${message.user} ${message.message}</p>`
-//     });
-
-//     box.innerHTML = html
-
-// })
 
 
 const containerProducts = document.querySelector('.contenedorProductos')
@@ -70,3 +81,9 @@ socket.on('eliminarProducto', data =>{
     })
 
 })
+
+
+
+
+
+

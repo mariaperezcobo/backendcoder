@@ -40,7 +40,18 @@ router.post('/', async (req, res)=>{
     if (!product.title || !product.price || !product.stock || !product.description || !product.category || !product.status || !product.code){
         return res.status(400).json({error: 'faltan datos'})
     }
-    product.id = products.length + 1
+
+    //ordeno los productos por id
+    products.sort((a,b) => a.id - b.id)
+
+    //me dijo si existe un product con ese id
+    let idExistente = products[products.length - 1].id + 1
+    while(products.some(p=>p.id === idExistente)){
+        idExistente++
+    }
+    product.id = idExistente
+    // product.id = products.length + 1
+    
     products.push(product)
 
     try {
@@ -55,7 +66,7 @@ router.post('/', async (req, res)=>{
     }
 
     } catch (err) {
-        res.status(500).json({ error: 'Error interno del servidor' })
+        res.status(500).json({ error: 'Error interno del servidor 2' })
     }   
     })
 
