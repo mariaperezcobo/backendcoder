@@ -5,22 +5,40 @@ const socket = io()
 const messages = []
 
 if(window.location.pathname === '/chat'){
-
-    const user = prompt('name')
-
-
+    
+    // let user = localStorage.getItem('user') ||''
+   
+    // if(!user){
+    //     user = prompt('name')
+        
+    //         sessionStorage.setItem('user', user)
+    //         console.log(user)
+        
+        
+    // }
+    let user = prompt('name')
     console.log(user)
     
-    document.querySelector('#chatinput').addEventListener('keyup', event =>{
+    const input = document.querySelector('#chatinput')
+
+    input.addEventListener('keyup', event =>{
         if(event.key === 'Enter' && event.currentTarget.value.trim().length>0){
             sendMessage(event.currentTarget.value)
         }
         
     })
+
+    document.querySelector('#send').addEventListener('click', event =>{
+            sendMessage(input.value)
+        
+    })
     
     function sendMessage(message){
-        socket.emit('message', {user, message })
-        console.log(user, message)
+        if( message.trim().length>0){
+            socket.emit('message', {user, message })
+            console.log(user, message)
+        }
+        
     }
     
     
@@ -34,8 +52,7 @@ if(window.location.pathname === '/chat'){
         });
     
         box.innerHTML = html
-        
-    
+
     })
 
 }

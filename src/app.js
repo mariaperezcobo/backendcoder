@@ -7,7 +7,8 @@ import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
 import userRouter from './router/users.router.js'
 import {Server} from 'socket.io'
-
+import UserModel from './models/users.model.js'
+import mongoose from 'mongoose'
 
 const app = express()
 
@@ -27,36 +28,56 @@ app.use('/', viewsRouter)
 
 app.use('/api/user', userRouter)
 
+//mongoose
+app.get('/api/userscollection', async (req, res)=>{
+const userscollection = await UserModel.find()
+res.json ({status: 'success', payload: userscollection})
+})
 
-const httpServer = app.listen (8080, ()=> console.log('running..'))
-const io = new Server (httpServer)
+//agregar user a usercollection
+app.post('/api/userscollection', async (req, res)=>{
+    try{
+        const dataUser = req.body
+        const resultUser = await UserModel.create(dataUser)
+        res.json ({status: 'success', payload: resultUser})
+    } catch (e) {
+        res.status(400).json({status:'error', error:e})
+    }
+  
+    })
+
+const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
+
+mongoose.connect(url, {dbName:'clase14'})
+    .then(()=>{
+        console.log('DB connected')
+    })
+    .catch(e=>{
+        console.error('error conectando a la base de datos')
+    })
+
+  
+
+    const httpServer = app.listen (8080, ()=> console.log('running..'))
+    const io = new Server (httpServer)
+    io.on('connection', async socket =>{
+        console.log('nuevo cliente conectado')
+    
+        // socket.on('message', data =>{
+        //     console.log(data)
+    
+        //     // socket.emit('response', 'mensaje recibido')
+        //     // socket.broadcast.emit('mensaje al resto', data)
+        //     socketServer.emit('all', data)
+            
+        // })
+    })
+    export {io}
+
 
 const messages = []
 
 
-io.on('connection', async socket =>{
-    console.log('nuevo cliente conectado')
 
-    // socket.on('message', data =>{
-    //     console.log(data)
 
-    //     // socket.emit('response', 'mensaje recibido')
-    //     // socket.broadcast.emit('mensaje al resto', data)
-    //     socketServer.emit('all', data)
-        
-    // })
-
-    //  cuando lleguen, los agrego a la base de datos y los emito a los demas
-    socket.on('message', data=>{
-        messages.push(data)
-        io.emit('logs', messages)
-        console.log(data)
-
-    })
-
- 
-
-})
-
-export {io}
 
