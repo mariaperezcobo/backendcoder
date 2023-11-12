@@ -56,7 +56,7 @@ app.use('/api/user', userRouter)
 //         console.error('error conectando a la base de datos')
 //     })
 
-   
+   const messages=[]
 
     const httpServer = app.listen (8080, ()=> console.log('running..'))
 
@@ -73,6 +73,14 @@ app.use('/api/user', userRouter)
         //     socketServer.emit('all', data)
             
         // })
+        // socket.on('message', data=>{
+        //         console.log('msj recibido del servidor', data)
+        //         messages.push(data)
+        //         io.emit('logs', messages)
+        //         console.log(data)
+        //     })
+
+
     })
     export {io}
 
