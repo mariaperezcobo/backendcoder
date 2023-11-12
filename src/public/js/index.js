@@ -19,19 +19,19 @@ if(window.location.pathname === '/chat'){
     let user = prompt('name')
     console.log(user)
     
-    const input = document.querySelector('#chatinput')
+    // const input = document.querySelector('#chatinput')
 
-    input.addEventListener('keyup', event =>{
+    document.querySelector('#chatinput').addEventListener('keyup', event =>{
         if(event.key === 'Enter' && event.currentTarget.value.trim().length>0){
             sendMessage(event.currentTarget.value)
         }
         
     })
 
-    document.querySelector('#send').addEventListener('click', event =>{
-            sendMessage(input.value)
+    // document.querySelector('#send').addEventListener('click', event =>{
+    //         sendMessage(input.value)
         
-    })
+    // })
     
     function sendMessage(message){
         if( message.trim().length>0){
