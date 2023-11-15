@@ -7,7 +7,9 @@ import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
 import userRouter from './router/users.router.js'
 import {Server} from 'socket.io'
-import UserModel from './models/users.model.js'
+import UserModel from './dao/models/users.model.js'
+
+//import UserModel from './models/users.model.js'
 import mongoose from 'mongoose'
 import prodMongoose from './router/prodmongoose.router.js'
 

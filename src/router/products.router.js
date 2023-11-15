@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import ProductManager from '../managers/productManager.js'
+import ProductManager from '../dao/managers/productManager.js'
 import fs from 'fs'
 import __dirname from '../utils.js'
 import {io} from '../app.js'
@@ -55,7 +55,7 @@ router.post('/', async (req, res)=>{
     products.push(product)
 
     try {
-        await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
+        await fs.promises.writeFile(__dirname + '/dao/files/products.json', JSON.stringify(products));
         res.status(201).json({ status: 'success', message: 'Producto creado' });
 
         io.emit('actualizarProductos', product)
@@ -106,7 +106,7 @@ router.put('/:id', async (req,res)=>{
         product.id=id
         products[indexProduct] = product
      try {
-            await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
+            await fs.promises.writeFile(__dirname + '/dao/files/products.json', JSON.stringify(products));
             res.status(201).json({ status: 'success', message: 'Producto modificado' });
         } catch  {
             
@@ -131,7 +131,7 @@ router.delete('/:id', async (req, res)=>{
   products = products.filter (p=> p.id !== id)
 
   try {
-    await fs.promises.writeFile(__dirname + '/files/products.json', JSON.stringify(products));
+    await fs.promises.writeFile(__dirname + '/dao/files/products.json', JSON.stringify(products));
 
     res.status(201).json({ status: 'success', message: 'Producto eliminado' });
     

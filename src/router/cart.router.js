@@ -1,6 +1,6 @@
 import { Router } from "express"
-import ProductManager from "../managers/productManager.js"
-import CartManager from '../managers/cartManager.js'
+import ProductManager from "../dao/managers/productManager.js"
+import CartManager from '../dao/managers/cartManager.js'
 import __dirname from "../utils.js"
 
 import fs from 'fs'
@@ -83,7 +83,7 @@ router.post('/', async(req,res)=>{
         carts.push(cart)
 
         try {
-            await fs.promises.writeFile(__dirname + '/files/carts.json', JSON.stringify(carts));
+            await fs.promises.writeFile(__dirname + '/dao/files/carts.json', JSON.stringify(carts));
             res.status(201).json({ status: 'success', message: 'cart creado' });
         } catch (err) {
             console.error(err); // Registra el error en la consola para depuración
@@ -134,7 +134,7 @@ router.post('/:cid/products/:pid', async (req,res)=>{
         }
 
         try {
-            await fs.promises.writeFile(__dirname + '/files/carts.json', JSON.stringify(carts));
+            await fs.promises.writeFile(__dirname + '/dao/files/carts.json', JSON.stringify(carts));
             res.status(201).json({ status: 'success', message: 'prod agregado al carrito' });
         } catch (err) {
             console.error(err); // Registra el error en la consola para depuración

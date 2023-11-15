@@ -1,0 +1,51 @@
+{{!-- ver un producto con mongoose --}}
+
+<div>
+
+    <div>
+    <div class="contenedorTituloPrincipal">
+ <h2>Detalle del Producto</h2>
+
+  </div>
+
+     
+    <div class="contenedorprincipal">
+        <div class="contenedorProductos" >
+
+      
+
+            <div class="card container" style="width: 25rem;">
+                <img src="{{productmongoose.thumbnail}}" class="card-img-top" alt="Placeholder Image">
+                <div class="card-body">
+
+                <h5 class="card-title">{{productmongoose.title}}</h5>
+                <p class="card-text">${{productmongoose.price}}</p>
+                <p>{{productmongoose._id}}</p>
+                <button id="delete" class="btn btn-primary">Eliminar</button>
+                {{!-- <a href="#" class="btn btn-primary" id="delete">Eliminar</a> --}}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+<script src="/socket.io/socket.io.js"></script>
+   
+<script src="/static/js/index.js"></script>
+<script>
+    document.querySelector('#delete').onclick = e =>{
+        const id = "{{productmongoose._id}}"
+
+        fetch(`/productsmongoose/${id}`, {method:'delete'})
+            .then (()=>{
+                alert('Eliminado con éxito')
+                document.location.href = '/productsmongoose'
+            })
+            .catch(e=>{
+                alert('No se pudo eliminar')
+            })
+    }
+</script>
+

@@ -1,12 +1,13 @@
 import {Router} from 'express'
-import ProductsModel from '../models/prodmongoose.models.js'
+import ProductsModel from '../dao/models/prodmongoose.models.js'
+
 
 
 const router = Router()
 
 router.get('/', async (req,res)=>{
     const productsmongoose = await ProductsModel.find().lean().exec()
-    console.log({productsmongoose})
+    // console.log({productsmongoose})
 
     res.render('list', {
         productsmongoose,
@@ -20,7 +21,7 @@ router.post('/', async (req,res)=>{
         const productmongooseNew = req.body
         const result = await ProductsModel.create(productmongooseNew)
 
-        console.log(result)
+        // console.log(result)
         res.redirect('/productsmongoose')
 
     }catch (error){
@@ -28,16 +29,6 @@ router.post('/', async (req,res)=>{
         res.send('error al crear productos con mongoose')
     }
 })
-
-// router.get('/:name', async (req,res)=>{
-//     res.render('one',)
-// })
-
-// router.delete('/:id', (req,res)=>{
-//     res.send('borrando producto')
-// })
-
-
 router.get('/create', async (req,res)=>{
     res.render('create', {
         style: 'index.css',
@@ -45,5 +36,36 @@ router.get('/create', async (req,res)=>{
     }
     )
 })
+router.get('/:code', async (req,res)=>{
+    try{
+        const {code} = req.params
+        const productmongoose = await ProductsModel.findOne({code}).lean().exec()
+
+        res.render('one',{
+            productmongoose,
+            style: 'index.css',
+            title: 'Fitness Ropa deportiva',
+        })
+    }catch (error){
+        res.send('error al buscar el producto')
+
+    }
+ })
+
+router.delete('/:id', async (req,res)=>{
+    try{
+        const {id} = req.params
+        await ProductsModel.deleteOne({ _id: id})
+
+        return res.json({status: 'success'})
+    }catch (error){
+        res.status(500).json(error)
+console.log(error)
+    }
+    
+})
+
+
+
 
 export default router
