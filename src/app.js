@@ -9,6 +9,7 @@ import userRouter from './router/users.router.js'
 import {Server} from 'socket.io'
 import UserModel from './models/users.model.js'
 import mongoose from 'mongoose'
+import prodMongoose from './router/prodmongoose.router.js'
 
 const app = express()
 
@@ -20,6 +21,12 @@ app.set('view engine', 'handlebars')
 app.use('/static', express.static(__dirname + '/public'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+
+//ruta para mongoose
+app.use('/productsmongoose', prodMongoose)
+
+
 
 app.use('/api/products', routerProducts)
 app.use('/api/carts', routerCarts)

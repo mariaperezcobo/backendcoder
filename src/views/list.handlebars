@@ -1,23 +1,23 @@
-{{!-- incluye los productos con filesystem --}}
+{{!-- incluye los productos con mongoose --}}
 
 <div>
 
     <div>
     <div class="contenedorTituloPrincipal">
- <h2>Remeras y Calzas</h2>
+ <h2>List</h2>
+
   </div>
 
-      
-
+     
     <div class="contenedorprincipal">
         <div class="contenedorProductos" >
-        
-        {{#each products}}
+
+        {{#each productsmongoose}}
 
             <div class="card container" style="width: 25rem;">
                 <img src="{{this.thumbnail}}" class="card-img-top" alt="Placeholder Image">
                 <div class="card-body">
-            
+
                 <h5 class="card-title">{{this.title}}</h5>
                 <p class="card-text">${{this.price}}</p>
                 <a href="#" class="btn btn-primary">Agregar al carrito</a>
@@ -29,14 +29,11 @@
         </div>
 
 
-    </div>   
-
     </div>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
 <script src="/socket.io/socket.io.js"></script>
 
    
 <script src="/static/js/index.js"></script>
-</div>
+    </div>
+
+
