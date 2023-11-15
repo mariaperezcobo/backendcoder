@@ -1,17 +1,32 @@
 import {Router} from 'express'
+import ProductsModel from '../models/prodmongoose.models.js'
+
 
 const router = Router()
 
 router.get('/', async (req,res)=>{
+    const productsmongoose = await ProductsModel.find().lean().exec()
+    console.log({productsmongoose})
+
     res.render('list', {
-        productsmongoose: [],
+        productsmongoose,
         style: 'index.css',
         title: 'Fitness Ropa deportiva',
     })
 })
 
 router.post('/', async (req,res)=>{
-    res.send('cargando productos')
+    try{
+        const productmongooseNew = req.body
+        const result = await ProductsModel.create(productmongooseNew)
+
+        console.log(result)
+        res.redirect('/productsmongoose')
+
+    }catch (error){
+        console.log(error),
+        res.send('error al crear productos con mongoose')
+    }
 })
 
 // router.get('/:name', async (req,res)=>{

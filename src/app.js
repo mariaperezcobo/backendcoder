@@ -13,12 +13,14 @@ import prodMongoose from './router/prodmongoose.router.js'
 
 const app = express()
 
+//configuramos el motor de plantillas
 app.engine('handlebars', handlebars.engine())
-// app.set('views', './views')
 app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 
 app.use('/static', express.static(__dirname + '/public'))
+
+//para trer info de post como json
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
@@ -26,16 +28,13 @@ app.use(express.urlencoded({extended: true}))
 //ruta para mongoose
 app.use('/productsmongoose', prodMongoose)
 
-
-
+//rutas
 app.use('/api/products', routerProducts)
 app.use('/api/carts', routerCarts)
-
 app.use('/', viewsRouter)
-
 app.use('/api/user', userRouter)
 
-//mongoose
+//rutas mongoose
 app.get('/api/userscollection', async (req, res)=>{
 const userscollection = await UserModel.find()
 res.json ({status: 'success', payload: userscollection})
@@ -53,9 +52,12 @@ app.post('/api/userscollection', async (req, res)=>{
   
     })
 
+//inicializamos variables
 const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
+const mongodbName = 'ecommerce'
 
-mongoose.connect(url, {dbName:'clase14'})
+//conectamos a db y corremos el server
+mongoose.connect(url, {dbName: mongodbName})
     .then(()=>{
         console.log('DB connected')
     })
@@ -65,13 +67,11 @@ mongoose.connect(url, {dbName:'clase14'})
 
    const messages=[]
 
-    const httpServer = app.listen (8080, ()=> console.log('running..'))
+const httpServer = app.listen (8080, ()=> console.log('running..'))
+const io = new Server (httpServer)
 
-    const io = new Server (httpServer)
-
-    io.on('connection', async socket =>{
+io.on('connection', async socket =>{
         console.log('nuevo cliente conectado')
-    
         // socket.on('message', data =>{
         //     console.log(data)
     
@@ -86,8 +86,6 @@ mongoose.connect(url, {dbName:'clase14'})
                 io.emit('logs', messages)
                 console.log(data)
             })
-
-
     })
     export {io}
 
