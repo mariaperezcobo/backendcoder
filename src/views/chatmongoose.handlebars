@@ -1,0 +1,31 @@
+<div>
+     <div class="contenedorTituloPrincipal">
+ <h2>Chat mongoose</h2>
+  </div>
+
+  <form action="/chatmongoose" method="post">
+<br>
+   Usuario: <input name="usuario"><br>
+   <br>
+    Mensaje: <input name="mensaje"><br>
+    <br>
+   
+<input type="submit" value="Enviar">
+<hr>
+</form>
+
+
+ <div class="contenedorprincipal">
+       
+
+        {{#each contenidochat}}
+            <p >  {{this.usuario}}: {{this.mensaje}}</p>
+           
+
+        {{/each}}
+
+    </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js">
+</script>
