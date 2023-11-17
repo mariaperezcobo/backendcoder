@@ -1,0 +1,24 @@
+<div>
+     <div class="contenedorTituloPrincipal">
+ <h2>Cart mongoose</h2>
+  </div>
+
+  <form action="/cartmongoose" method="post">
+<br>
+   
+    Carrito de: <input name="carrito"><br>
+    <br>
+   
+<input type="submit" value="Crear">
+<hr>
+</form>
+<div>
+{{#each carritosmongoose}}
+<div>Carrito de: {{this.carrito}}</div>
+<div>Carrito numero: {{this._id}}</div>
+{{/each}}
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js">
+</script>
