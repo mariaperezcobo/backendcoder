@@ -3,8 +3,8 @@ import mongoose from 'mongoose'
 // const cartCollection = 'cartmongoose'
 
 const cartSchema = mongoose.Schema({
-    carrito: String,
-    productos:{
+    title: String,
+    productosagregados:{
         type:[
             {
                 product:{

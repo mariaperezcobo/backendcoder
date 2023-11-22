@@ -2,9 +2,10 @@ import mongoose from 'mongoose'
 
 const productCartSchema = mongoose.Schema({
     title: String,
+    price: Number,
    
 })
 
-const productModel = mongoose.model('productosagregados', productCartSchema)
+const ProductModel = mongoose.model('productosagregados', productCartSchema)
 
-export default productModel
+export default ProductModel
