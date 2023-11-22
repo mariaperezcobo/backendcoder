@@ -13,6 +13,7 @@ import UserModel from './dao/models/users.model.js'
 import mongoose from 'mongoose'
 import prodMongoose from './router/prodmongoose.router.js'
 import chatMongoose from './router/chatmongoose.router.js'
+import cartMongoose from './router/cartmongoose.js'
 
 const app = express()
 
@@ -31,6 +32,7 @@ app.use(express.urlencoded({extended: true}))
 //ruta para mongoose
 app.use('/productsmongoose', prodMongoose)
 app.use('/chatmongoose', chatMongoose)
+app.use('/cartmongoose', cartMongoose)
 
 //rutas
 app.use('/api/products', routerProducts)

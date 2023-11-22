@@ -65,6 +65,10 @@ console.log(error)
     
 })
 
+// router.post('/:id', async (req,res)=>{
+    
+// })
+
 
 
 
