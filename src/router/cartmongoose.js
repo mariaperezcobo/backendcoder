@@ -38,8 +38,8 @@ const router = Router()
 // const result = await CartModel.updateOne({_id:'655e22a57a08d8cfdddb6e79'}, cart)
 // console.log({result})
 
-const cart = await CartModel.findById('655e22a57a08d8cfdddb6e79').populate('productosagregados.product')
-console.log(JSON.stringify(cart, null, '\t'))
+const cart = await CartModel.findOne({_id:'655e22a57a08d8cfdddb6e79'}).populate('productosagregados.product')
+// console.log(JSON.stringify(cart, null, '\t'))
 
 // // router.get('/', async (req,res)=>{
 // //     const carritosmongoose = await CartModel.find().lean().exec()

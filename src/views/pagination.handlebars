@@ -1,0 +1,33 @@
+{{!-- para usuario clase 17 --}}
+
+<div>
+    <table>
+        <thead>
+            {{#each docs}}
+            <tr>
+                <th>{{this.first_name}}First name</th>
+                <th>{{this.last_name}}Last name</th>
+                <th>{{this.email}}Email</th>
+                <th>{{this.gender}}Gender</th>
+                
+
+            </tr>
+            {{/each}}
+        </thead>
+        <body>
+            <tr>
+                <td></td>
+                 <td></td>
+                  <td></td>
+                   <td></td>
+            </tr>
+        </body>
+    </table>
+<div>
+    Total doc: {{totalDocs}}
+    <br>
+    <a href="">Previus</a> 
+    <a href="">Next</a>
+</div>
+
+</div>

@@ -12,7 +12,7 @@
     <div class="contenedorprincipal">
         <div class="contenedorProductos" >
 
-        {{#each productsmongoose}}
+        {{#each result.productsmongoose}}
 
             <div class="card container" style="width: 25rem;">
                 <img src="{{this.thumbnail}}" class="card-img-top" alt="Placeholder Image">
@@ -28,7 +28,15 @@
         {{/each}}
 
         </div>
+    Total Productos: {{result.totalDocs}}<br>
+    Paginas: {{result.page}}/{{result.totalPages}}<br>
 
+    {{#if result.hasPrevPage}}
+        <a href="/productsmongoose/?page={{result.prevPage}}&limit={{result.limit}}">Previus</a>|
+    {{/if}}
+    {{#if result.hasNextPage}}
+        <a href="/productsmongoose/?page={{result.nextPage}}&limit={{result.limit}}">Next</a>
+    {{/if}}
 
     </div>
 <script src="/socket.io/socket.io.js"></script>
