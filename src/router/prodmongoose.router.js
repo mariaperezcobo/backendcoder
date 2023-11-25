@@ -5,7 +5,7 @@ const router = Router()
 
 router.get('/', async (req,res)=>{
     try{
-        const limit = parseInt(req.query?.limit ?? 4)
+        const limit = parseInt(req.query?.limit ?? 2)
         const page = parseInt(req.query?.page ?? 1)
 
         const result = await ProductsModel.paginate({},{
@@ -14,13 +14,7 @@ router.get('/', async (req,res)=>{
             lean:true
         })
         
-    
-        if(!result){
-            throw new Error ('no se encontraron datos')
-        }
-
-       
-        console.log(result.docs)
+        // console.log(result.docs)
         //console.log(productsmongoose)
 
         result.productsmongoose = result.docs
