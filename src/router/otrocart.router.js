@@ -1,3 +1,5 @@
+//es la segunda parte del cartmongoose. aca es para ue por posman pueda agregar un producto al carrito. este no renderiza en html con formato
+
 import {Router} from 'express'
 import mongoose from 'mongoose'
 import CartModel from '../dao/models/cartmongoose.model.js'

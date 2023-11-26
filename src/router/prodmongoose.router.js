@@ -43,7 +43,7 @@ router.get('/', async (req,res)=>{
             sort: {price: sortDirection}
         })
         
-        // console.log(result.docs)
+       // console.log(result.docs)
         //console.log(productsmongoose)
 
         result.productsmongoose = result.docs
@@ -51,7 +51,7 @@ router.get('/', async (req,res)=>{
         delete result.docs
         
 
-       // console.log(result)
+       console.log(result)
         
         res.render('list', {
             result,
