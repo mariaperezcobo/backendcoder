@@ -44,7 +44,7 @@ router.get('/:cid', async (req,res)=>{
             const cid = req.params.cid
 
             const cartBuscado = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
-            console.log(cartBuscado)
+            //console.log(cartBuscado)
             if(!cartBuscado){
                 res.status(404).json({error: 'cart not found', details: error.message})
             }else{
@@ -102,8 +102,8 @@ router.post('/:cid/product/:pid', async (req,res)=>{
         return res.json({ msg: 'Carrito actualizado!', carrito });
 
     }catch (error){
-        console.error('error', error)
-        res.status(500).json({error: 'error', details: error.message})
+        console.error('error al agregar un prod', error)
+        res.status(500).json({error: 'error 3', details: error.message})
        }  
 }
 )

@@ -27,7 +27,7 @@ const router = Router()
 //para ver los carritos
 router.get('/', async (req,res)=>{
     try{
-        const carritosmongoose = await CartModel.find().lean().exec()
+        const carritosmongoose = await CartModel.find().populate('productosagregados.product').lean().exec()
         console.log(carritosmongoose)
     
         // const result = await ProductsModel.find().lean().exec()
@@ -35,7 +35,6 @@ router.get('/', async (req,res)=>{
     
         res.render('cartmongoose',{
             carritosmongoose,
-            
             style: 'index.css',
             title: 'Fitness Ropa deportiva',
     
@@ -53,8 +52,8 @@ router.get('/:cid', async (req,res)=>{
    
     try{
                 const {cid} = req.params
-                const carrito = await CartModel.findById(cid)
-            console.log(carrito)
+                const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
+            //console.log(carrito)
 
                 if(carrito)
                 
