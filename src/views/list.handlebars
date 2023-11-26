@@ -28,19 +28,28 @@
         {{/each}}
 
         </div>
+
+        <div class="margen">
     Total Productos: {{result.totalDocs}}<br><br>
     Paginas: {{result.page}}/{{result.totalPages}}<br><br>
     Limit: <input id="limit" type="text" value="{{result.limit}}"><br><br>
     Page: <input id="page" type="text" value="{{result.page}}"><br><br>
     Query: <input id='query' type="text" value="{{result.query}}"><br><br>
+    Categoria: <select name="" id="categoria">
+    <option value="todos">Todos</option>
+    <option value="calzas">Calzas</option>
+    <option value="remeras">Remeras</option>
+</select><br>
     <button id="btnSearch">Buscar</button><br>
 
-    <br><br>
+    <br>
     <input id="prevPage" type="hidden" value="{{result.prevPage}}">
     <input id="nextPage" type="hidden" value="{{result.nextPage}}">  
 
     <a id="btnPrev" href="#" {{#unless result.hasPrevPage}} style="display:none" {{/unless}}>Previus</a>
     <a id="btnNext" href="#"   {{#unless result.hasNextPage}} style="display:none" {{/unless}}>Next</a>
+<br><br>
+        </div>
 
     </div>
 
@@ -49,24 +58,27 @@ document.querySelector('#btnPrev').onclick =()=>{
     const prevPage = document.querySelector('#prevPage').value 
     const limit = document.querySelector('#limit').value
     const query = document.querySelector('#query').value
+    const categoria = document.querySelector('#categoria').value
 
-    const url = `/productsmongoose/?page=${prevPage}&limit=${limit}&query=${query}`
+    const url = `/productsmongoose/?page=${prevPage}&limit=${limit}&query=${query}&categoria=${categoria}`
     document.location.href = url
 }
 document.querySelector('#btnNext').onclick =()=>{
     const nextPage = document.querySelector('#nextPage').value 
     const limit = document.querySelector('#limit').value
     const query = document.querySelector('#query').value
+    const categoria = document.querySelector('#categoria').value
 
-    const url = `/productsmongoose/?page=${nextPage}&limit=${limit}&query=${query}`
+    const url = `/productsmongoose/?page=${nextPage}&limit=${limit}&query=${query}&categoria=${categoria}`
     document.location.href = url
 }
 document.querySelector('#btnSearch').onclick =()=>{
     const page = document.querySelector('#page').value 
     const limit = document.querySelector('#limit').value
     const query = document.querySelector('#query').value
+    const categoria = document.querySelector('#categoria').value
 
-    const url = `/productsmongoose/?page=${page}&limit=${limit}&query=${query}`
+    const url = `/productsmongoose/?page=${page}&limit=${limit}&query=${query}&categoria=${categoria}`
     document.location.href = url
 }
 

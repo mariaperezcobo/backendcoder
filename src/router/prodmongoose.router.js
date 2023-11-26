@@ -5,14 +5,21 @@ const router = Router()
 
 router.get('/', async (req,res)=>{
     try{
-        const limit = parseInt(req.query?.limit ?? 2)
+        const limit = parseInt(req.query?.limit ?? 10)
         const page = parseInt(req.query?.page ?? 1)
         const query = req.query?.query ?? ''
+        const categoria = req.query?.categoria ?? ''
 
         const search = {}
+        // const filtro = {}
         if (query) search.title = {"$regex": query, "$options": "i"}
+        
+        if (categoria && categoria !== 'todos') {
+            search.category = { "$regex": categoria, "$options": "i" };
+        }
+        const searchQuery = { ...search };
 
-        const result = await ProductsModel.paginate(search,{
+        const result = await ProductsModel.paginate(searchQuery,{
             page,
             limit,
             lean:true
@@ -27,7 +34,7 @@ router.get('/', async (req,res)=>{
         
 
        // console.log(result)
-
+        
         res.render('list', {
             result,
             style: 'index.css',

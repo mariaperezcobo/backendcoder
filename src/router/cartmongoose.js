@@ -1,3 +1,6 @@
+//cart con mongoose (la parte de agregar el producto a un carrito esta en otrocart.router)
+
+
 import {Router} from 'express'
 import mongoose from 'mongoose'
 import CartModel from '../dao/models/cartmongoose.model.js'
@@ -30,8 +33,6 @@ router.get('/', async (req,res)=>{
         // const result = await ProductsModel.find().lean().exec()
         // result.productsmongoose = result.docs
     
-       
-
         res.render('cartmongoose',{
             carritosmongoose,
             
@@ -41,9 +42,9 @@ router.get('/', async (req,res)=>{
         })
        
     }catch (error){
-        console.log('error',error)
-    }
+        console.error('error',error)
 
+    }
 
 })
 
@@ -53,7 +54,8 @@ router.get('/:cid', async (req,res)=>{
     try{
                 const {cid} = req.params
                 const carrito = await CartModel.findById(cid)
-            
+            console.log(carrito)
+
                 if(carrito)
                 
                // return res.json({carrito});
@@ -81,6 +83,10 @@ router.post('/', async (req,res)=>{
         res.send('error al crear el carrito')
     }
 })
+
+
+//para agregar un producto a un carrito uso el router otrocart.router 
+
 
 
 
