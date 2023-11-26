@@ -8,7 +8,8 @@ import __dirname from './utils.js'
 import userRouter from './router/users.router.js'
 import {Server} from 'socket.io'
 import UserModel from './dao/models/users.model.js'
-import usuarioRouter from './router/usuario.router.js'
+
+import otrocart from './router/otrocart.router.js'
 
 //import UserModel from './models/users.model.js'
 import mongoose from 'mongoose'
@@ -36,13 +37,15 @@ app.use(express.urlencoded({extended: true}))
 app.use('/productsmongoose', prodMongoose)
 app.use('/chatmongoose', chatMongoose)
 app.use('/cartmongoose', cartMongoose)
+//app.use('/api/cartmongoose', cartMongoose)
+app.use('/api/otrocart', otrocart)
 
 //rutas
 app.use('/api/products', routerProducts)
 app.use('/api/carts', routerCarts)
 app.use('/', viewsRouter)
 app.use('/api/user', userRouter)
-app.use('/pagination', usuarioRouter)
+
 
 //rutas mongoose
 app.get('/api/userscollection', async (req, res)=>{

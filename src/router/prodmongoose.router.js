@@ -7,8 +7,12 @@ router.get('/', async (req,res)=>{
     try{
         const limit = parseInt(req.query?.limit ?? 2)
         const page = parseInt(req.query?.page ?? 1)
+        const query = req.query?.query ?? ''
 
-        const result = await ProductsModel.paginate({},{
+        const search = {}
+        if (query) search.title = {"$regex": query, "$options": "i"}
+
+        const result = await ProductsModel.paginate(search,{
             page,
             limit,
             lean:true
@@ -18,9 +22,11 @@ router.get('/', async (req,res)=>{
         //console.log(productsmongoose)
 
         result.productsmongoose = result.docs
+        result.query = query
         delete result.docs
+        
 
-        console.log(result)
+       // console.log(result)
 
         res.render('list', {
             result,
