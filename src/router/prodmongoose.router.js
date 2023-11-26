@@ -9,6 +9,8 @@ router.get('/', async (req,res)=>{
         const page = parseInt(req.query?.page ?? 1)
         const query = req.query?.query ?? ''
         const categoria = req.query?.categoria ?? ''
+        const stock = req.query?.stock ?? ''
+        const precio = req.query?.precio ?? ''
 
         const search = {}
         // const filtro = {}
@@ -17,12 +19,28 @@ router.get('/', async (req,res)=>{
         if (categoria && categoria !== 'todos') {
             search.category = { "$regex": categoria, "$options": "i" };
         }
+
+        if (stock && stock !== 'todos') {
+            search.stock = {'$gt': 1}
+        }
+
+        let sortDirection = 1
+        if (precio === 'menor') {
+            sortDirection = 1
+        } if (precio === 'mayor'){
+            sortDirection = -1}
+            else{
+            sortDirection = 1
+        }
+
+
         const searchQuery = { ...search };
 
         const result = await ProductsModel.paginate(searchQuery,{
             page,
             limit,
-            lean:true
+            lean:true,
+            sort: {price: sortDirection}
         })
         
         // console.log(result.docs)

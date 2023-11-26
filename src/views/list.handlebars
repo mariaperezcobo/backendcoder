@@ -35,11 +35,21 @@
     Limit: <input id="limit" type="text" value="{{result.limit}}"><br><br>
     Page: <input id="page" type="text" value="{{result.page}}"><br><br>
     Query: <input id='query' type="text" value="{{result.query}}"><br><br>
+    Disponibilidad: 
+    <select name="" id="stock">
+    <option value="todos">Todos</option>
+    <option value="stock">En stock</option>
+</select><br><br>
     Categoria: <select name="" id="categoria">
     <option value="todos">Todos</option>
     <option value="calzas">Calzas</option>
     <option value="remeras">Remeras</option>
-</select><br>
+</select><br><br>
+Ordenar por precio: <select name="" id="precio">
+       <option value="orden">Indistinto</option>
+    <option value="menor">De menor a mayor</option>
+    <option value="mayor">De mayor a menor</option>
+</select><br><br>
     <button id="btnSearch">Buscar</button><br>
 
     <br>
@@ -59,8 +69,10 @@ document.querySelector('#btnPrev').onclick =()=>{
     const limit = document.querySelector('#limit').value
     const query = document.querySelector('#query').value
     const categoria = document.querySelector('#categoria').value
+  const stock = document.querySelector('#stock').value
+   const precio = document.querySelector('#precio').value
 
-    const url = `/productsmongoose/?page=${prevPage}&limit=${limit}&query=${query}&categoria=${categoria}`
+    const url = `/productsmongoose/?page=${prevPage}&limit=${limit}&query=${query}&categoria=${categoria}&stock=${stock}&precio=${precio}`
     document.location.href = url
 }
 document.querySelector('#btnNext').onclick =()=>{
@@ -68,8 +80,10 @@ document.querySelector('#btnNext').onclick =()=>{
     const limit = document.querySelector('#limit').value
     const query = document.querySelector('#query').value
     const categoria = document.querySelector('#categoria').value
+    const stock = document.querySelector('#stock').value
+     const precio = document.querySelector('#precio').value
 
-    const url = `/productsmongoose/?page=${nextPage}&limit=${limit}&query=${query}&categoria=${categoria}`
+    const url = `/productsmongoose/?page=${nextPage}&limit=${limit}&query=${query}&categoria=${categoria}&stock=${stock}&precio=${precio}`
     document.location.href = url
 }
 document.querySelector('#btnSearch').onclick =()=>{
@@ -77,8 +91,10 @@ document.querySelector('#btnSearch').onclick =()=>{
     const limit = document.querySelector('#limit').value
     const query = document.querySelector('#query').value
     const categoria = document.querySelector('#categoria').value
+    const stock = document.querySelector('#stock').value
+     const precio = document.querySelector('#precio').value
 
-    const url = `/productsmongoose/?page=${page}&limit=${limit}&query=${query}&categoria=${categoria}`
+    const url = `/productsmongoose/?page=${page}&limit=${limit}&query=${query}&categoria=${categoria}&stock=${stock}&precio=${precio}`
     document.location.href = url
 }
 
