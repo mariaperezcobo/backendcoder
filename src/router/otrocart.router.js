@@ -140,7 +140,7 @@ router.delete('/:cid/product/:pid', async (req,res)=>{
 
 })
 
-//para eliminar un producto del carrito
+//para eliminar carrito
 router.delete('/:cid', async (req,res)=>{
     try{
      const cid = req.params.cid
@@ -166,6 +166,39 @@ router.delete('/:cid', async (req,res)=>{
 
 
 
+//para actualizar la cantidad de producto de un carrito
+router.put('/:cid/product/:pid', async (req,res)=>{
+    try{
+        const cid = (req.params.cid)
+        const pid = (req.params.pid)
+        const carrito = await CartModel.findById(cid).exec();
+    
+        if(!carrito){
+            return res.status(404).json({ error: 'cart not found' });
+        }
+            
+        const newQuantity = req.body.quantity
+    
+        if (!newQuantity || isNaN(newQuantity)){
+            return res.status(400).json({error: 'faltan datos'})
+        }
+    
+        const productoIndex = carrito.productosagregados.findIndex(p => p.product._id.toString() === pid);
+        if(!productoIndex){
+            return res.status(404).json({ error: 'product not found' });
+        }
+        carrito.productosagregados[productoIndex].quantity = newQuantity
+        await carrito.save()
+        res.json ({status:'succes', message: 'product updated'})
+        
+    } catch(error){
+        console.error('error', error);
+        return res.status(500).json({ error: 'error', details: error.message });
+    }
+    
+   
+   
+})
 
 
 export default router
