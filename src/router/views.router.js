@@ -55,7 +55,11 @@ router.get('/register', (req, res)=>{
         style: 'index.css',
     })
 })
-
+router.get('/pagination', (req, res)=>{
+    res.render('pagination',{
+        style: 'index.css',
+    })
+})
 
 const messages=[]
 router.get('/chat', (req, res)=>{

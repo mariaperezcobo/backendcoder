@@ -1,0 +1,36 @@
+<div>
+     <div class="contenedorTituloPrincipal">
+ <h2>Carrito de {{carrito.name}}</h2>
+  </div>
+
+
+<div class="contenedorprincipal">
+       <div class="contenedorProductos" >
+  {{#each carrito.productosagregados}}
+
+            <div class="card container" style="width: 25rem;">
+                <img src="{{this.product.thumbnail}}" class="card-img-top" alt="Placeholder Image">
+                <div class="card-body">
+
+                <h5 class="card-title">{{this.product.title}}</h5>
+                <p class="card-text">${{this.product.price}}</p>
+                <p class="card-text">Cantidad: {{this.quantity}}</p>
+                
+                </div>
+            </div>
+
+        {{/each}}
+
+
+
+        </div>
+<div class="margen">
+
+  <a href="/productsmongoose" class="btn btn-primary">Ver mas productos</a>
+
+</div>
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js">
+</script>

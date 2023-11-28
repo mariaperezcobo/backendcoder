@@ -5,8 +5,8 @@
 
   <form action="/cartmongoose" method="post">
 <br>
-   
-    Carrito de: <input name="carrito"><br>
+   Para crear nuevos carritos:<br>
+    Carrito de: <input name="name"><br>
     <br>
    
 <input type="submit" value="Crear">
@@ -14,8 +14,9 @@
 </form>
 <div>
 {{#each carritosmongoose}}
-<div>Carrito de: {{this.carrito}}</div>
+<div>Carrito de: {{this.name}}</div>
 <div>Carrito numero: {{this._id}}</div>
+ <a href="/cartmongoose/{{this._id}}" class="btn btn-primary">Ver Carrito</a>
 {{/each}}
 
 </div>

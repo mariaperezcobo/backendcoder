@@ -1,20 +1,81 @@
 import {Router} from 'express'
 import ProductsModel from '../dao/models/prodmongoose.models.js'
 
-
-
 const router = Router()
 
 router.get('/', async (req,res)=>{
-    const productsmongoose = await ProductsModel.find().lean().exec()
-    // console.log({productsmongoose})
+    try{
+        const limit = parseInt(req.query?.limit ?? 10)
+        const page = parseInt(req.query?.page ?? 1)
+        const query = req.query?.query ?? ''
+        const categoria = req.query?.categoria ?? ''
+        const stock = req.query?.stock ?? ''
+        const precio = req.query?.precio ?? ''
 
-    res.render('list', {
-        productsmongoose,
-        style: 'index.css',
-        title: 'Fitness Ropa deportiva',
-    })
+        const search = {}
+        // const filtro = {}
+        if (query) search.title = {"$regex": query, "$options": "i"}
+        
+        if (categoria && categoria !== 'todos') {
+            search.category = { "$regex": categoria, "$options": "i" };
+        }
+
+        if (stock && stock !== 'todos') {
+            search.stock = {'$gt': 1}
+        }
+
+        let sortDirection = 1
+        if (precio === 'menor') {
+            sortDirection = 1
+        } if (precio === 'mayor'){
+            sortDirection = -1}
+            else{
+            sortDirection = 1
+        }
+
+
+        const searchQuery = { ...search };
+
+        const result = await ProductsModel.paginate(searchQuery,{
+            page,
+            limit,
+            lean:true,
+            sort: {price: sortDirection}
+        })
+        
+       // console.log(result.docs)
+        //console.log(productsmongoose)
+
+        result.productsmongoose = result.docs
+        result.query = query
+        delete result.docs
+        
+
+       console.log(result)
+        
+        res.render('list', {
+            result,
+            style: 'index.css',
+            title: 'Fitness Ropa deportiva',
+        })
+
+    }catch(error){
+        console.error('error', error)
+        console.error(error)
+    }
+  
 })
+
+// router.get('/', async (req,res)=>{
+//     const productsmongoose = await ProductsModel.find().lean().exec()
+//     // console.log({productsmongoose})
+
+//     res.render('list', {
+//         productsmongoose,
+//         style: 'index.css',
+//         title: 'Fitness Ropa deportiva',
+//     })
+// })
 
 router.post('/', async (req,res)=>{
     try{
