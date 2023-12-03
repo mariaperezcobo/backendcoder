@@ -28,7 +28,7 @@ const router = Router()
 router.get('/', async (req,res)=>{
     try{
         const carritosmongoose = await CartModel.find().populate('productosagregados.product').lean().exec()
-        console.log(carritosmongoose)
+       // console.log(carritosmongoose)
     
         // const result = await ProductsModel.find().lean().exec()
         // result.productsmongoose = result.docs

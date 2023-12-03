@@ -51,7 +51,7 @@ router.get('/', async (req,res)=>{
         delete result.docs
         
 
-       console.log(result)
+       //console.log(result)
         
         res.render('list', {
             result,
@@ -76,6 +76,7 @@ router.get('/', async (req,res)=>{
 //         title: 'Fitness Ropa deportiva',
 //     })
 // })
+
 
 router.post('/', async (req,res)=>{
     try{
