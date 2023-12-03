@@ -33,6 +33,12 @@ router.post('/registeruser', async (req,res)=>{
    
 })
 
+router.get('/logout', (req,res)=>{
+    req.session.destroy(err=>{
+        if(err) return res.send('logout error')
+        return res.redirect('/')
+    })
+})
 
 
 export default router

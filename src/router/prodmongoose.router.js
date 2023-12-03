@@ -1,10 +1,14 @@
 import {Router} from 'express'
 import ProductsModel from '../dao/models/prodmongoose.models.js'
+import UserRegisterModel from '../dao/models/userregister.model.js'
 
 const router = Router()
 
 router.get('/', async (req,res)=>{
     try{
+        const usuario = await UserRegisterModel.find()
+
+
         const limit = parseInt(req.query?.limit ?? 10)
         const page = parseInt(req.query?.page ?? 1)
         const query = req.query?.query ?? ''
@@ -50,10 +54,11 @@ router.get('/', async (req,res)=>{
         result.query = query
         delete result.docs
         
-
+       
        //console.log(result)
         
         res.render('list', {
+            usuario,
             result,
             style: 'index.css',
             title: 'Fitness Ropa deportiva',

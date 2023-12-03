@@ -2,11 +2,15 @@
      <div class="contenedorTituloPrincipal">
  <h2>Profile</h2>
   </div>
- <div>
-    First name:  {{first_name}}
-    Last name:  {{last_name}}
-    Age:  {{age}}
-    Email:  {{email}}
+ <div class="margen">
+    First name:  {{usuario.first_name}}<br>
+    Last name:  {{usuario.last_name}}<br>
+    Age:  {{usuario.age}}<br>
+    Email:  {{usuario.email}}<br><br>
+
+
+    <a href="/api/session/logout" class="btn btn-primary" >Logout</a>
+    <a href="/productsmongoose" class="btn btn-primary">Ver mas productos</a>
 
  </div>
     

@@ -87,7 +87,12 @@ router.get('/registeruser', justPublicWhitoutSession ,(req,res)=>{
 router.get('/profile', auth, (req, res) =>{
     const usuario = req.session.usuario
 
-    res.render('profile', usuario)
+    res.render('profile',
+        {
+            usuario,
+            style: 'index.css',
+            title: 'Fitness Ropa deportiva',
+        } )
 })
 
 
