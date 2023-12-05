@@ -53,10 +53,15 @@ router.get('/:cid', async (req,res)=>{
     try{
                 const {cid} = req.params
                 const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
-            //console.log(carrito)
+              console.log(carrito)
+                 console.log(cid)
 
-                if(carrito)
-                
+            if(!carrito){
+                return res.status(404).json({ error: 'cart not found' });
+            }
+            carrito.productosagregados.forEach(product => {
+                product.cid = cid;
+            });
                // return res.json({carrito});
             //res.status(400).json('el id del carrito no existe'),
             
@@ -84,55 +89,42 @@ router.post('/', async (req,res)=>{
 })
 
 
-//para agregar un producto a un carrito uso el router otrocart.router 
 
-
-//agregar un producto a un carrito
-//el carrito lo creo desde la pagina /cartmongoose
-router.post('/:cid/product/:pid', async (req,res)=>{
-    
+//para eliminar un producto del carrito
+router.delete('/:cid/product/:pid', async (req,res)=>{
     try{
-        const carrito = await CartModel.findOne({}) 
+     const cid = req.params.cid
+     const pid = req.params.pid
+ 
+     const carrito = await CartModel.findById(cid).exec();
+ 
+     console.log(cid)
+ 
+    
+carrito.productosagregados = carrito.productosagregados.filter(p => p._id.toString() !== pid);
+console.log('carrito actualizado antes de save', carrito) 
 
-        let cid
+// carrito.productosagregados = carrito.productosagregados.filter(p => {
+//     console.log('Comparando _id:', p._id.toString(), 'con pid:', pid);
+//     return p._id.toString() !== pid;
+// });
+console.log('carrito despues del filtro', carrito) 
 
-        if(carrito){
-            cid = carrito.id
-        }else{
-            carrito = await CartModel.create({})
-            cid = carrito.id
-        }
-        
-        
-       
-        
-        const pid = req.params.pid
+          await carrito.save()
 
-        console.log('param', cid, pid)
+         console.log('carrito actualizado', carrito) 
+         return res.status(204).json({ message: 'Eliminación exitosa' });
 
-               
-        const productoInCart = carrito.productosagregados.find(p => p.product._id.toString() === pid);
-        //console.log(productoInCart)
-        if (productoInCart){
-            productoInCart.quantity++;
-        }
-        
-    else{
-        const newProduct = { product: pid, quantity: 1}
-        carrito.productosagregados.push(newProduct);
-    }
-      
-
-       await carrito.save();
-
-        return res.json({ msg: 'Carrito actualizado!', carrito });
 
     }catch (error){
-        console.error('error al agregar un prod', error)
-        res.status(500).json({error: 'error 3', details: error.message})
-       }  
-}
-)
+     console.error('error', error);
+     return res.status(500).json({ error: 'error', details: error.message });
+    }
+ 
+ })
+
+//para agregar un producto a un carrito uso el router otrocart.router 
+
 
 
 

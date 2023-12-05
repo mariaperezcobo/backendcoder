@@ -15,8 +15,11 @@
                 <h5 class="card-title">{{this.product.title}}</h5>
                 <p class="card-text">${{this.product.price}}</p>
                 <p class="card-text">Cantidad: {{this.quantity}}</p>
-                
+                 
+                 <button id="delete" class="btn btn-secondary margen-top delete-btn" data-cid="{{cid}}" data-id="{{this._id}}">Eliminar</button><br><br>
+              
                 </div>
+               
             </div>
 
         {{/each}}
@@ -33,4 +36,32 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/index.js">
+</script>
+
+<script>
+
+ document.querySelectorAll('.delete-btn').forEach(btn=>{
+btn.addEventListener('click', async (e) =>{
+const cid = e.target.dataset.cid;
+ const id = e.target.dataset.id;
+
+        try {
+          const response = await fetch(`/cartmongoose/${cid}/product/${id}`, { method: 'delete'});
+
+      if (response.ok) {
+        console.log('Eliminado con éxito')
+        document.location.href = `/cartmongoose/${cid}`
+        console.log(response)
+      } else {
+        console.log('No se pudo eliminar')
+      }
+    }catch (error) {
+      console.error('There was an error!', error);
+     
+    }
+
+});
+ })
+
+
 </script>

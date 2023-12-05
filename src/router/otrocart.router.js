@@ -60,6 +60,8 @@ router.get('/:cid', async (req,res)=>{
     }
 )
 
+
+
 //agregar un producto a un carrito
 //el carrito lo creo desde la pagina /cartmongoose
 router.post('/:cid/product/:pid', async (req,res)=>{
