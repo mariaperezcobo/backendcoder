@@ -4,10 +4,16 @@ import UserRegisterModel from '../dao/models/userregister.model.js'
 
 const router = Router()
 
-router.get('/', async (req,res)=>{
-    try{
-        const usuario = await UserRegisterModel.find()
+function auth(req,res, next){
+    if (req.session?.usuario) return next()
+    return res.redirect('/login')
+}
 
+
+router.get('/', auth, async (req,res)=>{
+    try{
+       // const usuario = await UserRegisterModel.find()
+       const usuario = req.session.usuario
 
         const limit = parseInt(req.query?.limit ?? 10)
         const page = parseInt(req.query?.page ?? 1)

@@ -52,7 +52,7 @@ router.get('/home', async (req,res)=>{
 
 //middlewares para sesiones
 function justPublicWhitoutSession (req,res,next){
-    if(req.session?.usurario) return res.redirect('/profile')
+    if(req.session?.usuario) return res.redirect('/profile')
     return next()
 }
 
@@ -63,8 +63,11 @@ function auth(req,res, next){
 
 //renders para sesiones
 
-router.get('/', (req,res)=> {
+router.get('/', auth, (req,res)=> {
+    const usuario = req.session.usuario
+
    return  res.render('index',{
+    usuario,
     style: 'index.css',
     title: 'Fitness Ropa deportiva',
    })
@@ -79,6 +82,7 @@ router.get('/login', justPublicWhitoutSession, (req,res) =>{
 
 router.get('/registeruser', justPublicWhitoutSession ,(req,res)=>{
     return res.render('registeruser',{
+        
         style: 'index.css',
         title: 'Fitness Ropa deportiva',
     })
@@ -92,15 +96,16 @@ router.get('/profile', auth, (req, res) =>{
             usuario,
             style: 'index.css',
             title: 'Fitness Ropa deportiva',
-        } )
+        } 
+)
 })
 
 
-router.get('/register', (req, res)=>{
-    res.render('register',{
-        style: 'index.css',
-    })
-})
+// router.get('/register', (req, res)=>{
+//     res.render('register',{
+//         style: 'index.css',
+//     })
+// })
 
 
 const messages=[]

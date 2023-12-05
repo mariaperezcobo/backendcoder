@@ -6,6 +6,7 @@ const UserRegisterModel = mongoose.model('usuario', new mongoose.Schema({
     email: String,
     age: Number,
     password: String,
+    rol: String
    
 }))
 

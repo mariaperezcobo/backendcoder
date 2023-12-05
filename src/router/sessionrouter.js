@@ -12,7 +12,8 @@ router.post('/login', async (req,res)=>{
         if(!usuario) return res.status(404).send('user not found')
        
         req.session.usuario = usuario
-        res.redirect('/profile')
+        console.log('usuario almacenado en sesion', req.session.usuario)
+        res.redirect('/productsmongoose')
     }catch(error){
         console.error('error al ingresar', error)
     }
@@ -23,8 +24,11 @@ router.post('/login', async (req,res)=>{
 router.post('/registeruser', async (req,res)=>{
     try{
         const usuario = req.body
+       // usuario.role = 'usuario'
+        
         await UserRegisterModel.create(usuario)
     
+        console.log('usuario creado', usuario)
         return res.redirect('/profile')
     }catch (error){
         console.error('error al registrarse', error)
