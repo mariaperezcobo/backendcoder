@@ -1,6 +1,7 @@
 import {Router} from 'express'
 import ProductsModel from '../dao/models/prodmongoose.models.js'
 import UserRegisterModel from '../dao/models/userregister.model.js'
+import CartModel from '../dao/models/cartmongoose.model.js'
 
 const router = Router()
 
@@ -12,6 +13,21 @@ function auth(req,res, next){
 
 router.get('/', auth, async (req,res)=>{
     try{
+
+        const carrito = await CartModel.findOne({}) 
+
+        let cid
+        
+
+        if(carrito){
+            cid = carrito.id
+        }else{
+            carrito = await CartModel.create({ productosagregados: [] })
+            cid = carrito.id
+        }
+//console.log('el carrito es :', carrito)
+//console.log('el cid es: ', cid)
+//console.log('el carrito.id es: ', carrito.id)
        // const usuario = await UserRegisterModel.find()
        const usuario = req.session.usuario
 
@@ -60,12 +76,18 @@ router.get('/', auth, async (req,res)=>{
         result.query = query
         delete result.docs
         
-       
+        result.productsmongoose.forEach(product => {
+            product.cid = cid;
+        });
+
+       //console.log(result)
        //console.log(result)
         
         res.render('list', {
             usuario,
             result,
+           
+            cid,
             style: 'index.css',
             title: 'Fitness Ropa deportiva',
         })
@@ -141,6 +163,45 @@ console.log(error)
 // router.post('/:id', async (req,res)=>{
     
 // })
+
+//agregar un producto a un carrito
+//el carrito lo creo desde la pagina /cartmongoose
+router.post('/:cid/product/:pid', async (req,res)=>{
+    
+    try{
+
+        const cid = req.params.cid   
+        const pid = req.params.pid
+        
+        const carrito = await CartModel.findById(cid) 
+
+         console.log('param', cid, pid)
+
+               
+        const productoInCart = carrito.productosagregados.find(p => p.product._id.toString() === pid);
+        //console.log(productoInCart)
+        if (productoInCart){
+            productoInCart.quantity++;
+        }
+        
+    else{
+        const newProduct = { product: pid, quantity: 1}
+        carrito.productosagregados.push(newProduct);
+    }
+      
+
+       await carrito.save();
+
+        //return res.json({ msg: 'Carrito actualizado!', carrito });
+
+    }catch (error){
+        console.error('error al agregar un prod', error)
+        res.status(500).json({error: 'error 3', details: error.message})
+       }  
+}
+)
+
+
 
 
 

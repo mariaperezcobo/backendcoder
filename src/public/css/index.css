@@ -23,7 +23,13 @@ b{
     align-items: center;
     /* background-color: blue; */
   }
-
+  .contenedorCarrito{
+    display: flex;
+    flex-wrap: wrap;
+  
+    align-items: center;
+    /* background-color: blue; */
+  }
 
 
   .container{
@@ -63,4 +69,8 @@ b{
 .margen{
 
   margin:15px
+}
+.margen-top{
+
+  margin-top:15px
 }
