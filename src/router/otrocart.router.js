@@ -88,7 +88,7 @@ router.post('/:cid/product/:pid', async (req,res)=>{
         // }
 
         const productoInCart = carrito.productosagregados.find(p => p.product._id.toString() === pid);
-        console.log(productoInCart)
+        //console.log(productoInCart)
         if (productoInCart){
             productoInCart.quantity++;
         }

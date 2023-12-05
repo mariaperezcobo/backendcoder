@@ -1,0 +1,21 @@
+<div>
+    <div class="contenedorTituloPrincipal">
+        <h2>Login</h2>
+    </div>
+
+    <div class="margen">
+        <form action="/api/session/login" method="post">
+            Email: <input type="text" name="email"><br><br>
+            Password: <input type="text" name="password"><br><br>
+            
+            <button type="submit">Login</button><br><br>
+
+            <a href="/registeruser">No tienes cuenta? Registrarse</a>
+        </form>
+    </div>
+
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js"></script>

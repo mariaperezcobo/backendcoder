@@ -8,8 +8,10 @@ import __dirname from './utils.js'
 import userRouter from './router/users.router.js'
 import {Server} from 'socket.io'
 import UserModel from './dao/models/users.model.js'
-
+import Session from './router/sessionrouter.js'
 import otrocart from './router/otrocart.router.js'
+import session from 'express-session'
+import MongoStore from 'connect-mongo'
 
 //import UserModel from './models/users.model.js'
 import mongoose from 'mongoose'
@@ -31,43 +33,23 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 
-
-
-//ruta para mongoose
-app.use('/productsmongoose', prodMongoose)
-app.use('/chatmongoose', chatMongoose)
-app.use('/cartmongoose', cartMongoose)
-//app.use('/api/cartmongoose', cartMongoose)
-app.use('/api/otrocart', otrocart)
-
-//rutas
-app.use('/api/products', routerProducts)
-app.use('/api/carts', routerCarts)
-app.use('/', viewsRouter)
-app.use('/api/user', userRouter)
-
-
-//rutas mongoose
-app.get('/api/userscollection', async (req, res)=>{
-const userscollection = await UserModel.find()
-res.json ({status: 'success', payload: userscollection})
-})
-
-//agregar user a usercollection
-app.post('/api/userscollection', async (req, res)=>{
-    try{
-        const dataUser = req.body
-        const resultUser = await UserModel.create(dataUser)
-        res.json ({status: 'success', payload: resultUser})
-    } catch (e) {
-        res.status(400).json({status:'error', error:e})
-    }
-  
-    })
-
 //inicializamos variables
 const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
 const mongodbName = 'ecommerce'
+
+//sesiones
+app.use(session({
+    
+    store: MongoStore.create({
+        mongoUrl : url,
+        dbName : mongodbName
+    }),
+    secret: 'secret',
+    resave:true,
+    saveUninitialized: true
+
+}))
+
 
 //conectamos a db y corremos el server
 mongoose.connect(url, {dbName: mongodbName})
@@ -101,6 +83,46 @@ io.on('connection', async socket =>{
             })
     })
     export {io}
+
+
+
+
+
+
+//ruta para mongoose
+app.use('/productsmongoose', prodMongoose)
+app.use('/chatmongoose', chatMongoose)
+app.use('/cartmongoose', cartMongoose)
+//app.use('/api/cartmongoose', cartMongoose)
+app.use('/api/otrocart', otrocart)
+app.use('/api/session', Session)
+
+//rutas
+app.use('/api/products', routerProducts)
+app.use('/api/carts', routerCarts)
+app.use('/', viewsRouter)
+app.use('/api/user', userRouter)
+
+
+//rutas mongoose
+app.get('/api/userscollection', async (req, res)=>{
+const userscollection = await UserModel.find()
+res.json ({status: 'success', payload: userscollection})
+})
+
+//agregar user a usercollection
+app.post('/api/userscollection', async (req, res)=>{
+    try{
+        const dataUser = req.body
+        const resultUser = await UserModel.create(dataUser)
+        res.json ({status: 'success', payload: resultUser})
+    } catch (e) {
+        res.status(400).json({status:'error', error:e})
+    }
+  
+    })
+
+
 
 
 

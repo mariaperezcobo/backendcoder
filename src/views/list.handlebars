@@ -10,6 +10,10 @@
 
      
     <div class="contenedorprincipal">
+        <div class="contenedorProductos">Bienvenido {{usuario.first_name}} {{usuario.last_name}}!! </div><br>
+        <div class="contenedorProductos">Email: {{usuario.email}} </div> 
+        <div class="contenedorProductos">Age: {{usuario.age}}</div>
+        <div class="contenedorProductos">Rol: {{usuario.rol}}</div>
         <div class="contenedorProductos" >
 
         {{#each result.productsmongoose}}
