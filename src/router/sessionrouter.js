@@ -24,7 +24,10 @@ router.post('/login', async (req,res)=>{
 router.post('/registeruser', async (req,res)=>{
     try{
         const usuario = req.body
-       // usuario.role = 'usuario'
+       
+        if(usuario.email === 'adminCoder@coder.com' && usuario.password === 'adminCod3r123') {
+            usuario.rol = 'admin'
+        }
         
         await UserRegisterModel.create(usuario)
     
