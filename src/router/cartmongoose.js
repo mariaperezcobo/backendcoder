@@ -87,6 +87,53 @@ router.post('/', async (req,res)=>{
 //para agregar un producto a un carrito uso el router otrocart.router 
 
 
+//agregar un producto a un carrito
+//el carrito lo creo desde la pagina /cartmongoose
+router.post('/:cid/product/:pid', async (req,res)=>{
+    
+    try{
+        const carrito = await CartModel.findOne({}) 
+
+        let cid
+
+        if(carrito){
+            cid = carrito.id
+        }else{
+            carrito = await CartModel.create({})
+            cid = carrito.id
+        }
+        
+        
+       
+        
+        const pid = req.params.pid
+
+        console.log('param', cid, pid)
+
+               
+        const productoInCart = carrito.productosagregados.find(p => p.product._id.toString() === pid);
+        //console.log(productoInCart)
+        if (productoInCart){
+            productoInCart.quantity++;
+        }
+        
+    else{
+        const newProduct = { product: pid, quantity: 1}
+        carrito.productosagregados.push(newProduct);
+    }
+      
+
+       await carrito.save();
+
+        return res.json({ msg: 'Carrito actualizado!', carrito });
+
+    }catch (error){
+        console.error('error al agregar un prod', error)
+        res.status(500).json({error: 'error 3', details: error.message})
+       }  
+}
+)
+
 
 
 // const result = await ProductModel.create({
