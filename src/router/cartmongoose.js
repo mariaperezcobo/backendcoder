@@ -99,7 +99,7 @@ router.delete('/:cid/product/:pid', async (req,res)=>{
  
      const carrito = await CartModel.findById(cid).exec();
  
-     console.log(cid)
+     //console.log(cid)
  
     
 carrito.productosagregados = carrito.productosagregados.filter(p => p._id.toString() !== pid);
@@ -132,11 +132,11 @@ router.delete('/:cid', async (req,res)=>{
      const cid = req.params.cid
       
      const carrito = await CartModel.findById(cid).exec();
-      console.log('1', carrito)                
+                 
          carrito.productosagregados = []
-         console.log('2',carrito) 
+       
          await carrito.save()
-         console.log('3',carrito) 
+         
          return res.json({ msg: 'carrito actualizado!', carrito });
  
     }catch (error){
