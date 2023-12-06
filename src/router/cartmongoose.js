@@ -53,8 +53,8 @@ router.get('/:cid', async (req,res)=>{
     try{
                 const {cid} = req.params
                 const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
-              console.log(carrito)
-                 console.log(cid)
+             // console.log(carrito)
+               //  console.log(cid)
 
             if(!carrito){
                 return res.status(404).json({ error: 'cart not found' });
@@ -67,6 +67,7 @@ router.get('/:cid', async (req,res)=>{
             
             res.render('cartone', {
                 carrito,
+                cid,
                 style: 'index.css',
                 title: 'Fitness Ropa deportiva',
             })
@@ -112,7 +113,7 @@ console.log('carrito despues del filtro', carrito)
 
           await carrito.save()
 
-         console.log('carrito actualizado', carrito) 
+       //  console.log('carrito actualizado', carrito) 
          return res.status(204).json({ message: 'Eliminación exitosa' });
 
 
@@ -123,7 +124,27 @@ console.log('carrito despues del filtro', carrito)
  
  })
 
-//para agregar un producto a un carrito uso el router otrocart.router 
+
+
+ //para eliminar carrito
+router.delete('/:cid', async (req,res)=>{
+    try{
+     const cid = req.params.cid
+      
+     const carrito = await CartModel.findById(cid).exec();
+      console.log('1', carrito)                
+         carrito.productosagregados = []
+         console.log('2',carrito) 
+         await carrito.save()
+         console.log('3',carrito) 
+         return res.json({ msg: 'carrito actualizado!', carrito });
+ 
+    }catch (error){
+     console.error('error', error);
+     return res.status(500).json({ error: 'error', details: error.message });
+    }
+ 
+ })
 
 
 

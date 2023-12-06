@@ -1,6 +1,6 @@
 <div>
      <div class="contenedorTituloPrincipal">
- <h2>Carrito de {{carrito.name}}</h2>
+ <h2>Carrito</h2>
   </div>
 
 
@@ -8,7 +8,7 @@
        <div class="contenedorProductos" >
   {{#each carrito.productosagregados}}
 
-            <div class="card container" style="width: 25rem;">
+            <div class="card container" style="width: 18rem;">
                 <img src="{{this.product.thumbnail}}" class="card-img-top" alt="Placeholder Image">
                 <div class="card-body">
 
@@ -16,7 +16,7 @@
                 <p class="card-text">${{this.product.price}}</p>
                 <p class="card-text">Cantidad: {{this.quantity}}</p>
                  
-                 <button id="delete" class="btn btn-secondary margen-top delete-btn" data-cid="{{cid}}" data-id="{{this._id}}">Eliminar</button><br><br>
+                 <button class="btn btn-secondary delete-btn" data-cid="{{cid}}" data-id="{{this._id}}">Eliminar</button><br>
               
                 </div>
                
@@ -30,7 +30,8 @@
 <div class="margen">
 
   <a href="/productsmongoose" class="btn btn-primary">Ver mas productos</a>
-
+   <button class="btn btn-secondary delete-carrito" data-cid="{{cid}}">Vaciar carrito</button><br>
+  data-cid="{{cid}}"
 </div>
 
 </div>
@@ -45,7 +46,7 @@ btn.addEventListener('click', async (e) =>{
 const cid = e.target.dataset.cid;
  const id = e.target.dataset.id;
 
-        try {
+      try {
           const response = await fetch(`/cartmongoose/${cid}/product/${id}`, { method: 'delete'});
 
       if (response.ok) {
@@ -63,5 +64,26 @@ const cid = e.target.dataset.cid;
 });
  })
 
+
+ document.querySelector('.delete-carrito').onclick = async function (e) {
+const cid = this.dataset.cid;
+console.log('cid del handlebars', cid)
+
+        try {
+          const response = await fetch(`/cartmongoose/${cid}`, { method: 'delete'});
+console.log(response)
+      if (response.ok) {
+        console.log('Eliminado con éxito')
+        document.location.href = `/cartmongoose/${cid}`;
+        console.log(response)
+      } else {
+        console.log('No se pudo eliminar el carrito')
+      }
+    }catch (error) {
+      console.error('error eliminando el carrito!', error);
+     
+    }
+
+}
 
 </script>
