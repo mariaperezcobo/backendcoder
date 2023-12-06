@@ -1,3 +1,6 @@
+//cart con filesistem
+
+
 import { Router } from "express"
 import ProductManager from "../dao/managers/productManager.js"
 import CartManager from '../dao/managers/cartManager.js'
@@ -8,30 +11,7 @@ import fs from 'fs'
 const cartManager = new CartManager()
 const productManager = new ProductManager()
 
-// let carts = 
-// [
-//     {
-//     "id":1,
-//     "products":[
-//         { "pid":1,
-//         "quantity":1}
-//         ]
-//     },
-//     {
-//     "id":2,
-//     "products":[
-//         { "pid":2,
-//         "quantity":1}
-//         ]
-//     },
-//     {
-//     "id":3,
-//     "products":[
-//         { "pid":1,
-//         "quantity":1}
-//         ]
-//     } 
-// ]
+
 
 const router = Router()
 

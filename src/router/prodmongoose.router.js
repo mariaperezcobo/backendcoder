@@ -6,7 +6,7 @@ import CartModel from '../dao/models/cartmongoose.model.js'
 const router = Router()
 
 function auth(req,res, next){
-    if (req.session?.usuario) return next()
+    if (req.session?.user) return next()
     return res.redirect('/login')
 }
 
@@ -29,7 +29,7 @@ router.get('/', auth, async (req,res)=>{
 //console.log('el cid es: ', cid)
 //console.log('el carrito.id es: ', carrito.id)
        // const usuario = await UserRegisterModel.find()
-       const usuario = req.session.usuario
+       const user = req.session.user
 
         const limit = parseInt(req.query?.limit ?? 10)
         const page = parseInt(req.query?.page ?? 1)
@@ -84,7 +84,7 @@ router.get('/', auth, async (req,res)=>{
        //console.log(result)
         
         res.render('list', {
-            usuario,
+            user,
             result,
            
             cid,

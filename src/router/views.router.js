@@ -52,22 +52,22 @@ router.get('/home', async (req,res)=>{
 
 //middlewares para sesiones
 function justPublicWhitoutSession (req,res,next){
-    if(req.session?.usuario) return res.redirect('/profile')
+    if(req.session?.user) return res.redirect('/profile')
     return next()
 }
 
 function auth(req,res, next){
-    if (req.session?.usuario) return next()
+    if (req.session?.user) return next()
     return res.redirect('/login')
 }
 
 //renders para sesiones
 
 router.get('/', auth, (req,res)=> {
-    const usuario = req.session.usuario
+    const user = req.session.user
 
    return  res.render('index',{
-    usuario,
+    user,
     style: 'index.css',
     title: 'Fitness Ropa deportiva',
    })
@@ -89,11 +89,11 @@ router.get('/registeruser', justPublicWhitoutSession ,(req,res)=>{
 })
 
 router.get('/profile', auth, (req, res) =>{
-    const usuario = req.session.usuario
+    const user = req.session.user
 
     res.render('profile',
         {
-            usuario,
+            user,
             style: 'index.css',
             title: 'Fitness Ropa deportiva',
         } 

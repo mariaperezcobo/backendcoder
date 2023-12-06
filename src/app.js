@@ -5,10 +5,12 @@ import routerCarts from './router/cart.router.js'
 import handlebars from 'express-handlebars'
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
-import userRouter from './router/users.router.js'
+//import userRouter from './router/users.router.js'
 import {Server} from 'socket.io'
-import UserModel from './dao/models/users.model.js'
+//import UserModel from './dao/models/users.model.js'
+import passport from 'passport'
 import Session from './router/sessionrouter.js'
+import initializePassport from './config/passport.config.js'
 import otrocart from './router/otrocart.router.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
@@ -42,13 +44,21 @@ app.use(session({
     
     store: MongoStore.create({
         mongoUrl : url,
-        dbName : mongodbName
+        dbName : mongodbName,
+        ttl: 100
     }),
     secret: 'secret',
     resave:true,
     saveUninitialized: true
 
 }))
+
+//configurar passport
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
+
+
 
 
 //conectamos a db y corremos el server
@@ -101,7 +111,7 @@ app.use('/api/session', Session)
 app.use('/api/products', routerProducts)
 app.use('/api/carts', routerCarts)
 app.use('/', viewsRouter)
-app.use('/api/user', userRouter)
+//app.use('/api/user', userRouter)
 
 
 //rutas mongoose
