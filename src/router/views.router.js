@@ -1,6 +1,6 @@
 import { Router } from "express"
 import ProductManager from '../dao/managers/productManager.js'
-
+import passport from 'passport'
 
 const router = Router()
 
@@ -98,6 +98,29 @@ router.get('/profile', auth, (req, res) =>{
             title: 'Fitness Ropa deportiva',
         } 
 )
+})
+
+router.get('/error', (req,res)=> res.send('pagina de error'))
+
+//sesion login con github
+router.get(
+    '/github', 
+    passport.authenticate('github', {scope:['user:email']}),
+   async (req,res)=>{
+    
+})
+
+
+//sesion login con github
+router.get(
+    '/githubcallback',
+    passport.authenticate('github', {failureRedirect: '/error'}),
+    (req,res)=>{
+        console.log('Callback:', req.user)
+        req.session.user = req.user
+        console.log('user session setted')
+        res.redirect('/')
+
 })
 
 

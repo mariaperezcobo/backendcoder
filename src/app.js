@@ -14,6 +14,7 @@ import initializePassport from './config/passport.config.js'
 import otrocart from './router/otrocart.router.js'
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
+import jwtRouter from './router/jwt.router.js'
 
 //import UserModel from './models/users.model.js'
 import mongoose from 'mongoose'
@@ -59,8 +60,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-
-
 //conectamos a db y corremos el server
 mongoose.connect(url, {dbName: mongodbName})
     .then(()=>{
@@ -95,8 +94,9 @@ io.on('connection', async socket =>{
     export {io}
 
 
-
-
+  //  App ID: 681168
+    //Client ID: Iv1.662a6575b5411586
+   // 3608645456c4540155929a3bfce812999d8fc636
 
 
 //ruta para mongoose
@@ -111,6 +111,7 @@ app.use('/api/session', Session)
 app.use('/api/products', routerProducts)
 app.use('/api/carts', routerCarts)
 app.use('/', viewsRouter)
+app.use('/jwt', jwtRouter)
 //app.use('/api/user', userRouter)
 
 
