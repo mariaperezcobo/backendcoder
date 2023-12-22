@@ -34,7 +34,8 @@ router.post(
     passport.authenticate('registeruser', {failureRedirect: '/'}),
     async (req,res)=>{
        // res.send('registrado')
-       
+       console.log('usuario registrado')
+       res.redirect('/login')
    
 })
 

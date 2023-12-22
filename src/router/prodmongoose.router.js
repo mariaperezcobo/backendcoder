@@ -14,22 +14,23 @@ function auth(req,res, next){
 router.get('/', auth, async (req,res)=>{
     try{
 
-        const carrito = await CartModel.findOne({}) 
+    //     const carrito = await CartModel.findOne({}) 
+    //     console.log(carrito)
+        // let cid
+       
+        // if(carrito){
+        //     cid = carrito.id
+        // }else{
+        //     carrito = await CartModel.create({ productosagregados: [] })
+        //     cid = carrito.id
+        // }
 
-        let cid
-        
-
-        if(carrito){
-            cid = carrito.id
-        }else{
-            carrito = await CartModel.create({ productosagregados: [] })
-            cid = carrito.id
-        }
 //console.log('el carrito es :', carrito)
 //console.log('el cid es: ', cid)
 //console.log('el carrito.id es: ', carrito.id)
        // const usuario = await UserRegisterModel.find()
        const user = req.session.user
+       const cid = req.session.user.cart;
 
         const limit = parseInt(req.query?.limit ?? 10)
         const page = parseInt(req.query?.page ?? 1)

@@ -3,6 +3,7 @@ import local from 'passport-local'
 import UserRegisterModel from "../dao/models/userregister.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 import GitHubStrategy from 'passport-github2'
+import CartModel from "../dao/models/cartmongoose.model.js";
 
 
 const LocalStrategy = local.Strategy
@@ -47,6 +48,8 @@ const initializePassport =()=>{
         passReqToCallback: true,
         usernameField: 'email'
     }, async (req, username, password, done) => {
+ 
+
         const {first_name, last_name, age, rol, email} = req.body
         try{
             const user = await UserRegisterModel.findOne({email: username})
@@ -64,10 +67,14 @@ const initializePassport =()=>{
                 password: createHash(password)
             }
 
+        const carrito = await CartModel.create({ productosagregados: [] })
+        
+        newUser.cart = carrito.id
+        
             const result = await UserRegisterModel.create(newUser)
             return done(null, result)
 
-
+          
         }catch(error){
             done('error to register', error)
         }
@@ -87,7 +94,7 @@ const initializePassport =()=>{
                 console.error('password not valid')
                 return done(null, false)
             }
-
+            console.log(user)
             return done(null, user)
         }catch(error){
             return done('error login', error)
