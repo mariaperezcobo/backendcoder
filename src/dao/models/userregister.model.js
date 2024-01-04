@@ -7,7 +7,10 @@ const UserRegisterModel = mongoose.model('user', new mongoose.Schema({
     age: Number,
     password: String,
     rol: String,
-    cart: String
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'carritos'
+    }
    
 }))
 
