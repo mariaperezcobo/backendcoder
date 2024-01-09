@@ -1,4 +1,17 @@
 
+import dotenv from 'dotenv'
+//dotenv.config()
+
+import { config } from 'dotenv';
+import path from 'path';
+
+const envPath = path.resolve(__dirname, '../.env');
+config({ path: envPath });
+
+
+console.log('MONGO_URL:', process.env.MONGO_URL);
+console.log('MONGO_DBNAME:', process.env.MONGO_DBNAME);
+
 import express from 'express'
 import routerProducts from './router/products.router.js'
 import routerCarts from './router/cart.router.js'
@@ -13,6 +26,7 @@ import Session from './router/sessionrouter.js'
 import initializePassport from './config/passport.config.js'
 import otrocart from './router/otrocart.router.js'
 import session from 'express-session'
+
 import MongoStore from 'connect-mongo'
 import jwtRouter from './router/jwt.router.js'
 
@@ -21,6 +35,8 @@ import mongoose from 'mongoose'
 import prodMongoose from './router/prodmongoose.router.js'
 import chatMongoose from './router/chatmongoose.router.js'
 import cartMongoose from './router/cartmongoose.js'
+
+
 
 const app = express()
 
@@ -37,8 +53,14 @@ app.use(express.urlencoded({extended: true}))
 
 
 //inicializamos variables
-const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
-const mongodbName = 'ecommerce'
+//const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
+//const mongodbName = 'ecommerce'
+
+const url = process.env.MONGO_URL
+const mongodbName = process.env.MONGO_DBNAME
+
+console.log('MONGO_URL:', url);
+console.log('MONGO_DBNAME:', mongodbName);
 
 //sesiones
 app.use(session({
@@ -53,6 +75,7 @@ app.use(session({
     saveUninitialized: true
 
 }))
+
 
 //configurar passport
 initializePassport()
@@ -70,8 +93,8 @@ mongoose.connect(url, {dbName: mongodbName})
     })
 
    const messages=[]
-
-const httpServer = app.listen (8080, ()=> console.log('running..'))
+const PORT = process.env.PORT
+const httpServer = app.listen (PORT, ()=> console.log('running..'))
 const io = new Server (httpServer)
 
 io.on('connection', async socket =>{
