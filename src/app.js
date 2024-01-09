@@ -9,8 +9,8 @@ const envPath = path.resolve(__dirname, '../.env');
 config({ path: envPath });
 
 
-console.log('MONGO_URL:', process.env.MONGO_URL);
-console.log('MONGO_DBNAME:', process.env.MONGO_DBNAME);
+//console.log('MONGO_URL:', process.env.MONGO_URL);
+//console.log('MONGO_DBNAME:', process.env.MONGO_DBNAME);
 
 import express from 'express'
 import routerProducts from './router/products.router.js'
@@ -59,8 +59,8 @@ app.use(express.urlencoded({extended: true}))
 const url = process.env.MONGO_URL
 const mongodbName = process.env.MONGO_DBNAME
 
-console.log('MONGO_URL:', url);
-console.log('MONGO_DBNAME:', mongodbName);
+//console.log('MONGO_URL:', url);
+//console.log('MONGO_DBNAME:', mongodbName);
 
 //sesiones
 app.use(session({

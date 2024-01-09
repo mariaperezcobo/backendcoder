@@ -9,17 +9,17 @@ import ProductsModel from '../dao/models/prodmongoose.models.js'
 
 
 //inicializamos variables
-const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
-const mongodbName = 'ecommerce'
+// const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
+// const mongodbName = 'ecommerce'
 
-//conectamos a db y corremos el server
-await mongoose.connect(url, {dbName: mongodbName})
-    .then(()=>{
-        console.log('DB connected')
-    })
-    .catch(e=>{
-        console.error('error conectando a la base de datos')
-    })
+// //conectamos a db y corremos el server
+// await mongoose.connect(url, {dbName: mongodbName})
+//     .then(()=>{
+//         console.log('DB connected')
+//     })
+//     .catch(e=>{
+//         console.error('error conectando a la base de datos')
+//     })
 
 const router = Router()
 
