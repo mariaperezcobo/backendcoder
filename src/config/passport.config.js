@@ -94,9 +94,10 @@ const initializePassport =()=>{
                 console.error('password not valid')
                 return done(null, false)
             }
-            console.log(user)
+            console.log('usruario:', user)
             return done(null, user)
         }catch(error){
+            console.error('Error during login en passport:', error);
             return done('error login', error)
         }
     }))
