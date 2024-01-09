@@ -1,7 +1,7 @@
 //cart con mongoose (la parte de agregar el producto a un carrito esta en otrocart.router)
 
 import {Router} from 'express'
-import mongoose from 'mongoose'
+//import mongoose from 'mongoose'
 // import CartModel from '../dao/models/cartmongoose.model.js'
 // import ProductModel from '../dao/models/productcart.model.js'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
