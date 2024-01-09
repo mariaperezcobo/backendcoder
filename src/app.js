@@ -28,7 +28,7 @@ import otrocart from './router/otrocart.router.js'
 import session from 'express-session'
 
 import MongoStore from 'connect-mongo'
-import jwtRouter from './router/jwt.router.js'
+
 
 //import UserModel from './models/users.model.js'
 import mongoose from 'mongoose'
@@ -134,7 +134,7 @@ app.use('/api/session', Session)
 app.use('/api/products', routerProducts)
 app.use('/api/carts', routerCarts)
 app.use('/', viewsRouter)
-app.use('/jwt', jwtRouter)
+
 //app.use('/api/user', userRouter)
 
 
