@@ -1,40 +1,26 @@
 import { Router } from "express"
 import ProductManager from '../dao/managers/productManager.js'
 import passport from 'passport'
+import { profileUser, initUser, loginView, registerView, homeView , realtimeproductsView} from "../controllers/views.js"
 
 const router = Router()
 
-const foods = [
-    {name:'prod a', price:10},
-    {name:'prod b', price:10},
-    {name:'prod a', price:10},
-    {name:'prod a', price:10},
-]
+//middlewares para sesiones
+function justPublicWhitoutSession (req,res,next){
+    if(req.session?.user) return res.redirect('/profile')
+    return next()
+}
 
-
+function auth(req,res, next){
+    if (req.session?.user) return next()
+    return res.redirect('/login')
+}
 
 const productManager = new ProductManager()
-router.get('/home', async (req,res)=>{
-    
-    
-        const products = await productManager.getProducts()
-      
-     res.render('home',{
-            products,
-            style: 'index.css',
-            title: 'Fitness Ropa deportiva',
-            
-         })
-    })
 
-    router.get('/realtimeproducts', async (req, res)=>{
-        const products = await productManager.getProducts()
-        res.render('realtimeproducts',{
-            products,
-            style: 'index.css',
-            title: 'Fitness Ropa deportiva',
-        })
-    })
+//para ver productos con filesystem
+router.get('/home', auth, homeView)
+router.get('/realtimeproducts', realtimeproductsView)
 
 // router.get ('/', (req, res)=> {
 //     const user={
@@ -50,55 +36,19 @@ router.get('/home', async (req,res)=>{
 //     })
 // })
 
-//middlewares para sesiones
-function justPublicWhitoutSession (req,res,next){
-    if(req.session?.user) return res.redirect('/profile')
-    return next()
-}
 
-function auth(req,res, next){
-    if (req.session?.user) return next()
-    return res.redirect('/login')
-}
 
 //renders para sesiones
 
-router.get('/', auth, (req,res)=> {
-    const user = req.session.user
+router.get('/', auth, initUser)
 
-   return  res.render('index',{
-    user,
-    style: 'index.css',
-    title: 'Fitness Ropa deportiva',
-   })
-})
+router.get('/login', justPublicWhitoutSession, loginView )
 
-router.get('/login', justPublicWhitoutSession, (req,res) =>{
-    return res.render('login', {
-        style: 'index.css',
-        title: 'Fitness Ropa deportiva',
-    })
-})
 
-router.get('/registeruser', justPublicWhitoutSession ,(req,res)=>{
-    return res.render('registeruser',{
-        
-        style: 'index.css',
-        title: 'Fitness Ropa deportiva',
-    })
-})
+router.get('/registeruser', justPublicWhitoutSession , registerView)
 
-router.get('/profile', auth, (req, res) =>{
-    const user = req.session.user
+router.get('/profile', auth, profileUser)
 
-    res.render('profile',
-        {
-            user,
-            style: 'index.css',
-            title: 'Fitness Ropa deportiva',
-        } 
-)
-})
 
 router.get('/error', (req,res)=> res.send('pagina de error'))
 
@@ -106,29 +56,20 @@ router.get('/error', (req,res)=> res.send('pagina de error'))
 router.get(
     '/github', 
     passport.authenticate('github', {scope:['user:email']}),
-   async (req,res)=>{
-    
-})
+    async (req,res)=>{
+ })
 
 
 //sesion login con github
-router.get(
-    '/githubcallback',
-    passport.authenticate('github', {failureRedirect: '/error'}),
-    (req,res)=>{
-        console.log('Callback:', req.user)
-        req.session.user = req.user
-        console.log('user session setted')
-        res.redirect('/')
-
-})
-
-
-// router.get('/register', (req, res)=>{
-//     res.render('register',{
-//         style: 'index.css',
-//     })
-// })
+ router.get(
+        '/githubcallback',
+        passport.authenticate('github', {failureRedirect: '/error'}),
+        (req,res)=>{
+            console.log('Callback:', req.user)
+            req.session.user = req.user
+            console.log('user session setted')
+            res.redirect('/productsmongoose')
+        })
 
 
 const messages=[]
