@@ -14,22 +14,26 @@
         <div class="contenedorProductos">Email: {{user.email}} </div> 
         <div class="contenedorProductos">Age: {{user.age}}</div>
         <div class="contenedorProductos">Rol: {{user.rol}}</div>
+        <div class="contenedorProductos">cid: {{user.cart}}</div>
         <div class="contenedorCarrito margen"><a href="/cartmongoose/{{cid}}" class="btn btn-danger">Ver carrito</a> </div>
         <div class="contenedorProductos" >
  
- 
+
+
+
         {{#each result.productsmongoose}}
 
             <div class="card container" style="width: 25rem;">
-                <img src="{{this.thumbnail}}" class="card-img-top" alt="Placeholder Image">
+                
+                <img src="{{thumbnail}}" class="card-img-top" alt="Placeholder Image">
                 <div class="card-body">
 
-                <h5 class="card-title">{{this.title}}</h5>
-                <p class="card-text">${{this.price}}</p>
+                <h5 class="card-title">{{title}}</h5>
+                <p class="card-text">${{price}}</p>
                 
-                <a href="/productsmongoose/{{this.code}}" class="btn btn-primary">Ver</a>
+                <a href="/productsmongoose/{{id}}" class="btn btn-primary">Ver</a>
 
-                <form action="/productsmongoose/{{cid}}/product/{{this._id}}" method="post">
+                <form action="/productsmongoose/{{cid}}/product/{{_id}}" method="post">
                     <button type="submit" class="btn btn-primary margen-top">Agregar al carrito</button><br><br>
                 </form>
 

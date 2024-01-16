@@ -1,8 +1,9 @@
 import {Router} from 'express'
-// import ProductsModel from '../dao/models/prodmongoose.models.js'
-// import UserRegisterModel from '../dao/models/userregister.model.js'
-// import CartModel from '../dao/models/cartmongoose.model.js'
+//import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct } from '../controllers/products.js'
 import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct } from '../controllers/products.js'
+
+//import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/mongo/products.mongo.js"
+//import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/file/products.file.js"
 
 const router = Router()
 
@@ -17,8 +18,8 @@ router.post('/', addProduct)
 
 router.get('/create', createProduct)
 
-router.get('/:code', getProductsById)
-
+//router.get('/:code', getProductsById)
+router.get('/:id', getProductsById)
 router.delete('/:id', deleteProduct)
 
 router.post('/:cid/product/:pid', addProductInCart)

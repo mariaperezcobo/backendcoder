@@ -16,6 +16,8 @@ import express from 'express'
 import routerProducts from './router/products.router.js'
 import routerCarts from './router/cart.router.js'
 import handlebars from 'express-handlebars'
+import exphbs from 'express-handlebars';
+
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
 //import userRouter from './router/users.router.js'
@@ -39,6 +41,7 @@ import cartMongoose from './router/cartmongoose.js'
 
 
 const app = express()
+
 
 //configuramos el motor de plantillas
 app.engine('handlebars', handlebars.engine())
