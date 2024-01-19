@@ -4,7 +4,7 @@ import UserRegisterModel from "../dao/models/userregister.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 import GitHubStrategy from 'passport-github2'
 import CartModel from "../dao/models/cartmongoose.model.js";
-
+import { UserService } from "../services/index.js";
 
 const LocalStrategy = local.Strategy
 
@@ -52,7 +52,10 @@ const initializePassport =()=>{
 
         const {first_name, last_name, age, rol, email} = req.body
         try{
-            const user = await UserRegisterModel.findOne({email: username})
+            //const user = await UserRegisterModel.findOne({email: username})
+
+            const user = await UserService.getUsers(username)
+            console.log(user)
             if(user){
                 console.log('user already exist')
                 return done(null,false)
@@ -71,7 +74,8 @@ const initializePassport =()=>{
         
         newUser.cart = carrito.id
         
-            const result = await UserRegisterModel.create(newUser)
+            //const result = await UserRegisterModel.create(newUser)
+            const result = await UserService.addUsers(newUser)
             return done(null, result)
 
           
@@ -84,7 +88,7 @@ const initializePassport =()=>{
         usernameField: 'email'
     }, async(username, password, done)=>{
         try{
-            const user = await UserRegisterModel.findOne({email: username}).lean().exec()
+            const user = await UserService.getUsers(username)
             if(!user){
                 console.error('user doesnt exist')
                 return done (null, false)
