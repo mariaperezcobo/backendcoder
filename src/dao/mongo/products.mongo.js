@@ -9,7 +9,7 @@ export default class Products {
     getProductsById = async id => { const product = await ProductsModel.findById(id);
         return product ? product.toObject() : null; }
 
-
+    deleteProduct = async id =>{return ProductsModel.deleteOne({ _id: id})}    
     getProductsFindOne = async code => { return ProductsModel.findOne(code) }
     addProduct = async product => { return ProductsModel.create(product) }
     // updateOrder = async (id, order) => {
