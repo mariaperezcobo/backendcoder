@@ -87,13 +87,13 @@ app.use(passport.session())
 
 
 //conectamos a db y corremos el server
-mongoose.connect(url, {dbName: mongodbName})
-    .then(()=>{
-        console.log('DB connected')
-    })
-    .catch(e=>{
-        console.error('error conectando a la base de datos')
-    })
+// mongoose.connect(url, {dbName: mongodbName})
+//     .then(()=>{
+//         console.log('DB connected')
+//     })
+//     .catch(e=>{
+//         console.error('error conectando a la base de datos')
+//     })
 
    const messages=[]
 const PORT = process.env.PORT

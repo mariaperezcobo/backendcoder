@@ -17,7 +17,7 @@ config({path: envPath})
 // // dotenv.config({ path: envPath });
 
 
-// console.log('File loaded!!');
+ console.log('File loaded!!');
 
 const environmentConfig = {
     PERSISTENCE: process.env.PERSISTENCE,
@@ -32,7 +32,7 @@ const environmentConfig = {
 
 // console.log('process.env.MONGO_UR', process.env.MONGO_URL);
 // console.log('environmentConfig.MONGO_URL', environmentConfig.MONGO_URL);
-// console.log('port', process.env.PORT);
+console.log('port', process.env.PORT);
 // console.log('port', environmentConfig.PORT);
 // console.log(process.env.MONGO_DBNAME);
 // //console.log(process.env);
