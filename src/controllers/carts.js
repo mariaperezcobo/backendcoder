@@ -1,6 +1,6 @@
 import {request, response} from 'express'
 import CartModel from "../dao/models/cartmongoose.model.js";
-
+import { CartService } from '../services/index.js';
 
 export const getCartById =async(req=request,res=response)=>{
 
@@ -35,7 +35,7 @@ export const deleteProductInCart =async(req=request,res=response)=>{
         const cid = req.params.cid
         const pid = req.params.pid
     
-        const carrito = await CartModel.findById(cid).exec();
+        const carrito = await CartService.getCartsById(cid)
     
         //console.log(cid)
 
@@ -64,7 +64,7 @@ export const deleteProductInCart =async(req=request,res=response)=>{
         try{
             const cid = req.params.cid
              
-            const carrito = await CartModel.findById(cid).exec();
+            const carrito =  await CartService.getCartsById(cid);
                         
                 carrito.productosagregados = []
               

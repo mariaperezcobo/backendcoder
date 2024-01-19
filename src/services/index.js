@@ -10,6 +10,8 @@
 
 //import Products from '../dao/mongo/products.mongo.js'
 import ProductRepository from "./product.repository.js";
-import { Products} from '../dao/factory.js'
+import CartRepository from './cart.repository.js';
+import { Products, Carts} from '../dao/factory.js'
 
 export const ProductService = new ProductRepository(new Products())
+export const CartService = new CartRepository(new Carts())

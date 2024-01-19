@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import environmentConfig from '../enviroments.js'
 
 export let Products
+export let Carts
 
 console.log(`Persistence with ${environmentConfig.PERSISTENCE}`)
 
@@ -13,9 +14,10 @@ switch (environmentConfig.PERSISTENCE) {
         console.log('DB connected 👌')
 
         const { default: ProductsMongo } = await import('../dao/mongo/products.mongo.js')
-        
+        const { default: CartsMongo } = await import('../dao/mongo/carts.mongo.js')
 
         Products = ProductsMongo
+        Carts = CartsMongo
 
         break;
 

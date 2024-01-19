@@ -82,7 +82,7 @@ console.log(result)
                 result.productsmongoose.forEach(product => {
                     product.cid = cid;
                 });
-                console.log('Documentos después de agregar "cid":', result);
+                //console.log('Documentos después de agregar "cid":', result);
                 //console.log('Documentos con precio:', result.productmongoose.price);
             } else {
                 console.log('La propiedad "productsmongoose" no está presente en el resultado');
@@ -162,7 +162,7 @@ res.render('list', {
  export const addProduct =async(req=request,res=response)=>{
     try{
         const productmongooseNew = req.body
-        const result = await ProductsModel.create(productmongooseNew)
+        const result = await ProductService.addProduct(productmongooseNew)
 
         // console.log(result)
         res.redirect('/productsmongoose')
@@ -176,7 +176,7 @@ res.render('list', {
  export const deleteProduct =async(req=request,res=response)=>{
     try{
         const {id} = req.params
-        await ProductsModel.deleteOne({ _id: id})
+        await ProductService.deleteProduct(id)
 
         return res.json({status: 'success'})
     }catch (error){
