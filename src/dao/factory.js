@@ -24,9 +24,10 @@ switch (environmentConfig.PERSISTENCE) {
     case "FILE":
 
     const { default: ProductsFile } = await import('../dao/file/products.file.js')
-        
+    const { default: CartsFile } = await import('../dao/file/carts.file.js')
 
     Products = ProductsFile
+    Carts = CartsFile
 
         break
 

@@ -1,108 +1,18 @@
-//se usaba para filesystem
-import UserRegisterModel from '../models/userregister.model.js'
 
-import {Router} from 'express'
-import ProductManager from '../managers/productManager.js'
-import fs from 'fs/promises'
+
+import FileManager from "./file.manager.js";
 import __dirname from '../../utils.js'
-import {io} from '../../app.js'
 
-const productManager = new ProductManager()
+export default class Products extends FileManager {
 
-export const getProducts =async(req=request,res=response)=>{
-    try{
-
-        const user = req.session.user
-        const products = await productManager.getProducts()
-        const result = { productsmongoose: products, totalDocs: products.length, page: 1, totalPages: 1, limit: products.length, query: '', hasPrevPage: false, hasNextPage: false, prevPage: null, nextPage: null };
-        
-        console.log('resultado de result.productmongoose:', result.productsmongoose)
-        console.log('resultado de result', result)
-        //const productsData = await productManager.getProducts()
-        //const products = JSON.parse(productsData);
-                // const limit = parseInt(req.query.limit)
-                // if(limit){
-                //     const product = result.slice (0,limit)
-                   // res.send(product)
-                    
-                //  }else{
-                // //     res.send(products)
-                   
-                //     console.log(req.params)
-                //     console.log(result)
-                //  }
-    
-         
-                 //res.send(products)   
-                 console.log(result)     
-            res.render('list', {
-                user,
-                result,
-               //products,
-                //cid,
-                style: 'index.css',
-                title: 'Fitness Ropa deportiva',
-            })
-    
-        }catch(error){
-            console.error('error', error)
-            console.error(error)
-        }  
- }
- 
-
- export const  getProductsById =async(req=request,res=response)=>{
-    try{
-        
-
-        res.render('one',{
-            productmongoose,
-            style: 'index.css',
-            title: 'Fitness Ropa deportiva',
-        })
-    }catch (error){
-        res.send('error al buscar el producto')
-
+    constructor(filename = __dirname + '/dao/files/products.json') {
+        super(filename)
     }
- }
 
- export const addProduct =async(req=request,res=response)=>{
-    try{
-       
-        res.redirect('/productsmongoose')
+    getProducts = async () => { return this.getProducts() }
+    //getProductsById = async id => { return this.getProductsById(id) }
 
-    }catch (error){
-        console.log(error),
-        res.send('error al crear productos con mongoose')
-    }
- }
-
- export const deleteProduct =async(req=request,res=response)=>{
-    try{
-        
-
-        return res.json({status: 'success'})
-    }catch (error){
-        res.status(500).json(error)
-console.log(error)
-    }
- }
-
- export const addProductInCart =async(req=request,res=response)=>{
-       
-    try{
-
-
-    }catch (error){
-        console.error('error al agregar un prod', error)
-        res.status(500).json({error: 'error 3', details: error.message})
-       }  
 }
- 
-
-export const createProduct = (req=request,res=response)=>{
-  
-     }
 
 
 
