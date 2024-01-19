@@ -81,8 +81,8 @@ const initializePassport =()=>{
             // Crear el usuario en la base de datos
           //const result = await UserRegisterModel.create(newUser)    
           
-            const result = await UserRegisterModel.create(newUser)  
-           // const result = await UserService.addUsers(newUser);
+           // const result = await UserRegisterModel.create(newUser)  
+           const result = await UserService.addUsers(newUser);
             console.log('usuario agregado', result)
        
 
