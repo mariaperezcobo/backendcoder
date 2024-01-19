@@ -26,7 +26,7 @@ import {Server} from 'socket.io'
 import passport from 'passport'
 import Session from './router/sessionrouter.js'
 import initializePassport from './config/passport.config.js'
-import otrocart from './router/otrocart.router.js'
+//import otrocart from './router/otrocart.router.js'
 import session from 'express-session'
 
 import MongoStore from 'connect-mongo'
@@ -130,7 +130,7 @@ app.use('/productsmongoose', prodMongoose)
 app.use('/chatmongoose', chatMongoose)
 app.use('/cartmongoose', cartMongoose)
 //app.use('/api/cartmongoose', cartMongoose)
-app.use('/api/otrocart', otrocart)
+//app.use('/api/otrocart', otrocart)
 app.use('/api/session', Session)
 
 //rutas
