@@ -103,7 +103,7 @@ export const deleteProductInCart =async(req=request,res=response)=>{
      export const createCart =async(req=request,res=response)=>{
         try{
             const carritoNew = req.body
-            const resultcarrito = await CartModel.create(carritoNew)
+            const resultcarrito = await CartService.addCart(carritoNew)
             res.redirect('/cartmongoose')
         }catch(error){
             console.log(error),

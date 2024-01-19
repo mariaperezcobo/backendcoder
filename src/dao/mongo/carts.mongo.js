@@ -5,6 +5,6 @@ export default class Carts {
    
     getCartsById = async cid => { return CartModel.findById(cid).exec() }
 
-        
+    addCart = async cart => { return CartModel.create(cart) }
          
 }

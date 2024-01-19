@@ -2,7 +2,7 @@
 import {request, response} from 'express'
 import ProductsModel from '../dao/models/prodmongoose.models.js'
 import CartModel from '../dao/models/cartmongoose.model.js'
-import {ProductService} from '../services/index.js'
+import {ProductService, CartService} from '../services/index.js'
 
 
 export const getProducts =async(req=request,res=response)=>{
@@ -192,7 +192,7 @@ console.log(error)
         const cid = req.params.cid   
         const pid = req.params.pid
         
-        const carrito = await CartModel.findById(cid) 
+        const carrito = await CartService.getCartsById(cid) 
 
          console.log('param', cid, pid)
 
