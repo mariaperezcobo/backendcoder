@@ -55,7 +55,7 @@ const initializePassport =()=>{
             //const user = await UserRegisterModel.findOne({email: username})
 
             const user = await UserService.getUsers(username)
-            console.log('usuario', user)
+            //console.log('usuario', user)
 
             if (!email) {
                 console.log('Email es nulo o indefinido');
@@ -76,14 +76,14 @@ const initializePassport =()=>{
                 password: createHash(password)
             }
 
-            console.log('Datos del nuevo usuario:', newUser);
+            //console.log('Datos del nuevo usuario:', newUser);
 
             // Crear el usuario en la base de datos
           //const result = await UserRegisterModel.create(newUser)    
           
            // const result = await UserRegisterModel.create(newUser)  
            const result = await UserService.addUsers(newUser);
-            console.log('usuario agregado', result)
+           // console.log('usuario agregado', result)
        
 
         
@@ -91,7 +91,7 @@ const initializePassport =()=>{
     // Añadir el carrito al usuario
     const carrito = await CartService.addCart({ productosagregados: [] });
     result.cart = carrito.id;
-    console.log('carrito', carrito)
+   // console.log('carrito', carrito)
   
     // Actualizar el usuario con el ID del carrito
     await result.save();
@@ -99,10 +99,10 @@ const initializePassport =()=>{
         //const carrito = await CartModel.create({ productosagregados: [] })
      
     
-        console.log('Datos del nuevo usuario con carrito:', newUser);
+     //   console.log('Datos del nuevo usuario con carrito:', newUser);
       
 
-            console.log('result', result)
+        //    console.log('result', result)
             return done(null, result)
 
          

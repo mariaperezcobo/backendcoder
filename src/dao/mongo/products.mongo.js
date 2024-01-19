@@ -3,9 +3,18 @@ import ProductsModel from "../models/prodmongoose.models.js"
 
 export default class Products {
     getProducts = async () => { return ProductsModel.find() }
+
     getProductsPaginate = async (searchQuery, options) => {
-        return ProductsModel.paginate(searchQuery, options);
+        try {
+            const products = await ProductsModel.paginate(searchQuery, options);
+            return products;
+        } catch (error) {
+            console.error('Error in getProductsPaginate:', error);
+            throw error;
+        }
     }
+    
+      
     getProductsById = async id => { const product = await ProductsModel.findById(id);
         return product ? product.toObject() : null; }
 

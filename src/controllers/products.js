@@ -1,5 +1,6 @@
 
 import {request, response} from 'express'
+import mongoose from 'mongoose'
 import ProductsModel from '../dao/models/prodmongoose.models.js'
 import CartModel from '../dao/models/cartmongoose.model.js'
 import {ProductService, CartService} from '../services/index.js'
@@ -7,6 +8,7 @@ import {ProductService, CartService} from '../services/index.js'
 
 export const getProducts =async(req=request,res=response)=>{
     try{
+        console.log('ProductsModel:', ProductsModel); 
         //     const carrito = await CartModel.findOne({}) 
         //     console.log(carrito)
             // let cid
@@ -21,6 +23,9 @@ export const getProducts =async(req=request,res=response)=>{
               // const usuario = await UserRegisterModel.find()
            const user = req.session.user
            const cid = req.session.user.cart;
+
+           console.log('user', user)
+           console.log('cid', cid)
     
             const limit = parseInt(req.query?.limit ?? 10)
             const page = parseInt(req.query?.page ?? 1)
@@ -64,23 +69,39 @@ export const getProducts =async(req=request,res=response)=>{
             //     lean:true,
             //     sort: {price: sortDirection}
             // })
-  // const result = await ProductService.getProductsPaginate(searchQuery,{
- const result = await ProductsModel.paginate(searchQuery,{
+
+            const options = {
                 page,
                 limit,
                 lean:true,
                 sort: {price: sortDirection}
-            })
-            result.query = query;
-//console.log(result)
-            result.productsmongoose = result.docs
-            result.query = query
-            delete result.docs
 
-            if (result.productsmongoose) {
+            }
+
+            console.log('ProductService:', ProductService);
+ //const result = await ProductService.getProductsPaginate(searchQuery,options)
+  //const result = await ProductService.getProducts()
+  const result = await ProductsModel.paginate(searchQuery,options)
+      
+            
+            result.query = query;
+
+            result.productsmongoose = result.docs
+            
+            console.log('result', result)
+            result.query = query
+           delete result.docs
+           // console.log('result2',result)         
+            //console.log('result3', result.productsmongoose)
+
+            console.log('result', result)
+
+
+            if (result.productsmongoose ) {
                 // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
                 result.productsmongoose.forEach(product => {
                     product.cid = cid;
+                    
                 });
                 //console.log('Documentos después de agregar "cid":', result);
                 //console.log('Documentos con precio:', result.productmongoose.price);
@@ -88,24 +109,8 @@ export const getProducts =async(req=request,res=response)=>{
                 console.log('La propiedad "productsmongoose" no está presente en el resultado');
             }
 
-          //  console.log('Documentos ":', result);
-            //console.log('Documentos docs":', result.docs);
-      //      console.log('Documentos prodmon":', result.productsmongoose);
-        //    console.log('Documentos con precio":', result.productsmongoose.price);
-            // if (result.productsmongoose) {
-            //     // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
-            //     result.productsmongoose.forEach(product => {
-            //         product.cid = cid;
-            //     });
-            
-            //     console.log('Documentos después de agregar "cid":', result.productsmongoose);
-            // } else {
-            //     console.log('La propiedad "productsmongoose" no está presente en el resultado');
-            // }
+        
 
-  //          console.log('result:', result);
-//console.log('Longitud del array de documentos:', result.productsmongoose);
-//console.log('Primer documento en el array:', result.productsmongoose[0]);
 console.log(cid)
 // Iterar sobre la lista de productos
 //result.productsmongoose.forEach(product => {
@@ -114,7 +119,7 @@ console.log(cid)
     //console.log('Título:', product.title);
     // Puedes agregar más propiedades según sea necesario
 //});
-
+console.log('result4', result.productsmongoose)
 //Renderizar la vista
 res.render('list', {
     user,
@@ -151,6 +156,7 @@ res.render('list', {
             style: 'index.css',
             title: 'Fitness Ropa deportiva',
         })
+
     }catch (error){
         console.error('Error al buscar el producto:', error);
     res.status(500).send('Error interno del servidor');

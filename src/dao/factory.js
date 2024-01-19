@@ -26,11 +26,16 @@ switch (environmentConfig.PERSISTENCE) {
 
     case "FILE":
 
+    await mongoose.connect(environmentConfig.MONGO_URL, { dbName: environmentConfig.MONGO_DBNAME })
+    console.log('DB connected 👌')
+
     const { default: ProductsFile } = await import('../dao/file/products.file.js')
     const { default: CartsFile } = await import('../dao/file/carts.file.js')
+    const { default: UsersFile } = await import('../dao/mongo/users.mongo.js')
 
     Products = ProductsFile
     Carts = CartsFile
+    Users = UsersFile
 
         break
 
