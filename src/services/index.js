@@ -8,7 +8,8 @@
 // export const StoreService = new StoreRepository(new Store())
 // export const OrderService = new OrderRepository(new Order())
 
-import Products from '../dao/mongo/products.mongo.js'
+//import Products from '../dao/mongo/products.mongo.js'
 import ProductRepository from "./product.repository.js";
+import { Products} from '../dao/factory.js'
 
 export const ProductService = new ProductRepository(new Products())
