@@ -72,7 +72,7 @@ export const getProducts =async(req=request,res=response)=>{
                 sort: {price: sortDirection}
             })
             result.query = query;
-console.log(result)
+//console.log(result)
             result.productsmongoose = result.docs
             result.query = query
             delete result.docs
@@ -88,7 +88,7 @@ console.log(result)
                 console.log('La propiedad "productsmongoose" no está presente en el resultado');
             }
 
-            console.log('Documentos ":', result);
+          //  console.log('Documentos ":', result);
             //console.log('Documentos docs":', result.docs);
       //      console.log('Documentos prodmon":', result.productsmongoose);
         //    console.log('Documentos con precio":', result.productsmongoose.price);
@@ -144,7 +144,7 @@ res.render('list', {
             // Si el producto no se encuentra, puedes manejarlo de alguna manera
             return res.status(404).send('Producto no encontrado');
         }
-        console.log(productmongoose)
+       // console.log(productmongoose)
 
         res.render('one',{
             productmongoose,

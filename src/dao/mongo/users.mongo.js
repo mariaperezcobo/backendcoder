@@ -1,7 +1,7 @@
 import UserRegisterModel from "../models/userregister.model.js";
 
 export default class Users {
-    getUsers = async username => { return UserRegisterModel.findOne({email: username}).lean().exec() }
+    getUsers = async (username, id )=> { return UserRegisterModel.findOne(({email: username}), id).lean().exec() }
     addUsers = async newUser => { return UserRegisterModel.create(newUser) }
 }
 

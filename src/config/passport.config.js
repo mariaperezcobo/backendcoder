@@ -4,7 +4,7 @@ import UserRegisterModel from "../dao/models/userregister.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 import GitHubStrategy from 'passport-github2'
 import CartModel from "../dao/models/cartmongoose.model.js";
-import { UserService } from "../services/index.js";
+import { CartService, UserService } from "../services/index.js";
 
 const LocalStrategy = local.Strategy
 
@@ -55,7 +55,13 @@ const initializePassport =()=>{
             //const user = await UserRegisterModel.findOne({email: username})
 
             const user = await UserService.getUsers(username)
-            console.log(user)
+            console.log('usuario', user)
+
+            if (!email) {
+                console.log('Email es nulo o indefinido');
+                return done(null, false);
+            }
+
             if(user){
                 console.log('user already exist')
                 return done(null,false)
@@ -70,15 +76,36 @@ const initializePassport =()=>{
                 password: createHash(password)
             }
 
-        const carrito = await CartModel.create({ productosagregados: [] })
+            console.log('Datos del nuevo usuario:', newUser);
+
+            // Crear el usuario en la base de datos
+          //const result = await UserRegisterModel.create(newUser)    
+          
+            const result = await UserRegisterModel.create(newUser)  
+           // const result = await UserService.addUsers(newUser);
+            console.log('usuario agregado', result)
+       
+
         
-        newUser.cart = carrito.id
-        
-            //const result = await UserRegisterModel.create(newUser)
-            const result = await UserService.addUsers(newUser)
+
+    // Añadir el carrito al usuario
+    const carrito = await CartService.addCart({ productosagregados: [] });
+    result.cart = carrito.id;
+    console.log('carrito', carrito)
+  
+    // Actualizar el usuario con el ID del carrito
+    await result.save();
+
+        //const carrito = await CartModel.create({ productosagregados: [] })
+     
+    
+        console.log('Datos del nuevo usuario con carrito:', newUser);
+      
+
+            console.log('result', result)
             return done(null, result)
 
-          
+         
         }catch(error){
             done('error to register', error)
         }
@@ -89,6 +116,8 @@ const initializePassport =()=>{
     }, async(username, password, done)=>{
         try{
             const user = await UserService.getUsers(username)
+
+            console.log('usuario', user)
             if(!user){
                 console.error('user doesnt exist')
                 return done (null, false)
@@ -113,7 +142,8 @@ const initializePassport =()=>{
     })
 
     passport.deserializeUser( async (id, done)=>{
-        const user = await UserRegisterModel.findById(id)
+        //const user = await UserRegisterModel.findById(id)
+        const user = await UserService.getUsers(id)
         done(null, user)
     })
 
