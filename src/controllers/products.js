@@ -79,7 +79,7 @@ export const getProducts =async(req=request,res=response)=>{
 
             }
 
-            console.log('ProductService:', ProductService);
+        //    console.log('ProductService:', ProductService);
  const result = await ProductService.getProductsPaginate(searchQuery,options)
  
   //const result = await ProductsModel.paginate(searchQuery,options)
@@ -116,7 +116,7 @@ export const getProducts =async(req=request,res=response)=>{
 
         
 
-console.log(cid)
+//console.log(cid)
 //console.log(result)
 
 //console.log('result4', result.productsmongoose)
@@ -198,13 +198,13 @@ console.log(error)
         const cid = req.params.cid   
         const pid = req.params.pid
         
-        const carrito = await CartService.getCartsById(cid) 
-console.log('carrito', carrito)
-         console.log('param', cid, pid)
-
+        let carrito = await CartService.getCartsById(cid) 
+    //  console.log('carrito', carrito)
+    // console.log('param', cid, pid)
+    //  console.log('carrito con prod', carrito.productosagregados)
                
-        const productoInCart = carrito.productosagregados.find(p => p.product._id.toString() === pid);
-        console.log(productoInCart)
+        const productoInCart = carrito.productosagregados.find(p => p.product && p.product._id.toString() === pid);
+    //    console.log('productoincart',productoInCart)
         if (productoInCart){
             productoInCart.quantity++;
         }
@@ -214,10 +214,12 @@ console.log('carrito', carrito)
         carrito.productosagregados.push(newProduct);
     }
       
+    // Actualizar la base de datos con los cambios
+   // await CartModel.findByIdAndUpdate(cid, { productosagregados: carrito.productosagregados }, { new: true });
+    //await CartService.updateCart(cid, { productosagregados: carrito.productosagregados }, { new: true });
+     await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+    //console.log('carrito desp de actualizar',carrito)
 
-       await carrito.save();
-
-        //return res.json({ msg: 'Carrito actualizado!', carrito });
 
     }catch (error){
         console.error('error al agregar un prod', error)

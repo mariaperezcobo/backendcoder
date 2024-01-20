@@ -5,7 +5,7 @@ import __dirname from './utils.js'
 
 const envPath= path.resolve(__dirname, '../.env')
 
-console.log('Before loading dotenv:', process.env.MONGO_URL, process.env.MONGO_DBNAME);
+//console.log('Before loading dotenv:', process.env.MONGO_URL, process.env.MONGO_DBNAME);
 
 config({path: envPath})
 

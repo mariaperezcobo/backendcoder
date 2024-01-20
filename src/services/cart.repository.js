@@ -7,4 +7,7 @@ export default class CartRepository {
     getCartsById = async cid => { return this.dao.getCartsById(cid) }
     
     addCart = async () => { return this.dao.addCart() }
+
+
+    updateCart= async (cid, update) =>{return this.dao.updateCart(cid, update)} 
 }

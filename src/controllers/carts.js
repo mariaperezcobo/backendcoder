@@ -10,7 +10,7 @@ export const getCartById =async(req=request,res=response)=>{
         //const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
 
         const carrito = await CartService.getCartsById(cid)
-      console.log('carrito', carrito)
+      //console.log('carrito', carrito)
         
 
     if(!carrito){
@@ -62,7 +62,9 @@ export const deleteProductInCart =async(req=request,res=response)=>{
             // });
         console.log('carrito despues del filtro', carrito) 
    
-        await carrito.save()
+
+        await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+        //await carrito.save()
    
           //  console.log('carrito actualizado', carrito) 
             return res.status(204).json({ message: 'Eliminación exitosa' });
