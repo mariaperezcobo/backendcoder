@@ -79,47 +79,45 @@ export const getProducts =async(req=request,res=response)=>{
             }
 
             console.log('ProductService:', ProductService);
- //const result = await ProductService.getProductsPaginate(searchQuery,options)
-  //const result = await ProductService.getProducts()
-  const result = await ProductsModel.paginate(searchQuery,options)
+ const result = await ProductService.getProductsPaginate(searchQuery,options)
+ 
+  //const result = await ProductsModel.paginate(searchQuery,options)
       
             
             result.query = query;
 
             result.productsmongoose = result.docs
             
-            console.log('result', result)
+            //console.log('result', result)
             result.query = query
            delete result.docs
-           // console.log('result2',result)         
-            //console.log('result3', result.productsmongoose)
+         
+         //   console.log('result 2 ', result)
+//console.log('cid', cid)
 
-            console.log('result', result)
-
-
-            if (result.productsmongoose ) {
-                // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
-                result.productsmongoose.forEach(product => {
-                    product.cid = cid;
+if (cid) {
+    result.productsmongoose = result.productsmongoose.map(product => ({
+        ...product.toObject(), 
+        cid: cid
+    }));
+}
+            // if (result.productsmongoose ) {
+            //     // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
+            //     result.productsmongoose.forEach(product => {
+            //         product.cid = cid;
                     
-                });
-                //console.log('Documentos después de agregar "cid":', result);
-                //console.log('Documentos con precio:', result.productmongoose.price);
-            } else {
-                console.log('La propiedad "productsmongoose" no está presente en el resultado');
-            }
+            //     });
+            //     //console.log('Documentos después de agregar "cid":', result);
+            //     //console.log('Documentos con precio:', result.productmongoose.price);
+            // } else {
+            //     console.log('La propiedad "productsmongoose" no está presente en el resultado');
+            // }
 
         
 
 console.log(cid)
-// Iterar sobre la lista de productos
-//result.productsmongoose.forEach(product => {
-    // Acceder a las propiedades del producto
-  //  console.log('Precio:', product.price);
-    //console.log('Título:', product.title);
-    // Puedes agregar más propiedades según sea necesario
-//});
-console.log('result4', result.productsmongoose)
+
+//console.log('result4', result.productsmongoose)
 //Renderizar la vista
 res.render('list', {
     user,
