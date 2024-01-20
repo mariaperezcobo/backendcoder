@@ -113,6 +113,8 @@ export const getProducts =async(req=request,res=response)=>{
 
  export const  getProductsById =async(req=request,res=response)=>{
     try{
+        
+        const user = req.session.user
         const {id} = req.params
         console.log('id controller', id)
         //const productmongoose = await ProductsModel.findOne({code}).lean().exec()
@@ -126,6 +128,7 @@ export const getProducts =async(req=request,res=response)=>{
 
         res.render('one',{
             productmongoose,
+            user,
             style: 'index.css',
             title: 'Fitness Ropa deportiva',
         })

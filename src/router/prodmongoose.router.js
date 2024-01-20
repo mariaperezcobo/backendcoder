@@ -1,7 +1,7 @@
 import {Router} from 'express'
 //import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct } from '../controllers/products.js'
 import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct } from '../controllers/products.js'
-
+import {isAdmin, isAdminEliminate} from "../controllers/sessions.js"
 //import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/mongo/products.mongo.js"
 //import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/file/products.file.js"
 
@@ -16,11 +16,12 @@ router.get('/', auth, getProducts)
 
 router.post('/', addProduct)
 
-router.get('/create', createProduct)
+router.get('/create',isAdmin, createProduct)
 
 //router.get('/:code', getProductsById)
 router.get('/:id', getProductsById)
-router.delete('/:id', deleteProduct)
+
+router.delete('/:id',isAdminEliminate, deleteProduct)
 
 router.post('/:cid/product/:pid', addProductInCart)
 

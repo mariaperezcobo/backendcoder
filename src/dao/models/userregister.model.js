@@ -6,7 +6,10 @@ const UserRegisterModel = mongoose.model('users', new mongoose.Schema({
     email: String,
     age: Number,
     password: String,
-    rol: String,
+    rol: {
+        type: String,
+        default: 'user'  // Valor predeterminado. para generar un usuario admin modificarlo desde mongo
+    },
     cart: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'carritos'

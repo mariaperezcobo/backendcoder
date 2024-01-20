@@ -28,29 +28,44 @@
 
         </div>
 
+
     </div>
   <div class="margen">
 
   <a href="/productsmongoose" class="btn btn-primary">Ver mas productos</a>
   <br>
-  
+ 
 </div>
     </div>
 <script src="/socket.io/socket.io.js"></script>
    
 <script src="/static/js/index.js"></script>
+
 <script>
+
+
     document.querySelector('#delete').onclick = e =>{
         const id = "{{productmongoose.id}}"
-
+        
         fetch(`/productsmongoose/${id}`, {method:'delete'})
-            .then (()=>{
+            .then(response => {
+                if (response.ok) {
+                    alert('Eliminado con éxito');
+                    document.location.href = '/productsmongoose';
+                } else {
+                    alert('No se pudo eliminar');
+                }
+            })
+            .catch(e => {
+                alert('No se pudo eliminar');
+            });
+    }
+</script>
+
+{{!-- .then (()=>{
                 alert('Eliminado con éxito')
                 document.location.href = '/productsmongoose'
             })
             .catch(e=>{
                 alert('No se pudo eliminar')
-            })
-    }
-</script>
-
+            }) --}}

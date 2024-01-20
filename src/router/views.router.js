@@ -16,6 +16,9 @@ function auth(req,res, next){
     return res.redirect('/login')
 }
 
+
+
+
 const productManager = new ProductManager()
 
 //para ver productos con filesystem
