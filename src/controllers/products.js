@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import ProductsModel from '../dao/models/prodmongoose.models.js'
 import CartModel from '../dao/models/cartmongoose.model.js'
 import {ProductService, CartService} from '../services/index.js'
+import ProductInsertDTO from '../DTO/products.dto.js'
 
 
 export const getProducts =async(req=request,res=response)=>{
@@ -139,9 +140,11 @@ export const getProducts =async(req=request,res=response)=>{
 
  export const addProduct =async(req=request,res=response)=>{
     try{
-        const productmongooseNew = req.body
-        console.log(productmongooseNew)
-        const result = await ProductService.addProduct(productmongooseNew)
+        const productNew = req.body
+        console.log(productNew)
+        const productmongooseNew = new ProductInsertDTO(productNew)
+       
+       const result = await ProductService.addProduct(productmongooseNew)
        // const result = await ProductsModel.create(productmongooseNew)
 
        console.log('resultado de crear prod', result)

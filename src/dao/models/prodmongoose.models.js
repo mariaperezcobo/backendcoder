@@ -6,7 +6,7 @@ const productsCollection = 'productsmongooses'
 const productsSchema = new mongoose.Schema({
     title:{
         type: String,
-        unique: true
+        // unique: true
     },
     price: Number,
     thumbnail: String,

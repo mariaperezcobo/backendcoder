@@ -47,6 +47,7 @@ export default class Products {
     deleteProduct = async id =>{return ProductsModel.deleteOne({_id: id })}    
     getProductsFindOne = async code => { return ProductsModel.findOne(code) }
     addProduct = async productmongooseNew => { return ProductsModel.create(productmongooseNew) }
+   
     // updateOrder = async (id, order) => {
     //     return OrderModel.updateOne({ _id: id }, { $set: order })
     // }
