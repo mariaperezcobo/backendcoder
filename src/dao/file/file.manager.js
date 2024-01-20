@@ -30,48 +30,69 @@ class FileManager {
         }
     
 
-    getById = async (req,res)=> {
+    getById = async (id)=> {
        
        try{
-        const id = req.params.id
-        console.log('id', id)
-
-        if (!id) {
-            // Si no hay un parámetro 'id' en la solicitud, devolver un error 400 Bad Request
-            return res.status(400).json({ error: 'Missing parameter: id' });
-        }
-
-        console.log('id', id)
-
-        try{
+        
             const products = await fs.promises.readFile(this.filename, this.format)
-            parsedProducts = JSON.parse(products)
+            const parsedProducts = JSON.parse(products)
     
             
-            console.log(parsedProducts)
+            console.log('parsedProducts', parsedProducts)
             const product = parsedProducts.find (product => String(product.id) === String(id))
            
-            if(product){
-                return product
-                
-            }else{
-                res.status(404).json({ error: 'product not found' });
+            if (product && product.status) {
+                return product;
+            } else {
+                throw new Error('Product not found');
             }
-        }catch(error){
-            console.error('error', error)
-            res.status(500).json({ error: 'internal server error' })
-        }
-
-
-        
+      
         
        }catch (error){
         console.error('error', error)
-        res.status(500).json({ error: 'internal server error' })
+        throw error;
        } 
-        }
+     }
         
-    
+        // getById = async (req,res)=> {
+       
+        //     try{
+        //      console.log('Leyendo datos del archivo por id...');
+        //      console.log('Params:', req.params);
+        //      const id = req.params.id
+        //      console.log('id', id)
+        //      console.log('Leyendo datos del archivo por id...', id);
+     
+        //       if (!id) {
+        //           // Si no hay un parámetro 'id' en la solicitud, devolver un error 400 Bad Request
+        //           return res.status(400).json({ error: 'Missing parameter: id' });
+        //       }
+     
+        //      // console.log('id', id)
+     
+             
+        //          const products = await fs.promises.readFile(this.filename, this.format)
+        //          const parsedProducts = JSON.parse(products)
+         
+                 
+        //          console.log('parsedProducts', parsedProducts)
+        //          const product = parsedProducts.find (product => String(product.id) === String(id))
+                
+        //          if(product){
+        //              return product
+                     
+        //          }else{
+        //              res.status(404).json({ error: 'product not found' });
+        //          }
+           
+     
+             
+        //     }catch (error){
+        //      console.error('error', error)
+        //      res.status(500).json({ error: 'internal server error' })
+        //     } 
+        //      }
+             
 
     addProduct = async data => {
        

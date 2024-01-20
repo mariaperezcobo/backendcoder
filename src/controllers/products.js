@@ -86,7 +86,7 @@ export const getProducts =async(req=request,res=response)=>{
                     product.cid = cid;
                     
                 })}
-         // console.log('Documentos después de agregar "cid":', result);
+          console.log('Documentos después de agregar "cid":', result);
             //     //console.log('Documentos con precio:', result.productmongoose.price);
             // } else {
             //     console.log('La propiedad "productsmongoose" no está presente en el resultado');
@@ -116,8 +116,6 @@ export const getProducts =async(req=request,res=response)=>{
         console.log('id controller', id)
         //const productmongoose = await ProductsModel.findOne({code}).lean().exec()
         const productmongoose = await ProductService.getProductsById(id)
-        
-        
 
         if (!productmongoose) {
             // Si el producto no se encuentra, puedes manejarlo de alguna manera

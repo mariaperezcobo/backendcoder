@@ -12,12 +12,32 @@ export default class Products extends FileManager {
     //getProducts = async () => { return this.get() }
 
     getProductsPaginate = async () => { return this.get() }
-    getProductsById = async (id) => { return this.getById(id) }
+   
+    getProductsById = async (id) => {
+        try {
+            console.log('Obteniendo producto por ID:', id);
+            return this.getById(id);
+
+        } catch (error) {
+           
+            console.error('Error en el método getProductsById:', error);
+            throw error;
+        }
+    };
+
+// getProductsById = async (id) => { 
+//     try{
+       
+//         console.log('Obteniendo producto por ID:', id);
+//         return this.getById(id) 
+    
+//     }catch(error){
+//         console.error('Error en el método getProductsById:', error);
+    
+// }
+// }
 
 }
-
-
-
 
 
 // const productManager = new ProductManager()
