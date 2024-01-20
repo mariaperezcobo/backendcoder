@@ -42,11 +42,11 @@ export default class Products {
     
       
     getProductsById = async id => { const product = await ProductsModel.findById(id);
-        return product ? product.toObject() : null; }
+        return product ? product.toObject({ virtuals: true }) : null; }
 
-    deleteProduct = async id =>{return ProductsModel.deleteOne({ _id: id})}    
+    deleteProduct = async id =>{return ProductsModel.deleteOne({_id: id })}    
     getProductsFindOne = async code => { return ProductsModel.findOne(code) }
-    addProduct = async product => { return ProductsModel.create(product) }
+    addProduct = async productmongooseNew => { return ProductsModel.create(productmongooseNew) }
     // updateOrder = async (id, order) => {
     //     return OrderModel.updateOne({ _id: id }, { $set: order })
     // }

@@ -34,6 +34,7 @@ class FileManager {
        
        try{
         const id = req.params.id
+        console.log('id', id)
 
         if (!id) {
             // Si no hay un parámetro 'id' en la solicitud, devolver un error 400 Bad Request
@@ -44,13 +45,14 @@ class FileManager {
 
         try{
             const products = await fs.promises.readFile(this.filename, this.format)
-            this.products = JSON.parse(products)
+            parsedProducts = JSON.parse(products)
     
-            console.log(products)
-            const product = products.find (product => product.id === id)
+            
+            console.log(parsedProducts)
+            const product = parsedProducts.find (product => String(product.id) === String(id))
            
             if(product){
-                res.send(product);
+                return product
                 
             }else{
                 res.status(404).json({ error: 'product not found' });

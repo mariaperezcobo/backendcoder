@@ -20,7 +20,7 @@
 
                 <h5 class="card-title">{{productmongoose.title}}</h5>
                 <p class="card-text">${{productmongoose.price}}</p>
-                <p>{{productmongoose._id}}</p>
+                hola<p>{{productmongoose.id}}</p>hola<p>{{productmongoose._id}}</p>
                 <button id="delete" class="btn btn-primary">Eliminar</button>
                 
                 </div>
@@ -41,7 +41,7 @@
 <script src="/static/js/index.js"></script>
 <script>
     document.querySelector('#delete').onclick = e =>{
-        const id = "{{productmongoose._id}}"
+        const id = "{{productmongoose.id}}"
 
         fetch(`/productsmongoose/${id}`, {method:'delete'})
             .then (()=>{

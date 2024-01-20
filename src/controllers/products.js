@@ -72,13 +72,13 @@ export const getProducts =async(req=request,res=response)=>{
 
             result.productsmongoose = result.docs
             
-            console.log('result', result)
-            console.log('result prod', result.productsmongoose)
+          //  console.log('result', result)
+          //  console.log('result prod', result.productsmongoose)
             result.query = query
            delete result.docs
          
-         //   console.log('result 2 ', result)
-        //console.log('cid', cid)
+             //   console.log('result 2 ', result)
+            //console.log('cid', cid)
 
             if (result.productsmongoose ) {
                 // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
@@ -86,7 +86,7 @@ export const getProducts =async(req=request,res=response)=>{
                     product.cid = cid;
                     
                 })}
-            //     //console.log('Documentos después de agregar "cid":', result);
+         // console.log('Documentos después de agregar "cid":', result);
             //     //console.log('Documentos con precio:', result.productmongoose.price);
             // } else {
             //     console.log('La propiedad "productsmongoose" no está presente en el resultado');
@@ -113,14 +113,17 @@ export const getProducts =async(req=request,res=response)=>{
  export const  getProductsById =async(req=request,res=response)=>{
     try{
         const {id} = req.params
+        console.log('id controller', id)
         //const productmongoose = await ProductsModel.findOne({code}).lean().exec()
         const productmongoose = await ProductService.getProductsById(id)
         
+        
+
         if (!productmongoose) {
             // Si el producto no se encuentra, puedes manejarlo de alguna manera
             return res.status(404).send('Producto no encontrado');
         }
-       // console.log(productmongoose)
+       console.log(productmongoose)
 
         res.render('one',{
             productmongoose,
@@ -139,21 +142,26 @@ export const getProducts =async(req=request,res=response)=>{
  export const addProduct =async(req=request,res=response)=>{
     try{
         const productmongooseNew = req.body
+        console.log(productmongooseNew)
         const result = await ProductService.addProduct(productmongooseNew)
+       // const result = await ProductsModel.create(productmongooseNew)
 
-        console.log(result)
+       console.log('resultado de crear prod', result)
         res.redirect('/productsmongoose')
 
     }catch (error){
         console.log(error),
-        res.send('error al crear productos con mongoose')
+        res.status(500).send('Error interno del servidor al crear productos con mongoose: ' + error.message);
     }
+    
  }
 
  export const deleteProduct =async(req=request,res=response)=>{
     try{
         const {id} = req.params
-        await ProductService.deleteProduct(id)
+        console.log('id para elimnar', id)
+       // await ProductService.deleteProduct({id: id })
+        await ProductsModel.deleteOne({_id: id })
 
         return res.json({status: 'success'})
     }catch (error){

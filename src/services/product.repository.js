@@ -12,5 +12,5 @@ export default class ProductRepository {
     
    // getProductsFindOne = async code => { return this.dao.getProductsfindOne(code) }
     deleteProduct = async id =>{return this.dao.deleteProduct(id)}  
-    addProduct = async () => { return this.dao.addProduct() }
+    addProduct = async (productmongooseNew) => { return this.dao.addProduct(productmongooseNew) }
 }
