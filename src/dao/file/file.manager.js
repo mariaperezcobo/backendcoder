@@ -10,19 +10,22 @@ class FileManager {
     get= async (limit) => {
         try{
             const products = await fs.promises.readFile(this.filename, this.format)
-            this.products = JSON.parse(products)
+            const parsedProducts = JSON.parse(products)
             
+            let result = {};
+
             if (limit){
-                const productsFiltrados = this.products.slice(0,limit)
-                return productsFiltrados
-            }         
-    
-            return this.products
-            console.log('hay archivos!')
+                // const productsFiltrados = this.products.slice(0,limit)
+                // return productsFiltrados
+                result.docs = parsedProducts.slice(0, limit);
+            } else {
+                result.docs = parsedProducts;
+            }
+           
+            return result
     
         }catch (error){
             console.error('error', error)
-            
         }
         }
     

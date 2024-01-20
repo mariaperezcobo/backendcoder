@@ -9,8 +9,9 @@ export default class Products extends FileManager {
         super(filename)
     }
 
-    getProducts = async () => { return this.get() }
+    //getProducts = async () => { return this.get() }
 
+    getProductsPaginate = async () => { return this.get() }
     getProductsById = async (id) => { return this.getById(id) }
 
 }

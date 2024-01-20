@@ -72,7 +72,8 @@ export const getProducts =async(req=request,res=response)=>{
 
             result.productsmongoose = result.docs
             
-            //console.log('result', result)
+            console.log('result', result)
+            console.log('result prod', result.productsmongoose)
             result.query = query
            delete result.docs
          
@@ -204,7 +205,7 @@ export const createProduct = (req=request,res=response)=>{
     }
     )
  }
- 
+
 // import {request, response} from 'express'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
 // import CartModel from '../dao/models/cartmongoose.model.js'
