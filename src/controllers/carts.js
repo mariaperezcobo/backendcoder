@@ -6,16 +6,30 @@ export const getCartById =async(req=request,res=response)=>{
 
     try{
         const {cid} = req.params
-        const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
-     // console.log(carrito)
-       //  console.log(cid)
+        console.log('cid desde el controller', cid)
+        //const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
+
+        const carrito = await CartService.getCartsById(cid)
+      console.log('carrito', carrito)
+        
 
     if(!carrito){
         return res.status(404).json({ error: 'cart not found' });
     }
-    carrito.productosagregados.forEach(product => {
-        product.cid = cid;
+
+
+    // Agregar la propiedad 'cid' a cada producto en 'productosagregados'
+    carrito.productosagregados = carrito.productosagregados.map(product => {
+        return {
+            ...product,
+            cid: cid
+        };
     });
+    // carrito.productosagregados.forEach(product => {
+    //     product.cid = cid;
+    // });
+
+    console.log ('carrito.productosagregados', carrito.productosagregados)
        // return res.json({carrito});
     //res.status(400).json('el id del carrito no existe'),
     
@@ -60,7 +74,7 @@ export const deleteProductInCart =async(req=request,res=response)=>{
     
     }
 
-    export const deleteAllProductsInCart =async(req=request,res=response)=>{
+export const deleteAllProductsInCart =async(req=request,res=response)=>{
         try{
             const cid = req.params.cid
              

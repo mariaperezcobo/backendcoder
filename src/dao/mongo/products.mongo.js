@@ -7,11 +7,37 @@ export default class Products {
     getProductsPaginate = async (searchQuery, options) => {
         try {
             const products = await ProductsModel.paginate(searchQuery, options);
-            return products;
+    
+            //// Convertir cada documento a un objeto plano
+            //const productsPlain = products.docs.map(doc => doc.toObject());
+    
+            // Verificar si cada documento es un objeto plano antes de intentar convertirlo
+        const productsPlain = products.docs.map(doc => {
+            return typeof doc.toObject === 'function' ? doc.toObject() : doc;
+        });
+
+            // Devolver los resultados paginados con documentos convertidos
+            return {
+                ...products,
+                docs: productsPlain
+            };
+    
         } catch (error) {
             console.error('Error in getProductsPaginate:', error);
             throw error;
         }
+       
+       
+        // try {
+        //     const products = await ProductsModel.paginate(searchQuery, options);
+        //     return products;
+
+
+
+        // } catch (error) {
+        //     console.error('Error in getProductsPaginate:', error);
+        //     throw error;
+        // }
     }
     
       

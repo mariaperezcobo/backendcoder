@@ -31,9 +31,9 @@
                 <h5 class="card-title">{{this.title}}</h5>
                 <p class="card-text">${{this.price}}</p>
                 
-                <a href="/productsmongoose/{{id}}" class="btn btn-primary">Ver</a>
+                <a href="/productsmongoose/{{this._id}}" class="btn btn-primary">Ver</a>
 
-                <form action="/productsmongoose/{{cid}}/product/{{_id}}" method="post">
+                <form action="/productsmongoose/{{this.cid}}/product/{{this._id}}" method="post">
                     <button type="submit" class="btn btn-primary margen-top">Agregar al carrito</button><br><br>
                 </form>
 

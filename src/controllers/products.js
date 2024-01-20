@@ -8,7 +8,8 @@ import {ProductService, CartService} from '../services/index.js'
 
 export const getProducts =async(req=request,res=response)=>{
     try{
-        console.log('ProductsModel:', ProductsModel); 
+       // console.log('ProductsModel:', ProductsModel); 
+     //   console.log('CartsModel:', CartModel); 
         //     const carrito = await CartModel.findOne({}) 
         //     console.log(carrito)
             // let cid
@@ -95,18 +96,18 @@ export const getProducts =async(req=request,res=response)=>{
          //   console.log('result 2 ', result)
 //console.log('cid', cid)
 
-if (cid) {
-    result.productsmongoose = result.productsmongoose.map(product => ({
-        ...product.toObject(), 
-        cid: cid
-    }));
-}
-            // if (result.productsmongoose ) {
-            //     // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
-            //     result.productsmongoose.forEach(product => {
-            //         product.cid = cid;
+// if (cid) {
+//     result.productsmongoose = result.productsmongoose.map(product => ({
+//         ...product.toObject(), 
+//         cid: cid
+//     }));
+// }
+            if (result.productsmongoose ) {
+                // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
+                result.productsmongoose.forEach(product => {
+                    product.cid = cid;
                     
-            //     });
+                })}
             //     //console.log('Documentos después de agregar "cid":', result);
             //     //console.log('Documentos con precio:', result.productmongoose.price);
             // } else {
@@ -116,6 +117,7 @@ if (cid) {
         
 
 console.log(cid)
+//console.log(result)
 
 //console.log('result4', result.productsmongoose)
 //Renderizar la vista
@@ -168,7 +170,7 @@ res.render('list', {
         const productmongooseNew = req.body
         const result = await ProductService.addProduct(productmongooseNew)
 
-        // console.log(result)
+        console.log(result)
         res.redirect('/productsmongoose')
 
     }catch (error){
@@ -197,12 +199,12 @@ console.log(error)
         const pid = req.params.pid
         
         const carrito = await CartService.getCartsById(cid) 
-
+console.log('carrito', carrito)
          console.log('param', cid, pid)
 
                
         const productoInCart = carrito.productosagregados.find(p => p.product._id.toString() === pid);
-        //console.log(productoInCart)
+        console.log(productoInCart)
         if (productoInCart){
             productoInCart.quantity++;
         }

@@ -95,7 +95,7 @@ const initializePassport =()=>{
   
     // Actualizar el usuario con el ID del carrito
     await result.save();
-
+console.log('carrito de la sesion', result)
         //const carrito = await CartModel.create({ productosagregados: [] })
      
     
@@ -117,7 +117,7 @@ const initializePassport =()=>{
         try{
             const user = await UserService.getUsers(username)
 
-            console.log('usuario', user)
+           // console.log('usuario', user)
             if(!user){
                 console.error('user doesnt exist')
                 return done (null, false)
@@ -127,7 +127,7 @@ const initializePassport =()=>{
                 console.error('password not valid')
                 return done(null, false)
             }
-            console.log('usruario:', user)
+           // console.log('usruario:', user)
             return done(null, user)
         }catch(error){
             console.error('Error during login en passport:', error);
