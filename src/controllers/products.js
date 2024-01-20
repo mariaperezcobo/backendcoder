@@ -10,18 +10,7 @@ export const getProducts =async(req=request,res=response)=>{
     try{
        // console.log('ProductsModel:', ProductsModel); 
      //   console.log('CartsModel:', CartModel); 
-        //     const carrito = await CartModel.findOne({}) 
-        //     console.log(carrito)
-            // let cid
-           
-            // if(carrito){
-            //     cid = carrito.id
-            // }else{
-            //     carrito = await CartModel.create({ productosagregados: [] })
-            //     cid = carrito.id
-            // }
-    
-              // const usuario = await UserRegisterModel.find()
+       
            const user = req.session.user
            const cid = req.session.user.cart;
 
@@ -64,13 +53,7 @@ export const getProducts =async(req=request,res=response)=>{
             //     lean:true,
             //     sort: {price: sortDirection}
             // })
-            // const result = await ProductService.getProductsPaginate(searchQuery,{
-            //     page,
-            //     limit,
-            //     lean:true,
-            //     sort: {price: sortDirection}
-            // })
-
+         
             const options = {
                 page,
                 limit,
@@ -94,14 +77,8 @@ export const getProducts =async(req=request,res=response)=>{
            delete result.docs
          
          //   console.log('result 2 ', result)
-//console.log('cid', cid)
+        //console.log('cid', cid)
 
-// if (cid) {
-//     result.productsmongoose = result.productsmongoose.map(product => ({
-//         ...product.toObject(), 
-//         cid: cid
-//     }));
-// }
             if (result.productsmongoose ) {
                 // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
                 result.productsmongoose.forEach(product => {
@@ -114,22 +91,15 @@ export const getProducts =async(req=request,res=response)=>{
             //     console.log('La propiedad "productsmongoose" no está presente en el resultado');
             // }
 
-        
-
-//console.log(cid)
-//console.log(result)
-
-//console.log('result4', result.productsmongoose)
-//Renderizar la vista
-res.render('list', {
-    user,
-    //dataToSend,
-    result ,
-    cid,
-    style: 'index.css',
-    title: 'Fitness Ropa deportiva',
-});
-
+            //Renderizar la vista
+            res.render('list', {
+                user,
+                //dataToSend,
+                result ,
+                cid,
+                style: 'index.css',
+                title: 'Fitness Ropa deportiva',
+            });
 
 
         }catch(error){
@@ -216,7 +186,6 @@ console.log(error)
       
     // Actualizar la base de datos con los cambios
    // await CartModel.findByIdAndUpdate(cid, { productosagregados: carrito.productosagregados }, { new: true });
-    //await CartService.updateCart(cid, { productosagregados: carrito.productosagregados }, { new: true });
      await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
     //console.log('carrito desp de actualizar',carrito)
 
@@ -235,6 +204,7 @@ export const createProduct = (req=request,res=response)=>{
     }
     )
  }
+ 
 // import {request, response} from 'express'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
 // import CartModel from '../dao/models/cartmongoose.model.js'
