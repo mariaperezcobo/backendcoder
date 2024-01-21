@@ -1,0 +1,26 @@
+<div>
+     <div class="contenedorTituloPrincipal">
+ <h2>Carrito</h2>
+  </div>
+
+
+<div class="contenedorprincipal">
+    
+       <div class="margen" >
+
+        <h3 class="margen">Compra realizada exitosamente!!</h3>
+        
+        <p class="margen">El total de la compra es de ${{ticket.amount}}</p>
+        <p class="margen">La compra se realizó el dia {{ticket.purchase_datatime}}</p>
+        <p class="margen">El código de la operación es {{ticket.code}}</p>
+        <p class="margen">El email del usuario que registró la compra es {{ticket.purchaser}}</p>
+    
+        </div>
+
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js">
+</script>
+
+<script>

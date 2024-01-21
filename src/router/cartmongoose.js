@@ -6,6 +6,7 @@ import {Router} from 'express'
 // import ProductModel from '../dao/models/productcart.model.js'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
 import { deleteProductInCart, getCartById, deleteAllProductsInCart, createCart , getCartToBuy} from '../controllers/carts.js'
+import { generateTicket } from '../controllers/ticket.js'
 
 
 //inicializamos variables
@@ -43,5 +44,9 @@ router.delete('/:cid/product/:pid', deleteProductInCart )
 router.delete('/:cid', deleteAllProductsInCart)
 
 router.get('/:cid/purchase', getCartToBuy)
+
+router.post('/:cid/purchase/checkout', generateTicket)
+//router.get('/:cid/purchase/checkout', generateTicket)
+
 
 export default router

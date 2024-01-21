@@ -6,6 +6,7 @@ export const getCartById =async(req=request,res=response)=>{
 
     try{
         const {cid} = req.params
+        const user = req.session.user
        // console.log('cid desde el controller', cid)
         //const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
 
@@ -31,9 +32,10 @@ export const getCartById =async(req=request,res=response)=>{
     //console.log ('carrito.productosagregados', carrito.productosagregados)
        // return res.json({carrito});
     //res.status(400).json('el id del carrito no existe'),
-    
+    console.log('usuario desde getprodtoby', user)
     res.render('cartone', {
         carrito,
+        user,
         cid,
         style: 'index.css',
         title: 'Fitness Ropa deportiva',
@@ -120,9 +122,9 @@ export const getCartToBuy =async(req=request,res=response)=>{
             // carrito.productosagregados.forEach(product => {
             //     product.cid = cid;
             // });
-            console.log ('carrito', carrito)
+            console.log ('carrito de getCartToBuy', carrito)
 
-            console.log ('carrito.productosagregados', carrito.productosagregados)
+          //  console.log ('carrito.productosagregados', carrito.productosagregados)
                // return res.json({carrito});
             //res.status(400).json('el id del carrito no existe'),
             
@@ -167,6 +169,10 @@ export const getCartToBuy =async(req=request,res=response)=>{
                 console.log('error', error)
             }
         }
+
+
+
+
 
     //     export const seeCarts =async(req=request,res=response)=>{
     //         try{

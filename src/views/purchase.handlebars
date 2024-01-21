@@ -1,6 +1,6 @@
 <div>
      <div class="contenedorTituloPrincipal">
- <h2>Carrito</h2>
+ <h2>Compra a finalizar</h2>
   </div>
 
 
@@ -36,10 +36,15 @@
             <p class='totalCompra btn btn-secondary' variant='secondary' size="lg" >El precio total de la compra es: ${{totalCompra}}</p> 
 </div> 
 <div class="margen">
+    <form action="/cartmongoose/{{carrito._id}}/purchase/checkout" method="post">
+    <button type="submit" class="btn btn-primary">Confirmar compra</button>
+    </form>
+   
+</form>
 
-  <a href="/cartmongoose/{{this._id}}" class="btn btn-primary">Volver a editar el carrito</a>
-
-  
+</div>
+<div class="margen">
+  <a href="/cartmongoose/{{carrito._id}}" class="btn btn-primary">Volver a editar el carrito</a> 
 </div>
 
 </div>
