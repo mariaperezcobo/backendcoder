@@ -126,6 +126,24 @@ export const getCartToBuy =async(req=request,res=response)=>{
                // return res.json({carrito});
             //res.status(400).json('el id del carrito no existe'),
             
+            let stockAlert = ''
+
+             // Verificar y ajustar la cantidad en base al stock disponible
+            carrito.productosagregados.forEach(product => {
+            const stockDisponible = product.product.stock;
+
+            if (product.quantity > stockDisponible) {
+                // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
+                product.quantity = stockDisponible;
+              
+                // Enviar un mensaje de alerta a la vista
+                stockAlert = 'No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito';
+                
+            }
+        });
+     // Actualizar el carrito en la base de datos
+        await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+
             let totalCompra
 
             try{
@@ -143,6 +161,7 @@ export const getCartToBuy =async(req=request,res=response)=>{
                 cid,
                 style: 'index.css',
                 title: 'Fitness Ropa deportiva',
+                stockAlert,
             })
             }catch(error){
                 console.log('error', error)

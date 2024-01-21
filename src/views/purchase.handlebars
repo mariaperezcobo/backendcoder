@@ -5,6 +5,14 @@
 
 
 <div class="contenedorprincipal">
+    <div class="margen">
+   {{#if stockAlert}}
+    <div class="alert alert-warning">
+        {{stockAlert}}
+    </div>
+    {{/if}}
+    </div>
+ 
        <div class="contenedorProductos" >
   {{#each carrito.productosagregados}}
 
@@ -20,7 +28,6 @@
             </div>
 
         {{/each}}
-
 
 
         </div>
