@@ -233,7 +233,8 @@ export const updateProductBase =async(req=request,res=response)=>{
 
         const updatedProductData = req.body; 
 
-        const updatedProduct = await ProductsModel.findByIdAndUpdate(id, updatedProductData, { new: true });
+        const updatedProduct = await ProductService.updateProduct(id, updatedProductData);
+        //const updatedProduct = await ProductsModel.findByIdAndUpdate(id, updatedProductData, { new: true });
 
         if (updatedProduct) {
           

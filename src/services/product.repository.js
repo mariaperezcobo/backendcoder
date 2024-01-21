@@ -16,4 +16,6 @@ export default class ProductRepository {
     deleteProduct = async id =>{return this.dao.deleteProduct(id)}  
     //addProduct = async (productToInsert) => { return this.dao.addProduct(productToInsert) }
     addProduct = async (productmongooseNew) => { return this.dao.addProduct(productmongooseNew) }
+    
+    updateProduct= async (id, update) =>{return this.dao.updateProduct(id, update)} 
 }

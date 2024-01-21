@@ -27,17 +27,7 @@ export default class Products {
             throw error;
         }
        
-       
-        // try {
-        //     const products = await ProductsModel.paginate(searchQuery, options);
-        //     return products;
-
-
-
-        // } catch (error) {
-        //     console.error('Error in getProductsPaginate:', error);
-        //     throw error;
-        // }
+      
     }
     
       
@@ -48,9 +38,13 @@ export default class Products {
     getProductsFindOne = async code => { return ProductsModel.findOne(code) }
     addProduct = async productmongooseNew => { return ProductsModel.create(productmongooseNew) }
    
-    // updateOrder = async (id, order) => {
-    //     return OrderModel.updateOne({ _id: id }, { $set: order })
-    // }
+    updateProduct =  async (id, update) =>{try {
+        const updatedProduct = await ProductsModel.findByIdAndUpdate(id, update);
+        return updatedProduct;
+    } catch (error) {
+        console.error('Error en updateCart:', error);
+        throw error;
+    }}    
 }
 
 
