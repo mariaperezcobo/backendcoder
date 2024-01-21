@@ -24,12 +24,23 @@ export const generateTicket = async (req, res) => {
         console.log('carrito de checkout', carrito)
         let totalCompra
 
-        function generarCodigo() {
-            const codigo = Math.floor(1000 + Math.random() * 9000);
-            return codigo;
-          }
+       // const lastTicket = await TicketModel.findOne({}, {}, { sort: { 'code': -1 } });
+        const lastTicket = await TicketService.getTickets({}, {}, { sort: { 'code': -1 } });
+        let newCode;
+    if (lastTicket) {
+      newCode = lastTicket.code + 1;
+    } else {
+    // En caso de que no haya ningún ticket en la base de datos aún
+    newCode = 1;
+}
+
+
+        // function generarCodigo() {
+        //     const codigo = Math.floor(1000 + Math.random() * 9000);
+        //     return codigo;
+        //   }
           
-          const codigoGenerado = generarCodigo();
+        //   const codigoGenerado = generarCodigo();
 
         try{
             totalCompra = carrito.productosagregados.reduce((acc, product) => acc + product.product.price * product.quantity, 0)
@@ -41,7 +52,7 @@ export const generateTicket = async (req, res) => {
 
         // Crea una nueva instancia del ticket
         const nuevoTicket = new TicketModel({
-            code: codigoGenerado,  // Puedes ajustar esto según tu lógica para generar códigos de operación
+            code: newCode, 
             purchase_datatime: new Date().toISOString(),
             amount: totalCompra,
             purchaser: email, 

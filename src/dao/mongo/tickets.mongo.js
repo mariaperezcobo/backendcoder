@@ -8,6 +8,6 @@ export default class Tickets {
         const ticketObject = ticket.toObject();
         return  ticketObject}
 
-
-    
+    getTickets =  async code => { return TicketModel.findOne(code) }
+            
 }

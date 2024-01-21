@@ -143,6 +143,8 @@ export const getProducts =async(req=request,res=response)=>{
 
  export const addProduct =async(req=request,res=response)=>{
     try{
+        const user = req.session.user
+     //   console.log(user)
         const productNew = req.body
         console.log(productNew)
         const productmongooseNew = new ProductInsertDTO(productNew)

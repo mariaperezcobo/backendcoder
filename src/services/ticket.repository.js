@@ -6,5 +6,5 @@ export default class TicketRepository {
 
     addTicket = async (nuevoTicket) => { return this.dao.addTicket(nuevoTicket) }
     
-    
+    getTickets =  async code => { return this.dao.getTickets(code) }
 }
