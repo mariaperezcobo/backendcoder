@@ -28,7 +28,6 @@
 
         </div>
 
-
     </div>
   <div class="margen">
 
@@ -46,8 +45,30 @@
 
     document.querySelector('#delete').onclick = e =>{
         const id = "{{productmongoose.id}}"
-        
-        fetch(`/productsmongoose/${id}`, {method:'delete'})
+      
+            if ("{{user.rol}}" === 'admin') {
+            fetch(`/productsmongoose/${id}`, { method: 'delete' })
+                .then(response => {
+                    if (response.ok) {
+                        alert('Eliminado con éxito');
+                        document.location.href = '/productsmongoose';
+                    } else {
+                        alert('No se pudo eliminar');
+                    }
+                })
+                .catch(e => {
+                    alert('No se pudo eliminar');
+                });
+        } else {
+            // Si el usuario no es admin, muestra un mensaje de alerta
+            alert('No tienes permisos para eliminar este producto');
+        }
+            
+           
+    }
+</script>
+
+        {{!-- fetch(`/productsmongoose/${id}`, {method:'delete'})
             .then(response => {
                 if (response.ok) {
                     alert('Eliminado con éxito');
@@ -59,13 +80,4 @@
             .catch(e => {
                 alert('No se pudo eliminar');
             });
-    }
-</script>
-
-{{!-- .then (()=>{
-                alert('Eliminado con éxito')
-                document.location.href = '/productsmongoose'
-            })
-            .catch(e=>{
-                alert('No se pudo eliminar')
-            }) --}}
+    } --}}

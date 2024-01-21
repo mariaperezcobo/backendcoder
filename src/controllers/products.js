@@ -87,7 +87,7 @@ export const getProducts =async(req=request,res=response)=>{
                     product.cid = cid;
                     
                 })}
-          console.log('Documentos después de agregar "cid":', result);
+        //  console.log('Documentos después de agregar "cid":', result);
             //     //console.log('Documentos con precio:', result.productmongoose.price);
             // } else {
             //     console.log('La propiedad "productsmongoose" no está presente en el resultado');
@@ -124,7 +124,7 @@ export const getProducts =async(req=request,res=response)=>{
             // Si el producto no se encuentra, puedes manejarlo de alguna manera
             return res.status(404).send('Producto no encontrado');
         }
-       console.log(productmongoose)
+     //  console.log(productmongoose)
 
         res.render('one',{
             productmongoose,
@@ -150,7 +150,7 @@ export const getProducts =async(req=request,res=response)=>{
        const result = await ProductService.addProduct(productmongooseNew)
        // const result = await ProductsModel.create(productmongooseNew)
 
-       console.log('resultado de crear prod', result)
+      // console.log('resultado de crear prod', result)
         res.redirect('/productsmongoose')
 
     }catch (error){
@@ -164,10 +164,18 @@ export const getProducts =async(req=request,res=response)=>{
     try{
         const {id} = req.params
         console.log('id para elimnar', id)
+
+        if(req.session?.user && req.session.user.rol === 'admin') {
+            // Realiza la eliminación del producto aquí)
        // await ProductService.deleteProduct({id: id })
         await ProductsModel.deleteOne({_id: id })
 
         return res.json({status: 'success'})
+        }else{
+            res.status(403).json({ error: 'No tienes permisos para eliminar este producto' });
+        }
+
+
     }catch (error){
         res.status(500).json(error)
 console.log(error)
