@@ -8,8 +8,8 @@ export default class Carts {
         try{
             const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec(); 
 
-            console.log('Carrito obtenido:', carrito)
-            console.log('cid desde el dao', cid)
+          //  console.log('Carrito obtenido:', carrito)
+           // console.log('cid desde el dao', cid)
             return carrito
         }catch(error){
             console.error('Error en getCartsById:', error);

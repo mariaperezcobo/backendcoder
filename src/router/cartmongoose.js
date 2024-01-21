@@ -5,7 +5,7 @@ import {Router} from 'express'
 // import CartModel from '../dao/models/cartmongoose.model.js'
 // import ProductModel from '../dao/models/productcart.model.js'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
-import { deleteProductInCart, getCartById, deleteAllProductsInCart, seeCarts, createCart } from '../controllers/carts.js'
+import { deleteProductInCart, getCartById, deleteAllProductsInCart, createCart , getCartToBuy} from '../controllers/carts.js'
 
 
 //inicializamos variables
@@ -25,7 +25,7 @@ const router = Router()
 
 
 //para ver los carritos
-router.get('/', seeCarts)
+//router.get('/', seeCarts)
 
 //para ver un carrito especifico
 router.get('/:cid', getCartById)
@@ -42,5 +42,6 @@ router.delete('/:cid/product/:pid', deleteProductInCart )
  //para eliminar carrito
 router.delete('/:cid', deleteAllProductsInCart)
 
+router.get('/:cid/purchase', getCartToBuy)
 
 export default router

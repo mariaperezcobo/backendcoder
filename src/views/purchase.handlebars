@@ -1,0 +1,43 @@
+<div>
+     <div class="contenedorTituloPrincipal">
+ <h2>Carrito</h2>
+  </div>
+
+
+<div class="contenedorprincipal">
+       <div class="contenedorProductos" >
+  {{#each carrito.productosagregados}}
+
+            <div class="card container" style="width: 18rem;">
+                <img src="{{this.product.thumbnail}}" class="card-img-top" alt="Placeholder Image">
+                <div class="card-body">
+
+                <h5 class="card-title">{{this.product.title}}</h5>
+                <p class="card-text">${{this.product.price}}</p>
+                <p class="card-text">Cantidad: {{this.quantity}}</p>
+                </div>
+               
+            </div>
+
+        {{/each}}
+
+
+
+        </div>
+
+ <div class='contenedorPrecioFinal'>
+            <p class='totalCompra btn btn-secondary' variant='secondary' size="lg" >El precio total de la compra es: ${{totalCompra}}</p> 
+</div> 
+<div class="margen">
+
+  <a href="/cartmongoose/{{this._id}}" class="btn btn-primary">Volver a editar el carrito</a>
+
+  
+</div>
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js">
+</script>
+
+<script>

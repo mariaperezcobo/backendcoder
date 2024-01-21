@@ -25,15 +25,16 @@
         {{/each}}
 
 
-
         </div>
 <div class="margen">
 
   <a href="/productsmongoose" class="btn btn-primary">Ver mas productos</a>
    <button class="btn btn-secondary delete-carrito" data-cid="{{cid}}">Vaciar carrito</button><br>
-  
+   
 </div>
-
+<div class="margen">
+   <a href="/cartmongoose/{{carrito._id}}/purchase" class="btn btn-primary">Ir a finalizar compra</a>
+</div>
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/index.js">

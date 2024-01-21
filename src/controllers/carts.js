@@ -27,8 +27,8 @@ export const getCartById =async(req=request,res=response)=>{
     // carrito.productosagregados.forEach(product => {
     //     product.cid = cid;
     // });
-
-    console.log ('carrito.productosagregados', carrito.productosagregados)
+    console.log ('carrito', carrito)
+    //console.log ('carrito.productosagregados', carrito.productosagregados)
        // return res.json({carrito});
     //res.status(400).json('el id del carrito no existe'),
     
@@ -94,27 +94,80 @@ export const deleteAllProductsInCart =async(req=request,res=response)=>{
            }
         
         }
-    
 
-        export const seeCarts =async(req=request,res=response)=>{
-            try{
-                const carritosmongoose = await CartModel.find().populate('productosagregados.product').lean().exec()
-               // console.log(carritosmongoose)
-            
-                // const result = await ProductsModel.find().lean().exec()
-                // result.productsmongoose = result.docs
-            
-                res.render('cartmongoose',{
-                    carritosmongoose,
-                    style: 'index.css',
-                    title: 'Fitness Ropa deportiva',
-                })
-               
-            }catch (error){
-                console.error('error',error)
+export const getCartToBuy =async(req=request,res=response)=>{
+
+             try{
+             const {cid} = req.params
+             console.log('cid desde el controller', cid)
+            //     //const carrito = await CartModel.findById(cid).populate('productosagregados.product').lean().exec();
         
+            const carrito = await CartService.getCartsById(cid)
+            //   //console.log('carrito', carrito)
+        
+            if(!carrito){
+                return res.status(404).json({ error: 'cart not found' });
             }
-     }
+        
+        
+            // Agregar la propiedad 'cid' a cada producto en 'productosagregados'
+            carrito.productosagregados = carrito.productosagregados.map(product => {
+                return {
+                    ...product,
+                    cid: cid
+                };
+            });
+            // carrito.productosagregados.forEach(product => {
+            //     product.cid = cid;
+            // });
+            console.log ('carrito', carrito)
+
+            console.log ('carrito.productosagregados', carrito.productosagregados)
+               // return res.json({carrito});
+            //res.status(400).json('el id del carrito no existe'),
+            
+            let totalCompra
+
+            try{
+                totalCompra = carrito.productosagregados.reduce((acc, product) => acc + product.product.price * product.quantity, 0)
+                console.log('totalcompra',totalCompra)
+              
+            }catch(error){
+                console.error('error en calcular total compra', error)
+            }
+            
+
+            res.render('purchase', {
+                 carrito,
+                 totalCompra,
+                cid,
+                style: 'index.css',
+                title: 'Fitness Ropa deportiva',
+            })
+            }catch(error){
+                console.log('error', error)
+            }
+        }
+
+    //     export const seeCarts =async(req=request,res=response)=>{
+    //         try{
+    //             const carritosmongoose = await CartModel.find().populate('productosagregados.product').lean().exec()
+    //            // console.log(carritosmongoose)
+            
+    //             // const result = await ProductsModel.find().lean().exec()
+    //             // result.productsmongoose = result.docs
+            
+    //             res.render('cartmongoose',{
+    //                 carritosmongoose,
+    //                 style: 'index.css',
+    //                 title: 'Fitness Ropa deportiva',
+    //             })
+               
+    //         }catch (error){
+    //             console.error('error',error)
+        
+    //         }
+    //  }
 
      export const createCart =async(req=request,res=response)=>{
         try{

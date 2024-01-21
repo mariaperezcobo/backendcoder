@@ -78,3 +78,18 @@ b{
 
   margin-top:10px
 }
+
+.contenedorPrecioFinal{
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.totalCompra{
+  background-color: rgb(180, 196, 196);
+  width: 70%;
+  font-size: 36px;
+  margin: 20px;
+}
