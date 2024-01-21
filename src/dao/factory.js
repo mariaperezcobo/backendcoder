@@ -2,9 +2,11 @@ import mongoose from "mongoose";
 
 import environmentConfig from '../enviroments.js'
 
+
 export let Products
 export let Carts
 export let Users
+export let Tickets
 
 console.log(`Persistence with ${environmentConfig.PERSISTENCE}`)
 
@@ -17,10 +19,13 @@ switch (environmentConfig.PERSISTENCE) {
         const { default: ProductsMongo } = await import('../dao/mongo/products.mongo.js')
         const { default: CartsMongo } = await import('../dao/mongo/carts.mongo.js')
         const { default: UsersMongo } = await import('../dao/mongo/users.mongo.js')
+        const { default: TicketsMongo } = await import('../dao/mongo/tickets.mongo.js')
+
 
         Products = ProductsMongo
         Carts = CartsMongo
         Users = UsersMongo
+        Tickets = TicketsMongo
 
         break;
 
@@ -32,10 +37,12 @@ switch (environmentConfig.PERSISTENCE) {
     const { default: ProductsFile } = await import('../dao/file/products.file.js')
     const { default: CartsFile } = await import('../dao/file/carts.file.js')
     const { default: UsersFile } = await import('../dao/mongo/users.mongo.js')
+    const { default: TicketsFile } = await import('../dao/mongo/tickets.mongo.js')
 
     Products = ProductsFile
     Carts = CartsFile
     Users = UsersFile
+    Tickets = TicketsFile
 
         break
 

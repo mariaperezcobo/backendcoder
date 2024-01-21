@@ -1,5 +1,5 @@
 import TicketModel from '../dao/models/ticket.model.js'
-import { CartService } from '../services/index.js';
+import { CartService, TicketService } from '../services/index.js';
 
 export const generateTicket = async (req, res) => {
     try {
@@ -15,7 +15,7 @@ export const generateTicket = async (req, res) => {
 
      
           const user = req.session.user
-            const email = req.session.user.email;
+        const email = req.session.user.email;
 
            console.log('user', user)
            console.log('email', email)
@@ -49,13 +49,16 @@ export const generateTicket = async (req, res) => {
         console.log('crear nuevo ticket', nuevoTicket)
 
         // Guarda el ticket en la base de datos
-        const ticket = await TicketModel.create(nuevoTicket)
+        // const ticket = await TicketModel.create(nuevoTicket)
+        // const ticketObject = ticket.toObject();
 
-        const ticketObject = ticket.toObject();
+        const ticket = await TicketService.addTicket(nuevoTicket)
+        
+
         console.log(' ticket guardado en la base de datos', ticket)
         
         res.render('checkout', {
-           ticket: ticketObject,
+           ticket,
            style: 'index.css',
            title: 'Fitness Ropa deportiva',
            
