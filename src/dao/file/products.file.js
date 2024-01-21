@@ -25,17 +25,17 @@ export default class Products extends FileManager {
         }
     };
 
-// getProductsById = async (id) => { 
-//     try{
-       
-//         console.log('Obteniendo producto por ID:', id);
-//         return this.getById(id) 
-    
-//     }catch(error){
-//         console.error('Error en el método getProductsById:', error);
-    
-// }
-// }
+    addProduct = async (product) => {
+        try {
+         
+            return this.add(product);
+          
+        } catch (error) {
+           
+            console.error('Error ', error);
+            throw error;
+        }
+    };
 
 }
 

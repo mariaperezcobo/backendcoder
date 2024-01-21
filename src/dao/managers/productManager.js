@@ -23,26 +23,29 @@ loadProducts = async () =>{
 }
 }
 
-async getProducts(limit){
+// async getProducts(limit){
     
-    try{
-        const products = await fs.promises.readFile(this.filename, this.format)
-        this.products = JSON.parse(products)
+//     try{
+
         
-        if (limit){
-            const productsFiltrados = this.products.slice(0,limit)
-            return productsFiltrados
-        }         
-
-        return this.products
-        console.log('hay archivos!')
-
-    }catch (error){
-        console.error('error', error)
+//         const products = await fs.promises.readFile(this.filename, this.format)
+//         this.products = JSON.parse(products)
         
-    }
-    }
+//         if (limit){
+//             const productsFiltrados = this.products.slice(0,limit)
+//             return productsFiltrados
+//         }         
 
+//         return this.products
+//         console.log('hay archivos!')
+
+//     }catch (error){
+//         console.error('error', error)
+        
+//     }
+//     }
+
+// }
 }
 
 // //array de productos de bak up

@@ -1,5 +1,6 @@
 import fs from 'fs'
 import ProductManager from '../managers/productManager.js'
+//import {io} from '../../app.js'
 
 class FileManager {
     constructor(filename = __dirname + '/dao/files/products.json') {
@@ -54,50 +55,48 @@ class FileManager {
        } 
      }
         
-        // getById = async (req,res)=> {
-       
-        //     try{
-        //      console.log('Leyendo datos del archivo por id...');
-        //      console.log('Params:', req.params);
-        //      const id = req.params.id
-        //      console.log('id', id)
-        //      console.log('Leyendo datos del archivo por id...', id);
-     
-        //       if (!id) {
-        //           // Si no hay un parámetro 'id' en la solicitud, devolver un error 400 Bad Request
-        //           return res.status(400).json({ error: 'Missing parameter: id' });
-        //       }
-     
-        //      // console.log('id', id)
-     
-             
-        //          const products = await fs.promises.readFile(this.filename, this.format)
-        //          const parsedProducts = JSON.parse(products)
-         
-                 
-        //          console.log('parsedProducts', parsedProducts)
-        //          const product = parsedProducts.find (product => String(product.id) === String(id))
-                
-        //          if(product){
-        //              return product
-                     
-        //          }else{
-        //              res.status(404).json({ error: 'product not found' });
-        //          }
-           
-     
-             
-        //     }catch (error){
-        //      console.error('error', error)
-        //      res.status(500).json({ error: 'internal server error' })
-        //     } 
-        //      }
-             
 
-    addProduct = async data => {
+    add = async (product) => {
        
+        try{
+        const readProducts = await fs.promises.readFile(this.filename, this.format)
+        const products = JSON.parse(readProducts)
+        //const product = req.body
+
+    // if (!product.title || !product.price || !product.stock || !product.description || !product.category || !product.status || !product.code){
+    //     return res.status(400).json({error: 'faltan datos'})
+    // }
+
+    //ordeno los productos por id
+    products.sort((a,b) => a.id - b.id)
+
+    //me dijo si existe un product con ese id
+    let idExistente = products[products.length - 1].id + 1
+    while(products.some(p=>p.id === idExistente)){
+        idExistente++
+    }
+    product.id = idExistente
+    // product.id = products.length + 1
+    
+    products.push(product)
+
+   
+    await fs.promises.writeFile(this.filename, JSON.stringify(products));
+    // io.emit('actualizarProductos', product)
+
+    return { status: 'success', message: 'Producto creado' };   
+
+   
+
+    } catch (error) {
+        console.error('Error en el método addProduct:', error);
+            throw error;
+    }   
 
     }
+
+    
+
 
     update = async (id, data) => {
        
