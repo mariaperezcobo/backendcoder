@@ -1,0 +1,31 @@
+{{!-- para actualizar productos con mongoose --}}
+
+    <div class="contenedorTituloPrincipal">
+ <h2>Actualizar productos</h2>
+
+  </div>
+<form action="/productsmongoose/{{productmongoose._id}}/update" method="post">
+<br>
+prod{{productmongoose.title}}
+   title: <input name="title" value="{{productmongoose.title}}" ><br>
+   <br>
+    price: <input name="price" value="{{productmongoose.price}}" placeholder="{{productmongoose.price}}"><br>
+    <br>
+    thumbnail: <input name="thumbnail" value="{{productmongoose.thumbnail}}" placeholder="{{productmongoose.thumbnail}}"><br>
+    <br>
+    description: <input name="description" value="{{productmongoose.description}}" placeholder="{{productmongoose.description}}"><br>
+    <br>
+    category: <input name="category" value="{{productmongoose.category}}" placeholder=""><br>
+    <br>
+    code: <input name="code" placeholder="campo obligatorio" value="{{productmongoose.code}}" ><br>
+    <br>
+    status: <input name="status" value="{{productmongoose.status}}" placeholder="{{productmongoose.status}}"><br>
+    <br>
+    stock: <input name="stock" value="{{productmongoose.stock}}" placeholder="{{productmongoose.stock}}"><br>
+<br>
+    <input type="hidden" name="_method" value="PUT">
+    <input type="submit" value="Actualizar">
+</form>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js">
+</script>

@@ -1,7 +1,7 @@
 import {Router} from 'express'
 //import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct } from '../controllers/products.js'
-import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct } from '../controllers/products.js'
-import {isAdmin, isAdminEliminate} from "../controllers/sessions.js"
+import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct, updateProductBase, updateProductForm } from '../controllers/products.js'
+import {isAdmin, isAdminEliminate, isUser} from "../controllers/sessions.js"
 //import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/mongo/products.mongo.js"
 //import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/file/products.file.js"
 
@@ -23,7 +23,9 @@ router.get('/:id', getProductsById)
 
 router.delete('/:id',isAdminEliminate, deleteProduct)
 
-router.post('/:cid/product/:pid', addProductInCart)
+router.post('/:cid/product/:pid',isUser, addProductInCart)
 
+router.get('/:id/update',isAdmin, updateProductForm)
 
+router.post('/:id/update',isAdmin, updateProductBase)
 export default router

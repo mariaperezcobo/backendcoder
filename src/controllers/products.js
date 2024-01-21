@@ -147,6 +147,7 @@ export const getProducts =async(req=request,res=response)=>{
         console.log(productNew)
         const productmongooseNew = new ProductInsertDTO(productNew)
        
+        
        const result = await ProductService.addProduct(productmongooseNew)
        // const result = await ProductsModel.create(productmongooseNew)
 
@@ -193,22 +194,28 @@ console.log(error)
     //  console.log('carrito', carrito)
     // console.log('param', cid, pid)
     //  console.log('carrito con prod', carrito.productosagregados)
-               
-        const productoInCart = carrito.productosagregados.find(p => p.product && p.product._id.toString() === pid);
-    //    console.log('productoincart',productoInCart)
-        if (productoInCart){
-            productoInCart.quantity++;
-        }
         
-    else{
-        const newProduct = { product: pid, quantity: 1}
-        carrito.productosagregados.push(newProduct);
+    if(req.session?.user && req.session.user.rol !== 'admin'){
+        const productoInCart = carrito.productosagregados.find(p => p.product && p.product._id.toString() === pid);
+        //    console.log('productoincart',productoInCart)
+            if (productoInCart){
+                productoInCart.quantity++;
+            }
+            
+        else{
+            const newProduct = { product: pid, quantity: 1}
+            carrito.productosagregados.push(newProduct);
+        }
+          
+        // Actualizar la base de datos con los cambios
+        // await CartModel.findByIdAndUpdate(cid, { productosagregados: carrito.productosagregados }, { new: true });
+         await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+        //console.log('carrito desp de actualizar',carrito)
+    }else{
+        res.status(403).json({ error: 'No tienes permisos para agregar un producto al carrito este producto' });
     }
-      
-    // Actualizar la base de datos con los cambios
-   // await CartModel.findByIdAndUpdate(cid, { productosagregados: carrito.productosagregados }, { new: true });
-     await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
-    //console.log('carrito desp de actualizar',carrito)
+
+    
 
 
     }catch (error){
@@ -218,6 +225,47 @@ console.log(error)
 }
  
 
+export const updateProductBase =async(req=request,res=response)=>{
+    try{
+        
+        const {id} = req.params
+        console.log('id para elimnar', id)
+
+        const updatedProductData = req.body; 
+
+        const updatedProduct = await ProductsModel.findByIdAndUpdate(id, updatedProductData, { new: true });
+
+        if (updatedProduct) {
+          
+            res.redirect('/productsmongoose')
+        } else {
+            res.status(404).json({ error: 'Producto no encontrado o no se realizaron modificaciones' });
+        }
+
+      ;
+    }catch (error){
+        console.error('Error in update product route:', error);
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+ }
+
+ export const updateProductForm = async (req=request,res=response)=>{
+    const {id} = req.params
+    const productmongoose = await ProductService.getProductsById(id)
+
+        if (!productmongoose) {
+            // Si el producto no se encuentra, puedes manejarlo de alguna manera
+            return res.status(404).send('Producto no encontrado');
+        }
+    
+    res.render('update', {
+        productmongoose,        
+        style: 'index.css',
+        title: 'Fitness Ropa deportiva',
+    }
+    )
+ }
+
 export const createProduct = (req=request,res=response)=>{
     res.render('create', {
         style: 'index.css',
@@ -225,6 +273,7 @@ export const createProduct = (req=request,res=response)=>{
     }
     )
  }
+
 
 // import {request, response} from 'express'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
