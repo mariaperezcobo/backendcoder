@@ -36,7 +36,7 @@ switch (environmentConfig.PERSISTENCE) {
 
     const { default: ProductsFile } = await import('../dao/file/products.file.js')
     const { default: CartsFile } = await import('../dao/file/carts.file.js')
-    const { default: UsersFile } = await import('../dao/mongo/users.mongo.js')
+    const { default: UsersFile } = await import('../dao/file/users.file.js')
     const { default: TicketsFile } = await import('../dao/mongo/tickets.mongo.js')
 
     Products = ProductsFile

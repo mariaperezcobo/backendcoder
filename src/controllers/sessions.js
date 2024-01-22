@@ -29,8 +29,8 @@ export const loginUser =async(req,res) =>{
 export const registerUser =async(req,res) =>{
 
     passport.authenticate('registeruser', {failureRedirect: '/'}, (err,user)=>{
-
    
+
  return res.redirect('/login')
  })(req, res);
 

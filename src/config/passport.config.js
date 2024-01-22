@@ -55,16 +55,17 @@ const initializePassport =()=>{
             //const user = await UserRegisterModel.findOne({email: username})
 
             const user = await UserService.getUsers(username)
-            //console.log('usuario', user)
+            //console.log('usuario 2', user)
 
             if (!email) {
                 console.log('Email es nulo o indefinido');
                 return done(null, false);
             }
 
+
             if(user){
-                console.log('user already exist')
-                return done(null,false)
+                console.log('user already exist', user)
+                return done(null,false, { message: 'User already exists' })
             }
 
             const newUser ={
@@ -83,31 +84,40 @@ const initializePassport =()=>{
           
            // const result = await UserRegisterModel.create(newUser)  
            const result = await UserService.addUsers(newUser);
-           // console.log('usuario agregado', result)
+           console.log('usuario agregado', result)
        
 
         
 
     // Añadir el carrito al usuario
     const carrito = await CartService.addCart({ productosagregados: [] });
+
     result.cart = carrito.id;
    // console.log('carrito', carrito)
-  
+  console.log('carrito desde passport', carrito)
+  console.log('result desp de incorporar carrito', result)
+
     // Actualizar el usuario con el ID del carrito
-    await result.save();
-console.log('carrito de la sesion', result)
+    //await result.save();
+
+ // Actualiza el usuario con el ID del carrito
+ await UserService.updateUser(result._id, { cart: carrito.id });
+
+
+
         //const carrito = await CartModel.create({ productosagregados: [] })
      
     
      //   console.log('Datos del nuevo usuario con carrito:', newUser);
       
 
-        //    console.log('result', result)
+         console.log('result de passport config', result)
             return done(null, result)
 
          
         }catch(error){
             done('error to register', error)
+            console.error('Error al registrar usuario:', error);
         }
     }))
 
@@ -117,7 +127,7 @@ console.log('carrito de la sesion', result)
         try{
             const user = await UserService.getUsers(username)
 
-           // console.log('usuario', user)
+           console.log('usuario', user)
             if(!user){
                 console.error('user doesnt exist')
                 return done (null, false)

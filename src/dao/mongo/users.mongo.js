@@ -1,9 +1,30 @@
 import UserRegisterModel from "../models/userregister.model.js";
 
 export default class Users {
-    getUsers = async (username, id )=> { return UserRegisterModel.findOne(({email: username}), id).lean().exec() }
-    addUsers = async newUser => { return UserRegisterModel.create(newUser) }
+
+    getUsers = async (username, id )=> { return await UserRegisterModel.findOne(({email: username}), id).lean().exec() }
+    getUsersByEmail = async (username, id )=> { return await UserRegisterModel.findOne(({email}), id).lean().exec() }
+    addUsers = async newUser => { 
+        try {
+            const result = await UserRegisterModel.create(newUser);
+            return result; 
+        } catch (error) {
+            console.error('Error en addUsers:', error);
+            throw error;
+        }
+    }
+        
+       
+
+    updateUser= async (cid, update) =>{try {
+        const updatedUser = await UserRegisterModel.findByIdAndUpdate(cid, update);
+        return updatedUser;
+    } catch (error) {
+        console.error('Error en updateCart:', error);
+        throw error;
+    }}    
 }
+
 
 
 
