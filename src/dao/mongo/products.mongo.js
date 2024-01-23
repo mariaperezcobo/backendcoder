@@ -33,6 +33,7 @@ export default class Products {
       
     getProductsById = async id => { const product = await ProductsModel.findById(id);
         return product ? product.toObject({ virtuals: true }) : null; }
+     
 
     deleteProduct = async id =>{return ProductsModel.deleteOne({_id: id })}    
     getProductsFindOne = async code => { return ProductsModel.findOne(code) }

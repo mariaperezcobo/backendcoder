@@ -25,7 +25,7 @@ router.delete('/:id',isAdminEliminate, deleteProduct)
 
 router.post('/:cid/product/:pid',isUser, addProductInCart)
 
-router.get('/:id/update',isAdmin, updateProductForm)
+ router.get('/:id/update',isAdmin, updateProductForm)
 
 router.post('/:id/update',isAdmin, updateProductBase)
 export default router

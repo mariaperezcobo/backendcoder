@@ -9,7 +9,7 @@ export default class ProductInsertDTO {
         this.code= product?.code ?? 1 
         this.status= product?.status ?? true
         this.stock= product?.stock ?? 10
-
+        this.id = product?.id || product?._id || null;
          }
 
 }

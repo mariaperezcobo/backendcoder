@@ -124,7 +124,7 @@ export const getProducts =async(req=request,res=response)=>{
             // Si el producto no se encuentra, puedes manejarlo de alguna manera
             return res.status(404).send('Producto no encontrado');
         }
-     //  console.log(productmongoose)
+      console.log(productmongoose)
 
         res.render('one',{
             productmongoose,
@@ -153,7 +153,7 @@ export const getProducts =async(req=request,res=response)=>{
        const result = await ProductService.addProduct(productmongooseNew)
        // const result = await ProductsModel.create(productmongooseNew)
 
-      // console.log('resultado de crear prod', result)
+      console.log('resultado de crear prod', result)
         res.redirect('/productsmongoose')
 
     }catch (error){
@@ -229,7 +229,7 @@ console.log(error)
 
 export const updateProductBase =async(req=request,res=response)=>{
     try{
-        
+        const user = req.session.user
         const {id} = req.params
         console.log('id para elimnar', id)
 
@@ -254,6 +254,8 @@ export const updateProductBase =async(req=request,res=response)=>{
 
  export const updateProductForm = async (req=request,res=response)=>{
     const {id} = req.params
+    console.log('id para elimnar', id)
+
     const productmongoose = await ProductService.getProductsById(id)
 
         if (!productmongoose) {
