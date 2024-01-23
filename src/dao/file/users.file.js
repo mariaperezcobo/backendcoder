@@ -8,9 +8,9 @@ export default class Carts extends FileManager {
         super(filename)
     }
 
-    getUsersByEmail = async () => { return this.getUserByEmailFile(username)}
+    //getUsersByEmail = async () => { return this.getUserByEmailFile(username)}
 
-    getUsers = async () => { return this.getUserByIdFile()}
+    getUsers = async (email) => { return this.getUserByEmailFile(email)}
    
 
     addUsers = async (user) => {

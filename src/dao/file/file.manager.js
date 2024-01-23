@@ -27,7 +27,7 @@ class FileManager {
 
             try{
                 this.products = JSON.parse(products)
-                console.log('hay archivos!')
+              //  console.log('hay archivos!')
             }catch (parseError) {
  // Si hay un error al analizar el JSON, establece products en un array vacío
  console.error('Error analizando JSON:', parseError);
@@ -55,7 +55,7 @@ class FileManager {
  
              try{
                  this.users = JSON.parse(users)
-                 console.log('hay archivos!')
+               //  console.log('hay archivos!')
              }catch (parseError) {
   // Si hay un error al analizar el JSON, establece products en un array vacío
   console.error('Error analizando JSON:', parseError);
@@ -82,7 +82,7 @@ class FileManager {
  
              try{
                  this.carts = JSON.parse(carts)
-                 console.log('hay archivos!')
+               //  console.log('hay archivos!')
              }catch (parseError) {
   // Si hay un error al analizar el JSON, establece products en un array vacío
   console.error('Error analizando JSON:', parseError);
@@ -151,11 +151,12 @@ class FileManager {
              const users = await fs.promises.readFile(this.filename, this.format)
              const parsedUsers = JSON.parse(users)
      
-             
+             console.log('email', email)
              console.log('parsedUsers', parsedUsers)
-             const user = parsedUsers.find (user => String(user.email) === String(email))
-            
-             if (user && user.status) {
+             const user = parsedUsers.find (user => user.email === email)
+            console.log('usuario desde file', user)
+             if (user) {
+                console.log('usuario esta', user)
                  return user;
              } else {
                  console.log('user not found');
@@ -244,17 +245,24 @@ class FileManager {
     // if (!product.title || !product.price || !product.stock || !product.description || !product.category || !product.status || !product.code){
     //     return res.status(400).json({error: 'faltan datos'})
     // }
-
+            console.log('users', users)
     //ordeno los productos por id
     users.sort((a,b) => a.id - b.id)
 
+    let idExistente;
     //me dijo si existe un product con ese id
-    let idExistente = users[users.length - 1].id + 1
-    while(users.some(p=>p.id === idExistente)){
-        idExistente++
-    }
-
+    if (users.length === 0) {
+        idExistente = 1;
+      } else {
+        idExistente = users[users.length - 1].id + 1;
+        while (users.some(p => p.id === idExistente)) {
+          idExistente++;
+        }
+      }
+  
+ 
      // Agrega la propiedad _id al objeto user
+     idExistente = parseInt(idExistente);
     user._id = idExistente;
 
     user.id = idExistente

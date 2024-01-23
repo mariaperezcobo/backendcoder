@@ -5,6 +5,7 @@ import { createHash, isValidPassword } from "../utils.js";
 import GitHubStrategy from 'passport-github2'
 import CartModel from "../dao/models/cartmongoose.model.js";
 import { CartService, UserService } from "../services/index.js";
+import UserInsertDTO from "../DTO/users.dto.js";
 
 const LocalStrategy = local.Strategy
 
@@ -83,6 +84,9 @@ const initializePassport =()=>{
           //const result = await UserRegisterModel.create(newUser)    
           
            // const result = await UserRegisterModel.create(newUser)  
+
+         //  const newUserDTO = new UserInsertDTO(newUser)
+
            const result = await UserService.addUsers(newUser);
            console.log('usuario agregado', result)
        
@@ -125,8 +129,11 @@ const initializePassport =()=>{
         usernameField: 'email'
     }, async(username, password, done)=>{
         try{
+            console.log('Email proporcionado:', username);
+console.log('Contraseña proporcionada:', password);
             const user = await UserService.getUsers(username)
-
+            console.log('Email proporcionado:', username);
+            console.log('Contraseña proporcionada:', password);
            console.log('usuario', user)
             if(!user){
                 console.error('user doesnt exist')
