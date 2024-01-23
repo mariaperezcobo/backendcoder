@@ -1,5 +1,5 @@
 import TicketModel from '../dao/models/ticket.model.js'
-import { CartService, TicketService } from '../services/index.js';
+import { CartService, TicketService, ProductService } from '../services/index.js';
 
 export const generateTicket = async (req, res) => {
     try {
@@ -35,13 +35,7 @@ export const generateTicket = async (req, res) => {
 }
 
 
-        // function generarCodigo() {
-        //     const codigo = Math.floor(1000 + Math.random() * 9000);
-        //     return codigo;
-        //   }
-          
-        //   const codigoGenerado = generarCodigo();
-
+        
         try{
             totalCompra = carrito.productosagregados.reduce((acc, product) => acc + product.product.price * product.quantity, 0)
             console.log('totalcompra',totalCompra)
@@ -49,6 +43,8 @@ export const generateTicket = async (req, res) => {
         }catch(error){
             console.error('error en calcular total compra', error)
         }
+
+
 
         // Crea una nueva instancia del ticket
         const nuevoTicket = new TicketModel({
@@ -67,6 +63,25 @@ export const generateTicket = async (req, res) => {
         
 
         console.log(' ticket guardado en la base de datos', ticket)
+
+        //actualizar el stock en la base
+        const productsInCart = carrito.productosagregados
+
+        for (const productInfo of productsInCart) {
+            const productId = productInfo.product._id; // Asume que tienes un campo _id en tu modelo de productos
+            const purchasedQuantity = productInfo.quantity;
+            const product = await ProductService.getProductsById(productId);
+            console.log('producto a restar cantidas', product)
+            console.log('id del producto a restar stock', productId)
+            const updatedStock = product.stock - purchasedQuantity;
+            console.log('updatedStock', updatedStock)
+            const actualizar = await ProductService.updateProduct(productId, {stock: updatedStock} );
+            console.log('acutualizar', actualizar)
+        }
+
+        
+
+         
         
         res.render('checkout', {
            ticket,
@@ -79,35 +94,5 @@ export const generateTicket = async (req, res) => {
         console.error('Error al generar el ticket desde post:', error);
         res.status(500).json({ error: 'Error interno del servidor desde post' });
     }
-};
+}
 
-// export const generateTicketView = async (req,res) => {
-//     try {
-//         try{
-//             const cid = req.params.cid
-//             console.log('id desde el generate ticket', cid)
-//             const user = req.session.user
-//             const email = req.session.user.email;
-
-//            console.log('user', user)
-//            console.log('email', email)
-
-
-//         }catch(error){
-//             console.error('Error al generar el ticket desde ruta get:', error);
-//             res.status(500).json({ error: 'Error interno del servidor desde get' });
-//         }
-        
-       
-//         res.render('checkout', {
-          
-//            style: 'index.css',
-//            title: 'Fitness Ropa deportiva',
-           
-//        })
-
-//     } catch (error) {
-//         console.error('Error al generar el ticket:', error);
-//         res.status(500).json({ error: 'Error interno del servidor' });
-//     }
-// };

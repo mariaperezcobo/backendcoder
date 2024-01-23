@@ -40,7 +40,9 @@ export default class Products {
    
     updateProduct =  async (id, update) =>{try {
         const updatedProduct = await ProductsModel.findByIdAndUpdate(id, update);
+        console.log(' console.log(updatedProduct)', updatedProduct)
         return updatedProduct;
+        console.log(updatedProduct)
     } catch (error) {
         console.error('Error en updateCart:', error);
         throw error;
