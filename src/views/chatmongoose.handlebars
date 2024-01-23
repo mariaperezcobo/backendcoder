@@ -3,10 +3,12 @@
  <h2>Chat mongoose</h2>
   </div>
 
+ <p>Usuario: {{user.first_name}}</p>
   <form action="/chatmongoose" method="post">
-<br>
-   Usuario: <input name="usuario"><br>
-   <br>
+
+ <input name="usuario" value="{{user.first_name}}" type="hidden" ><br>
+     
+   
     Mensaje: <input name="mensaje"><br>
     <br>
    

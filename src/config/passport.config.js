@@ -129,12 +129,12 @@ const initializePassport =()=>{
         usernameField: 'email'
     }, async(username, password, done)=>{
         try{
-            console.log('Email proporcionado:', username);
-console.log('Contraseña proporcionada:', password);
+  //          console.log('Email proporcionado:', username);
+//console.log('Contraseña proporcionada:', password);
             const user = await UserService.getUsers(username)
-            console.log('Email proporcionado:', username);
-            console.log('Contraseña proporcionada:', password);
-           console.log('usuario', user)
+         //   console.log('Email proporcionado:', username);
+     //       console.log('Contraseña proporcionada:', password);
+       //    console.log('usuario', user)
             if(!user){
                 console.error('user doesnt exist')
                 return done (null, false)

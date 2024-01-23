@@ -9,18 +9,11 @@ const envPath= path.resolve(__dirname, '../.env')
 
 config({path: envPath})
 
-// // const PORT = process.env.PORT
-// // const NODE_ENV = process.env.NODE_ENV
-// // const MONGO_URL = process.env.MONGO_URL
-// // const MONGO_DBNAME = process.env.MONGO_DBNAME
-
-// // dotenv.config({ path: envPath });
-
 
  console.log('File loaded!!');
 
 const environmentConfig = {
-    PERSISTENCE: process.env.PERSISTENCE,
+    PERSISTENCE: process.env.PERSISTENCE, //nodemon app.js -e PERSISTENCE=MONGO
     PORT: process.env.PORT,
     NODE_ENV: process.env.NODE_ENV,
     MONGO_URL: process.env.MONGO_URL,
