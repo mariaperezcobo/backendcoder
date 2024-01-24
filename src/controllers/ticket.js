@@ -65,7 +65,7 @@ console.log('total compra desde ticket', totalCompra)
         console.log(' ticket guardado en la base de datos', ticket)
 
         //actualizar el stock en la base
-        const productsInCart = carrito.productosagregados
+        const productsInCart = carrito.productsToBuy
 
         for (const productInfo of productsInCart) {
             const productId = productInfo.product._id; // Asume que tienes un campo _id en tu modelo de productos
@@ -79,11 +79,10 @@ console.log('total compra desde ticket', totalCompra)
             console.log('acutualizar', actualizar)
         }
 
-        
-
-         
+           
         
         res.render('checkout', {
+            carrito,
            ticket,
            style: 'index.css',
            title: 'Fitness Ropa deportiva',

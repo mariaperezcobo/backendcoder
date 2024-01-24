@@ -16,7 +16,26 @@
         <p class="margen">El email del usuario que registró la compra es {{ticket.purchaser}}</p>
     
         </div>
+<br>
+       <h5 class="margen margen-top2">Productos que quedaron pendientes:</h5>
+       <div class="contenedorProductos" >
+  {{#each carrito.otherProducts}}
 
+            <div class="card container" style="width: 18rem;">
+                <img src="{{this.product.thumbnail}}" class="card-img-top" alt="Placeholder Image">
+                <div class="card-body">
+
+                <h5 class="card-title">{{this.product.title}}</h5>
+                <p class="card-text">${{this.product.price}}</p>
+                <p class="card-text">Cantidad: {{this.quantity}}</p>
+                </div>
+               
+            </div>
+
+        {{/each}}
+
+
+        </div>
 
 </div>
 <script src="/socket.io/socket.io.js"></script>
