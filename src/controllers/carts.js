@@ -136,20 +136,34 @@ export const getCartToBuy =async(req=request,res=response)=>{
         carrito.productosagregados.forEach(product => {
             const stockDisponible = product.product.stock;
 
-            
-
             if (product.quantity <= stockDisponible) {
                 // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
 
                 productsToBuy.push(product)
                 console.log('productsToBuy', productsToBuy)
             }else{
-                otherProducts.push(product)
+
+                if (stockDisponible > 0) {
+                    productsToBuy.push({
+                        ...product,
+                        quantity: stockDisponible
+                    });
+                }
+                console.log('productsToBuy despues de validar stock', productsToBuy)
+                const remainingUnits = product.quantity - stockDisponible;
+        
+                if (remainingUnits > 0) {
+                    otherProducts.push({
+                        ...product,
+                        quantity: remainingUnits
+                    });
+
+                //otherProducts.push(product)
                 console.log('otherProducts', otherProducts)
             // Enviar un mensaje de alerta a la vista
             stockAlert = 'No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito';
             }
-              
+        }
                 
         });
 
