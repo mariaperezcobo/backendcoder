@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 import environmentConfig from '../enviroments.js'
+import {opts} from '../commander.js'
 
 
 export let Products
@@ -10,6 +11,7 @@ export let Tickets
 export let Chats
 
 console.log(`Persistence with ${environmentConfig.PERSISTENCE}`)
+//console.log(`Persistence with ${environmentConfig.PERSISTENCE}`)
 
 switch (environmentConfig.PERSISTENCE) {
     case "MONGO":
