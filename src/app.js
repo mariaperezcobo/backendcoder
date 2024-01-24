@@ -1,22 +1,40 @@
 
 import dotenv from 'dotenv'
-//dotenv.config()
-
-import { config } from 'dotenv';
 import path from 'path';
+import {program} from 'commander'
 
-const envPath = path.resolve(__dirname, '../.env');
-config({ path: envPath });
+
+dotenv.config();
+
+
+//import { config } from 'dotenv';
+
+program
+  .option('-p, --persistence <type>', 'Tipo de persistencia: file o mongo')
+  .parse(process.argv);
+  
+const envPath= path.resolve(__dirname, '../.env')
+//config({path: envPath})
+
+
+ // console.log('program.persistence!', program.persistence);
+  //console.log('process.argv:', process.argv);
+
+  const persistenceType = program.persistence || process.env.PERSISTENCE || 'default';
+
+ // console.log('persistenceType:', persistenceType);
+//const envPath = path.resolve(__dirname, '../.env');
+//config({ path: envPath });
 
 
 //console.log('MONGO_URL:', process.env.MONGO_URL);
 //console.log('MONGO_DBNAME:', process.env.MONGO_DBNAME);
 
+
 import express from 'express'
 import routerProducts from './router/products.router.js'
 import routerCarts from './router/cart.router.js'
 import handlebars from 'express-handlebars'
-import exphbs from 'express-handlebars';
 
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'

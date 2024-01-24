@@ -15,6 +15,7 @@ export const generateTicket = async (req, res) => {
 
      
           const user = req.session.user
+          console.log('user', user)
         const email = req.session.user.email;
 
            console.log('user', user)
