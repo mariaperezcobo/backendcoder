@@ -46,7 +46,7 @@ router.delete('/:cid', deleteAllProductsInCart)
 router.get('/:cid/purchase', getCartToBuy)
 
 router.post('/:cid/purchase/checkout', generateTicket)
-//router.get('/:cid/purchase/checkout', generateTicket)
+router.get('/:cid/purchase/checkout', generateTicket)
 
 
 export default router

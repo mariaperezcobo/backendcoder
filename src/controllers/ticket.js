@@ -3,6 +3,13 @@ import { CartService, TicketService, ProductService } from '../services/index.js
 
 export const generateTicket = async (req, res) => {
     try {
+        const user = req.session.user
+        console.log('user desde ticket', user)
+      const email = req.session.user.email;
+
+         console.log('user', user)
+         console.log('email', email)
+
         let cid 
         
         try{
@@ -14,15 +21,11 @@ export const generateTicket = async (req, res) => {
         }
 
      
-          const user = req.session.user
-          console.log('user', user)
-        const email = req.session.user.email;
-
-           console.log('user', user)
-           console.log('email', email)
+     
 
         const carrito = await CartService.getCartsById(cid)
         console.log('carrito de checkout', carrito)
+        console.log('carrito de checkout productsToBuy', carrito.productsToBuy)
         let totalCompra
 
        // const lastTicket = await TicketModel.findOne({}, {}, { sort: { 'code': -1 } });
@@ -36,15 +39,11 @@ export const generateTicket = async (req, res) => {
 }
 
 
-        
-        try{
-            totalCompra = carrito.productosagregados.reduce((acc, product) => acc + product.product.price * product.quantity, 0)
-            console.log('totalcompra',totalCompra)
-          
-        }catch(error){
-            console.error('error en calcular total compra', error)
-        }
-
+totalCompra = 0;
+carrito.productsToBuy.forEach(product => {
+    totalCompra += product.product.price * product.quantity;
+});
+console.log('total compra desde ticket', totalCompra)
 
 
         // Crea una nueva instancia del ticket
@@ -88,6 +87,7 @@ export const generateTicket = async (req, res) => {
            ticket,
            style: 'index.css',
            title: 'Fitness Ropa deportiva',
+           user,
            
        })
 

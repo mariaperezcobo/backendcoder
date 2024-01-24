@@ -129,32 +129,77 @@ export const getCartToBuy =async(req=request,res=response)=>{
             //res.status(400).json('el id del carrito no existe'),
             
             let stockAlert = ''
+            let productsToBuy =[]
 
-             // Verificar y ajustar la cantidad en base al stock disponible
-            carrito.productosagregados.forEach(product => {
+            let otherProducts=[]
+
+        carrito.productosagregados.forEach(product => {
             const stockDisponible = product.product.stock;
 
-            if (product.quantity > stockDisponible) {
-                // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
-                product.quantity = stockDisponible;
-              
-                // Enviar un mensaje de alerta a la vista
-                stockAlert = 'No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito';
-                
-            }
-        });
-     // Actualizar el carrito en la base de datos
-        await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+            
 
+            if (product.quantity <= stockDisponible) {
+                // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
+
+                productsToBuy.push(product)
+                console.log('productsToBuy', productsToBuy)
+            }else{
+                otherProducts.push(product)
+                console.log('otherProducts', otherProducts)
+            // Enviar un mensaje de alerta a la vista
+            stockAlert = 'No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito';
+            }
+              
+                
+        });
+
+        // carrito.productosagregados.forEach(product => {
+        //     const stockDisponible = product.product.stock;
+
+        //     if (product.quantity > stockDisponible) {
+        //         // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
+        //         product.quantity = stockDisponible;
+              
+        //         // Enviar un mensaje de alerta a la vista
+        //         stockAlert = 'No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito';
+                
+        //     }
+        // });
+     // Actualizar el carrito en la base de datos
+       // await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+         
+       // Crear objeto con propiedades actualizadas
+       const updatedCart = {
+        ...carrito,
+        productsToBuy: productsToBuy,
+        otherProducts: otherProducts,
+    };
+
+
+
+     //  await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+     await CartService.updateCart(cid, updatedCart );
             let totalCompra
 
-            try{
-                totalCompra = carrito.productosagregados.reduce((acc, product) => acc + product.product.price * product.quantity, 0)
-                console.log('totalcompra',totalCompra)
+ // Calcular el total de la compra
+totalCompra = 0;
+ productsToBuy.forEach(product => {
+     totalCompra += product.product.price * product.quantity;
+ });
+
+
+console.log('total compra desde getcart', totalCompra)
+        //    const resultPrueba = await CartService.getCartsById(cid)
+        //     console.log('carrito despues de validar stock', resultPrueba)
+
+        //     try{
+        //         //totalCompra = carrito.productosagregados.reduce((acc, product) => acc + product.product.price * product.quantity, 0)
+        //         totalCompra = carrito.productsToBuy.reduce((acc, product) => acc + product.product.price * product.quantity, 0)
+        //         console.log('totalcompra',totalCompra)
               
-            }catch(error){
-                console.error('error en calcular total compra', error)
-            }
+        //     }catch(error){
+        //         console.error('error en calcular total compra', error)
+        //     }
             
 
             res.render('purchase', {
