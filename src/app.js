@@ -1,34 +1,14 @@
 
 import dotenv from 'dotenv'
-import path from 'path';
-import {program} from 'commander'
+//import path from 'path';
+
 
 
 dotenv.config();
 
 
-//import { config } from 'dotenv';
+// const envPath= path.resolve(__dirname, '../.env')
 
-program
-  .option('-p, --persistence <type>', 'Tipo de persistencia: file o mongo')
-  .parse(process.argv);
-  
-const envPath= path.resolve(__dirname, '../.env')
-//config({path: envPath})
-
-
- // console.log('program.persistence!', program.persistence);
-  //console.log('process.argv:', process.argv);
-
-  const persistenceType = program.persistence || process.env.PERSISTENCE || 'default';
-
- // console.log('persistenceType:', persistenceType);
-//const envPath = path.resolve(__dirname, '../.env');
-//config({ path: envPath });
-
-
-//console.log('MONGO_URL:', process.env.MONGO_URL);
-//console.log('MONGO_DBNAME:', process.env.MONGO_DBNAME);
 
 
 import express from 'express'
