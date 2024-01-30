@@ -167,6 +167,12 @@ export const getCartToBuy =async(req=request,res=response)=>{
                 
         });
 
+        if (productsToBuy.length === 0) {
+            // If productsToBuy is an empty array, redirect to /products
+            return res.redirect('/productsmongoose');
+        }
+
+
         // carrito.productosagregados.forEach(product => {
         //     const stockDisponible = product.product.stock;
 

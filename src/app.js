@@ -12,19 +12,14 @@ dotenv.config();
 
 
 import express from 'express'
-import routerProducts from './router/products.router.js'
-import routerCarts from './router/cart.router.js'
 import handlebars from 'express-handlebars'
 
 import viewsRouter from './router/views.router.js'
 import __dirname from './utils.js'
-//import userRouter from './router/users.router.js'
 import {Server} from 'socket.io'
-//import UserModel from './dao/models/users.model.js'
 import passport from 'passport'
 import Session from './router/sessionrouter.js'
 import initializePassport from './config/passport.config.js'
-//import otrocart from './router/otrocart.router.js'
 import session from 'express-session'
 
 import MongoStore from 'connect-mongo'
@@ -118,25 +113,19 @@ io.on('connection', async socket =>{
     export {io}
 
 
-  //  App ID: 681168
-    //Client ID: Iv1.662a6575b5411586
-   // 3608645456c4540155929a3bfce812999d8fc636
 
 
 //ruta para mongoose
 app.use('/productsmongoose', prodMongoose)
 app.use('/chatmongoose', chatMongoose)
 app.use('/cartmongoose', cartMongoose)
-//app.use('/api/cartmongoose', cartMongoose)
-//app.use('/api/otrocart', otrocart)
+
 app.use('/api/session', Session)
 
 //rutas
-app.use('/api/products', routerProducts)
-app.use('/api/carts', routerCarts)
 app.use('/', viewsRouter)
 
-//app.use('/api/user', userRouter)
+
 
 
 //rutas mongoose
