@@ -55,3 +55,5 @@ loadProducts = async () =>{
 // {"title":"Calzas Amsterdam","description":"Calzas estampadas","price":20000,"thumbnail":"/static/imagenes/yoga3.png","category":"calzas","code":61,"status":true,"stock":17,"id":4},
 // {"id":5,"title":"Remera Buzios","description":"Remera rosa","price":16000,"thumbnail":"/static/imagenes/remera3.png","category":"remeras","code":53,"stock":22},
 // {"title":"Remera Miami","description":"Remera verde","price":20000,"thumbnail":"/static/imagenes/conperro.png","category":"calzas","code":61,"status":true,"stock":2,"id":6}]
+
+// [{"id":1,"products":[{"pid":1,"quantity":1}]},{"id":2,"products":[{"pid":2,"quantity":1},{"pid":3,"quantity":2},{"pid":1,"quantity":3}]},{"id":3,"products":[{"pid":1,"quantity":3}]},{"id":4,"productos":[]}]

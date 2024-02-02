@@ -5,18 +5,19 @@ import ProductsModel from '../dao/models/prodmongoose.models.js'
 import CartModel from '../dao/models/cartmongoose.model.js'
 import {ProductService, CartService} from '../services/index.js'
 import ProductInsertDTO from '../DTO/products.dto.js'
+import logger from '../utils/logger.js'
 
 
 export const getProducts =async(req=request,res=response)=>{
     try{
-       // console.log('ProductsModel:', ProductsModel); 
-     //   console.log('CartsModel:', CartModel); 
-       
            const user = req.session.user
            const cid = req.session.user.cart;
 
-           console.log('user', user)
-           console.log('cid', cid)
+           logger.debug('user', user);
+           logger.debug('cid', cid);
+
+        //    console.log('user', user)
+        //    console.log('cid', cid)
     
             const limit = parseInt(req.query?.limit ?? 10)
             const page = parseInt(req.query?.page ?? 1)
@@ -105,8 +106,8 @@ export const getProducts =async(req=request,res=response)=>{
 
 
         }catch(error){
-            console.error('error', error)
-            console.error(error)
+            logger.error('Error en getProducts:', error);
+        res.status(500).send('Error interno del servidor');
         }  
  }
  

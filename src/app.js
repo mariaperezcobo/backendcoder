@@ -31,7 +31,8 @@ import prodMongoose from './router/prodmongoose.router.js'
 import chatMongoose from './router/chatmongoose.router.js'
 import cartMongoose from './router/cartmongoose.js'
 
-
+//import { addLogger } from './utils/logger.js';
+import logger from './utils/logger.js';
 
 const app = express()
 
@@ -41,6 +42,7 @@ app.engine('handlebars', handlebars.engine())
 app.set('views', __dirname + '/views')
 app.set('view engine', 'handlebars')
 
+//app.use(addLogger)
 app.use('/static', express.static(__dirname + '/public'))
 
 //para trer info de post como json
@@ -125,7 +127,17 @@ app.use('/api/session', Session)
 //rutas
 app.use('/', viewsRouter)
 
+app.get('/loggertest', (req,res)=>{
+    req.logger.debug('Error de debug')
+    req.logger.http('Error de http')
+    req.logger.info('Error de info')
+    req.logger.warning('Error de warning')
+    req.logger.error('Error de error')
+    req.logger.fatal('Error de fatal')
 
+    res.send('ok')
+   
+})
 
 
 //rutas mongoose
