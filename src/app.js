@@ -30,9 +30,10 @@ import mongoose from 'mongoose'
 import prodMongoose from './router/prodmongoose.router.js'
 import chatMongoose from './router/chatmongoose.router.js'
 import cartMongoose from './router/cartmongoose.js'
+import pruebaErrores from './controllers/errors.js'
 
 //import { addLogger } from './utils/logger.js';
-import logger from './utils/logger.js';
+import logger from './logging/logger.js';
 
 const app = express()
 
@@ -127,17 +128,7 @@ app.use('/api/session', Session)
 //rutas
 app.use('/', viewsRouter)
 
-app.get('/loggertest', (req,res)=>{
-    req.logger.debug('Error de debug')
-    req.logger.http('Error de http')
-    req.logger.info('Error de info')
-    req.logger.warning('Error de warning')
-    req.logger.error('Error de error')
-    req.logger.fatal('Error de fatal')
-
-    res.send('ok')
-   
-})
+app.get('/loggertest', pruebaErrores)
 
 
 //rutas mongoose

@@ -5,7 +5,7 @@ import ProductsModel from '../dao/models/prodmongoose.models.js'
 import CartModel from '../dao/models/cartmongoose.model.js'
 import {ProductService, CartService} from '../services/index.js'
 import ProductInsertDTO from '../DTO/products.dto.js'
-import logger from '../utils/logger.js'
+import logger from '../logging/logger.js'
 
 
 export const getProducts =async(req=request,res=response)=>{
@@ -16,9 +16,7 @@ export const getProducts =async(req=request,res=response)=>{
            logger.debug('user', user);
            logger.debug('cid', cid);
 
-        //    console.log('user', user)
-        //    console.log('cid', cid)
-    
+         
             const limit = parseInt(req.query?.limit ?? 10)
             const page = parseInt(req.query?.page ?? 1)
             const query = req.query?.query ?? ''
@@ -27,7 +25,7 @@ export const getProducts =async(req=request,res=response)=>{
             const precio = req.query?.precio ?? ''
     
             const search = {}
-            // const filtro = {}
+         
             if (query) search.title = {"$regex": query, "$options": "i"}
             
             if (categoria && categoria !== 'todos') {
@@ -74,14 +72,11 @@ export const getProducts =async(req=request,res=response)=>{
 
             result.productsmongoose = result.docs
             
-          //  console.log('result', result)
-          //  console.log('result prod', result.productsmongoose)
+         
             result.query = query
            delete result.docs
          
-             //   console.log('result 2 ', result)
-            //console.log('cid', cid)
-
+       
             if (result.productsmongoose ) {
                 // Añadir la propiedad 'cid' a cada producto en 'productsmongoose'
                 result.productsmongoose.forEach(product => {
@@ -117,15 +112,19 @@ export const getProducts =async(req=request,res=response)=>{
         
         const user = req.session.user
         const {id} = req.params
-        console.log('id controller', id)
+        logger.debug(`ID: ${id}`);
+
+       
         //const productmongoose = await ProductsModel.findOne({code}).lean().exec()
         const productmongoose = await ProductService.getProductsById(id)
 
         if (!productmongoose) {
-            // Si el producto no se encuentra, puedes manejarlo de alguna manera
+            logger.warn('Producto no encontrado')
             return res.status(404).send('Producto no encontrado');
         }
-      console.log(productmongoose)
+      
+        logger.info(`Producto encontrado: ${productmongoose.title}`)
+        // console.log(productmongoose)
 
         res.render('one',{
             productmongoose,
@@ -135,7 +134,8 @@ export const getProducts =async(req=request,res=response)=>{
         })
 
     }catch (error){
-        console.error('Error al buscar el producto:', error);
+        logger.error(`Error al buscar el producto: ${error.message}`);
+        //console.error('Error al buscar el producto:', error);
     res.status(500).send('Error interno del servidor');
         
 
@@ -147,18 +147,21 @@ export const getProducts =async(req=request,res=response)=>{
         const user = req.session.user
      //   console.log(user)
         const productNew = req.body
-        console.log(productNew)
+        logger.info(`Nuevo producto: ${productNew}`);
+        //console.log(productNew)
         const productmongooseNew = new ProductInsertDTO(productNew)
        
         
        const result = await ProductService.addProduct(productmongooseNew)
        // const result = await ProductsModel.create(productmongooseNew)
 
-      console.log('resultado de crear prod', result)
+       logger.info(`resultado de crear un nuevo producto: ${result}`);
+      //console.log('resultado de crear prod', result)
         res.redirect('/productsmongoose')
 
     }catch (error){
-        console.log(error),
+        logger.error(`Error al agregar el producto al carrito: ${error.message}`);
+        //console.log(error),
         res.status(500).send('Error interno del servidor al crear productos con mongoose: ' + error.message);
     }
     
@@ -167,7 +170,8 @@ export const getProducts =async(req=request,res=response)=>{
  export const deleteProduct =async(req=request,res=response)=>{
     try{
         const {id} = req.params
-        console.log('id para elimnar', id)
+        //console.log('id para elimnar', id)
+        logger.debug(`ID para eliminar: ${id}`);
 
         if(req.session?.user && req.session.user.rol === 'admin') {
             // Realiza la eliminación del producto aquí)
@@ -181,8 +185,9 @@ export const getProducts =async(req=request,res=response)=>{
 
 
     }catch (error){
+        logger.error(`Error al eliminar el producto del carrito: ${error.message}`);
         res.status(500).json(error)
-console.log(error)
+//console.log(error)
     }
  }
 
@@ -192,11 +197,11 @@ console.log(error)
 
         const cid = req.params.cid   
         const pid = req.params.pid
-        
+
+        logger.debug(`CID: ${cid}, PID: ${pid}`);
+
         let carrito = await CartService.getCartsById(cid) 
-    //  console.log('carrito', carrito)
-    // console.log('param', cid, pid)
-    //  console.log('carrito con prod', carrito.productosagregados)
+  
         
     if(req.session?.user && req.session.user.rol !== 'admin'){
         const productoInCart = carrito.productosagregados.find(p => p.product && p.product._id.toString() === pid);
@@ -215,6 +220,7 @@ console.log(error)
          await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
         //console.log('carrito desp de actualizar',carrito)
     }else{
+        logger.warn(`Usuario no autorizado`);
         res.status(403).json({ error: 'No tienes permisos para agregar un producto al carrito este producto' });
     }
 
@@ -222,7 +228,7 @@ console.log(error)
 
 
     }catch (error){
-        console.error('error al agregar un prod', error)
+        logger.error(`Error al agregar producto al carrito: ${error.message}`);
         res.status(500).json({error: 'error 3', details: error.message})
        }  
 }
@@ -232,7 +238,8 @@ export const updateProductBase =async(req=request,res=response)=>{
     try{
         const user = req.session.user
         const {id} = req.params
-        console.log('id para elimnar', id)
+        logger.debug(`ID para actualizar: ${id}`);
+        
 
         const updatedProductData = req.body; 
 
@@ -243,20 +250,21 @@ export const updateProductBase =async(req=request,res=response)=>{
           
             res.redirect('/productsmongoose')
         } else {
+            logger.warn(`Error al actualizar el producto: ${error.message}`);
             res.status(404).json({ error: 'Producto no encontrado o no se realizaron modificaciones' });
         }
 
       ;
     }catch (error){
-        console.error('Error in update product route:', error);
+        logger.error(`Error al actualizar el producto: ${error.message}`);
+        //console.error('Error in update product route:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
     }
  }
 
  export const updateProductForm = async (req=request,res=response)=>{
     const {id} = req.params
-    console.log('id para elimnar', id)
-
+   
     const productmongoose = await ProductService.getProductsById(id)
 
         if (!productmongoose) {
@@ -281,176 +289,3 @@ export const createProduct = (req=request,res=response)=>{
  }
 
 
-// import {request, response} from 'express'
-// import ProductsModel from '../dao/models/prodmongoose.models.js'
-// import CartModel from '../dao/models/cartmongoose.model.js'
-
-//  export const getProducts =async(req=request,res=response)=>{
-//     try{
-//         //     const carrito = await CartModel.findOne({}) 
-//         //     console.log(carrito)
-//             // let cid
-           
-//             // if(carrito){
-//             //     cid = carrito.id
-//             // }else{
-//             //     carrito = await CartModel.create({ productosagregados: [] })
-//             //     cid = carrito.id
-//             // }
-    
-//               // const usuario = await UserRegisterModel.find()
-//            const user = req.session.user
-//            const cid = req.session.user.cart;
-    
-//             const limit = parseInt(req.query?.limit ?? 10)
-//             const page = parseInt(req.query?.page ?? 1)
-//             const query = req.query?.query ?? ''
-//             const categoria = req.query?.categoria ?? ''
-//             const stock = req.query?.stock ?? ''
-//             const precio = req.query?.precio ?? ''
-    
-//             const search = {}
-//             // const filtro = {}
-//             if (query) search.title = {"$regex": query, "$options": "i"}
-            
-//             if (categoria && categoria !== 'todos') {
-//                 search.category = { "$regex": categoria, "$options": "i" };
-//             }
-    
-//             if (stock && stock !== 'todos') {
-//                 search.stock = {'$gt': 1}
-//             }
-    
-//             let sortDirection = 1
-//             if (precio === 'menor') {
-//                 sortDirection = 1
-//             } if (precio === 'mayor'){
-//                 sortDirection = -1}
-//                 else{
-//                 sortDirection = 1
-//             }
-    
-    
-//             const searchQuery = { ...search };
-    
-//             const result = await ProductsModel.paginate(searchQuery,{
-//                 page,
-//                 limit,
-//                 lean:true,
-//                 sort: {price: sortDirection}
-//             })
-            
-//            // console.log(result.docs)
-//             //console.log(productsmongoose)
-    
-//             result.productsmongoose = result.docs
-//             result.query = query
-//             delete result.docs
-            
-//             result.productsmongoose.forEach(product => {
-//                 product.cid = cid;
-//             });
-            
-//            //console.log(result)
-//            //console.log(result)
-            
-//             res.render('list', {
-//                 user,
-//                 result,
-               
-//                 cid,
-//                 style: 'index.css',
-//                 title: 'Fitness Ropa deportiva',
-//             })
-    
-//         }catch(error){
-//             console.error('error', error)
-//             console.error(error)
-//         }  
-//  }
- 
-
-//  export const getProductsById =async(req=request,res=response)=>{
-//     try{
-//         const {code} = req.params
-//         const productmongoose = await ProductsModel.findOne({code}).lean().exec()
-
-//         res.render('one',{
-//             productmongoose,
-//             style: 'index.css',
-//             title: 'Fitness Ropa deportiva',
-//         })
-//     }catch (error){
-//         res.send('error al buscar el producto')
-
-//     }
-//  }
-
-//  export const addProduct =async(req=request,res=response)=>{
-//     try{
-//         const productmongooseNew = req.body
-//         const result = await ProductsModel.create(productmongooseNew)
-
-//         // console.log(result)
-//         res.redirect('/productsmongoose')
-
-//     }catch (error){
-//         console.log(error),
-//         res.send('error al crear productos con mongoose')
-//     }
-//  }
-
-//  export const deleteProduct =async(req=request,res=response)=>{
-//     try{
-//         const {id} = req.params
-//         await ProductsModel.deleteOne({ _id: id})
-
-//         return res.json({status: 'success'})
-//     }catch (error){
-//         res.status(500).json(error)
-// console.log(error)
-//     }
-//  }
-
-//  export const addProductInCart =async(req=request,res=response)=>{
-       
-//     try{
-
-//         const cid = req.params.cid   
-//         const pid = req.params.pid
-        
-//         const carrito = await CartModel.findById(cid) 
-
-//          console.log('param', cid, pid)
-
-               
-//         const productoInCart = carrito.productosagregados.find(p => p.product._id.toString() === pid);
-//         //console.log(productoInCart)
-//         if (productoInCart){
-//             productoInCart.quantity++;
-//         }
-        
-//     else{
-//         const newProduct = { product: pid, quantity: 1}
-//         carrito.productosagregados.push(newProduct);
-//     }
-      
-
-//        await carrito.save();
-
-//         //return res.json({ msg: 'Carrito actualizado!', carrito });
-
-//     }catch (error){
-//         console.error('error al agregar un prod', error)
-//         res.status(500).json({error: 'error 3', details: error.message})
-//        }  
-// }
- 
-
-// export const createProduct = (req=request,res=response)=>{
-//     res.render('create', {
-//         style: 'index.css',
-//         title: 'Fitness Ropa deportiva',
-//     }
-//     )
-//  }

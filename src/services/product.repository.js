@@ -6,7 +6,7 @@ export default class ProductRepository {
 
     getProducts = async () => { return this.dao.getProducts() }
     getProductsById = async id => { 
-        console.log('ProductService - getProductsById - id:', id);
+        // console.log('ProductService - getProductsById - id:', id);
         return this.dao.getProductsById(id) }
 
     getProductsPaginate = async (searchQuery, options) => {

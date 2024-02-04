@@ -7,7 +7,7 @@ import {Router} from 'express'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
 import { deleteProductInCart, getCartById, deleteAllProductsInCart, createCart , getCartToBuy} from '../controllers/carts.js'
 import { generateTicket } from '../controllers/ticket.js'
-
+import { isUser} from "../controllers/sessions.js"
 
 //inicializamos variables
 // const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
@@ -29,7 +29,7 @@ const router = Router()
 //router.get('/', seeCarts)
 
 //para ver un carrito especifico
-router.get('/:cid', getCartById)
+router.get('/:cid', isUser, getCartById)
 
 
 //para crear un carrito

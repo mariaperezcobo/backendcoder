@@ -1,21 +1,28 @@
 
 import UserRegisterModel from '../dao/models/userregister.model.js'
 import passport from 'passport'
-
+import logger from '../logging/logger.js'
 
 export const loginUser =async(req,res) =>{
+  try{
 
+  }catch{
+
+  }
     passport.authenticate('login', {failureRedirect: '/'}, (err,user)=>{
 
         if(err){
-            console.error('Passport error:', err);
+          logger.error('Passport error:', err);
+            //console.error('Passport error:', err);
             return res.status(500).send('An error occurred')
         }
         if(!user){
-            console.log('User not found');
+          logger.warn('User not found');
+           // console.log('User not found');
             return res.status(400).send('invalid credentials')
         }
         //console.log('User authenticated successfully');
+        logger.info(`User authenticated successfully: ${user.username}`);
         req.session.user = user
         return res.redirect('/productsmongoose')
     })(req, res);
@@ -39,10 +46,12 @@ export const registerUser =async(req,res) =>{
     export const logOutSession = (req, res) => {
         req.logout(function(err) {
             if (err) {
+              logger.error('logout error:', err);
                 return res.send('logout error');
             }
             req.session.destroy(function(err) {
                 if (err) {
+                  logger.error('logout error:', err);
                     return res.send('logout error');
                 }
                 return res.redirect('/');
@@ -79,6 +88,9 @@ export const registerUser =async(req,res) =>{
   }
 
  export function isUser(req, res, next) {
+
+  logger.info(`Estado de la sesión en isUser middleware: ${req.session}`);
+  console.log('Estado de la sesión en isUser middleware:', req.session);
     // Verificar si el usuario está autenticado y tiene el rol de admin
     if (req.session?.user && req.session.user.rol !== 'admin') {
       return next();

@@ -1,6 +1,7 @@
 import {request, response} from 'express'
 import ProductManager from '../dao/managers/productManager.js'
 import passport from 'passport'
+import logger from '../logging/logger.js'
 
 export const profileUser =async(req=request,res=response)=>{
     try{
@@ -14,7 +15,8 @@ export const profileUser =async(req=request,res=response)=>{
             } 
         )
     }catch (error){
-        console.error('error', error)
+        logger.error(`User error: ${error.message}`);
+       // console.error('error', error)
     }
  }
 
@@ -29,7 +31,8 @@ export const profileUser =async(req=request,res=response)=>{
          title: 'Fitness Ropa deportiva',
         })
     }catch (error){
-        console.error('error', error)
+        logger.error(`EUser error from initUser: ${error.message}`);
+       // console.error('error', error)
     }
  }
  export const loginView =async(req=request,res=response)=>{
@@ -39,7 +42,8 @@ export const profileUser =async(req=request,res=response)=>{
             title: 'Fitness Ropa deportiva',
         })
     }catch (error){
-        console.error('error', error)
+        logger.error(`Error t: ${error.message}`);
+        //console.error('error', error)
     }
  }
 

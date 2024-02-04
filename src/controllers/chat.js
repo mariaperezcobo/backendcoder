@@ -1,6 +1,7 @@
 import {request, response} from 'express'
 import ChatModel from '../dao/models/chatmongoose.models.js'
 import { ChatService } from '../services/index.js'
+import logger from '../logging/logger.js'
 
 export const chatView =async(req=request,res=response)=>{
     try{
@@ -18,7 +19,8 @@ export const chatView =async(req=request,res=response)=>{
     })
     
        }catch (error){
-        console.error('error', error)
+        logger.error(`Error: ${error.message}`);
+        //console.error('error', error)
        }
     
     }
@@ -34,7 +36,8 @@ export const chatView =async(req=request,res=response)=>{
             res.redirect('/chatmongoose')
         
            }catch (error){
-            console.log(error)
+            // console.log(error)
+            logger.error(`Error al enviar el mensaje: ${error.message}`);
             res.send('Error al enviar el mensaje')
            }
         
