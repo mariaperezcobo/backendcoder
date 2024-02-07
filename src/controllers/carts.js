@@ -60,7 +60,7 @@ export const deleteProductInCart =async(req=request,res=response)=>{
         //console.log(cid)
 
         carrito.productosagregados = carrito.productosagregados.filter(p => p._id.toString() !== pid);
-        console.log('carrito actualizado antes de save', carrito) 
+       // console.log('carrito actualizado antes de save', carrito) 
 
         logger.info(`Eliminación exitosa - CID: ${cid}, PID: ${pid}`);
         logger.debug(`Carrito actualizado después de la eliminación: ${JSON.stringify(carrito, null,2)}`);
