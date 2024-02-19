@@ -10,6 +10,7 @@ export default class ProductInsertDTO {
         this.status= product?.status ?? true
         this.stock= product?.stock ?? 10
         this.id = product?.id || product?._id || null;
+        this.owner= product?.owner ?? "admin"
          }
 
 }

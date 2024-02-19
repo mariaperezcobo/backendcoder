@@ -145,8 +145,13 @@ export const getProducts =async(req=request,res=response)=>{
  export const addProduct =async(req=request,res=response)=>{
     try{
         const user = req.session.user
-     //   console.log(user)
+        const userId = req.session.user._id;
+
+     console.log(user)
+     console.log(userId)
+
         const productNew = req.body
+        productNew.owner = userId;
         logger.info(`Nuevo producto: ${productNew}`);
         //console.log(productNew)
         const productmongooseNew = new ProductInsertDTO(productNew)
@@ -173,24 +178,52 @@ export const getProducts =async(req=request,res=response)=>{
         //console.log('id para elimnar', id)
         logger.debug(`ID para eliminar: ${id}`);
 
-        if(req.session?.user && req.session.user.rol === 'admin') {
-            // Realiza la eliminación del producto aquí)
-       // await ProductService.deleteProduct({id: id })
-        await ProductsModel.deleteOne({_id: id })
+    //     if(req.session?.user && req.session.user.rol === 'admin') {
+    //         // Realiza la eliminación del producto aquí)
+    //    // await ProductService.deleteProduct({id: id })
+    //     await ProductsModel.deleteOne({_id: id })
+    
+    //return res.json({status: 'success'})
 
-        return res.json({status: 'success'})
-        }else{
-            res.status(403).json({ error: 'No tienes permisos para eliminar este producto' });
+// Verificar si el usuario tiene permisos de administrador o es propietario del producto
+if (req.session?.user) {
+    const { user } = req.session;
+
+    if (user.rol === 'admin') {
+        // Si es un administrador, eliminar el producto directamente
+        await ProductsModel.deleteOne({ _id: id });
+        return res.json({ status: 'success' });
+    } else if (user.rol === 'premium') {
+        // Si es un usuario premium, verificar si es el propietario del producto
+        const product = await ProductsModel.findById(id);
+        if (!product) {
+            return res.status(404).json({ error: 'El producto no fue encontrado' });
         }
+        
+        // Verificar si el propietario del producto es el mismo que el usuario actual
+        if (product.owner === user._id) {
+            // Si es el propietario, eliminar el producto
+            await ProductsModel.deleteOne({ _id: id });
+            return res.json({ status: 'success' });
+        } else {
+            // Si no es el propietario, devolver un error de permisos
+            return res.status(403).json({ error: 'No tienes permisos para eliminar este producto' });
+        }
+    }
+}
 
+// Si el usuario no está autenticado, devolver un error de permisos
+res.status(403).json({ error: 'Debes iniciar sesión para eliminar productos' });
 
-    }catch (error){
+    
+}catch (error){
         logger.error(`Error al eliminar el producto del carrito: ${error.message}`);
         res.status(500).json(error)
 //console.log(error)
     }
  }
 
+    
  export const addProductInCart =async(req=request,res=response)=>{
        
     try{
