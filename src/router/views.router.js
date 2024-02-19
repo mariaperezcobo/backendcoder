@@ -1,7 +1,8 @@
 import { Router } from "express"
 import ProductManager from '../dao/managers/productManager.js'
 import passport from 'passport'
-import { profileUser, initUser, loginView, registerView, homeView , realtimeproductsView} from "../controllers/views.js"
+import { profileUser, initUser, loginView, registerView, homeView , realtimeproductsView, updateUserView, updateUser} from "../controllers/views.js"
+
 
 
 const router = Router()
@@ -36,8 +37,8 @@ router.get('/login', justPublicWhitoutSession, loginView )
 router.get('/registeruser', justPublicWhitoutSession , registerView)
 
 router.get('/profile', auth, profileUser)
-
-
+router.get('/updateuser', auth, updateUserView)
+router.put('/updateuser/:id', auth, updateUser)
 
 router.get('/error', (req,res)=> res.send('pagina de error'))
 

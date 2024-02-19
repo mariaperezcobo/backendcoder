@@ -109,3 +109,51 @@ export const registerUser =async(req,res) =>{
   
   }
 
+
+
+  export const updateUser =async(req=request,res=response)=>{
+    try{
+        const user = req.session.user
+        const id = req.session.user._id
+        logger.debug(`ID para actualizar: ${id}`);
+        
+
+        const updatedUser = req.body; 
+
+        //const updatedProduct = await ProductService.updateUser(id, updatedUser);
+        const updatedProduct = await UserRegisterModel.findByIdAndUpdate(id, updatedUser, { new: true });
+
+        if (updatedUser) {
+          
+            res.redirect('/productsmongoose')
+        } else {
+            logger.warn(`Error al actualizar el user: ${error.message}`);
+            res.status(404).json({ error: 'user no encontrado o no se realizaron modificaciones' });
+        }
+
+      ;
+    }catch (error){
+        logger.error(`Error al actualizar el user: ${error.message}`);
+    
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+ }
+
+ export const updateUserView =async(req=request,res=response)=>{
+  try{
+      const user = req.session.user
+
+      res.render('updateuser',
+          {
+              user,
+              style: 'index.css',
+              title: 'Fitness Ropa deportiva',
+          } 
+      )
+  }catch (error){
+      logger.error(`User error: ${error.message}`);
+     // console.error('error', error)
+  }
+}
+
+

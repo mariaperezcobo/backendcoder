@@ -1,0 +1,62 @@
+{{!-- para actualizar users --}}
+
+    <div class="contenedorTituloPrincipal">
+ <h2>Actualizar Usuario</h2>
+
+  </div>
+<form id="updateUserForm" action="/updateuser/{{user._id}}" method="post">
+<br>
+Usuario: <br>
+   First name:  {{user.first_name}}<br>
+    Last name:  {{user.last_name}}<br>
+    id: {{user._id}}
+    Age:  {{user.age}}<br>
+    Email:  {{user.email}}<br><br>
+    password: {{user.password}}<br><br>
+
+    Rol: <input name="rol" value="{{user.rol}}" placeholder="{{user.rol}}"><br>
+    <br>
+    
+<br>
+  
+    <input type="submit" value="Actualizar">
+</form>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/static/js/index.js">
+</script>
+
+<script>
+    document.getElementById("updateUserForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevenir el envío del formulario por defecto
+        
+          const userData = {
+        rol: document.querySelector('input[name="rol"]').value
+        // Agrega otros campos de usuario aquí si es necesario
+    };
+
+
+
+        const userId = "{{user._id}}"; // Puedes obtener el ID del usuario de alguna manera
+    console.log('userid', userId)
+        fetch(`/updateuser/${userId}`, {
+           
+             method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userData)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Usuario actualizado correctamente');
+                window.location.href = '/'; // Redirigir a alguna página después de la actualización
+            } else {
+                alert('Hubo un problema al actualizar el usuario 1');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Hubo un problema al actualizar el usuario');
+        });
+    });
+</script>

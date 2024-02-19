@@ -539,3 +539,86 @@
 {"level":"debug","message":"ID para eliminar: 65d3b37d996aa0acb42f48ca"}
 {"__v":0,"_id":"65aed97a441047957cc00b47","age":null,"cart":"65aed97a441047957cc00b49","email":"juana@google.com","first_name":"juana","last_name":"perewz","level":"debug","message":"user","password":"$2b$10$jT2p6io4k7GWVi2dTisl8u0uzguQjduSFltryqdpxeU6nTFL.O0s.","rol":"admin"}
 {"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d3b08a52815486cb6d79a4","age":33,"cart":"65d3b08a52815486cb6d79a6","email":"jose@perez","first_name":"jose","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$vtv6DlMy9GQxiEcHKjAJK.cVh.I4E0gT8h7bj/zeZ/n9Yf6YoP9EW","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 655518ea9dd9bba2858e6f70"}
+{"level":"info","message":"Producto encontrado: Calzas Madrid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65aed97a441047957cc00b47","age":null,"cart":"65aed97a441047957cc00b49","email":"juana@google.com","first_name":"juana","last_name":"perewz","level":"debug","message":"user","password":"$2b$10$jT2p6io4k7GWVi2dTisl8u0uzguQjduSFltryqdpxeU6nTFL.O0s.","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"error","message":"Error al actualizar el user: UserRegisterModel is not defined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65b01d0e99d7b9e103c65f38","age":30,"cart":"65b01d0f99d7b9e103c65f3a","email":"manu@google","first_name":"manu","last_name":"perez","level":"debug","message":"user","password":"$2b$10$jril8HozaJNz3Pzeu8QNhO961CEpFPrO4nouvplhGlTHFAbAXTdgm","rol":"admin"}
+{"level":"debug","message":"cid"}
