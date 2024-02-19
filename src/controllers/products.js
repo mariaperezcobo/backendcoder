@@ -175,6 +175,8 @@ export const getProducts =async(req=request,res=response)=>{
  export const deleteProduct =async(req=request,res=response)=>{
     try{
         const {id} = req.params
+        const { user } = req.session;
+        console.log(user)
         //console.log('id para elimnar', id)
         logger.debug(`ID para eliminar: ${id}`);
 
@@ -189,6 +191,7 @@ export const getProducts =async(req=request,res=response)=>{
 if (req.session?.user) {
     const { user } = req.session;
 
+    console.log('usuario', user)
     if (user.rol === 'admin') {
         // Si es un administrador, eliminar el producto directamente
         await ProductsModel.deleteOne({ _id: id });
@@ -196,6 +199,7 @@ if (req.session?.user) {
     } else if (user.rol === 'premium') {
         // Si es un usuario premium, verificar si es el propietario del producto
         const product = await ProductsModel.findById(id);
+        console.log('producto a eliminar' , product)
         if (!product) {
             return res.status(404).json({ error: 'El producto no fue encontrado' });
         }
@@ -207,14 +211,14 @@ if (req.session?.user) {
             return res.json({ status: 'success' });
         } else {
             // Si no es el propietario, devolver un error de permisos
-            return res.status(403).json({ error: 'No tienes permisos para eliminar este producto' });
+            return res.status(403).json({ error: 'no tienes permisos para eliminar' });
         }
     }
 }
 
 // Si el usuario no está autenticado, devolver un error de permisos
 res.status(403).json({ error: 'Debes iniciar sesión para eliminar productos' });
-
+    
     
 }catch (error){
         logger.error(`Error al eliminar el producto del carrito: ${error.message}`);

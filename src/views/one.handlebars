@@ -47,7 +47,7 @@
     document.querySelector('#delete').onclick = e =>{
         const id = "{{productmongoose.id}}"
       
-            if ("{{user.rol}}" === 'admin') {
+            if ("{{user.rol}}" === 'admin'|| "{{user.rol}}" === 'premium') {
             fetch(`/productsmongoose/${id}`, { method: 'delete' })
                 .then(response => {
                     if (response.ok) {
