@@ -101,13 +101,14 @@ export const profileUser =async(req=request,res=response)=>{
         console.log('user desde updateUser', userId)
 
         const updatedUser = req.body; 
+
         console.log('req . body desde updateUser', updatedUser)
         //const updatedProduct = await ProductService.updateUser(id, updatedUser);
         const updatedUserResult = await UserRegisterModel.findByIdAndUpdate(userId, updatedUser, { new: true });
 
         console.log('updatedUserResult desde updateUser', updatedUserResult)
         if (updatedUserResult) {
-          
+          req.session.user = updatedUserResult;
             res.status(200).json({ message: 'Usuario actualizado correctamente' });
         } else {
             logger.warn(`Error al actualizar el user: ${error.message}`);

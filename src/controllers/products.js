@@ -146,12 +146,19 @@ export const getProducts =async(req=request,res=response)=>{
     try{
         const user = req.session.user
         const userId = req.session.user._id;
+        const userRole = req.session.user.rol;
 
      console.log(user)
      console.log(userId)
 
         const productNew = req.body
-        productNew.owner = userId;
+
+        if (userRole === 'premium') {
+            productNew.owner = userId;
+        } else {
+            productNew.owner = 'admin';
+        }
+       
         logger.info(`Nuevo producto: ${productNew}`);
         //console.log(productNew)
         const productmongooseNew = new ProductInsertDTO(productNew)
@@ -241,7 +248,21 @@ res.status(403).json({ error: 'Debes iniciar sesión para eliminar productos' })
   
         
     if(req.session?.user && req.session.user.rol !== 'admin'){
+
+        const producto = await ProductService.getProductsById(pid)
+        if (!producto) {
+            return res.status(404).json({ error: 'Producto no encontrado' });
+        }
+
+        if (producto.owner.toString() === req.session.user._id.toString()) {
+            return res.status(403).json({ error: 'No puedes agregar tu propio producto al carrito' });
+        }
+
+
         const productoInCart = carrito.productosagregados.find(p => p.product && p.product._id.toString() === pid);
+
+
+
         //    console.log('productoincart',productoInCart)
             if (productoInCart){
                 productoInCart.quantity++;
