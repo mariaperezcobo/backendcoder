@@ -162,7 +162,7 @@ app.post("/mail", async (req, res) => {
   const email = req.body.email;
   const token = generateToken({ email }); // Generar el token
 
-  const expiration = Date.now() + 3600000;
+  const expiration = Date.now() + 120000; //3600000;
   req.session.passwordReset = { token, expiration, email };
 
   const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
@@ -173,7 +173,7 @@ app.post("/mail", async (req, res) => {
     subject: "Recuperacion de contraseña",
     html: `
         <div>
-            <h1> 'Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:8080/updateuserpassword' </h1>
+            <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
             <a href="${resetLink}">${resetLink}</a> 
             
         </div>
