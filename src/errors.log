@@ -721,3 +721,84 @@
 {"level":"info","message":"resultado de crear un nuevo producto: {\n  title: '555',\n  price: 555,\n  thumbnail: '',\n  description: '',\n  category: '',\n  code: '555',\n  status: '',\n  stock: null,\n  owner: 'admin',\n  _id: new ObjectId('65d526d64b59b5d061d655a9'),\n  __v: 0\n}"}
 {"__v":0,"_id":"65aed97a441047957cc00b47","age":null,"cart":"65aed97a441047957cc00b49","email":"juana@google.com","first_name":"juana","last_name":"perewz","level":"debug","message":"user","password":"$2b$10$jT2p6io4k7GWVi2dTisl8u0uzguQjduSFltryqdpxeU6nTFL.O0s.","rol":"admin"}
 {"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"6585814ba184e84fbe37a517","age":null,"cart":"6585814ba184e84fbe37a515","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$C4K4wQGrB0W7/K3gyoJj3.GrwjvI0WIfH.5iAWb/j86lwEnF2yXLG","rol":"usuario"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"6585814ba184e84fbe37a517","age":null,"cart":"6585814ba184e84fbe37a515","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$C4K4wQGrB0W7/K3gyoJj3.GrwjvI0WIfH.5iAWb/j86lwEnF2yXLG","rol":"usuario"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"6585814ba184e84fbe37a517","age":null,"cart":"6585814ba184e84fbe37a515","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$C4K4wQGrB0W7/K3gyoJj3.GrwjvI0WIfH.5iAWb/j86lwEnF2yXLG","rol":"usuario"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"6585814ba184e84fbe37a517","age":null,"cart":"6585814ba184e84fbe37a515","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$C4K4wQGrB0W7/K3gyoJj3.GrwjvI0WIfH.5iAWb/j86lwEnF2yXLG","rol":"usuario"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"6585814ba184e84fbe37a517","age":null,"cart":"6585814ba184e84fbe37a515","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$C4K4wQGrB0W7/K3gyoJj3.GrwjvI0WIfH.5iAWb/j86lwEnF2yXLG","rol":"usuario"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"6585814ba184e84fbe37a517","age":null,"cart":"6585814ba184e84fbe37a515","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$C4K4wQGrB0W7/K3gyoJj3.GrwjvI0WIfH.5iAWb/j86lwEnF2yXLG","rol":"usuario"}
+{"level":"debug","message":"cid"}
+{"level":"error","message":"Passport error:"}
+{"level":"error","message":"Passport error:"}
+{"level":"error","message":"Passport error:"}
+{"level":"error","message":"Passport error:"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d653c587154ac107c8e1c6","age":33,"cart":"65d653c587154ac107c8e1c8","email":"mariaperezcobo@hotmail.com","first_name":"maria","last_name":"perez","level":"debug","message":"user","password":"$2b$10$JLoLp2dHGuRbqV7Ht.55d..wdB1TyZXLRZVs6zCfiOUOYKG2SCm6K","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"error","message":"Passport error:"}
+{"level":"error","message":"Passport error:"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d65703a623c5157651a84b","age":null,"cart":"65d65703a623c5157651a84d","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$lnAY6fcIGfFC/r9qn5P2pONsHTt/nNta4ISlHYaClv4NW6I/7ETJW","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d657a5e38bc204a81198ea","age":33,"cart":"65d657a5e38bc204a81198ec","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$diMjEhA208QZEt.1dcYtxu.KpqkQb6E6oIq9n/zfmOMQihEKIbRBu","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"error","message":"Passport error:"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d712e137573789f77240a1","age":null,"cart":"65d712e137573789f77240a3","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$yzgRS0oT2CQvH10hojWSCunkHY1UyIkvD2h7/KxcfQZJC9h1STqz6","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d713ba33d38926108a697b","age":null,"cart":"65d713ba33d38926108a697d","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$/N6zivSrSKXcMzJZ7pMzxOViy0DXxMh4N/LragbVJIAQudEfqcY0C","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d714da259032d97085447b","age":null,"cart":"65d714da259032d97085447d","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$jhlSDfNUE6QZhIdoWUjok.HQWpixxx6O9QxjK9Oc.HUx2EZS3n9hS","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7c99c537c9e5d88f68414","age":null,"cart":"65d7c99c537c9e5d88f68416","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$LWtuwtHaFhAbxgVntou/x.rz.dtswlb.LKx3EnW0FZ48TZ2avV26q","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7cb95b91f88dfbc64eb53","age":null,"cart":"65d7cb95b91f88dfbc64eb55","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$xBThKDx/GlBkiGfsMySlqesBkYJERzuRtDvOM9QqUEVyy5z/0CpW2","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7cc71f198b4ac8a0629a2","age":null,"cart":"65d7cc71f198b4ac8a0629a4","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$KeNtWZA23n.MqOXUpXCXJeCtoyZf8hm5BC26l2AxSVGyVNp2zqCrG","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"error","message":"Error al actualizar el password: UserRegisterModel.getUsersByEmail is not a function"}
+{"level":"error","message":"Error al actualizar el password: UserRegisterModel.getUsersByEmail is not a function"}
+{"level":"error","message":"Error al actualizar el password: this.dao.getUsersByEmail is not a function"}
+{"level":"error","message":"Error al actualizar el password: email is not defined"}
+{"level":"error","message":"Error al actualizar el password: email is not defined"}
+{"level":"error","message":"Error al actualizar el password: email is not defined"}
+{"level":"error","message":"Error al actualizar el password: UserService.findByIdAndUpdate is not a function"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$W1VoKfsg.yIGts/nI2Ril.HRt9aVuR1D73H.ynwR92gYnaWlyE4Am","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"error","message":"User error: generateToken is not defined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$HGE5zp2ApCbf/ijCRBY5aeNq0T21LHV7mLVhNQUTk7nJ03GakrC.W","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$yICgskYlXroqlvDr8Pl9r.Qrom.zAUqF53yigFSiAcsX8l3gqem5K","rol":""}
+{"level":"debug","message":"cid"}

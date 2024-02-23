@@ -3,7 +3,7 @@ import UserRegisterModel from "../models/userregister.model.js";
 export default class Users {
 
     getUsers = async (username, id )=> { return await UserRegisterModel.findOne(({email: username}), id).lean().exec() }
-    //getUsersByEmail = async (username, id )=> { return await UserRegisterModel.findOne(({email}), id).lean().exec() }
+    getUsersByEmail = async (email, id )=> { return await UserRegisterModel.findOne(({email}), id).lean().exec() }
     addUsers = async newUser => { 
         try {
             const result = await UserRegisterModel.create(newUser);
