@@ -1,0 +1,11 @@
+paths:
+  /productsmongoose:
+    get:
+      summary: Obtiene todos los productos
+      tags:
+        - Products
+  /productsmongoose/{id}:
+    get:
+      summary: Obtiene un producto por ID
+      tags:
+        - Products

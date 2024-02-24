@@ -18,6 +18,8 @@ import session from "express-session";
 import { generateToken } from "./utils.js";
 import MongoStore from "connect-mongo";
 import nodemailer from "nodemailer";
+import swaggerJSDoc from "swagger-jsdoc";
+import SwaggerUiExpress from "swagger-ui-express";
 
 //import UserModel from './models/users.model.js'
 import mongoose from "mongoose";
@@ -83,6 +85,22 @@ app.use(passport.session());
 //     .catch(e=>{
 //         console.error('error conectando a la base de datos')
 //     })
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.1",
+    info: {
+      title: "Documentación",
+      description: "Proyecto de venta de ropa deportiva",
+    },
+  },
+  apis: [`${__dirname}/./docs/**/*.yaml`],
+};
+
+const specs = swaggerJSDoc(swaggerOptions);
+app.use("/apidocs", SwaggerUiExpress.serve, SwaggerUiExpress.setup(specs));
+
+// import sef from '../src/docs'
 
 const messages = [];
 const PORT = process.env.PORT;

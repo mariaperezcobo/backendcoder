@@ -823,3 +823,27 @@
 {"level":"debug","message":"cid"}
 {"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$VFdi2Zek0Ovs/fvHt..ESeUYqBEpdkXRyuEcjTaKG5H6ZrzT7TRbq","rol":""}
 {"level":"debug","message":"cid"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
