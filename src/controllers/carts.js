@@ -218,7 +218,7 @@ export const getCartToBuy = async (req = request, res = response) => {
           });
 
           //otherProducts.push(product)
-          console.log("otherProducts", otherProducts);
+          // console.log("otherProducts", otherProducts);
           // Enviar un mensaje de alerta a la vista
           stockAlert =
             "No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito";
