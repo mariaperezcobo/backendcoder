@@ -18,6 +18,8 @@ import session from "express-session";
 import { generateToken } from "./utils.js";
 import MongoStore from "connect-mongo";
 import nodemailer from "nodemailer";
+import swaggerJSDoc from "swagger-jsdoc";
+import SwaggerUiExpress from "swagger-ui-express";
 
 //import UserModel from './models/users.model.js'
 import mongoose from "mongoose";
@@ -83,6 +85,22 @@ app.use(passport.session());
 //     .catch(e=>{
 //         console.error('error conectando a la base de datos')
 //     })
+
+const swaggerOptions = {
+  definition: {
+    openapi: "3.0.1",
+    info: {
+      title: "Documentación",
+      description: "Proyecto de venta de ropa deportiva",
+    },
+  },
+  apis: [`${__dirname}/./docs/**/*.yaml`],
+};
+
+const specs = swaggerJSDoc(swaggerOptions);
+app.use("/apidocs", SwaggerUiExpress.serve, SwaggerUiExpress.setup(specs));
+
+// import sef from '../src/docs'
 
 const messages = [];
 const PORT = process.env.PORT;
@@ -162,7 +180,7 @@ app.post("/mail", async (req, res) => {
   const email = req.body.email;
   const token = generateToken({ email }); // Generar el token
 
-  const expiration = Date.now() + 3600000;
+  const expiration = Date.now() + 120000; //3600000;
   req.session.passwordReset = { token, expiration, email };
 
   const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
@@ -173,7 +191,7 @@ app.post("/mail", async (req, res) => {
     subject: "Recuperacion de contraseña",
     html: `
         <div>
-            <h1> 'Haz clic en el siguiente enlace para restablecer tu contraseña: http://localhost:8080/updateuserpassword' </h1>
+            <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
             <a href="${resetLink}">${resetLink}</a> 
             
         </div>

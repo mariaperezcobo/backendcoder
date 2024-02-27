@@ -1,13 +1,13 @@
-import { Router } from 'express'
-import ChatModel from '../dao/models/chatmongoose.models.js'
-import { chatPost, chatView } from '../controllers/chat.js'
-import { isUser } from '../controllers/sessions.js'
+import { Router } from "express";
+import ChatModel from "../dao/models/chatmongoose.models.js";
+import { chatPost, chatView } from "../controllers/chat.js";
+import { isUser } from "../controllers/sessions.js";
 
-const router = Router()
+const router = Router();
 
-router.get('/', isUser, chatView)
+router.get("/", isUser, chatView);
 
-router.post('/', isUser, chatPost)
+router.post("/", isUser, chatPost);
 
 // router.get('/', async (req,res)=>{
 //     const contenidochat = await ChatModel.find().lean().exec()
@@ -24,7 +24,7 @@ router.post('/', isUser, chatPost)
 
 // router.post('/', async (req,res)=>{
 //     try{
-      
+
 //         const chatmongooseNew = req.body
 //         const resultadochat = await ChatModel.create(chatmongooseNew)
 //         console.log(resultadochat)
@@ -35,4 +35,4 @@ router.post('/', isUser, chatPost)
 //     }
 // })
 
-export default router
+export default router;
