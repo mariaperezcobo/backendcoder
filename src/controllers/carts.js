@@ -54,6 +54,51 @@ export const getCartById = async (req = request, res = response) => {
   }
 };
 
+//para ver documentacion swagger
+export const getCartByIdView = async (req = request, res = response) => {
+  try {
+    const { cid } = req.params;
+    const user = req.session.user;
+
+    logger.info(
+      `CID desde getCartById: ${cid}, User: ${
+        user ? user.first_name : "Not logged in"
+      }`
+    );
+
+    const carrito = await CartService.getCartsById(cid);
+    //console.log('carrito', carrito)
+
+    if (!carrito) {
+      logger.debug(`Carrito no encontrado`);
+      return res.status(404).json({ error: "cart not found" });
+    }
+
+    // Agregar la propiedad 'cid' a cada producto en 'productosagregados'
+    carrito.productosagregados = carrito.productosagregados.map((product) => {
+      return {
+        ...product,
+        cid: cid,
+      };
+    });
+    // carrito.productosagregados.forEach(product => {
+    //     product.cid = cid;
+    // });
+    logger.debug(
+      `Datos del carrito desde getCartById: ${JSON.stringify(carrito, null, 2)}`
+    );
+
+    // console.log ('carrito', carrito)
+    //console.log ('carrito.productosagregados', carrito.productosagregados)
+    // return res.json({carrito});
+    //res.status(400).json('el id del carrito no existe'),
+    return res.status(200).json(carrito);
+  } catch (error) {
+    logger.error(`Error al obtener el carrito: ${error.message}`);
+    // console.log('error')
+  }
+};
+
 export const deleteProductInCart = async (req = request, res = response) => {
   try {
     const cid = req.params.cid;
@@ -82,7 +127,7 @@ export const deleteProductInCart = async (req = request, res = response) => {
     });
     //await carrito.save()
 
-    return res.status(204).json({ message: "Eliminación exitosa" });
+    return res.status(200).json({ message: "Eliminación exitosa" });
   } catch (error) {
     logger.error(`Error al eliminar producto del carrito: ${error.message}`);
     return res.status(500).json({ error: "error", details: error.message });
@@ -248,7 +293,21 @@ export const createCart = async (req = request, res = response) => {
   try {
     const carritoNew = req.body;
     const resultcarrito = await CartService.addCart(carritoNew);
+    console.log(resultcarrito);
     res.redirect("/cartmongoose");
+  } catch (error) {
+    logger.error(`Error al el carrito: ${error.message}`);
+    // console.log(error),
+    res.send("error al crear el carrito");
+  }
+};
+
+//para documentacion con swagger
+export const createCartView = async (req = request, res = response) => {
+  try {
+    const carritoNew = req.body;
+    const resultcarrito = await CartService.addCart(carritoNew);
+    return res.status(200).json(resultcarrito);
   } catch (error) {
     logger.error(`Error al el carrito: ${error.message}`);
     // console.log(error),

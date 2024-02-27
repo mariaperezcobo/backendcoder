@@ -1,13 +1,21 @@
 //cart con mongoose (la parte de agregar el producto a un carrito esta en otrocart.router)
 
-import {Router} from 'express'
+import { Router } from "express";
 //import mongoose from 'mongoose'
 // import CartModel from '../dao/models/cartmongoose.model.js'
 // import ProductModel from '../dao/models/productcart.model.js'
 // import ProductsModel from '../dao/models/prodmongoose.models.js'
-import { deleteProductInCart, getCartById, deleteAllProductsInCart, createCart , getCartToBuy} from '../controllers/carts.js'
-import { generateTicket } from '../controllers/ticket.js'
-import { isUser} from "../controllers/sessions.js"
+import {
+  deleteProductInCart,
+  getCartById,
+  deleteAllProductsInCart,
+  createCart,
+  getCartToBuy,
+  createCartView,
+  getCartByIdView,
+} from "../controllers/carts.js";
+import { generateTicket } from "../controllers/ticket.js";
+import { isUser } from "../controllers/sessions.js";
 
 //inicializamos variables
 // const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
@@ -22,31 +30,36 @@ import { isUser} from "../controllers/sessions.js"
 //         console.error('error conectando a la base de datos')
 //     })
 
-const router = Router()
-
+const router = Router();
 
 //para ver los carritos
 //router.get('/', seeCarts)
 
 //para ver un carrito especifico
-router.get('/:cid', isUser, getCartById)
+router.get("/:cid", isUser, getCartById);
 
+//para ver por documentacion swagger
+router.get("/api/:cid", isUser, getCartByIdView);
 
 //para crear un carrito
-router.post('/', createCart)
+router.post("/", createCart);
 
+router.post("/api", createCartView);
 
 //para eliminar un producto del carrito
-router.delete('/:cid/product/:pid', deleteProductInCart )
+router.delete("/:cid/product/:pid", deleteProductInCart);
 
+router.delete("/api/:cid/product/:pid", deleteProductInCart);
 
- //para eliminar carrito
-router.delete('/:cid', deleteAllProductsInCart)
+//para eliminar carrito
+router.delete("/:cid", deleteAllProductsInCart);
 
-router.get('/:cid/purchase', getCartToBuy)
+//para ver por documentacion swagger
+router.delete("/api/:cid", deleteAllProductsInCart);
 
-router.post('/:cid/purchase/checkout', generateTicket)
-router.get('/:cid/purchase/checkout', generateTicket)
+router.get("/:cid/purchase", getCartToBuy);
 
+router.post("/:cid/purchase/checkout", generateTicket);
+router.get("/:cid/purchase/checkout", generateTicket);
 
-export default router
+export default router;
