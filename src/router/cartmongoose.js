@@ -13,8 +13,9 @@ import {
   getCartToBuy,
   createCartView,
   getCartByIdView,
+  getCartToBuyView,
 } from "../controllers/carts.js";
-import { generateTicket } from "../controllers/ticket.js";
+import { generateTicket, generateTicketView } from "../controllers/ticket.js";
 import { isUser } from "../controllers/sessions.js";
 
 //inicializamos variables
@@ -59,7 +60,13 @@ router.delete("/api/:cid", deleteAllProductsInCart);
 
 router.get("/:cid/purchase", getCartToBuy);
 
+router.get("/api/:cid/purchase", getCartToBuyView);
+
 router.post("/:cid/purchase/checkout", generateTicket);
+
 router.get("/:cid/purchase/checkout", generateTicket);
 
+//para swagger
+router.get("/api/:cid/purchase/checkout", generateTicketView);
+router.post("/api/:cid/purchase/checkout", generateTicketView);
 export default router;

@@ -222,7 +222,7 @@ export const getCartToBuy = async (req = request, res = response) => {
           // Enviar un mensaje de alerta a la vista
           stockAlert =
             "No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito";
-          logger.warn(
+          logger.debug(
             `No hay suficiente stock para ${remainingUnits} unidades de ${product.product.title}`
           );
         }
@@ -262,6 +262,112 @@ export const getCartToBuy = async (req = request, res = response) => {
       title: "Fitness Ropa deportiva",
       stockAlert,
     });
+  } catch (error) {
+    logger.error(`Error en getCartToBuy: ${error.message}`);
+
+    // console.log('error', error)
+  }
+};
+
+//para swagger que devuelve json
+export const getCartToBuyView = async (req = request, res = response) => {
+  try {
+    const { cid } = req.params;
+
+    logger.info(`CID desde getCartToBuy: ${cid}`);
+    //console.log('cid desde el controller', cid)
+
+    const carrito = await CartService.getCartsById(cid);
+
+    if (!carrito) {
+      logger.debug(`Cart no encontrado`);
+      return res.status(404).json({ error: "cart not found" });
+    }
+
+    // Agregar la propiedad 'cid' a cada producto en 'productosagregados'
+    carrito.productosagregados = carrito.productosagregados.map((product) => {
+      return {
+        ...product,
+        cid: cid,
+      };
+    });
+
+    let stockAlert = "";
+    let productsToBuy = [];
+
+    let otherProducts = [];
+
+    carrito.productosagregados.forEach((product) => {
+      const stockDisponible = product.product.stock;
+
+      if (product.quantity <= stockDisponible) {
+        // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
+
+        productsToBuy.push(product);
+        // logger.debug(`Producto agregado a la compra: ${JSON.stringify(product, null, 2)}`);
+        logger.debug(
+          `Productos a comprar: ${JSON.stringify(productsToBuy, null, 2)}`
+        );
+        //  console.log('productsToBuy', productsToBuy)
+      } else {
+        if (stockDisponible > 0) {
+          productsToBuy.push({
+            ...product,
+            quantity: stockDisponible,
+          });
+        }
+        logger.debug(
+          `productsToBuy despues de validar stock: ${JSON.stringify(
+            productsToBuy
+          )}`
+        );
+
+        const remainingUnits = product.quantity - stockDisponible;
+
+        if (remainingUnits > 0) {
+          otherProducts.push({
+            ...product,
+            quantity: remainingUnits,
+          });
+
+          //otherProducts.push(product)
+          console.log("otherProducts", otherProducts);
+          // Enviar un mensaje de alerta a la vista
+          stockAlert =
+            "No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito";
+          logger.debug(
+            `No hay suficiente stock para ${remainingUnits} unidades de ${product.product.title}`
+          );
+        }
+      }
+    });
+
+    if (productsToBuy.length === 0) {
+      // If productsToBuy is an empty array, redirect to /products
+      return res.redirect("/productsmongoose");
+    }
+
+    // Crear objeto con propiedades actualizadas
+    const updatedCart = {
+      ...carrito,
+      productsToBuy: productsToBuy,
+      otherProducts: otherProducts,
+    };
+
+    //  await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+    await CartService.updateCart(cid, updatedCart);
+    let totalCompra;
+
+    // Calcular el total de la compra
+    totalCompra = 0;
+    productsToBuy.forEach((product) => {
+      totalCompra += product.product.price * product.quantity;
+    });
+
+    logger.info(`Compra total - CID: ${cid}, Total de compra: ${totalCompra}`);
+    //console.log('total compra desde getcart', totalCompra)
+
+    return res.status(200).json(updatedCart);
   } catch (error) {
     logger.error(`Error en getCartToBuy: ${error.message}`);
 
