@@ -847,3 +847,178 @@
 {"level":"debug","message":"cid"}
 {"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
 {"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: {id}"}
+{"level":"error","message":"Error al buscar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"debug","message":"ID: {id}"}
+{"level":"error","message":"Error al buscar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"debug","message":"ID: {id}"}
+{"level":"error","message":"Error al buscar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"debug","message":"ID: {id}"}
+{"level":"error","message":"Error al buscar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"error","message":"Error al agregar el producto al carrito: Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Error al agregar el producto al carrito: Cannot read properties of undefined (reading '_id')"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: {id}"}
+{"level":"error","message":"Error al buscar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: {id}"}
+{"level":"error","message":"Error al buscar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"debug","message":"ID: {id}"}
+{"level":"error","message":"Error al buscar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65548d5fc3f09f05e9c4abf9"}
+{"level":"info","message":"Producto encontrado: Calzas Lisboa"}
+{"level":"error","message":"Error al buscar el producto: productsmongoose is not defined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"error","message":"Error al buscar el producto: productsmongoose is not defined"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"debug","message":"ID: 65548d5fc3f09f05e9c4abf9"}
+{"level":"info","message":"Producto encontrado: Calzas Lisboa"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'Clazas Lisboa',\n  price: 20000,\n  thumbnail: '/static/imagenes/calzas2.png',\n  description: 'Calzas estampadas',\n  category: 'calzas',\n  code: '61',\n  status: 'true',\n  stock: 15,\n  owner: 'admin',\n  _id: new ObjectId('65da071dd44497ec05c3dd7c'),\n  __v: 0\n}"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"error","message":"Error al agregar el producto al carrito: E11000 duplicate key error collection: ecommerce.productsmongooses index: title_1 dup key: { title: \"Clazas Lisboa\" }"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"error","message":"Error al agregar el producto al carrito: E11000 duplicate key error collection: ecommerce.productsmongooses index: title_1 dup key: { title: \"Clazas Lisboa\" }"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"info","message":"CID desde getCartById: 65d7d1b5de22700447d31acf, User: MARIA"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"65d7d1b5de22700447d31acf\",\n  \"productosagregados\": [],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":""}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"debug","message":"CID: 65d7d1b5de22700447d31acf, PID: 655518ea9dd9bba2858e6f70"}
+{"level":"error","message":"Error al agregar producto al carrito: Cannot read properties of undefined (reading 'toString')"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"debug","message":"CID: 65d7d1b5de22700447d31acf, PID: 655518ea9dd9bba2858e6f70"}
+{"level":"error","message":"Error al agregar producto al carrito: Cannot read properties of undefined (reading 'toString')"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"debug","message":"CID: 65d7d1b5de22700447d31acf, PID: 655518ea9dd9bba2858e6f70"}
+{"level":"error","message":"Error al agregar producto al carrito: Cannot read properties of undefined (reading 'toString')"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"debug","message":"CID: 65d7d1b5de22700447d31acf, PID: 655518ea9dd9bba2858e6f70"}
+{"level":"error","message":"Error al agregar producto al carrito: Cannot read properties of undefined (reading 'toString')"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"debug","message":"CID: 65d7d1b5de22700447d31acf, PID: 655518ea9dd9bba2858e6f70"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"info","message":"CID desde getCartById: 65d7d1b5de22700447d31acf, User: MARIA"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"65d7d1b5de22700447d31acf\",\n  \"productosagregados\": [\n    {\n      \"product\": {\n        \"_id\": \"655518ea9dd9bba2858e6f70\",\n        \"title\": \"Calzas Madrid\",\n        \"price\": 19000,\n        \"thumbnail\": \"/static/imagenes/mujer estir.png\",\n        \"description\": \"Calzas estampadas blancas y azules\",\n        \"category\": \"calzas\",\n        \"code\": \"4\",\n        \"status\": \"true\",\n        \"stock\": 3,\n        \"__v\": 0,\n        \"owner\": \"admin\"\n      },\n      \"quantity\": 1,\n      \"_id\": \"65da0da42cca78fa76b216d4\",\n      \"cid\": \"65d7d1b5de22700447d31acf\"\n    }\n  ],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65548d5fc3f09f05e9c4abf9"}
+{"level":"info","message":"Producto encontrado: Calzas Lisboa"}
+{"level":"error","message":"Error al agregar el producto al carrito: Cannot read properties of undefined (reading '_id')"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'Clazas Manolo',\n  price: 20000,\n  thumbnail: '/static/imagenes/calzas2.png',\n  description: 'Calzas estampadas',\n  category: 'calzas',\n  code: '68',\n  status: 'true',\n  stock: 15,\n  owner: 'admin',\n  _id: new ObjectId('65dde658025e8bc7bcf30f4b'),\n  __v: 0\n}"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"user"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65d526d64b59b5d061d655a9"}
+{"level":"info","message":"Producto encontrado: 555"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID para actualizar: {id}"}
+{"level":"error","message":"Error al actualizar el producto: Cast to ObjectId failed for value \"{id}\" (type string) at path \"_id\" for model \"productsmongooses\""}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID para actualizar: 65d522b12ef8b3aa6abe4894"}
+{"level":"debug","message":"ID: 65d522b12ef8b3aa6abe4894"}
+{"level":"info","message":"Producto encontrado: 65d522b12ef8b3aa6abe4894"}
+{"level":"debug","message":"ID: 65d522b12ef8b3aa6abe4894"}
+{"level":"info","message":"Producto encontrado: 65d522b12ef8b3aa6abe4894"}

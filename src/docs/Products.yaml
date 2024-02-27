@@ -1,11 +1,181 @@
 paths:
-  /productsmongoose:
+  /productsmongoose/api:
     get:
       summary: Obtiene todos los productos
       tags:
         - Products
-  /productsmongoose/{id}:
+      responses:
+        "200":
+          description: Los productos fueron devueltos satisfactoriamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "500":
+          description: Error interno del servidor. Query defectuoso de la DB
+    post:
+      summary: Crear productos
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/insertProduct"
+      responses:
+        "200":
+          description: El producto fue creado correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "500":
+          description: Error interno del servidor. No se pudo crear el producto
+  /productsmongoose/api/{id}:
     get:
       summary: Obtiene un producto por ID
       tags:
         - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto que se solicita
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El producto fue devuelto satisfactoriamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "500":
+          description: Error interno del servidor.
+        "404":
+          description: No se encontro el producto
+  /productsmongoose/{id}/api/update:
+    post:
+      summary: Actualizar productos
+      tags:
+        - Products
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/insertProduct"
+      responses:
+        "200":
+          description: El producto fue actualizado correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Product"
+        "500":
+          description: Error interno del servidor. No se pudo actualizar el producto
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongo
+        title:
+          type: string
+          description: El nombre del producto
+        price:
+          type: number
+          description: El precio del producto
+        thumbnail:
+          type: string
+          description: La ruta de la imagen del producto
+        description:
+          type: string
+          description: La descripcion del producto
+        category:
+          type: string
+          description: La categoria del producto calzas o remeras
+        code:
+          type: number
+          description: El codigo del producto
+        status:
+          type: boolean
+          description: El status del producto
+          default: true
+        stock:
+          type: number
+          description: El stock del producto
+        owner:
+          type: string
+          description: El owner del producto
+      example:
+        _id: ObjectId("65548d5fc3f09f05e9c4abf9")
+        title: Clazas Lisboa
+        price: 20000
+        description: Calzas estampadas
+        thumbnail: /static/imagenes/calzas2.png
+        category: calzas
+        code: 61
+        status: true
+        stock: 15
+        owner: admin
+  requestBodies:
+    insertProduct:
+      type: object
+      properties:
+        title:
+          type: string
+          description: El nombre del producto
+        price:
+          type: number
+          description: El precio del producto
+        thumbnail:
+          type: string
+          description: La ruta de la imagen del producto
+        description:
+          type: string
+          description: La descripcion del producto
+        category:
+          type: string
+          description: La categoria del producto calzas o remeras
+        code:
+          type: number
+          description: El codigo del producto
+        status:
+          type: boolean
+          description: El status del producto
+          default: true
+        stock:
+          type: number
+          description: El stock del producto
+        owner:
+          type: string
+          description: El owner del producto
+      example:
+        title: Clazas Lisboa
+        price: 20000
+        description: Calzas estampadas
+        thumbnail: /static/imagenes/calzas2.png
+        category: calzas
+        code: 61
+        status: true
+        stock: 15
+        owner: admin

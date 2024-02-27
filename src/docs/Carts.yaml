@@ -1,0 +1,108 @@
+paths:
+  /cartmongoose/api/{id}:
+    get:
+      summary: Obtiene un carrito por ID
+      tags:
+        - Carts
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del carrito que se solicita
+          schema:
+            type: string
+      responses:
+        "200":
+          description: El carrito fue devuelto satisfactoriamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/Cart"
+        "500":
+          description: Error interno del servidor.
+        "404":
+          description: No se encontro el carrito
+components:
+  schemas:
+    Cart:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: Id autogenerado por mongo
+        user:
+          type: string
+          description: ID del usuario al que pertenece el carrito
+        productosagregados:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                $ref: "#/components/schemas/Product"
+              quantity:
+                type: integer
+                description: Cantidad del producto en el carrito
+              _id:
+                type: string
+                description: ID del producto agregado
+              cid:
+                type: string
+                description: ID del carrito
+        productsToBuy:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                $ref: "#/components/schemas/Product"
+              quantity:
+                type: integer
+                description: Cantidad del producto en el carrito
+              _id:
+                type: string
+                description: ID del producto agregado
+              cid:
+                type: string
+                description: ID del carrito
+        otherProducts:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                $ref: "#/components/schemas/Product"
+              quantity:
+                type: integer
+                description: Cantidad del producto en el carrito
+              _id:
+                type: string
+                description: ID del producto agregado
+              cid:
+                type: string
+                description: ID del carrito
+        __v:
+          type: integer
+          description: Versión del esquema
+      example:
+        _id: "65d7d1b5de22700447d31acf"
+        productosagregados:
+          - product:
+              _id: "655518ea9dd9bba2858e6f70"
+              title: "Calzas Madrid"
+              price: 19000
+              thumbnail: "/static/imagenes/mujer estir.png"
+              description: "Calzas estampadas blancas y azules"
+              category: "calzas"
+              code: "4"
+              status: "true"
+              stock: 3
+              owner: "admin"
+            quantity: 1
+            _id: "65da0da42cca78fa76b216d4"
+            cid: "65d7d1b5de22700447d31acf"
+        productsToBuy: []
+        otherProducts: []
+        __v: 0

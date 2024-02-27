@@ -1,31 +1,55 @@
-import {Router} from 'express'
-//import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct } from '../controllers/products.js'
-import { addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct, updateProductBase, updateProductForm } from '../controllers/products.js'
-import {isAdmin, isAdminEliminate, isUser} from "../controllers/sessions.js"
-//import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/mongo/products.mongo.js"
-//import {addProduct, addProductInCart, deleteProduct, getProducts, getProductsById, createProduct} from "../dao/file/products.file.js"
+import { Router } from "express";
 
-const router = Router()
+import {
+  addProduct,
+  addProductInCart,
+  deleteProduct,
+  getProducts,
+  getProductsById,
+  createProduct,
+  updateProductBase,
+  updateProductForm,
+  getProductsView,
+  getProductsByIdView,
+  addProductView,
+  updateProductBaseView,
+} from "../controllers/products.js";
+import { isAdmin, isAdminEliminate, isUser } from "../controllers/sessions.js";
 
-function auth(req,res, next){
-    if (req.session?.user) return next()
-    return res.redirect('/login')
+const router = Router();
+
+function auth(req, res, next) {
+  if (req.session?.user) return next();
+  return res.redirect("/login");
 }
 
-router.get('/', auth, getProducts)
+router.get("/", auth, getProducts);
 
-router.post('/', addProduct)
+//para documentacion - devuelve un json
+router.get("/api", auth, getProductsView);
 
-router.get('/create',isAdmin, createProduct)
+router.post("/", addProduct);
+
+//para documentacion - devuelve un json
+router.post("/api", addProductView);
+
+router.get("/create", isAdmin, createProduct);
 
 //router.get('/:code', getProductsById)
-router.get('/:id', getProductsById)
+router.get("/:id", getProductsById);
 
-router.delete('/:id',isAdminEliminate, deleteProduct)
+//para documentacion - devuelve un json
+router.get("/api/:id", getProductsByIdView);
 
-router.post('/:cid/product/:pid',isUser, addProductInCart)
+router.delete("/:id", isAdminEliminate, deleteProduct);
 
- router.get('/:id/update',isAdmin, updateProductForm)
+router.post("/:cid/product/:pid", isUser, addProductInCart);
 
-router.post('/:id/update',isAdmin, updateProductBase)
-export default router
+router.get("/:id/update", isAdmin, updateProductForm);
+
+router.post("/:id/update", isAdmin, updateProductBase);
+
+//para documentacion - devuelve un json
+router.post("/:id/api/update", isAdmin, updateProductBaseView);
+
+export default router;
