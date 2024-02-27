@@ -42,6 +42,8 @@ router.get("/:id", getProductsById);
 router.get("/api/:id", getProductsByIdView);
 
 router.delete("/:id", isAdminEliminate, deleteProduct);
+//para documentacion - devuelve un json
+router.delete("/api/:id", isAdminEliminate, deleteProduct);
 
 router.post("/:cid/product/:pid", isUser, addProductInCart);
 

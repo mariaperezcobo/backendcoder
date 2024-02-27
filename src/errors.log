@@ -1022,3 +1022,14 @@
 {"level":"info","message":"Producto encontrado: 65d522b12ef8b3aa6abe4894"}
 {"level":"debug","message":"ID: 65d522b12ef8b3aa6abe4894"}
 {"level":"info","message":"Producto encontrado: 65d522b12ef8b3aa6abe4894"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65d522b12ef8b3aa6abe4894"}
+{"level":"info","message":"Producto encontrado: 65d522b12ef8b3aa6abe4894"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID para eliminar: 65d522b12ef8b3aa6abe4894"}
+{"__v":0,"_id":"65d7d1b5de22700447d31acd","age":null,"cart":"65d7d1b5de22700447d31acf","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$Qy.sKE3XC/OoLUvdUb3xeOg5WV.QhcKuQd9lVM6vBcpd7/YNkyB3u","rol":"admin"}
+{"level":"debug","message":"cid"}
