@@ -14,9 +14,11 @@ import {
   createCartView,
   getCartByIdView,
   getCartToBuyView,
+  getCartStock,
 } from "../controllers/carts.js";
 import { generateTicket, generateTicketView } from "../controllers/ticket.js";
-import { isUser } from "../controllers/sessions.js";
+//import { isUser } from "../controllers/sessions.js";
+import { isUser } from "../middlewares/session.middlewares.js";
 
 //inicializamos variables
 // const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
@@ -59,6 +61,8 @@ router.delete("/:cid", deleteAllProductsInCart);
 router.delete("/api/:cid", deleteAllProductsInCart);
 
 router.get("/:cid/purchase", getCartToBuy);
+
+router.get("/:cid/stock", getCartStock);
 
 router.get("/api/:cid/purchase", getCartToBuyView);
 

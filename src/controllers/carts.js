@@ -122,8 +122,13 @@ export const deleteProductInCart = async (req = request, res = response) => {
       )}`
     );
 
+    carrito.productsToBuy = [];
+    carrito.otherProducts = [];
+
     await CartService.updateCart(cid, {
       productosagregados: carrito.productosagregados,
+      otherProducts: carrito.otherProducts,
+      productsToBuy: carrito.productsToBuy,
     });
     //await carrito.save()
 
@@ -144,9 +149,13 @@ export const deleteAllProductsInCart = async (
     const carrito = await CartService.getCartsById(cid);
 
     carrito.productosagregados = [];
+    carrito.productsToBuy = [];
+    carrito.otherProducts = [];
 
     await CartService.updateCart(cid, {
       productosagregados: carrito.productosagregados,
+      otherProducts: carrito.otherProducts,
+      productsToBuy: carrito.productsToBuy,
     });
     //await carrito.save()
 
@@ -164,7 +173,7 @@ export const getCartToBuy = async (req = request, res = response) => {
     logger.info(`CID desde getCartToBuy: ${cid}`);
     //console.log('cid desde el controller', cid)
 
-    const carrito = await CartService.getCartsById(cid);
+    let carrito = await CartService.getCartsById(cid);
 
     if (!carrito) {
       logger.debug(`Cart no encontrado`);
@@ -187,6 +196,8 @@ export const getCartToBuy = async (req = request, res = response) => {
     carrito.productosagregados.forEach((product) => {
       const stockDisponible = product.product.stock;
 
+      console.log("stock disponible", stockDisponible);
+
       if (product.quantity <= stockDisponible) {
         // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
 
@@ -203,6 +214,7 @@ export const getCartToBuy = async (req = request, res = response) => {
             quantity: stockDisponible,
           });
         }
+
         logger.debug(
           `productsToBuy despues de validar stock: ${JSON.stringify(
             productsToBuy
@@ -231,7 +243,7 @@ export const getCartToBuy = async (req = request, res = response) => {
 
     if (productsToBuy.length === 0) {
       // If productsToBuy is an empty array, redirect to /products
-      return res.redirect("/productsmongoose");
+      return res.redirect(`/cartmongoose/${cid}/stock`);
     }
 
     // Crear objeto con propiedades actualizadas
@@ -240,10 +252,12 @@ export const getCartToBuy = async (req = request, res = response) => {
       productsToBuy: productsToBuy,
       otherProducts: otherProducts,
     };
-
+    console.log("updatedCart", updatedCart);
     //  await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
     await CartService.updateCart(cid, updatedCart);
     let totalCompra;
+
+    carrito = await CartService.getCartsById(cid);
 
     // Calcular el total de la compra
     totalCompra = 0;
@@ -253,7 +267,7 @@ export const getCartToBuy = async (req = request, res = response) => {
 
     logger.info(`Compra total - CID: ${cid}, Total de compra: ${totalCompra}`);
     //console.log('total compra desde getcart', totalCompra)
-
+    console.log("carrito desp de filtrar stock", carrito);
     res.render("purchase", {
       carrito,
       totalCompra,
@@ -261,6 +275,34 @@ export const getCartToBuy = async (req = request, res = response) => {
       style: "index.css",
       title: "Fitness Ropa deportiva",
       stockAlert,
+    });
+  } catch (error) {
+    logger.error(`Error en getCartToBuy: ${error.message}`);
+
+    // console.log('error', error)
+  }
+};
+
+export const getCartStock = async (req = request, res = response) => {
+  try {
+    const { cid } = req.params;
+
+    logger.info(`CID desde getCartToBuyStock: ${cid}`);
+    //console.log('cid desde el controller', cid)
+
+    const carrito = await CartService.getCartsById(cid);
+
+    if (!carrito) {
+      logger.debug(`Cart no encontrado`);
+      return res.status(404).json({ error: "cart not found" });
+    }
+    console.log("carrito desde stock", carrito.productosagregados);
+    res.render("stock", {
+      carrito,
+
+      cid,
+      style: "index.css",
+      title: "Fitness Ropa deportiva",
     });
   } catch (error) {
     logger.error(`Error en getCartToBuy: ${error.message}`);
@@ -300,6 +342,7 @@ export const getCartToBuyView = async (req = request, res = response) => {
     carrito.productosagregados.forEach((product) => {
       const stockDisponible = product.product.stock;
 
+      console.log("stockdisponible", stockDisponible);
       if (product.quantity <= stockDisponible) {
         // Si la cantidad solicitada es mayor que el stock, ajustar la cantidad al stock disponible
 
