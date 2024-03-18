@@ -14,6 +14,7 @@ import {
 import {
   updateUserPassword,
   updateUserPasswordView,
+  seeUsers,
 } from "../controllers/sessions.js";
 
 const router = Router();
@@ -49,6 +50,8 @@ router.put("/updateuser/:id", auth, updateUser);
 
 router.get("/updateuserpassword", updateUserPasswordView);
 router.post("/updateuserpassword", updateUserPassword);
+
+router.get("/allusers", seeUsers);
 
 router.get("/error", (req, res) => res.send("pagina de error"));
 

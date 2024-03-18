@@ -188,3 +188,22 @@ export const updateUserPasswordView = async (req = request, res = response) => {
     // console.error('error', error)
   }
 };
+
+export const seeUsers = async (req = request, res = response) => {
+  try {
+    const users = await UserService.getAllUsers();
+    console.log("all users", users);
+
+    console.log("all users docs", users.docs);
+
+    res.render("allusers", {
+      users,
+      style: "index.css",
+      title: "Fitness Ropa deportiva",
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    // Renderiza una página de error o maneja el error de alguna otra manera
+    res.status(500).send("Error fetching users");
+  }
+};
