@@ -2091,3 +2091,7 @@
 {"level":"debug","message":"Ticket guardado en la base de datos: {\n  \"code\": 2,\n  \"purchase_datatime\": \"2024-03-19T16:42:52.371Z\",\n  \"amount\": 22000,\n  \"purchaser\": \"mariaperezcobo@hotmail.com\",\n  \"_id\": \"65f9c08c3c691db198084dcf\",\n  \"__v\": 0\n}"}
 {"level":"debug","message":"Stock actualizado en la base de datos."}
 {"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1710866629 sk4-20020a17090b2dc400b0029abb8b1265sm9861236pjb.49 - gsmtp"}
+{"level":"error","message":"Passport error:"}
+{"level":"info","message":"User authenticated successfully: undefined"}
+{"__v":0,"_id":"65f9c619376278af36a18a46","age":null,"cart":"65f9c619376278af36a18a48","email":"lu@perez","first_name":"lu","last_connection":"2024-03-19T17:06:33.817Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$ElAFav8GluhwsNl5e2Dq.eRu5ukbkZGY4i9wcVT.Ori7g0.dvz9iK","rol":"user"}
+{"level":"debug","message":"cid"}

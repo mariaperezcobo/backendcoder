@@ -104,11 +104,16 @@ const initializePassport = () => {
           console.log("carrito desde passport", carrito);
           console.log("result desp de incorporar carrito", result);
 
+          result.last_connection = new Date();
+
           // Actualizar el usuario con el ID del carrito
           //await result.save();
 
           // Actualiza el usuario con el ID del carrito
-          await UserService.updateUser(result._id, { cart: carrito.id });
+          await UserService.updateUser(result._id, {
+            cart: carrito.id,
+            last_connection: result.last_connection,
+          });
 
           //const carrito = await CartModel.create({ productosagregados: [] })
 
@@ -147,8 +152,22 @@ const initializePassport = () => {
             console.error("password not valid");
             return done(null, false);
           }
+
+          user.last_connection = new Date();
+
+          const updatedUserResult = await UserService.updateUser(
+            user._id,
+            { last_connection: user.last_connection },
+            { new: true }
+          );
+
+          if (!updatedUserResult) {
+            console.error("Error updating user last_connection");
+            return done("Error updating user last_connection", null);
+          }
+
           // console.log('usruario:', user)
-          return done(null, user);
+          return done(null, updatedUserResult);
         } catch (error) {
           console.error("Error during login en passport:", error);
           return done("error login", error);
