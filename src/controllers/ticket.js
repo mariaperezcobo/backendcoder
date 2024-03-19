@@ -1,10 +1,21 @@
 import TicketModel from "../dao/models/ticket.model.js";
+import nodemailer from "nodemailer";
+
 import {
   CartService,
   TicketService,
   ProductService,
 } from "../services/index.js";
 import logger from "../logging/logger.js";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  port: 587,
+  auth: {
+    user: "mariapcsalem@gmail.com",
+    pass: "ivpkgozjdowugjtv",
+  },
+});
 
 export const generateTicket = async (req, res) => {
   try {
@@ -100,6 +111,29 @@ export const generateTicket = async (req, res) => {
     }
 
     logger.debug("Stock actualizado en la base de datos.");
+
+    const mailOptions = {
+      from: "mariaperezcobo@gmail.com",
+      to: email, // El correo electrónico del usuario obtenido del req.session.user.email
+      subject: "Confirmación de compra!!",
+      html: `
+      <div>
+          <h2> Gracias por su compra!! </h2>
+          <h4> El código de la operación es ${ticket.code}</h4><br>
+          <p>El total de la compra es de $ ${ticket.amount}</p>
+          <p>La compra se realizó el dia ${ticket.purchase_datatime}</p>
+                   
+      </div>
+  `,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        logger.error(`Error al enviar el correo electrónico: ${error.message}`);
+      } else {
+        logger.info(`Correo electrónico enviado: ${info.response}`);
+      }
+    });
 
     res.render("checkout", {
       carrito,
