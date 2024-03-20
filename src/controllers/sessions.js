@@ -5,6 +5,16 @@ import { createHash } from "../utils.js";
 import { UserService } from "../services/index.js";
 import { generateToken } from "../utils.js";
 import bcrypt from "bcrypt";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  port: 587,
+  auth: {
+    user: "mariapcsalem@gmail.com",
+    pass: "ivpkgozjdowugjtv",
+  },
+});
 
 export const loginUser = async (req, res) => {
   try {
@@ -192,9 +202,6 @@ export const updateUserPasswordView = async (req = request, res = response) => {
 export const seeUsers = async (req = request, res = response) => {
   try {
     const users = await UserService.getAllUsers();
-    console.log("all users", users);
-
-    console.log("all users docs", users.docs);
 
     res.render("allusers", {
       users,
@@ -205,5 +212,70 @@ export const seeUsers = async (req = request, res = response) => {
     console.error("Error fetching users:", error);
     // Renderiza una página de error o maneja el error de alguna otra manera
     res.status(500).send("Error fetching users");
+  }
+};
+
+export const deleteUsers = async (req, res, next) => {
+  try {
+    const users = await UserService.getAllUsers();
+
+    const currentTime = new Date();
+    console.log("current time", currentTime);
+
+    for (const user of users) {
+      console.log("user 1", user);
+      console.log("user lastConnection1", user.last_connection);
+      const lastConnectionTime = new Date(user.last_connection);
+
+      if (
+        lastConnectionTime instanceof Date &&
+        !isNaN(lastConnectionTime.getTime())
+      ) {
+        console.log("lastConnection es una fecha válida:", lastConnectionTime);
+      } else {
+        console.log(
+          "lastConnection no es una fecha válida:",
+          user.lastConnection
+        );
+      }
+
+      const timeDifference = (currentTime - lastConnectionTime) / (1000 * 60);
+      console.log("time diference", timeDifference);
+
+      console.log("user", user);
+      if (timeDifference > 10) {
+        await UserService.deleteUser(user._id);
+        console.log(
+          `Usuario ${user.id} eliminado debido a una conexión menor a 30 minutos.`
+        );
+      }
+
+      const mailInfo = {
+        from: "mariaperezcobo@gmail.com",
+        to: user.email, // El correo electrónico del usuario obtenido del req.session.user.email
+        subject: "Cuenta eliminada por falta de actividad",
+        html: `
+        <div>
+            <h2> Se ha eliminado la cuenta por falta de actividad </h2>
+            <h4> Podes volver a crearte una nueva cuenta! Te esperamos!</h4><br>
+        </div>
+    `,
+      };
+
+      transporter.sendMail(mailInfo, function (error, info) {
+        if (error) {
+          logger.error(
+            `Error al enviar el correo electrónico: ${error.message}`
+          );
+        } else {
+          logger.info(`Correo electrónico enviado: ${info.response}`);
+        }
+      });
+    }
+
+    res.redirect("/allusers");
+  } catch (error) {
+    console.error("¡Error!", error);
+    res.status(500).send("Error al eliminar usuarios");
   }
 };

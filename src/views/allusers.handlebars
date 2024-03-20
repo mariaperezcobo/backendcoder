@@ -4,7 +4,7 @@
 
     <div>
     <div class="contenedorTituloPrincipal">
- <h2>Calzas y Remeras</h2>
+ <h2>Ver todos los usuarios</h2>
 
   </div>
 
@@ -16,19 +16,24 @@
         {{#each users}}
 
         <div class="card container" style="width: 25rem;"><br>
-        <div class="contenedorProductos">Nombre y Apellido: {{this.first_name}} {{this.last_name}} </div><br>
-        <div class="contenedorProductos">Email: {{email}} </div> 
-        <div class="contenedorProductos">Age: {{age}}</div>
-        <div class="contenedorProductos">Rol: {{rol}}</div>
-        <div class="contenedorProductos">Cart número: {{cart}}</div><br>
-                    
-                
-                               
-                
-            </div>
+            <div class="contenedorProductos">Nombre y Apellido: {{this.first_name}} {{this.last_name}} </div><br>
+            <div class="contenedorProductos">Email: {{email}} </div> 
+            <div class="contenedorProductos">Age: {{age}}</div>
+            <div class="contenedorProductos">Rol: {{rol}}</div>
+
+        </div>
         
         {{/each}}
 
-        </div>
+
+
 
         </div>
+        <div class="contenedorprincipal margen">
+  <form action="/deleteusers" method="post">
+    <button type="submit" class="btn btn-primary">Eliminar Usuarios sin conexión por 30 minutos</button>
+  </form>
+</div>
+
+        </div>
+

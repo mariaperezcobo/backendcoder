@@ -5,6 +5,9 @@ export default class UserRepository {
   getAllUsers = async () => {
     return this.dao.getAllUsers();
   };
+  getAllUsersForDate = async () => {
+    return this.dao.getAllUsersForDate();
+  };
   getUsers = async (username) => {
     return this.dao.getUsers(username);
   };
@@ -16,5 +19,8 @@ export default class UserRepository {
   };
   updateUser = async (cid, update) => {
     return this.dao.updateUser(cid, update);
+  };
+  deleteUser = async (id) => {
+    return this.dao.deleteUser(id);
   };
 }

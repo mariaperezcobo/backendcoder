@@ -14,6 +14,19 @@ export default class Users {
     }
   };
 
+  getAllUsersForDate = async () => {
+    // return await UserRegisterModel.find();
+
+    try {
+      const users = await UserRegisterModel.find();
+      console.log("Users found:", users);
+      return users;
+    } catch (error) {
+      console.error("Error retrieving users:", error);
+      throw error; // Lanza el error para que se maneje en el controlador
+    }
+  };
+
   getUsers = async (username, id) => {
     return await UserRegisterModel.findOne({ email: username }, id)
       .lean()
@@ -43,6 +56,10 @@ export default class Users {
       console.error("Error en updateCart:", error);
       throw error;
     }
+  };
+
+  deleteUser = async (id) => {
+    return UserRegisterModel.deleteOne({ _id: id });
   };
 }
 
