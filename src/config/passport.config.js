@@ -3,11 +3,45 @@ import local from "passport-local";
 import UserRegisterModel from "../dao/models/userregister.model.js";
 import { createHash, isValidPassword } from "../utils.js";
 import GitHubStrategy from "passport-github2";
-import CartModel from "../dao/models/cartmongoose.model.js";
+// import CartModel from "../dao/models/cartmongoose.model.js";
 import { CartService, UserService } from "../services/index.js";
 import UserInsertDTO from "../DTO/users.dto.js";
+import passportJWT from "passport-jwt";
+import { generateToken } from "../utils.js";
 
 const LocalStrategy = local.Strategy;
+
+const JWTStrategy = passportJWT.Strategy;
+
+export function auth(req, res, next) {
+  if (req.isAuthenticated()) {
+    // Si el usuario está autenticado, continúa con la siguiente función de middleware
+    return next();
+  } else {
+    // Si el usuario no está autenticado, redirige a la página de inicio de sesión
+    return res.redirect("/login");
+  }
+}
+
+const cookieExtractor = (req) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies["jwt"];
+  }
+  return token;
+
+  // const token = req?.cookies ? req.cookies["jwt"] : null;
+  // console.log("req cokkies", req.cookies);
+  // console.log("token desde cookieextractor", token);
+
+  // if (!token) {
+  //   console.log("Cookie extractor: Token no encontrado");
+  //   return null; // O devuelve null, o maneja este caso de otra manera
+  // }
+
+  // console.log("cookie extractor :", token);
+  // return token;
+};
 
 const initializePassport = () => {
   //github strategy
@@ -49,128 +83,159 @@ const initializePassport = () => {
 
   //local estrategy
 
+  // passport.use(
+  //   "registeruser",
+  //   new LocalStrategy(
+  //     {
+  //       passReqToCallback: true,
+  //       usernameField: "email",
+  //     },
+  //     async (req, username, password, done) => {
+  //       const { first_name, last_name, age, rol, email } = req.body;
+  //       try {
+  //         //const user = await UserRegisterModel.findOne({email: username})
+
+  //         const user = await UserService.getUsers(username);
+  //         //console.log('usuario 2', user)
+
+  //         if (!email) {
+  //           console.log("Email es nulo o indefinido");
+  //           return done(null, false);
+  //         }
+
+  //         if (user) {
+  //           console.log("user already exist", user);
+  //           return done(null, false, { message: "User already exists" });
+  //         }
+  //         const rolValue = rol || "user";
+
+  //         const newUser = {
+  //           first_name,
+  //           last_name,
+  //           age,
+  //           rol: rolValue,
+  //           email,
+  //           password: createHash(password),
+  //         };
+
+  //         //console.log('Datos del nuevo usuario:', newUser);
+
+  //         // Crear el usuario en la base de datos
+  //         //const result = await UserRegisterModel.create(newUser)
+
+  //         // const result = await UserRegisterModel.create(newUser)
+
+  //         const newUserDTO = new UserInsertDTO(newUser);
+
+  //         const result = await UserService.addUsers(newUserDTO);
+  //         console.log("usuario agregado", result);
+
+  //         // Añadir el carrito al usuario
+  //         const carrito = await CartService.addCart({ productosagregados: [] });
+
+  //         result.cart = carrito.id;
+  //         // console.log('carrito', carrito)
+  //         console.log("carrito desde passport", carrito);
+  //         console.log("result desp de incorporar carrito", result);
+
+  //         result.last_connection = new Date();
+
+  //         // Actualizar el usuario con el ID del carrito
+  //         //await result.save();
+
+  //         // Actualiza el usuario con el ID del carrito
+  //         await UserService.updateUser(result._id, {
+  //           cart: carrito.id,
+  //           last_connection: result.last_connection,
+  //         });
+
+  //         //const carrito = await CartModel.create({ productosagregados: [] })
+
+  //         //   console.log('Datos del nuevo usuario con carrito:', newUser);
+
+  //         console.log("result de passport config", result);
+  //         return done(null, result);
+  //       } catch (error) {
+  //         done("error to register", error);
+  //         console.error("Error al registrar usuario:", error);
+  //       }
+  //     }
+  //   )
+  // );
+
+  //lo elimine para probar jwt
+  // passport.use(
+  //   "login",
+  //   new LocalStrategy(
+  //     {
+  //       usernameField: "email",
+  //     },
+  //     async (username, password, done) => {
+  //       try {
+  //         //          console.log('Email proporcionado:', username);
+  //         //console.log('Contraseña proporcionada:', password);
+  //         const user = await UserService.getUsers(username);
+  //         //   console.log('Email proporcionado:', username);
+  //         //       console.log('Contraseña proporcionada:', password);
+  //         //    console.log('usuario', user)
+  //         if (!user) {
+  //           console.error("user doesnt exist");
+  //           return done(null, false);
+  //         }
+
+  //         if (!isValidPassword(user, password)) {
+  //           console.error("password not valid");
+  //           return done(null, false);
+  //         }
+
+  //         user.last_connection = new Date();
+
+  //         const updatedUserResult = await UserService.updateUser(
+  //           user._id,
+  //           { last_connection: user.last_connection },
+  //           { new: true }
+  //         );
+
+  //         if (!updatedUserResult) {
+  //           console.error("Error updating user last_connection");
+  //           return done("Error updating user last_connection", null);
+  //         }
+
+  //         // console.log('usruario:', user)
+  //         return done(null, updatedUserResult);
+  //       } catch (error) {
+  //         console.error("Error during login en passport:", error);
+  //         return done("error login", error);
+  //       }
+  //     }
+  //   )
+  // );
+
   passport.use(
-    "registeruser",
-    new LocalStrategy(
+    "jwt",
+    new JWTStrategy(
       {
-        passReqToCallback: true,
-        usernameField: "email",
+        secretOrKey: "secret",
+        jwtFromRequest: passportJWT.ExtractJwt.fromExtractors([
+          cookieExtractor,
+        ]),
       },
-      async (req, username, password, done) => {
-        const { first_name, last_name, age, rol, email } = req.body;
+      async (jwt_payload, done) => {
+        console.log("payload", jwt_payload);
+
         try {
-          //const user = await UserRegisterModel.findOne({email: username})
+          console.log("payload", jwt_payload);
+          const user = await UserService.getUsers(jwt_payload.user.email);
 
-          const user = await UserService.getUsers(username);
-          //console.log('usuario 2', user)
-
-          if (!email) {
-            console.log("Email es nulo o indefinido");
-            return done(null, false);
-          }
-
+          console.log("usuario desde passport", user);
           if (user) {
-            console.log("user already exist", user);
-            return done(null, false, { message: "User already exists" });
-          }
-          const rolValue = rol || "user";
-
-          const newUser = {
-            first_name,
-            last_name,
-            age,
-            rol: rolValue,
-            email,
-            password: createHash(password),
-          };
-
-          //console.log('Datos del nuevo usuario:', newUser);
-
-          // Crear el usuario en la base de datos
-          //const result = await UserRegisterModel.create(newUser)
-
-          // const result = await UserRegisterModel.create(newUser)
-
-          const newUserDTO = new UserInsertDTO(newUser);
-
-          const result = await UserService.addUsers(newUserDTO);
-          console.log("usuario agregado", result);
-
-          // Añadir el carrito al usuario
-          const carrito = await CartService.addCart({ productosagregados: [] });
-
-          result.cart = carrito.id;
-          // console.log('carrito', carrito)
-          console.log("carrito desde passport", carrito);
-          console.log("result desp de incorporar carrito", result);
-
-          result.last_connection = new Date();
-
-          // Actualizar el usuario con el ID del carrito
-          //await result.save();
-
-          // Actualiza el usuario con el ID del carrito
-          await UserService.updateUser(result._id, {
-            cart: carrito.id,
-            last_connection: result.last_connection,
-          });
-
-          //const carrito = await CartModel.create({ productosagregados: [] })
-
-          //   console.log('Datos del nuevo usuario con carrito:', newUser);
-
-          console.log("result de passport config", result);
-          return done(null, result);
-        } catch (error) {
-          done("error to register", error);
-          console.error("Error al registrar usuario:", error);
-        }
-      }
-    )
-  );
-
-  passport.use(
-    "login",
-    new LocalStrategy(
-      {
-        usernameField: "email",
-      },
-      async (username, password, done) => {
-        try {
-          //          console.log('Email proporcionado:', username);
-          //console.log('Contraseña proporcionada:', password);
-          const user = await UserService.getUsers(username);
-          //   console.log('Email proporcionado:', username);
-          //       console.log('Contraseña proporcionada:', password);
-          //    console.log('usuario', user)
-          if (!user) {
-            console.error("user doesnt exist");
+            return done(null, user);
+          } else {
             return done(null, false);
           }
-
-          if (!isValidPassword(user, password)) {
-            console.error("password not valid");
-            return done(null, false);
-          }
-
-          user.last_connection = new Date();
-
-          const updatedUserResult = await UserService.updateUser(
-            user._id,
-            { last_connection: user.last_connection },
-            { new: true }
-          );
-
-          if (!updatedUserResult) {
-            console.error("Error updating user last_connection");
-            return done("Error updating user last_connection", null);
-          }
-
-          // console.log('usruario:', user)
-          return done(null, updatedUserResult);
         } catch (error) {
-          console.error("Error during login en passport:", error);
-          return done("error login", error);
+          console.error("Error al buscar al usuario:", error);
+          return done(error, false);
         }
       }
     )

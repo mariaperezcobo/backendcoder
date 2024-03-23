@@ -1,13 +1,12 @@
 import { Router } from "express";
-import {
-  logOutSession,
-  loginUser,
-  registerUser,
-} from "../controllers/sessions.js";
+import { logOutSession, login, registerUser } from "../controllers/sessions.js";
+//import { generateToken, authToken } from "../utils.js";
+import passport from "passport";
 
 const router = Router();
 
-router.post("/login", loginUser);
+// router.post("/login", loginUser);
+router.post("/login", passport.authenticate("jwt", { session: false }), login);
 
 router.post("/registeruser", registerUser);
 

@@ -12,16 +12,20 @@
 <br><br>
     <div class="margen margen-top">
         <h4>Login con Email y Password</h4>
-        <form action="/api/session/login" method="post" class="margen">
-            Email: <input type="text" name="email"><br><br>
-            Password: <input type="text" name="password"><br><br>
-            
-            <button type="submit">Login</button><br><br>
 
-            <a href="/registeruser">No tienes cuenta? Registrarse</a><br><br>
-            <a href="/mail">Recuperar contraseña</a>
-           
-        </form>
+
+        <form id="loginForm" action="/api/session/login" method="post" class="margen">
+         
+        Email: <input type="text" id="email" name="email"><br><br>
+        Password: <input type="password" id="password" name="password"><br><br>
+        
+        <button type="submit">Login</button><br><br>
+
+        <a href="/registeruser">No tienes cuenta? Registrarse</a><br><br>
+        <a href="/mail">Recuperar contraseña</a>
+       
+    </form>
+   
     </div>
 
 
@@ -29,3 +33,30 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/index.js"></script>
+<script>
+    document.getElementById('loginForm').addEventListener ('submit', function(event) {
+        event.preventDefault();
+console.log('formulario enviado')
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        console.log('email y pass desde handlebars', email, password)
+
+        fetch('/api/session/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+          
+            body: JSON.stringify({ email, password })
+        })
+         .then(r => r.json())
+     
+        .then(data => {
+            // Maneja la respuesta del servidor, por ejemplo, redireccionar al usuario a una nueva página
+            console.log('data',data); // Muestra la respuesta del servidor en la consola para propósitos de depuración
+        })
+        .catch(error => {
+            console.error('Error al iniciar sesión:', error); // Maneja errores en caso de que ocurran
+        });
+    });
+</script>

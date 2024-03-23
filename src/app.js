@@ -11,28 +11,27 @@ import handlebars from "express-handlebars";
 import viewsRouter from "./router/views.router.js";
 import __dirname from "./utils.js";
 import { Server } from "socket.io";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 import passport from "passport";
 import Session from "./router/sessionrouter.js";
 import initializePassport from "./config/passport.config.js";
-import session from "express-session";
+// import session from "express-session";
 import { generateToken } from "./utils.js";
 import MongoStore from "connect-mongo";
 import nodemailer from "nodemailer";
 import swaggerJSDoc from "swagger-jsdoc";
 import SwaggerUiExpress from "swagger-ui-express";
+import { auth } from "../src/middlewares/session.middlewares.js";
 
 //import UserModel from './models/users.model.js'
-import mongoose from "mongoose";
 import prodMongoose from "./router/prodmongoose.router.js";
 import chatMongoose from "./router/chatmongoose.router.js";
 import cartMongoose from "./router/cartmongoose.js";
 import pruebaErrores from "./controllers/errors.js";
 
-//import { addLogger } from './utils/logger.js';
-import logger from "./logging/logger.js";
-
 const app = express();
-
+app.use(cors());
 //Coder
 //ivpk gozj dowu gjtv
 
@@ -48,34 +47,40 @@ app.use("/static", express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//inicializamos variables
-//const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
-//const mongodbName = 'ecommerce'
+// Middleware de análisis de cookies
+app.use(cookieParser());
 
+// Middleware de autenticación que se aplica a todas las rutas
+
+app.use(
+  cors({
+    methods: ["GET", "POST"], // Establece los métodos HTTP permitidos
+    credentials: true, // Habilita el envío de cookies en las solicitudes CORS
+  })
+);
+
+//inicializamos variables
 const url = process.env.MONGO_URL;
 const mongodbName = process.env.MONGO_DBNAME;
 
-//console.log('MONGO_URL:', url);
-//console.log('MONGO_DBNAME:', mongodbName);
-
-//sesiones
-app.use(
-  session({
-    store: MongoStore.create({
-      mongoUrl: url,
-      dbName: mongodbName,
-      ttl: 100,
-    }),
-    secret: "secret",
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+//sesiones LO ELIMINE PARA PROBAR JWT
+// app.use(
+//   session({
+//     store: MongoStore.create({
+//       mongoUrl: url,
+//       dbName: mongodbName,
+//       ttl: 100,
+//     }),
+//     secret: "secret",
+//     resave: true,
+//     saveUninitialized: true,
+//   })
+// );
 
 //configurar passport
 initializePassport();
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 //conectamos a db y corremos el server
 // mongoose.connect(url, {dbName: mongodbName})
@@ -99,8 +104,6 @@ const swaggerOptions = {
 
 const specs = swaggerJSDoc(swaggerOptions);
 app.use("/apidocs", SwaggerUiExpress.serve, SwaggerUiExpress.setup(specs));
-
-// import sef from '../src/docs'
 
 const messages = [];
 const PORT = process.env.PORT;
@@ -126,16 +129,12 @@ io.on("connection", async (socket) => {
 });
 export { io };
 
-//ruta para mongoose
+//ruta
 app.use("/productsmongoose", prodMongoose);
 app.use("/chatmongoose", chatMongoose);
 app.use("/cartmongoose", cartMongoose);
-
 app.use("/api/session", Session);
-
-//rutas
 app.use("/", viewsRouter);
-
 app.get("/loggertest", pruebaErrores);
 
 //rutas mongoose
@@ -145,15 +144,15 @@ app.get("/api/userscollection", async (req, res) => {
 });
 
 //agregar user a usercollection
-app.post("/api/userscollection", async (req, res) => {
-  try {
-    const dataUser = req.body;
-    const resultUser = await UserModel.create(dataUser);
-    res.json({ status: "success", payload: resultUser });
-  } catch (e) {
-    res.status(400).json({ status: "error", error: e });
-  }
-});
+// app.post("/api/userscollection", async (req, res) => {
+//   try {
+//     const dataUser = req.body;
+//     const resultUser = await UserModel.create(dataUser);
+//     res.json({ status: "success", payload: resultUser });
+//   } catch (e) {
+//     res.status(400).json({ status: "error", error: e });
+//   }
+// });
 
 const transport = nodemailer.createTransport({
   service: "gmail",

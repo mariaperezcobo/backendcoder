@@ -8,8 +8,8 @@ import logger from "../logging/logger.js";
 
 export const getProducts = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
-    const cid = req.session.user.cart;
+    const user = req.user;
+    const cid = req.user.cart;
 
     logger.debug("user", user);
     logger.debug("cid", cid);
@@ -104,8 +104,8 @@ export const getProducts = async (req = request, res = response) => {
 
 export const getProductsView = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
-    const cid = req.session.user.cart;
+    const user = req.user;
+    const cid = req.user.cart;
 
     logger.debug("user", user);
     logger.debug("cid", cid);
@@ -221,7 +221,7 @@ export const getProductsById = async (req = request, res = response) => {
 //para docupentacion - devuelve un json
 export const getProductsByIdView = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
     const { id } = req.params;
     logger.debug(`ID: ${id}`);
 
@@ -246,9 +246,9 @@ export const getProductsByIdView = async (req = request, res = response) => {
 
 export const addProduct = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
-    const userId = req.session.user._id;
-    const userRole = req.session.user.rol;
+    const user = req.user;
+    const userId = req.user._id;
+    const userRole = req.user.rol;
 
     console.log(user);
     console.log(userId);
@@ -286,9 +286,9 @@ export const addProduct = async (req = request, res = response) => {
 //para docupentacion - devuelve un json
 export const addProductView = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
-    const userId = req.session.user._id;
-    const userRole = req.session.user.rol;
+    const user = req.user;
+    const userId = req.user._id;
+    const userRole = req.user.rol;
 
     console.log(user);
     console.log(userId);
@@ -326,7 +326,8 @@ export const addProductView = async (req = request, res = response) => {
 export const deleteProduct = async (req = request, res = response) => {
   try {
     const { id } = req.params;
-    const { user } = req.session;
+    // const { user } = req.session;
+    const user = req.user;
     console.log(user);
     //console.log('id para elimnar', id)
     logger.debug(`ID para eliminar: ${id}`);
@@ -339,8 +340,8 @@ export const deleteProduct = async (req = request, res = response) => {
     //return res.json({status: 'success'})
 
     // Verificar si el usuario tiene permisos de administrador o es propietario del producto
-    if (req.session?.user) {
-      const { user } = req.session;
+    if (req?.user) {
+      const user = req.user;
 
       console.log("usuario", user);
       if (user.rol === "admin") {
@@ -391,13 +392,13 @@ export const addProductInCart = async (req = request, res = response) => {
 
     let carrito = await CartService.getCartsById(cid);
 
-    if (req.session?.user && req.session.user.rol !== "admin") {
+    if (req?.user && req.session.user.rol !== "admin") {
       const producto = await ProductService.getProductsById(pid);
       if (!producto) {
         return res.status(404).json({ error: "Producto no encontrado" });
       }
       console.log("producto", producto);
-      if (producto.owner.toString() === req.session.user._id.toString()) {
+      if (producto.owner.toString() === req.user._id.toString()) {
         return res
           .status(403)
           .json({ error: "No puedes agregar tu propio producto al carrito" });
@@ -436,7 +437,7 @@ export const addProductInCart = async (req = request, res = response) => {
 
 export const updateProductBase = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
     const { id } = req.params;
     logger.debug(`ID para actualizar: ${id}`);
 
@@ -466,7 +467,7 @@ export const updateProductBase = async (req = request, res = response) => {
 //para docupentacion - devuelve un json
 export const updateProductBaseView = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
     const { id } = req.params;
     logger.debug(`ID para actualizar: ${id}`);
 

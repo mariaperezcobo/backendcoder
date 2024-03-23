@@ -24,15 +24,17 @@ export const isValidPassword = (usuario, password) => {
   return bcrypt.compareSync(password, usuario.password);
 };
 
-const PRIVATE_KEY = "CoderHouseMy_S3Crttt_ as";
+const PRIVATE_KEY = "secret";
 
 export const generateToken = (user) => {
-  const token = jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "1h" });
+  const token = jwt.sign({ user }, PRIVATE_KEY, { expiresIn: "24h" });
+  console.log(" token desde utils generate token", token);
   return token;
 };
 
 export const authToken = (req, res, next) => {
-  const token = req.headers.auth;
+  // const token = req.headers.auth
+  const token = req.cookies["jwt"];
 
   if (!token) return res.status(401).send({ error: "not auth" });
 

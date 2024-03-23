@@ -6,7 +6,7 @@ export default class Users {
 
     try {
       const users = await UserRegisterModel.find().lean();
-      console.log("Users found:", users);
+      //console.log("Users found:", users);
       return users;
     } catch (error) {
       console.error("Error retrieving users:", error);

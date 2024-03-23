@@ -16,25 +16,50 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const loginUser = async (req, res) => {
-  try {
-  } catch {}
-  passport.authenticate("login", { failureRedirect: "/" }, (err, user) => {
-    if (err) {
-      logger.error("Passport error:", err);
-      //console.error('Passport error:', err);
-      return res.status(500).send("An error occurred");
-    }
-    if (!user) {
-      logger.warn("User not found");
-      // console.log('User not found');
-      return res.status(400).send("invalid credentials");
-    }
-    //console.log('User authenticated successfully');
-    logger.info(`User authenticated successfully: ${user.username}`);
-    req.session.user = user;
-    return res.redirect("/productsmongoose");
-  })(req, res);
+// export const loginUser = async (req, res) => {
+//   try {
+//   } catch {}
+//   passport.authenticate("login", { failureRedirect: "/" }, (err, user) => {
+//     if (err) {
+//       logger.error("Passport error:", err);
+//       //console.error('Passport error:', err);
+//       return res.status(500).send("An error occurred");
+//     }
+//     if (!user) {
+//       logger.warn("User not found");
+//       // console.log('User not found');
+//       return res.status(400).send("invalid credentials");
+//     }
+//     //console.log('User authenticated successfully');
+//     logger.info(`User authenticated successfully: ${user.username}`);
+//     req.session.user = user;
+//     return res.redirect("/productsmongoose");
+//   })(req, res);
+// };
+
+//para jwt
+export const register = async (req, res) => {
+  const user = req.body;
+
+  const result = await UserRegisterModel.create(user);
+  const token = generateToken(result);
+  res.send({ status: "success", token });
+};
+
+//para jwt
+export const login = async (req, res, next) => {
+  console.log("Solicitud POST recibida en /api/session/login");
+  const { email, password } = req.body;
+  const user = await UserService.getUsers(email);
+  //console.log("user desde login", user);
+  if (user) {
+    const token = generateToken(user);
+    console.log("token desde login", token);
+    res.cookie("jwt", token, { httpOnly: true });
+    res.json({ message: "logueado" });
+  } else {
+    res.status(401).json({ message: "Credenciales inválidas" });
+  }
 };
 
 export const registerUser = async (req, res) => {
