@@ -2,9 +2,19 @@ import { request, response } from "express";
 import mongoose from "mongoose";
 import ProductsModel from "../dao/models/prodmongoose.models.js";
 import CartModel from "../dao/models/cartmongoose.model.js";
-import { ProductService, CartService } from "../services/index.js";
+import { ProductService, CartService, UserService } from "../services/index.js";
 import ProductInsertDTO from "../DTO/products.dto.js";
 import logger from "../logging/logger.js";
+import nodemailer from "nodemailer";
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  port: 587,
+  auth: {
+    user: "mariapcsalem@gmail.com",
+    pass: "ivpkgozjdowugjtv",
+  },
+});
 
 export const getProducts = async (req = request, res = response) => {
   try {
@@ -200,7 +210,7 @@ export const getProductsById = async (req = request, res = response) => {
     const productmongoose = await ProductService.getProductsById(id);
 
     if (!productmongoose) {
-      logger.warn("Producto no encontrado");
+      logger.error("Producto no encontrado");
       return res.status(404).send("Producto no encontrado");
     }
 
@@ -264,7 +274,7 @@ export const addProduct = async (req = request, res = response) => {
     }
 
     logger.info(`Nuevo producto: ${productNew}`);
-    //console.log(productNew)
+    console.log("product new", productNew);
     const productmongooseNew = new ProductInsertDTO(productNew);
 
     const result = await ProductService.addProduct(productmongooseNew);
@@ -330,7 +340,7 @@ export const deleteProduct = async (req = request, res = response) => {
     const { id } = req.params;
     // const { user } = req.session;
     const user = req.user;
-    console.log(user);
+
     //console.log('id para elimnar', id)
     logger.debug(`ID para eliminar: ${id}`);
 
@@ -341,49 +351,85 @@ export const deleteProduct = async (req = request, res = response) => {
 
     //return res.json({status: 'success'})
 
+    const product = await ProductService.getProductsById({ _id: id });
+
+    if (!product) {
+      return res.status(404).json({ error: "El producto no fue encontrado" });
+    }
+
+    console.log("prod  a eliminar", product);
+
     // Verificar si el usuario tiene permisos de administrador o es propietario del producto
     if (req?.user) {
       const user = req.user;
 
-      console.log("usuario desde delete product", user);
+      //  console.log("usuario desde delete product", user);
+
       if (user.rol === "admin") {
         // Si es un administrador, eliminar el producto directamente
         await ProductsModel.deleteOne({ _id: id });
-        return res.json({ status: "success" });
-      } else if (user.rol === "premium") {
-        // Si es un usuario premium, verificar si es el propietario del producto
-        const product = await ProductsModel.findById(id);
-        console.log("producto a eliminar", product);
-        if (!product) {
-          return res
-            .status(404)
-            .json({ error: "El producto no fue encontrado" });
-        }
+        console.log("producto eliminado. el user es admir");
 
-        console.log("user._id", user._id);
-        console.log("product.owner", product.owner);
-
+        res.json({ status: "success" });
+      }
+      if (user.rol === "premium") {
         // Verificar si el propietario del producto es el mismo que el usuario actual
         if (product.owner.toString() === user._id.toString()) {
           // Si es el propietario, eliminar el producto
           await ProductsModel.deleteOne({ _id: id });
-          return res.json({ status: "success" });
-        } else {
-          // Si no es el propietario, devolver un error de permisos
-          return res
-            .status(403)
-            .json({ error: "no tienes permisos para eliminar" });
+          console.log(
+            "producto eliminado. el user es premium y creador del producto"
+          );
+          res.json({ status: "success" });
         }
       }
-    }
 
-    // Si el usuario no está autenticado, devolver un error de permisos
-    res
-      .status(403)
-      .json({ error: "Debes iniciar sesión para eliminar productos" });
+      const idUserdelProduct = product.owner;
+      console.log("idUserdelProduct", idUserdelProduct);
+
+      // Buscar al propietario del producto en el modelo de usuarios
+      const owner = await UserService.getUsersById({ _id: idUserdelProduct });
+      if (!owner) {
+        return res
+          .status(404)
+          .json({ error: "El propietario del producto no fue encontrado" });
+      }
+
+      console.log("owner", owner);
+
+      // Verificar si el propietario del producto tiene rol premium
+      if (owner.rol === "premium") {
+        const mailInfoDeleteProduct = {
+          from: "mariaperezcobo@gmail.com",
+          to: owner.email, // El correo electrónico del usuario obtenido del req.session.user.email
+          subject: "Se eliminó un producto creado por tu usuario",
+          html: `
+    <div>
+  
+        <h4> El producto eliminado es ${product.title}</h4><br>
+    </div>
+`,
+        };
+
+        transporter.sendMail(mailInfoDeleteProduct, function (error, info) {
+          if (error) {
+            logger.error(
+              `Error al enviar el correo electrónico: ${error.message}`
+            );
+          } else {
+            logger.info(`Correo electrónico enviado: ${info.response}`);
+          }
+        });
+      } else {
+        // Si no es el propietario, devolver un error de permisos
+        return res
+          .status(403)
+          .json({ error: "no tienes permisos para eliminar" });
+      }
+    }
   } catch (error) {
     logger.error(`Error al eliminar el producto del carrito: ${error.message}`);
-    res.status(500).json(error);
+    return res.status(500).json(error);
     //console.log(error)
   }
 };

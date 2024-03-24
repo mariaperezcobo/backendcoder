@@ -11,6 +11,11 @@ export default class UserRepository {
   getUsers = async (username) => {
     return this.dao.getUsers(username);
   };
+
+  getUsersById = async (id) => {
+    return this.dao.getUsersById(id);
+  };
+
   getUsersByEmail = async (username) => {
     return this.dao.getUsersByEmail(username);
   };

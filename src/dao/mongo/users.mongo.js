@@ -35,6 +35,10 @@ export default class Users {
   getUsersByEmail = async (email, id) => {
     return await UserRegisterModel.findOne({ email }, id).lean().exec();
   };
+  getUsersById = async (id) => {
+    return await UserRegisterModel.findOne(id).lean().exec();
+  };
+
   addUsers = async (newUser) => {
     try {
       const result = await UserRegisterModel.create(newUser);

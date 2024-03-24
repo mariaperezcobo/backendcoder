@@ -25,7 +25,7 @@ export const generateTicket = async (req, res) => {
       `Usuario desde generateTicket: ${user ? user.first_name : "No logueado"}`
     );
 
-    const email = req.session.user.email;
+    const email = req.user.email;
     logger.debug(`Correo electrónico del usuario: ${email}`);
 
     let cid;

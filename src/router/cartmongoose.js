@@ -111,7 +111,11 @@ router.post(
   generateTicket
 );
 
-router.get("/:cid/purchase/checkout", generateTicket);
+router.get(
+  "/:cid/purchase/checkout",
+  passport.authenticate("jwt", { session: false }),
+  generateTicket
+);
 
 //para swagger
 router.get("/api/:cid/purchase/checkout", generateTicketView);
