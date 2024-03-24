@@ -13,16 +13,6 @@ const LocalStrategy = local.Strategy;
 
 const JWTStrategy = passportJWT.Strategy;
 
-const cookieExtractor = (req) => {
-  console.log("cookie extractor");
-  let token = null;
-  if (req && req.cookies) {
-    token = req.cookies["jwt"];
-    console.log("token", token);
-  }
-  return token;
-};
-
 const initializePassport = () => {
   //github strategy
   passport.use(
@@ -191,6 +181,17 @@ const initializePassport = () => {
   //   )
   // );
 
+  const cookieExtractor = (req, res) => {
+    console.log("cookie extractor");
+    let token = null;
+    if (req && req.cookies) {
+      token = req.cookies["jwt"];
+      console.log("token", token);
+    }
+
+    return token || null;
+  };
+
   passport.use(
     "jwt",
     new JWTStrategy(
@@ -204,35 +205,10 @@ const initializePassport = () => {
         console.log("payload", jwt_payload);
 
         try {
-          console.log("payload", jwt_payload);
+          // console.log("payload", jwt_payload);
           const user = await UserService.getUsers(jwt_payload.user.email);
 
-          //         if (!user) {
-          //           console.error("user doesnt exist");
-          //           return done(null, false);
-          //         }
-
-          //         if (!isValidPassword(user, password)) {
-          //           console.error("password not valid");
-          //           return done(null, false);
-          //         }
-
-          //         user.last_connection = new Date();
-
-          //         const updatedUserResult = await UserService.updateUser(
-          //           user._id,
-          //           { last_connection: user.last_connection },
-          //           { new: true }
-          //         );
-
-          //         if (!updatedUserResult) {
-          //           console.error("Error updating user last_connection");
-          //           return done("Error updating user last_connection", null);
-          //         }
-
-          //         // console.log('usruario:', user)
-
-          console.log("usuario desde passport", user);
+          //  console.log("usuario desde passport", user);
           if (user) {
             return done(null, user);
           } else {

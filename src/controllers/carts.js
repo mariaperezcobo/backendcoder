@@ -6,7 +6,7 @@ import logger from "../logging/logger.js";
 export const getCartById = async (req = request, res = response) => {
   try {
     const { cid } = req.params;
-    const user = req.session.user;
+    const user = req.user;
 
     logger.info(
       `CID desde getCartById: ${cid}, User: ${
@@ -58,7 +58,7 @@ export const getCartById = async (req = request, res = response) => {
 export const getCartByIdView = async (req = request, res = response) => {
   try {
     const { cid } = req.params;
-    const user = req.session.user;
+    const user = req.user;
 
     logger.info(
       `CID desde getCartById: ${cid}, User: ${

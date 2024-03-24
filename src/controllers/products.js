@@ -10,6 +10,7 @@ export const getProducts = async (req = request, res = response) => {
   try {
     const user = req.user;
     const cid = req.user.cart;
+    console.log(user, "usuario desde getproducts");
 
     logger.debug("user", user);
     logger.debug("cid", cid);
@@ -191,7 +192,7 @@ export const getProductsView = async (req = request, res = response) => {
 
 export const getProductsById = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
     const { id } = req.params;
     logger.debug(`ID: ${id}`);
 
@@ -344,7 +345,7 @@ export const deleteProduct = async (req = request, res = response) => {
     if (req?.user) {
       const user = req.user;
 
-      console.log("usuario", user);
+      console.log("usuario desde delete product", user);
       if (user.rol === "admin") {
         // Si es un administrador, eliminar el producto directamente
         await ProductsModel.deleteOne({ _id: id });
@@ -359,8 +360,11 @@ export const deleteProduct = async (req = request, res = response) => {
             .json({ error: "El producto no fue encontrado" });
         }
 
+        console.log("user._id", user._id);
+        console.log("product.owner", product.owner);
+
         // Verificar si el propietario del producto es el mismo que el usuario actual
-        if (product.owner === user._id) {
+        if (product.owner.toString() === user._id.toString()) {
           // Si es el propietario, eliminar el producto
           await ProductsModel.deleteOne({ _id: id });
           return res.json({ status: "success" });
@@ -388,17 +392,27 @@ export const addProductInCart = async (req = request, res = response) => {
   try {
     const cid = req.params.cid;
     const pid = req.params.pid;
+    const user = req.user;
 
     logger.debug(`CID: ${cid}, PID: ${pid}`);
 
     let carrito = await CartService.getCartsById(cid);
+    console.log("carrito", carrito);
+    console.log("user desde addproducts", user);
 
-    if (req?.user && req.session.user.rol !== "admin") {
+    console.log("req.user._id.toString()", req.user._id.toString());
+    console.log("carrito", carrito);
+
+    if (req?.user && req.user.rol !== "admin") {
       const producto = await ProductService.getProductsById(pid);
+
+      console.log("producto", producto);
+      console.log("producto.owner.toString()", producto.owner.toString());
+
       if (!producto) {
         return res.status(404).json({ error: "Producto no encontrado" });
       }
-      console.log("producto", producto);
+
       if (producto.owner.toString() === req.user._id.toString()) {
         return res
           .status(403)
@@ -424,10 +438,10 @@ export const addProductInCart = async (req = request, res = response) => {
       });
       //console.log('carrito desp de actualizar',carrito)
     } else {
-      logger.warn(`Usuario no autorizado`);
+      logger.info(`Usuario no autorizado`);
       res.status(403).json({
         error:
-          "No tienes permisos para agregar un producto al carrito este producto",
+          "No tienes permisos para agregar un producto al carrito este producto porque no sos user",
       });
     }
   } catch (error) {

@@ -129,6 +129,15 @@ io.on("connection", async (socket) => {
 });
 export { io };
 
+// Middleware global para manejar la excepción
+app.use((err, req, res, next) => {
+  if (err.message === "User not authenticated") {
+    console.log("Redirecting to /login");
+    return res.redirect("/login");
+  }
+  next(err);
+});
+
 //ruta
 app.use("/productsmongoose", prodMongoose);
 app.use("/chatmongoose", chatMongoose);

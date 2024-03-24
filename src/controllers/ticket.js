@@ -19,7 +19,7 @@ const transporter = nodemailer.createTransport({
 
 export const generateTicket = async (req, res) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
 
     logger.info(
       `Usuario desde generateTicket: ${user ? user.first_name : "No logueado"}`
@@ -150,13 +150,13 @@ export const generateTicket = async (req, res) => {
 
 export const generateTicketView = async (req, res) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
 
     logger.info(
       `Usuario desde generateTicket: ${user ? user.first_name : "No logueado"}`
     );
 
-    const email = req.session.user.email;
+    const email = req.user.email;
     logger.debug(`Correo electrónico del usuario: ${email}`);
 
     let cid;

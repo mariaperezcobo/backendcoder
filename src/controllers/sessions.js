@@ -381,29 +381,29 @@ export const deleteUsers = async (req, res, next) => {
         console.log(
           `Usuario ${user.id} eliminado debido a una conexión menor a 30 minutos.`
         );
+
+        const mailInfo = {
+          from: "mariaperezcobo@gmail.com",
+          to: user.email, // El correo electrónico del usuario obtenido del req.session.user.email
+          subject: "Cuenta eliminada por falta de actividad",
+          html: `
+          <div>
+              <h2> Se ha eliminado la cuenta por falta de actividad </h2>
+              <h4> Podes volver a crearte una nueva cuenta! Te esperamos!</h4><br>
+          </div>
+      `,
+        };
+
+        transporter.sendMail(mailInfo, function (error, info) {
+          if (error) {
+            logger.error(
+              `Error al enviar el correo electrónico: ${error.message}`
+            );
+          } else {
+            logger.info(`Correo electrónico enviado: ${info.response}`);
+          }
+        });
       }
-
-      const mailInfo = {
-        from: "mariaperezcobo@gmail.com",
-        to: user.email, // El correo electrónico del usuario obtenido del req.session.user.email
-        subject: "Cuenta eliminada por falta de actividad",
-        html: `
-        <div>
-            <h2> Se ha eliminado la cuenta por falta de actividad </h2>
-            <h4> Podes volver a crearte una nueva cuenta! Te esperamos!</h4><br>
-        </div>
-    `,
-      };
-
-      transporter.sendMail(mailInfo, function (error, info) {
-        if (error) {
-          logger.error(
-            `Error al enviar el correo electrónico: ${error.message}`
-          );
-        } else {
-          logger.info(`Correo electrónico enviado: ${info.response}`);
-        }
-      });
     }
 
     res.redirect("/allusers");

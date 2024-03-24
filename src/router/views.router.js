@@ -7,7 +7,6 @@ import {
   loginView,
   registerView,
   homeView,
-  realtimeproductsView,
   updateUserView,
   updateUser,
 } from "../controllers/views.js";
@@ -17,22 +16,23 @@ import {
   seeUsers,
   deleteUsers,
 } from "../controllers/sessions.js";
-import { auth } from "../middlewares/session.middlewares.js";
+import {
+  auth,
+  justPublicWhitoutSession,
+} from "../middlewares/session.middlewares.js";
 
 const router = Router();
 
 //para ver productos con filesystem
 //router.get("/home", auth, homeView);
 router.get("/home", homeView);
-router.get("/realtimeproducts", realtimeproductsView);
 
 //renders para sesiones
 
 router.get("/", auth, initUser);
 //router.get("/", initUser);
 
-//router.get("/login", justPublicWhitoutSession, loginView);
-router.get("/login", loginView);
+router.get("/login", justPublicWhitoutSession, loginView);
 
 //router.get("/registeruser", justPublicWhitoutSession, registerView);
 router.get("/registeruser", registerView);
@@ -65,6 +65,7 @@ router.post(
 );
 
 router.get("/allusers", seeUsers);
+
 router.post(
   "/deleteusers",
 

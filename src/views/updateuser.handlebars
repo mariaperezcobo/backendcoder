@@ -4,22 +4,24 @@
  <h2>Actualizar Usuario</h2>
 
   </div>
-<form id="updateUserForm" action="/updateuser/{{user._id}}" method="post">
+<form id="updateUserForm" action="/updateuser/{{user._id}}" method="post" class="margen">
 <br>
-Usuario: <br>
+<h4>Usuario:</h4> <br>
    First name:  {{user.first_name}}<br>
     Last name:  {{user.last_name}}<br>
-    id: {{user._id}}
+    Id: {{user._id}}<br>
     Age:  {{user.age}}<br>
-    Email:  {{user.email}}<br><br>
+    Email:  {{user.email}}<br>
     password: {{user.password}}<br><br>
 
     Rol: <input name="rol" value="{{user.rol}}" placeholder="{{user.rol}}"><br>
     <br>
     
 <br>
+  <div class="margen">
+  <input type="submit" value="Actualizar">
+  </div>
   
-    <input type="submit" value="Actualizar">
 </form>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/static/js/index.js">

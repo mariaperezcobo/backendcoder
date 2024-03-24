@@ -21,7 +21,7 @@ export const profileUser = async (req = request, res = response) => {
 
 export const initUser = async (req = request, res = response) => {
   try {
-    //const user = req.session.user
+    const user = req.user;
 
     return res.render("index", {
       //   user,
@@ -71,19 +71,19 @@ export const homeView = async (req = request, res = response) => {
   }
 };
 
-export const realtimeproductsView = async (req = request, res = response) => {
-  try {
-    const productManager = new ProductManager();
-    const products = await productManager.getProducts();
-    res.render("realtimeproducts", {
-      products,
-      style: "index.css",
-      title: "Fitness Ropa deportiva",
-    });
-  } catch (error) {
-    console.error("error", error);
-  }
-};
+// export const realtimeproductsView = async (req = request, res = response) => {
+//   try {
+//     const productManager = new ProductManager();
+//     const products = await productManager.getProducts();
+//     res.render("realtimeproducts", {
+//       products,
+//       style: "index.css",
+//       title: "Fitness Ropa deportiva",
+//     });
+//   } catch (error) {
+//     console.error("error", error);
+//   }
+// };
 
 export const updateUser = async (req = request, res = response) => {
   try {

@@ -3,10 +3,7 @@ import logger from "../logging/logger.js";
 //Middleware para verificar el rol del usuario
 export function isAdmin(req, res, next) {
   // Verificar si el usuario está autenticado y tiene el rol de admin
-  if (
-    req.user &&
-    (req.user.rol === "admin" || req.session.user.rol === "premium")
-  ) {
+  if (req.user && (req.user.rol === "admin" || req.user.rol === "premium")) {
     return next();
   }
 
@@ -21,10 +18,7 @@ export function isAdmin(req, res, next) {
 
 export function isAdminEliminate(req, res, next) {
   // Verificar si el usuario está autenticado y tiene el rol de admin
-  if (
-    req.user &&
-    (req.user.rol === "admin" || req.session.user.rol === "premium")
-  ) {
+  if (req.user && (req.user.rol === "admin" || req.user.rol === "premium")) {
     return next();
   }
 
@@ -61,4 +55,9 @@ export function isUser(req, res, next) {
     </script>
   `);
   }
+}
+
+export function justPublicWhitoutSession(req, res, next) {
+  if (req.user) return res.redirect("/profile");
+  return next();
 }
