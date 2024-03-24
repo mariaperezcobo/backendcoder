@@ -6,6 +6,7 @@ import { UserService } from "../services/index.js";
 import { generateToken } from "../utils.js";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
+import jwt from "jsonwebtoken";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -90,20 +91,37 @@ export const updateUserPassword = async (req = request, res = response) => {
     const { email, password, token } = req.body;
     console.log("user para password", req.body);
 
-    if (!req.session.passwordReset) {
-      return res.redirect("/mail");
-    }
+    // if (!req.session.passwordReset) {
+    //   return res.redirect("/mail");
+    // }
 
-    // Verificar si el token proporcionado coincide con el token almacenado en la sesión del usuario
-    if (
-      req.session.passwordReset &&
-      req.session.passwordReset.token === token
-    ) {
-      // Verificar si el tiempo de expiración no ha pasado
-      if (req.session.passwordReset.expiration > Date.now()) {
-        // Procesar el restablecimiento de contraseña
+    // Verificar si el token JWT es válido
+    jwt.verify(token, "secret", async (err, decodedToken) => {
+      if (err) {
+        return res.status(400).json({ error: "Token inválido" });
+      }
+      // Extrae la información del token
+      const { email: tokenEmail, exp } = decodedToken;
+
+      console.log(
+        "decoded token",
+        decodedToken,
+        "email",
+        email,
+        "tokenemail",
+        tokenEmail,
+        "expiration",
+        exp
+      );
+      console.log("fecha de ahora", Date.now());
+
+      const result = exp - Date.now();
+      console.log("result", result);
+      // Verifica si el token es para el usuario correcto y no ha expirado
+      if (email === tokenEmail && exp * 1000 > Date.now()) {
         const user = await UserService.getUsersByEmail(email);
-        console.log("user para password", user);
+        console.log("user para password de la bd", user);
+
         if (!user) {
           return res.status(404).json({ error: "Usuario no encontrado" });
         }
@@ -119,7 +137,6 @@ export const updateUserPassword = async (req = request, res = response) => {
           });
         }
 
-        // Actualizar la contraseña del usuario
         try {
           const hashedPassword = await bcrypt.hash(password, 10);
           user.password = hashedPassword;
@@ -130,9 +147,8 @@ export const updateUserPassword = async (req = request, res = response) => {
           );
 
           if (updatedUserResult) {
-            delete req.session.passwordReset; // Limpiar la información de restablecimiento de contraseña de la sesión del usuario
-            req.session.user = updatedUserResult;
-            return res.redirect("/productsmongoose");
+            req.user = updatedUserResult;
+            return res.redirect("/");
           } else {
             return res.status(404).json({
               error: "Usuario no encontrado o no se realizaron modificaciones",
@@ -143,11 +159,64 @@ export const updateUserPassword = async (req = request, res = response) => {
           return res.status(500).json({ error: "Error interno del servidor" });
         }
       } else {
-        return res.redirect("/mail");
+        return res.status(400).json({ error: "Token inválido o expirado" });
       }
-    } else {
-      return res.status(400).send("El token proporcionado no es válido");
-    }
+    });
+
+    // // Verificar si el token proporcionado coincide con el token almacenado en la sesión del usuario
+    // if (
+    //   req.session.passwordReset &&
+    //   req.session.passwordReset.token === token
+    // ) {
+    //   // Verificar si el tiempo de expiración no ha pasado
+    //   if (req.session.passwordReset.expiration > Date.now()) {
+    //     // Procesar el restablecimiento de contraseña
+    //     const user = await UserService.getUsersByEmail(email);
+    //     console.log("user para password", user);
+    //     if (!user) {
+    //       return res.status(404).json({ error: "Usuario no encontrado" });
+    //     }
+
+    //     // Verificar si la nueva contraseña es igual a la contraseña actual del usuario
+    //     const isSamePassword = await bcrypt.compare(password, user.password);
+
+    //     console.log("isSame ", isSamePassword);
+
+    //     if (isSamePassword) {
+    //       return res.status(400).json({
+    //         error: "La nueva contraseña debe ser diferente de la anterior",
+    //       });
+    //     }
+
+    //     // Actualizar la contraseña del usuario
+    //     try {
+    //       const hashedPassword = await bcrypt.hash(password, 10);
+    //       user.password = hashedPassword;
+    //       const updatedUserResult = await UserService.updateUser(
+    //         user._id,
+    //         user,
+    //         { new: true }
+    //       );
+
+    //       if (updatedUserResult) {
+    //         delete req.session.passwordReset; // Limpiar la información de restablecimiento de contraseña de la sesión del usuario
+    //         req.session.user = updatedUserResult;
+    //         return res.redirect("/productsmongoose");
+    //       } else {
+    //         return res.status(404).json({
+    //           error: "Usuario no encontrado o no se realizaron modificaciones",
+    //         });
+    //       }
+    //     } catch (error) {
+    //       console.log("Error al hashear la clave");
+    //       return res.status(500).json({ error: "Error interno del servidor" });
+    //     }
+    //   } else {
+    //     return res.redirect("/mail");
+    //   }
+    // } else {
+    //   return res.status(400).send("El token proporcionado no es válido");
+    // }
   } catch (error) {
     console.log("Error al hashear la clave");
     return res.status(500).json({ error: "Error interno del servidor" });

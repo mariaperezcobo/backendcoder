@@ -2125,3 +2125,11 @@
 {"level":"debug","message":"cid"}
 {"__v":0,"_id":"65ff163c0ff829d5726f8100","age":null,"cart":"65ff163c0ff829d5726f8102","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-23T17:49:48.797Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$rx7FFWROKNbA8TjoxXO4hOtEglnyWF1DzqpcSQOQyXvllQ39mju9y","rol":"user"}
 {"level":"debug","message":"cid"}
+{"__v":0,"_id":"65ff163c0ff829d5726f8100","age":null,"cart":"65ff163c0ff829d5726f8102","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-23T17:49:48.797Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$rx7FFWROKNbA8TjoxXO4hOtEglnyWF1DzqpcSQOQyXvllQ39mju9y","rol":"user"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65ff163c0ff829d5726f8100","age":null,"cart":"65ff163c0ff829d5726f8102","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-23T17:49:48.797Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$rx7FFWROKNbA8TjoxXO4hOtEglnyWF1DzqpcSQOQyXvllQ39mju9y","rol":"user"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65ff163c0ff829d5726f8100","age":null,"cart":"65ff163c0ff829d5726f8102","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-23T17:49:48.797Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$rx7FFWROKNbA8TjoxXO4hOtEglnyWF1DzqpcSQOQyXvllQ39mju9y","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"65ff163c0ff829d5726f8100","age":null,"cart":"65ff163c0ff829d5726f8102","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-23T17:49:48.797Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$0tFOpdBHGcewMC34FPmyNuJ9r/lI9lL/UsmNfAf1uChL8uKzgUYU6","rol":"admin"}
+{"level":"debug","message":"cid"}

@@ -22,6 +22,7 @@ import MongoStore from "connect-mongo";
 import nodemailer from "nodemailer";
 import swaggerJSDoc from "swagger-jsdoc";
 import SwaggerUiExpress from "swagger-ui-express";
+import jwt from "jsonwebtoken";
 
 //import UserModel from './models/users.model.js'
 import prodMongoose from "./router/prodmongoose.router.js";
@@ -176,10 +177,11 @@ app.get("/mail", (req, res) => {
 
 app.post("/mail", async (req, res) => {
   const email = req.body.email;
-  const token = generateToken({ email }); // Generar el token
 
-  const expiration = Date.now() + 120000; //3600000;
-  req.session.passwordReset = { token, expiration, email };
+  const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+
+  // const expiration = Date.now() + 120000; //3600000;
+  // req.session.passwordReset = { token, expiration, email };
 
   const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
 

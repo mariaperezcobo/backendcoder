@@ -44,14 +44,6 @@ router.get("/realtimeproducts", realtimeproductsView);
 router.get("/", auth, initUser);
 //router.get("/", initUser);
 
-// router.get(
-//   "/login",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     res.json({ message: "Autenticación exitosa", user: req.user });
-//   }
-// );
-
 //router.get("/login", justPublicWhitoutSession, loginView);
 router.get("/login", loginView);
 
@@ -63,8 +55,16 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   profileUser
 );
-// router.get("/updateuser", auth, updateUserView);
-// router.put("/updateuser/:id", auth, updateUser);
+router.get(
+  "/updateuser",
+  passport.authenticate("jwt", { session: false }),
+  updateUserView
+);
+router.put(
+  "/updateuser/:id",
+  passport.authenticate("jwt", { session: false }),
+  updateUser
+);
 
 router.get(
   "/updateuserpassword",
