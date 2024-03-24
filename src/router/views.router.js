@@ -21,19 +21,6 @@ import { auth } from "../middlewares/session.middlewares.js";
 
 const router = Router();
 
-//middlewares para sesiones
-// function justPublicWhitoutSession(req, res, next) {
-//   if (req.session?.user) return res.redirect("/profile");
-//   return next();
-// }
-
-// function auth(req, res, next) {
-//   if (req.session?.user) return next();
-//   return res.redirect("/login");
-// }
-
-const productManager = new ProductManager();
-
 //para ver productos con filesystem
 //router.get("/home", auth, homeView);
 router.get("/home", homeView);

@@ -1,12 +1,14 @@
 import UserRegisterModel from "../dao/models/userregister.model.js";
 import passport from "passport";
 import logger from "../logging/logger.js";
-import { createHash } from "../utils.js";
 import { UserService } from "../services/index.js";
 import { generateToken } from "../utils.js";
 import bcrypt from "bcrypt";
 import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
+import { createHash, isValidPassword } from "../utils.js";
+import UserInsertDTO from "../DTO/users.dto.js";
+import { CartService } from "../services/index.js";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -52,7 +54,32 @@ export const login = async (req, res, next) => {
   console.log("Solicitud POST recibida en /api/session/login");
   const { email, password } = req.body;
   const user = await UserService.getUsers(email);
+
+  if (!user) {
+    console.error("user doesnt exist");
+    return res.status(401).json({ message: "Credenciales inválidas" });
+  }
+
+  if (!isValidPassword(user, password)) {
+    console.error("password not valid");
+    return res.status(401).json({ message: "Credenciales inválidas" });
+  }
+
+  user.last_connection = new Date();
+
+  const updatedUserResult = await UserService.updateUser(
+    user._id,
+    { last_connection: user.last_connection },
+    { new: true }
+  );
+
+  if (!updatedUserResult) {
+    console.error("Error updating user last_connection");
+    return done("Error updating user last_connection", null);
+  }
+
   console.log("user desde login", user);
+
   if (user) {
     const token = generateToken(user);
 
@@ -65,15 +92,81 @@ export const login = async (req, res, next) => {
   }
 };
 
+// export const registerUser = async (req, res) => {
+//   passport.authenticate(
+//     "registeruser",
+//     { failureRedirect: "/" },
+//     (err, user) => {
+//       return res.redirect("/login");
+//     }
+//   )(req, res);
+// };
+
+//con jwt
 export const registerUser = async (req, res) => {
-  passport.authenticate(
-    "registeruser",
-    { failureRedirect: "/" },
-    (err, user) => {
-      return res.redirect("/login");
+  const { first_name, last_name, age, rol, email, password } = req.body;
+  try {
+    const user = await UserService.getUsers(email);
+    console.log("usuario 2", user);
+
+    if (!email) {
+      console.log("Email es nulo o indefinido");
+      return res.status(400).json({ error: "el mail no es valido" });
     }
-  )(req, res);
+
+    if (user) {
+      console.log("user already exist", user);
+      return res.status(400).json({ error: "El usuario ya existe" });
+    }
+    const rolValue = rol || "user";
+
+    const newUser = {
+      first_name,
+      last_name,
+      age,
+      rol: rolValue,
+      email,
+      password: createHash(password),
+    };
+
+    //console.log('Datos del nuevo usuario:', newUser);
+
+    // const result = await UserRegisterModel.create(newUser)
+
+    const newUserDTO = new UserInsertDTO(newUser);
+
+    const result = await UserService.addUsers(newUserDTO);
+    console.log("usuario agregado", result);
+
+    // Añadir el carrito al usuario
+    const carrito = await CartService.addCart({ productosagregados: [] });
+
+    result.cart = carrito.id;
+    // console.log('carrito', carrito)
+    console.log("carrito desde passport", carrito);
+    console.log("result desp de incorporar carrito", result);
+
+    result.last_connection = new Date();
+
+    // Actualiza el usuario con el ID del carrito
+    await UserService.updateUser(result._id, {
+      cart: carrito.id,
+      last_connection: result.last_connection,
+    });
+
+    //const carrito = await CartModel.create({ productosagregados: [] })
+
+    //   console.log('Datos del nuevo usuario con carrito:', newUser);
+    // Generar el token JWT
+
+    console.log("result de passport config", result);
+
+    return res.redirect("/login");
+  } catch (error) {
+    console.error("Error al registrar usuario:", error);
+  }
 };
+
 export const logOutSession = (req, res) => {
   // Obtener información del usuario de la solicitud
   const user = req.user; // Suponiendo que req.user contiene la información del usuario
