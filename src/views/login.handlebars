@@ -46,7 +46,7 @@ console.log('formulario enviado')
             headers: {
                 'Content-Type': 'application/json'
             },
-          
+          credentials: 'include',
             body: JSON.stringify({ email, password })
         })
          .then(r => r.json())
@@ -54,6 +54,8 @@ console.log('formulario enviado')
         .then(data => {
             // Maneja la respuesta del servidor, por ejemplo, redireccionar al usuario a una nueva página
             console.log('data',data); // Muestra la respuesta del servidor en la consola para propósitos de depuración
+             // Maneja la respuesta del servidor, por ejemplo, redirigiendo a otra página con JavaScript
+    window.location.href = '/productsmongoose';
         })
         .catch(error => {
             console.error('Error al iniciar sesión:', error); // Maneja errores en caso de que ocurran

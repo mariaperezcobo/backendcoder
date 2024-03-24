@@ -36,13 +36,13 @@ const productManager = new ProductManager();
 
 //para ver productos con filesystem
 //router.get("/home", auth, homeView);
-router.get("/home", auth, homeView);
-router.get("/realtimeproducts", auth, realtimeproductsView);
+router.get("/home", homeView);
+router.get("/realtimeproducts", realtimeproductsView);
 
 //renders para sesiones
 
-//router.get("/", auth, initUser);
 router.get("/", auth, initUser);
+//router.get("/", initUser);
 
 // router.get(
 //   "/login",
@@ -61,7 +61,6 @@ router.get("/registeruser", registerView);
 router.get(
   "/profile",
   passport.authenticate("jwt", { session: false }),
-  auth,
   profileUser
 );
 // router.get("/updateuser", auth, updateUserView);
@@ -69,27 +68,19 @@ router.get(
 
 router.get(
   "/updateuserpassword",
-  passport.authenticate("jwt", { session: false }),
-  auth,
+
   updateUserPasswordView
 );
 router.post(
   "/updateuserpassword",
-  passport.authenticate("jwt", { session: false }),
-  auth,
+
   updateUserPassword
 );
 
-router.get(
-  "/allusers",
-  passport.authenticate("jwt", { session: false }),
-  auth,
-  seeUsers
-);
+router.get("/allusers", seeUsers);
 router.post(
   "/deleteusers",
-  passport.authenticate("jwt", { session: false }),
-  auth,
+
   deleteUsers
 );
 

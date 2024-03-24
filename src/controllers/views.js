@@ -6,7 +6,7 @@ import UserRegisterModel from "../dao/models/userregister.model.js";
 
 export const profileUser = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
 
     res.render("profile", {
       user,
@@ -107,7 +107,7 @@ export const updateUser = async (req = request, res = response) => {
 
     console.log("updatedUserResult desde updateUser", updatedUserResult);
     if (updatedUserResult) {
-      req.session.user = updatedUserResult;
+      req.user = updatedUserResult;
       res.status(200).json({ message: "Usuario actualizado correctamente" });
     } else {
       logger.warn(`Error al actualizar el user: ${error.message}`);
@@ -124,7 +124,7 @@ export const updateUser = async (req = request, res = response) => {
 
 export const updateUserView = async (req = request, res = response) => {
   try {
-    const user = req.session.user;
+    const user = req.user;
     console.log("user desde updateview", user);
 
     res.render("updateuser", {

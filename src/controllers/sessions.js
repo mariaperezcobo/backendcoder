@@ -51,12 +51,14 @@ export const login = async (req, res, next) => {
   console.log("Solicitud POST recibida en /api/session/login");
   const { email, password } = req.body;
   const user = await UserService.getUsers(email);
-  //console.log("user desde login", user);
+  console.log("user desde login", user);
   if (user) {
     const token = generateToken(user);
+
     console.log("token desde login", token);
     res.cookie("jwt", token, { httpOnly: true });
-    res.json({ message: "logueado" });
+    // Envía una respuesta con el token en el cuerpo, si lo necesitas en el cliente
+    res.json({ token });
   } else {
     res.status(401).json({ message: "Credenciales inválidas" });
   }
@@ -72,72 +74,16 @@ export const registerUser = async (req, res) => {
   )(req, res);
 };
 export const logOutSession = (req, res) => {
-  req.logout(function (err) {
-    if (err) {
-      logger.error("logout error:", err);
-      return res.send("logout error");
-    }
-    req.session.destroy(function (err) {
-      if (err) {
-        logger.error("logout error:", err);
-        return res.send("logout error");
-      }
-      return res.redirect("/");
-    });
-  });
+  // Obtener información del usuario de la solicitud
+  const user = req.user; // Suponiendo que req.user contiene la información del usuario
+  console.log("users", user);
+
+  // Elimina el token almacenado en el cliente
+  res.clearCookie("jwt"); // Esto es un ejemplo para eliminar una cookie, puedes ajustarlo según cómo manejes los tokens en tu aplicación
+
+  // Devuelve una respuesta de éxito o redirige al cliente
+  res.redirect("/");
 };
-
-// // Middleware para verificar el rol del usuario
-// export function isAdmin(req, res, next) {
-//   // Verificar si el usuario está autenticado y tiene el rol de admin
-//   if (
-//     req.session?.user &&
-//     (req.session.user.rol === "admin" || req.session.user.rol === "premium")
-//   ) {
-//     return next();
-//   }
-
-//   // Si el usuario no es admin, redirigir a otra página o enviar un error
-//   res.status(403).send(`
-//     <script>
-//         alert('Acceso denegado: solo los administradores o los premium pueden realizar esta acción');
-//         window.location.href = '/productsmongoose';
-//       </script>
-//     `);
-// }
-
-// export function isAdminEliminate(req, res, next) {
-//   // Verificar si el usuario está autenticado y tiene el rol de admin
-//   if (
-//     req.session?.user &&
-//     (req.session.user.rol === "admin" || req.session.user.rol === "premium")
-//   ) {
-//     return next();
-//   }
-
-//   // Si el usuario no es admin, redirigir a otra página o enviar un error
-//   res.status(403).json({
-//     error:
-//       "Acceso denegado: solo los administradores pueden realizar esta acción",
-//   });
-// }
-
-// export function isUser(req, res, next) {
-//   logger.info(`Estado de la sesión en isUser middleware: ${req.session}`);
-//   console.log("Estado de la sesión en isUser middleware:", req.session);
-//   // Verificar si el usuario está autenticado y tiene el rol de admin
-//   if (req.session?.user && req.session.user.rol !== "admin") {
-//     return next();
-//   } else {
-//     // Si el usuario no es admin, redirigir a otra página o enviar un error
-//     res.status(403).send(`
-//   <script>
-//       alert('Acceso denegado: solo los usuarios pueden realizar esta acción');
-//       window.location.href = '/productsmongoose';
-//     </script>
-//   `);
-//   }
-// }
 
 export const updateUserPassword = async (req = request, res = response) => {
   try {

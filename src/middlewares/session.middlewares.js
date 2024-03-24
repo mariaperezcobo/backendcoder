@@ -37,6 +37,7 @@ export function isAdminEliminate(req, res, next) {
 
 export function auth(req, res, next) {
   if (!req.user) {
+    console.log("usuario no logueado");
     // Si no hay un usuario adjunto al objeto `req`, redirige a la página de inicio de sesión
     return res.redirect("/login");
   }
@@ -44,6 +45,7 @@ export function auth(req, res, next) {
   // Si hay un usuario adjunto al objeto `req`, continúa con la siguiente función middleware
   next();
 }
+
 export function isUser(req, res, next) {
   logger.info(`Estado de la sesión en isUser middleware: ${req.user}`);
   console.log("Estado de la sesión en isUser middleware:", req.user);

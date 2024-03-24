@@ -13,34 +13,14 @@ const LocalStrategy = local.Strategy;
 
 const JWTStrategy = passportJWT.Strategy;
 
-export function auth(req, res, next) {
-  if (req.isAuthenticated()) {
-    // Si el usuario está autenticado, continúa con la siguiente función de middleware
-    return next();
-  } else {
-    // Si el usuario no está autenticado, redirige a la página de inicio de sesión
-    return res.redirect("/login");
-  }
-}
-
 const cookieExtractor = (req) => {
+  console.log("cookie extractor");
   let token = null;
   if (req && req.cookies) {
     token = req.cookies["jwt"];
+    console.log("token", token);
   }
   return token;
-
-  // const token = req?.cookies ? req.cookies["jwt"] : null;
-  // console.log("req cokkies", req.cookies);
-  // console.log("token desde cookieextractor", token);
-
-  // if (!token) {
-  //   console.log("Cookie extractor: Token no encontrado");
-  //   return null; // O devuelve null, o maneja este caso de otra manera
-  // }
-
-  // console.log("cookie extractor :", token);
-  // return token;
 };
 
 const initializePassport = () => {
@@ -226,6 +206,31 @@ const initializePassport = () => {
         try {
           console.log("payload", jwt_payload);
           const user = await UserService.getUsers(jwt_payload.user.email);
+
+          //         if (!user) {
+          //           console.error("user doesnt exist");
+          //           return done(null, false);
+          //         }
+
+          //         if (!isValidPassword(user, password)) {
+          //           console.error("password not valid");
+          //           return done(null, false);
+          //         }
+
+          //         user.last_connection = new Date();
+
+          //         const updatedUserResult = await UserService.updateUser(
+          //           user._id,
+          //           { last_connection: user.last_connection },
+          //           { new: true }
+          //         );
+
+          //         if (!updatedUserResult) {
+          //           console.error("Error updating user last_connection");
+          //           return done("Error updating user last_connection", null);
+          //         }
+
+          //         // console.log('usruario:', user)
 
           console.log("usuario desde passport", user);
           if (user) {

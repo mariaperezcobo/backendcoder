@@ -22,7 +22,6 @@ import MongoStore from "connect-mongo";
 import nodemailer from "nodemailer";
 import swaggerJSDoc from "swagger-jsdoc";
 import SwaggerUiExpress from "swagger-ui-express";
-import { auth } from "../src/middlewares/session.middlewares.js";
 
 //import UserModel from './models/users.model.js'
 import prodMongoose from "./router/prodmongoose.router.js";

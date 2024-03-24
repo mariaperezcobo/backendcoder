@@ -13,6 +13,7 @@ export const getProducts = async (req = request, res = response) => {
 
     logger.debug("user", user);
     logger.debug("cid", cid);
+    console.log("user desde getproducts", user);
 
     const limit = parseInt(req.query?.limit ?? 10);
     const page = parseInt(req.query?.page ?? 1);
