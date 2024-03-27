@@ -264,15 +264,11 @@ export const addProduct = async (req = request, res = response) => {
     const userRole = req.user.rol;
 
     console.log(user);
-    console.log(userId);
+    console.log("userId", userId);
 
     const productNew = req.body;
 
-    if (userRole === "premium") {
-      productNew.owner = userId;
-    } else {
-      productNew.owner = "admin";
-    }
+    productNew.owner = userId;
 
     logger.info(`Nuevo producto: ${productNew}`);
     console.log("product new", productNew);
