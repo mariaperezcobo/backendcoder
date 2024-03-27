@@ -129,15 +129,6 @@ io.on("connection", async (socket) => {
 });
 export { io };
 
-// Middleware global para manejar la excepción
-app.use((err, req, res, next) => {
-  if (err.message === "User not authenticated") {
-    console.log("Redirecting to /login");
-    return res.redirect("/login");
-  }
-  next(err);
-});
-
 //ruta
 app.use("/productsmongoose", prodMongoose);
 app.use("/chatmongoose", chatMongoose);
@@ -163,50 +154,45 @@ app.get("/api/userscollection", async (req, res) => {
 //   }
 // });
 
-const transport = nodemailer.createTransport({
-  service: "gmail",
-  port: 587,
-  auth: {
-    user: "mariapcsalem@gmail.com",
-    pass: "ivpkgozjdowugjtv",
-  },
-});
+// const transport = nodemailer.createTransport({
+//   service: "gmail",
+//   port: 587,
+//   auth: {
+//     user: "mariapcsalem@gmail.com",
+//     pass: "ivpkgozjdowugjtv",
+//   },
+// });
 
-app.get("/mail", (req, res) => {
-  res.render("password", {
-    style: "index.css",
-    messages,
-  });
-});
+// app.get("/mail", (req, res) => {
+//   res.render("password", {
+//     style: "index.css",
+//     messages,
+//   });
+// });
 
-// // Función para generar un token único
-// function generarTokenUnico() {
-//   return uuidv4(); // Utilizamos UUID para generar un token único
-// }
+// app.post("/mail", async (req, res) => {
+//   const email = req.body.email;
 
-app.post("/mail", async (req, res) => {
-  const email = req.body.email;
+//   const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
 
-  const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+//   // const expiration = Date.now() + 120000; //3600000;
+//   // req.session.passwordReset = { token, expiration, email };
 
-  // const expiration = Date.now() + 120000; //3600000;
-  // req.session.passwordReset = { token, expiration, email };
+//   const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
 
-  const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
+//   const result = await transport.sendMail({
+//     from: "mariapcsalem@gmail.com.ar",
+//     to: email,
+//     subject: "Recuperacion de contraseña",
+//     html: `
+//         <div>
+//             <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
+//             <a href="${resetLink}">${resetLink}</a>
 
-  const result = await transport.sendMail({
-    from: "mariapcsalem@gmail.com.ar",
-    to: email,
-    subject: "Recuperacion de contraseña",
-    html: `
-        <div>
-            <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
-            <a href="${resetLink}">${resetLink}</a> 
-            
-        </div>
-    `,
-  });
+//         </div>
+//     `,
+//   });
 
-  console.log(result);
-  res.send(`Email sent! 😎`);
-});
+//   console.log(result);
+//   res.send(`Email sent! 😎`);
+// });

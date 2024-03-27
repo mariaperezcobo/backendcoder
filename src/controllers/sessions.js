@@ -9,15 +9,16 @@ import jwt from "jsonwebtoken";
 import { createHash, isValidPassword } from "../utils.js";
 import UserInsertDTO from "../DTO/users.dto.js";
 import { CartService } from "../services/index.js";
+import { transport } from "../utils.js";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  port: 587,
-  auth: {
-    user: "mariapcsalem@gmail.com",
-    pass: "ivpkgozjdowugjtv",
-  },
-});
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   port: 587,
+//   auth: {
+//     user: "mariapcsalem@gmail.com",
+//     pass: "ivpkgozjdowugjtv",
+//   },
+// });
 
 // export const loginUser = async (req, res) => {
 //   try {
@@ -245,7 +246,7 @@ export const updateUserPassword = async (req = request, res = response) => {
 
           if (updatedUserResult) {
             req.user = updatedUserResult;
-            return res.redirect("/productsmongoose");
+            return res.redirect("/login");
           } else {
             return res.status(404).json({
               error: "Usuario no encontrado o no se realizaron modificaciones",
@@ -398,7 +399,8 @@ export const deleteUsers = async (req, res, next) => {
       `,
         };
 
-        transporter.sendMail(mailInfo, function (error, info) {
+        //transporter.sendMail(mailInfo, function (error, info) {
+        transport.sendMail(mailInfo, function (error, info) {
           if (error) {
             logger.error(
               `Error al enviar el correo electrónico: ${error.message}`

@@ -20,6 +20,8 @@ import {
   auth,
   justPublicWhitoutSession,
 } from "../middlewares/session.middlewares.js";
+import jwt from "jsonwebtoken";
+import { transport } from "../utils.js";
 
 const router = Router();
 
@@ -73,6 +75,40 @@ router.post(
 );
 
 router.get("/error", (req, res) => res.send("pagina de error"));
+
+router.get("/mail", (req, res) => {
+  res.render("password", {
+    style: "index.css",
+    messages,
+  });
+});
+
+router.post("/mail", async (req, res) => {
+  const email = req.body.email;
+
+  const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+
+  // const expiration = Date.now() + 120000; //3600000;
+  // req.session.passwordReset = { token, expiration, email };
+
+  const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
+
+  const result = await transport.sendMail({
+    from: "mariapcsalem@gmail.com.ar",
+    to: email,
+    subject: "Recuperacion de contraseña",
+    html: `
+          <div>
+              <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
+              <a href="${resetLink}">${resetLink}</a> 
+              
+          </div>
+      `,
+  });
+
+  console.log(result);
+  res.send(`Email sent! 😎`);
+});
 
 //sesion login con github
 router.get(

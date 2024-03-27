@@ -6,15 +6,16 @@ import { ProductService, CartService, UserService } from "../services/index.js";
 import ProductInsertDTO from "../DTO/products.dto.js";
 import logger from "../logging/logger.js";
 import nodemailer from "nodemailer";
+import { transport } from "../utils.js";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  port: 587,
-  auth: {
-    user: "mariapcsalem@gmail.com",
-    pass: "ivpkgozjdowugjtv",
-  },
-});
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   port: 587,
+//   auth: {
+//     user: "mariapcsalem@gmail.com",
+//     pass: "ivpkgozjdowugjtv",
+//   },
+// });
 
 export const getProducts = async (req = request, res = response) => {
   try {
@@ -361,7 +362,8 @@ export const deleteProduct = async (req = request, res = response) => {
 
     if (user.rol === "admin") {
       // Si es un administrador, eliminar el producto directamente
-      await ProductsModel.deleteOne({ _id: id });
+      // await ProductsModel.deleteOne({ _id: id });
+      await ProductService.deleteProduct({ _id: id });
       console.log("producto eliminado. el user es admir");
 
       const idUserdelProduct = product.owner;
@@ -391,7 +393,7 @@ export const deleteProduct = async (req = request, res = response) => {
 `,
         };
 
-        transporter.sendMail(mailInfoDeleteProduct, function (error, info) {
+        transport.sendMail(mailInfoDeleteProduct, function (error, info) {
           if (error) {
             logger.error(
               `Error al enviar el correo electrónico: ${error.message}`
@@ -411,7 +413,8 @@ export const deleteProduct = async (req = request, res = response) => {
 
       if (product.owner.toString() === user._id.toString()) {
         // Si es el propietario, eliminar el producto
-        await ProductsModel.deleteOne({ _id: id });
+        //await ProductsModel.deleteOne({ _id: id });
+        await ProductService.deleteProduct({ _id: id });
         console.log(
           "producto eliminado. el user es premium y creador del producto"
         );
@@ -461,9 +464,14 @@ export const addProductInCart = async (req = request, res = response) => {
       }
 
       if (producto.owner.toString() === req.user._id.toString()) {
-        return res
-          .status(403)
-          .json({ error: "No puedes agregar tu propio producto al carrito" });
+        const alertMessage = "No puedes agregar tu propio producto al carrito";
+        return res.send(
+          `<script>alert('${alertMessage}'); window.location='/productsmongoose';</script>`
+        );
+
+        // return res
+        //   .status(403)
+        //   .json({ error: "No puedes agregar tu propio producto al carrito" });
       }
 
       const productoInCart = carrito.productosagregados.find(

@@ -2,6 +2,8 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -44,3 +46,12 @@ export const authToken = (req, res, next) => {
     next();
   });
 };
+
+export const transport = nodemailer.createTransport({
+  service: "gmail",
+  port: 587,
+  auth: {
+    user: "mariapcsalem@gmail.com",
+    pass: "ivpkgozjdowugjtv",
+  },
+});
