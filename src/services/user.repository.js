@@ -2,6 +2,11 @@ export default class UserRepository {
   constructor(dao) {
     this.dao = dao;
   }
+
+  createUser = async () => {
+    return this.dao.createUser();
+  };
+
   getAllUsers = async () => {
     return this.dao.getAllUsers();
   };

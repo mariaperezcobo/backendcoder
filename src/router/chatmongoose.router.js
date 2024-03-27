@@ -3,11 +3,23 @@ import ChatModel from "../dao/models/chatmongoose.models.js";
 import { chatPost, chatView } from "../controllers/chat.js";
 //import { isUser } from "../controllers/sessions.js";
 import { isUser } from "../middlewares/session.middlewares.js";
+import passport from "passport";
+
 const router = Router();
 
-router.get("/", isUser, chatView);
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  isUser,
+  chatView
+);
 
-router.post("/", isUser, chatPost);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  isUser,
+  chatPost
+);
 
 // router.get('/', async (req,res)=>{
 //     const contenidochat = await ChatModel.find().lean().exec()

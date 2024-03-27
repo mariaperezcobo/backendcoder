@@ -1,21 +1,11 @@
 import TicketModel from "../dao/models/ticket.model.js";
-import nodemailer from "nodemailer";
-
 import {
   CartService,
   TicketService,
   ProductService,
 } from "../services/index.js";
 import logger from "../logging/logger.js";
-
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  port: 587,
-  auth: {
-    user: "mariapcsalem@gmail.com",
-    pass: "ivpkgozjdowugjtv",
-  },
-});
+import { transport } from "../utils.js";
 
 export const generateTicket = async (req, res) => {
   try {
@@ -72,13 +62,22 @@ export const generateTicket = async (req, res) => {
     //console.log('total compra desde ticket', totalCompra)
     logger.debug(`Total de compra desde ticket: ${totalCompra}`);
 
-    // Crea una nueva instancia del ticket
-    const nuevoTicket = new TicketModel({
+    // // Crea una nueva instancia del ticket
+    // const nuevoTicket = new TicketModel({
+    //   code: newCode,
+    //   purchase_datatime: new Date().toISOString(),
+    //   amount: totalCompra,
+    //   purchaser: email,
+    // });
+
+    // Creas el objeto nuevoTicket
+    const nuevoTicket = {
       code: newCode,
       purchase_datatime: new Date().toISOString(),
       amount: totalCompra,
       purchaser: email,
-    });
+    };
+
     //console.log('crear nuevo ticket', nuevoTicket)
     logger.debug(
       `Nuevo ticket creado: ${JSON.stringify(nuevoTicket, null, 2)}`
@@ -127,7 +126,7 @@ export const generateTicket = async (req, res) => {
   `,
     };
 
-    transporter.sendMail(mailOptions, function (error, info) {
+    transport.sendMail(mailOptions, function (error, info) {
       if (error) {
         logger.error(`Error al enviar el correo electrónico: ${error.message}`);
       } else {
@@ -204,12 +203,21 @@ export const generateTicketView = async (req, res) => {
     logger.debug(`Total de compra desde ticket: ${totalCompra}`);
 
     // Crea una nueva instancia del ticket
-    const nuevoTicket = new TicketModel({
+    // const nuevoTicket = new TicketModel({
+    //   code: newCode,
+    //   purchase_datatime: new Date().toISOString(),
+    //   amount: totalCompra,
+    //   purchaser: email,
+    // });
+
+    // Creas el objeto nuevoTicket
+    const nuevoTicket = {
       code: newCode,
       purchase_datatime: new Date().toISOString(),
       amount: totalCompra,
       purchaser: email,
-    });
+    };
+
     //console.log('crear nuevo ticket', nuevoTicket)
     logger.debug(
       `Nuevo ticket creado: ${JSON.stringify(nuevoTicket, null, 2)}`

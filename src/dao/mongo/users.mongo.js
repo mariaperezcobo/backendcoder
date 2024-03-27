@@ -14,6 +14,10 @@ export default class Users {
     }
   };
 
+  createUser = async (user) => {
+    return UserRegisterModel.create(user);
+  };
+
   getAllUsersForDate = async () => {
     // return await UserRegisterModel.find();
 

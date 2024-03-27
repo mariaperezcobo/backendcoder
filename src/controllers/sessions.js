@@ -1,24 +1,12 @@
-import UserRegisterModel from "../dao/models/userregister.model.js";
-import passport from "passport";
 import logger from "../logging/logger.js";
 import { UserService } from "../services/index.js";
 import { generateToken } from "../utils.js";
 import bcrypt from "bcrypt";
-import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import { createHash, isValidPassword } from "../utils.js";
 import UserInsertDTO from "../DTO/users.dto.js";
 import { CartService } from "../services/index.js";
 import { transport } from "../utils.js";
-
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   port: 587,
-//   auth: {
-//     user: "mariapcsalem@gmail.com",
-//     pass: "ivpkgozjdowugjtv",
-//   },
-// });
 
 // export const loginUser = async (req, res) => {
 //   try {
@@ -45,7 +33,8 @@ import { transport } from "../utils.js";
 export const register = async (req, res) => {
   const user = req.body;
 
-  const result = await UserRegisterModel.create(user);
+  // const result = await UserRegisterModel.create(user);
+  const result = await UserService.createUser(user);
   const token = generateToken(result);
   res.send({ status: "success", token });
 };

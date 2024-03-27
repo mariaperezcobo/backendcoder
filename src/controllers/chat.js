@@ -1,46 +1,37 @@
-import {request, response} from 'express'
-import ChatModel from '../dao/models/chatmongoose.models.js'
-import { ChatService } from '../services/index.js'
-import logger from '../logging/logger.js'
+import { request, response } from "express";
+import { ChatService } from "../services/index.js";
+import logger from "../logging/logger.js";
 
-export const chatView =async(req=request,res=response)=>{
-    try{
-
-    const contenidochat = await ChatService.getChats()
+export const chatView = async (req = request, res = response) => {
+  try {
+    const contenidochat = await ChatService.getChats();
     //const contenidochat = await ChatModel.find().lean().exec()
-   // console.log('conenidochat', {contenidochat})
-    const user=req.session.user
+    // console.log('conenidochat', {contenidochat})
+    const user = req.user;
 
-    res.render('chatmongoose', {
-        user,
-        contenidochat,
-        style: 'index.css',
-        title: 'Fitness Ropa deportiva',
-    })
-    
-       }catch (error){
-        logger.error(`Error: ${error.message}`);
-        //console.error('error', error)
-       }
-    
-    }
+    res.render("chatmongoose", {
+      user,
+      contenidochat,
+      style: "index.css",
+      title: "Fitness Ropa deportiva",
+    });
+  } catch (error) {
+    logger.error(`Error: ${error.message}`);
+    //console.error('error', error)
+  }
+};
 
+export const chatPost = async (req = request, res = response) => {
+  try {
+    const chatmongooseNew = req.body;
 
-    export const chatPost =async(req=request,res=response)=>{
-        try{
-            const chatmongooseNew = req.body
-
-            const resultadochat = await ChatService.addChats(chatmongooseNew)
-          //  const resultadochat = await ChatModel.create(chatmongooseNew)
-            console.log(resultadochat)
-            res.redirect('/chatmongoose')
-        
-           }catch (error){
-            // console.log(error)
-            logger.error(`Error al enviar el mensaje: ${error.message}`);
-            res.send('Error al enviar el mensaje')
-           }
-        
-        }
-
-
+    const resultadochat = await ChatService.addChats(chatmongooseNew);
+    //  const resultadochat = await ChatModel.create(chatmongooseNew)
+    console.log(resultadochat);
+    res.redirect("/chatmongoose");
+  } catch (error) {
+    // console.log(error)
+    logger.error(`Error al enviar el mensaje: ${error.message}`);
+    res.send("Error al enviar el mensaje");
+  }
+};

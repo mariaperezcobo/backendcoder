@@ -1,5 +1,4 @@
 import { request, response } from "express";
-import CartModel from "../dao/models/cartmongoose.model.js";
 import { CartService } from "../services/index.js";
 import logger from "../logging/logger.js";
 

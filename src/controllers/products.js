@@ -1,21 +1,8 @@
 import { request, response } from "express";
-import mongoose from "mongoose";
-import ProductsModel from "../dao/models/prodmongoose.models.js";
-import CartModel from "../dao/models/cartmongoose.model.js";
 import { ProductService, CartService, UserService } from "../services/index.js";
 import ProductInsertDTO from "../DTO/products.dto.js";
 import logger from "../logging/logger.js";
-import nodemailer from "nodemailer";
 import { transport } from "../utils.js";
-
-// const transporter = nodemailer.createTransport({
-//   service: "gmail",
-//   port: 587,
-//   auth: {
-//     user: "mariapcsalem@gmail.com",
-//     pass: "ivpkgozjdowugjtv",
-//   },
-// });
 
 export const getProducts = async (req = request, res = response) => {
   try {
@@ -491,8 +478,7 @@ export const addProductInCart = async (req = request, res = response) => {
     } else {
       logger.info(`Usuario no autorizado`);
       res.status(403).json({
-        error:
-          "No tienes permisos para agregar un producto al carrito este producto porque no sos user",
+        error: "No tienes permisos para agregar un producto al carrito",
       });
     }
   } catch (error) {
