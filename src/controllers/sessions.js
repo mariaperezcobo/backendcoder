@@ -51,6 +51,10 @@ export const register = async (req, res) => {
 
 //para jwt
 export const login = async (req, res, next) => {
+  // if (user) {
+  //   return res.redirect("/productsmongoose");
+  // }
+
   console.log("Solicitud POST recibida en /api/session/login");
   const { email, password } = req.body;
   const user = await UserService.getUsers(email);
@@ -241,7 +245,7 @@ export const updateUserPassword = async (req = request, res = response) => {
 
           if (updatedUserResult) {
             req.user = updatedUserResult;
-            return res.redirect("/");
+            return res.redirect("/productsmongoose");
           } else {
             return res.status(404).json({
               error: "Usuario no encontrado o no se realizaron modificaciones",

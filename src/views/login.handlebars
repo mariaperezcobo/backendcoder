@@ -49,6 +49,7 @@ console.log('formulario enviado')
           credentials: 'include',
             body: JSON.stringify({ email, password })
         })
+
          .then(r => r.json())
      
         .then(data => {

@@ -340,62 +340,42 @@ export const deleteProduct = async (req = request, res = response) => {
     const { id } = req.params;
     // const { user } = req.session;
     const user = req.user;
+    console.log("user desde delete", user);
 
     //console.log('id para elimnar', id)
     logger.debug(`ID para eliminar: ${id}`);
 
-    //     if(req.session?.user && req.session.user.rol === 'admin') {
-    //         // Realiza la eliminación del producto aquí)
-    //    // await ProductService.deleteProduct({id: id })
-    //     await ProductsModel.deleteOne({_id: id })
-
-    //return res.json({status: 'success'})
-
     const product = await ProductService.getProductsById({ _id: id });
-
+    console.log("product desde delete", product);
     if (!product) {
       return res.status(404).json({ error: "El producto no fue encontrado" });
     }
 
     console.log("prod  a eliminar", product);
-
+    if (!user) {
+      res
+        .status(401)
+        .json({ error: "No estás autorizado para realizar esta acción" });
+    }
     // Verificar si el usuario tiene permisos de administrador o es propietario del producto
-    if (req?.user) {
-      const user = req.user;
 
-      //  console.log("usuario desde delete product", user);
-
-      if (user.rol === "admin") {
-        // Si es un administrador, eliminar el producto directamente
-        await ProductsModel.deleteOne({ _id: id });
-        console.log("producto eliminado. el user es admir");
-
-        res.json({ status: "success" });
-      }
-      if (user.rol === "premium") {
-        // Verificar si el propietario del producto es el mismo que el usuario actual
-        if (product.owner.toString() === user._id.toString()) {
-          // Si es el propietario, eliminar el producto
-          await ProductsModel.deleteOne({ _id: id });
-          console.log(
-            "producto eliminado. el user es premium y creador del producto"
-          );
-          res.json({ status: "success" });
-        }
-      }
+    if (user.rol === "admin") {
+      // Si es un administrador, eliminar el producto directamente
+      await ProductsModel.deleteOne({ _id: id });
+      console.log("producto eliminado. el user es admir");
 
       const idUserdelProduct = product.owner;
-      console.log("idUserdelProduct", idUserdelProduct);
 
+      console.log("idUserdelProduct", idUserdelProduct);
       // Buscar al propietario del producto en el modelo de usuarios
       const owner = await UserService.getUsersById({ _id: idUserdelProduct });
-      if (!owner) {
-        return res
-          .status(404)
-          .json({ error: "El propietario del producto no fue encontrado" });
-      }
+      console.log("owner eliminando premium", owner);
 
-      console.log("owner", owner);
+      // if (!owner) {
+      //   return res
+      //     .status(404)
+      //     .json({ error: "El propietario del producto no fue encontrado" });
+      // }
 
       // Verificar si el propietario del producto tiene rol premium
       if (owner.rol === "premium") {
@@ -421,11 +401,32 @@ export const deleteProduct = async (req = request, res = response) => {
           }
         });
       } else {
-        // Si no es el propietario, devolver un error de permisos
-        return res
-          .status(403)
-          .json({ error: "no tienes permisos para eliminar" });
+        console.log("el usuario creador del producto no es premium");
       }
+      console.log("se elimino porque el user es admin");
+      return res.json({ status: "success" });
+    } else if (user.rol === "premium") {
+      console.log("el user es premium");
+      // Verificar si el propietario del producto es el mismo que el usuario actual
+
+      if (product.owner.toString() === user._id.toString()) {
+        // Si es el propietario, eliminar el producto
+        await ProductsModel.deleteOne({ _id: id });
+        console.log(
+          "producto eliminado. el user es premium y creador del producto"
+        );
+        return res.json({ status: "success" });
+      } else {
+        console.log(
+          "Un usuario premium solo puede eliminar productos creados por él mismo"
+        );
+        return res.status(500).json(error);
+      }
+    } else {
+      console.log("No tienes permisos para eliminar este producto..");
+      return res.json({
+        error: "No tienes permisos para eliminar este producto..",
+      });
     }
   } catch (error) {
     logger.error(`Error al eliminar el producto del carrito: ${error.message}`);
