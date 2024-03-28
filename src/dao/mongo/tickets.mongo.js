@@ -17,4 +17,9 @@ export default class Tickets {
 
     //return TicketModel.find().sort({ code: -1 });
   };
+
+  getTicketById = async (id) => {
+    const ticket = await TicketModel.findById(id);
+    return ticket;
+  };
 }

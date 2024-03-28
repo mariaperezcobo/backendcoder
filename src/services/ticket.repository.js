@@ -16,4 +16,8 @@ export default class TicketRepository {
     return tickets.sort((a, b) => b.code - a.code);
     //return this.dao.getAllTickets().sort({ code: -1 });
   };
+
+  getTicketById = async (id) => {
+    return this.dao.getTicketById(id);
+  };
 }

@@ -29,6 +29,7 @@ import prodMongoose from "./router/prodmongoose.router.js";
 import chatMongoose from "./router/chatmongoose.router.js";
 import cartMongoose from "./router/cartmongoose.js";
 import pruebaErrores from "./controllers/errors.js";
+import paymentRouter from "./router/payments.router.js";
 
 const app = express();
 app.use(cors());
@@ -136,6 +137,7 @@ app.use("/cartmongoose", cartMongoose);
 app.use("/api/session", Session);
 app.use("/", viewsRouter);
 app.get("/loggertest", pruebaErrores);
+app.use("/api/payments", paymentRouter);
 
 //rutas mongoose
 app.get("/api/userscollection", async (req, res) => {

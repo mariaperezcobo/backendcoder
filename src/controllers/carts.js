@@ -298,7 +298,6 @@ export const getCartStock = async (req = request, res = response) => {
     console.log("carrito desde stock", carrito.productosagregados);
     res.render("stock", {
       carrito,
-
       cid,
       style: "index.css",
       title: "Fitness Ropa deportiva",

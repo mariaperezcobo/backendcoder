@@ -13,8 +13,13 @@
         <p class="margen">El total de la compra es de ${{ticket.amount}}</p>
         <p class="margen">La compra se realizó el dia {{ticket.purchase_datatime}}</p>
         <p class="margen">El código de la operación es {{ticket.code}}</p>
-        <p class="margen">El email del usuario que registró la compra es {{ticket.purchaser}}</p>
+        <p class="margen">El email del usuario que registró la compra es {{ticket.purchaser}}</p><br><br>
     
+    <!-- Use action="/create-checkout-session.php" if your server is PHP based. -->
+    <form id="buyForm" action="/api/payments/payment-intents/{{ticket._id}}" method="POST">
+      <button type="submit">Ir a pagar</button>
+    </form>
+
         </div>
 <br>
        <h5 class="margen margen-top2">Productos que quedaron pendientes:</h5>
@@ -43,3 +48,37 @@
 </script>
 
 <script>
+  <script>
+    document.getElementById('buyForm').addEventListener ('submit', function(event) {
+        event.preventDefault();
+        console.log('submit para ir a pagar')
+      
+      const id = `{{ticket._id}}`
+
+        fetch(`/api/payments/payment-intents/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        
+            body: JSON.stringify({ result })
+        })
+
+         .then(response => {
+            if (!response.ok) {
+                throw new Error('La solicitud falló'); // Manejar errores de red u otros errores en la solicitud fetch
+            }
+            return response.json();
+         })
+     
+        .then(data => {
+            // Maneja la respuesta del servidor, por ejemplo, redireccionar al usuario a una nueva página
+            console.log('data',data); // Muestra la respuesta del servidor en la consola para propósitos de depuración
+             // Maneja la respuesta del servidor, por ejemplo, redirigiendo a otra página con JavaScript
+ 
+        })
+        .catch(error => {
+            console.error('Error :', error); // Maneja errores en caso de que ocurran
+        });
+    });
+</script>
