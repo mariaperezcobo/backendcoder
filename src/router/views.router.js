@@ -1,5 +1,4 @@
 import { Router } from "express";
-import ProductManager from "../dao/managers/productManager.js";
 import passport from "passport";
 import {
   profileUser,
@@ -25,8 +24,6 @@ import { transport } from "../utils.js";
 
 const router = Router();
 
-//para ver productos con filesystem
-//router.get("/home", auth, homeView);
 router.get("/home", homeView);
 
 //renders para sesiones
@@ -36,7 +33,6 @@ router.get("/", auth, initUser);
 
 router.get("/login", justPublicWhitoutSession, loginView);
 
-//router.get("/registeruser", justPublicWhitoutSession, registerView);
 router.get("/registeruser", registerView);
 
 router.get(
@@ -44,6 +40,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   profileUser
 );
+
 router.get(
   "/updateuser",
   passport.authenticate("jwt", { session: false }),
@@ -55,24 +52,13 @@ router.put(
   updateUser
 );
 
-router.get(
-  "/updateuserpassword",
+router.get("/updateuserpassword", updateUserPasswordView);
 
-  updateUserPasswordView
-);
-router.post(
-  "/updateuserpassword",
-
-  updateUserPassword
-);
+router.post("/updateuserpassword", updateUserPassword);
 
 router.get("/allusers", seeUsers);
 
-router.post(
-  "/deleteusers",
-
-  deleteUsers
-);
+router.post("/deleteusers", deleteUsers);
 
 router.get("/error", (req, res) => res.send("pagina de error"));
 

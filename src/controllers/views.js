@@ -1,6 +1,5 @@
 import { request, response } from "express";
 import ProductManager from "../dao/managers/productManager.js";
-import passport from "passport";
 import logger from "../logging/logger.js";
 import UserRegisterModel from "../dao/models/userregister.model.js";
 

@@ -1,10 +1,4 @@
-//cart con mongoose (la parte de agregar el producto a un carrito esta en otrocart.router)
-
 import { Router } from "express";
-//import mongoose from 'mongoose'
-// import CartModel from '../dao/models/cartmongoose.model.js'
-// import ProductModel from '../dao/models/productcart.model.js'
-// import ProductsModel from '../dao/models/prodmongoose.models.js'
 import {
   deleteProductInCart,
   getCartById,
@@ -17,22 +11,8 @@ import {
   getCartStock,
 } from "../controllers/carts.js";
 import { generateTicket, generateTicketView } from "../controllers/ticket.js";
-//import { isUser } from "../controllers/sessions.js";
 import { isUser } from "../middlewares/session.middlewares.js";
 import passport from "passport";
-
-//inicializamos variables
-// const url = 'mongodb+srv://mariaperezcobo:t5pFMZnlhzX5AsFQ@clustermaria.jeh0zpu.mongodb.net/'
-// const mongodbName = 'ecommerce'
-
-// //conectamos a db y corremos el server
-// await mongoose.connect(url, {dbName: mongodbName})
-//     .then(()=>{
-//         console.log('DB connected')
-//     })
-//     .catch(e=>{
-//         console.error('error conectando a la base de datos')
-//     })
 
 const router = Router();
 
@@ -73,7 +53,7 @@ router.delete(
   deleteProductInCart
 );
 
-//para eliminar carrito
+//para vaciar un carrito
 router.delete(
   "/:cid",
   passport.authenticate("jwt", { session: false }),
@@ -93,6 +73,7 @@ router.get(
   getCartToBuy
 );
 
+//controla si hay stock y calcula el monto de la compra final
 router.get(
   "/:cid/stock",
   passport.authenticate("jwt", { session: false }),
@@ -120,4 +101,5 @@ router.get(
 //para swagger
 router.get("/api/:cid/purchase/checkout", generateTicketView);
 router.post("/api/:cid/purchase/checkout", generateTicketView);
+
 export default router;

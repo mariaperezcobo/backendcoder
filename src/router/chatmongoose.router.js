@@ -1,7 +1,5 @@
 import { Router } from "express";
-import ChatModel from "../dao/models/chatmongoose.models.js";
 import { chatPost, chatView } from "../controllers/chat.js";
-//import { isUser } from "../controllers/sessions.js";
 import { isUser } from "../middlewares/session.middlewares.js";
 import passport from "passport";
 

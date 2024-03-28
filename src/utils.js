@@ -55,3 +55,9 @@ export const transport = nodemailer.createTransport({
     pass: "ivpkgozjdowugjtv",
   },
 });
+
+//stripe
+//pk_test_51OvqE5P6ivAJFcXxAUm3XgE7NIzeLmRkj5yFjsI8XqOa6pu3QHcYpqcRxdP8whRr6KYFKtJWOOv6UEz5M20EfBr100cpCkuwRB
+
+//privada
+//sk_test_51OvqE5P6ivAJFcXxx3RGgideVFuqIupAADPCjhfDQY95DI0tZ2kWMAJlMkcVXemAwCq08IlEYatko3Gj7otemutx00Kjzj4kEO

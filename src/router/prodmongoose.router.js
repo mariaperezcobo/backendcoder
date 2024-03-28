@@ -14,14 +14,11 @@ import {
   addProductView,
   updateProductBaseView,
 } from "../controllers/products.js";
-//import { isAdmin, isAdminEliminate, isUser } from "../controllers/sessions.js";
 import {
   isAdmin,
   isAdminEliminate,
-  isUser,
 } from "../middlewares/session.middlewares.js";
 import passport from "passport";
-import { auth } from "../middlewares/session.middlewares.js";
 
 const router = Router();
 

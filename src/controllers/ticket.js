@@ -1,4 +1,3 @@
-import TicketModel from "../dao/models/ticket.model.js";
 import {
   CartService,
   TicketService,
@@ -41,15 +40,17 @@ export const generateTicket = async (req, res) => {
     // console.log('carrito de checkout productsToBuy', carrito.productsToBuy)
     let totalCompra;
 
-    // const lastTicket = await TicketModel.findOne({}, {}, { sort: { 'code': -1 } });
-    const lastTicket = await TicketService.getTickets(
+    const lastTicket = await TicketService.getAllTickets(
       {},
       {},
       { sort: { code: -1 } }
     );
+    console.log("lastTicket", lastTicket);
+
     let newCode;
-    if (lastTicket) {
-      newCode = lastTicket.code + 1;
+
+    if (lastTicket.length > 0) {
+      newCode = lastTicket[0].code + 1;
     } else {
       // En caso de que no haya ningún ticket en la base de datos aún
       newCode = 1;

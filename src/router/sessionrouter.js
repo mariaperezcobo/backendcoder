@@ -1,7 +1,5 @@
 import { Router } from "express";
 import { logOutSession, login, registerUser } from "../controllers/sessions.js";
-//import { generateToken, authToken } from "../utils.js";
-import passport from "passport";
 
 const router = Router();
 
