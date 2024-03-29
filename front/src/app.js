@@ -10,7 +10,8 @@ function App() {
     <Suspense fallback="loading">
       <Routes>
         <Route path="" element={<Home />} />
-        <Route path="/stripe" element={<Stripe />} />
+        {/* <Route path="/stripe" element={<Stripe />} /> */}
+        <Route path="/pagar/:ticketId" element={<Stripe />} />
       </Routes>
     </Suspense>
   );
