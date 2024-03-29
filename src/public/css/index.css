@@ -59,6 +59,11 @@ b{
   
     
   } 
+  .delete-carrito {
+    background-color: rgb(180, 196, 196);
+    color:black;
+  }
+
   .menu_desplegable{
     text-decoration: none;
     background-color: rgb(13, 13, 75);
@@ -99,4 +104,21 @@ b{
   width: 70%;
   font-size: 36px;
   margin: 20px;
+}
+
+.terminarCompra{
+  background-color: gray;
+  margin: 10px;
+  font-size: 20px;
+  
+}
+.terminarCompra2{
+  
+  margin: 10px;
+  font-size: 22px;
+  
+}
+.margin10{
+  margin: 10px;
+  
 }
