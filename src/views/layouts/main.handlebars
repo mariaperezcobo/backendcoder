@@ -1,53 +1,140 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
 
-      <!-- Incluye Bootstrap CSS desde el CDN oficial de Bootstrap -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <!-- Incluye Bootstrap CSS desde el CDN oficial de Bootstrap -->
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="/static/css/{{style}}">
+    <link rel="stylesheet" href="/static/css/{{style}}" />
 
-    
-    
-</head>
-<body>
-    <div class="color--barranav">
-    <h1 class="logo">{{title}}</h1>
+
+  </head>
+  <body>
+
+
+    <div className="color--barranav">
+      <div className="colornav">
+        <nav class="navbar navbar-expand-lg colornav">
+          <div class="container-fluid color--barranav">
+
+            <a class="navbar-brand" href="">
+              <h1 class="logo">{{title}}</h1>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavDropdown"
+              aria-controls="navbarNavDropdown"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item" >
+                  <a
+                    class="menu_desplegable nav-link" 
+                    href="/productsmongoose"
+                  >Productos</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle botonnav menu_desplegable"
+                    href=""
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Usuarios
+                  </a>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="navbarDropdownMenuLink"
+                  >
+                    <li><a
+                        class="dropdown-item botonnav "
+                        href="/allusers"
+                      >Ver Usuarios</a></li>
+                    <li><a
+                        class="dropdown-item botonnav"
+                        href="/updateuser"
+                      >Actualizar usuario</a></li>
+                    <li><a
+                        class="dropdown-item botonnav"
+                        href="/profile"
+                      >Profile</a></li>
+                  </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link botonnav menu_desplegable"
+                      href="/chatmongoose"
+                    >Chat</a>
+                  </li>
+
+                  <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle botonnav menu_desplegable"
+                    href=""
+                    id="navbarDropdownMenuLink"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Otros
+                  </a>
+                  <ul
+                    class="dropdown-menu"
+                    aria-labelledby="navbarDropdownMenuLink"
+                  >
+                                      <li><a
+                        class="dropdown-item botonnav"
+                        href="/productsmongoose/create"
+                      >Crear Productos</a></li>
+                    <li><a
+                        class="dropdown-item botonnav"
+                        href="/apidocs"
+                      >Documentación</a></li>
+                    <li><a
+                        class="dropdown-item botonnav"
+                        href="/loggertest"
+                      >Logger Test</a></li>
+                  </ul>
+                  </li>
+                 <li class="nav-item">
+                    <a
+                      class="nav-link botonnav menu_desplegable"
+                      href="/login"
+                    >Login</a>
+                  </li>
+                 <li class="nav-item">
+                    <a
+                      class="nav-link botonnav menu_desplegable"
+                      href="/registeruser"
+                    >Registrarse</a>
+                  </li>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+
     </div>
-   
-<nav>
-  <ul>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/registeruser">Register</a></li>
-    <li><a href="/profile">Profile</a></li>
-    <li><a href="/allusers">Ver todos los usuarios</a></li>
-    <li><a href="/updateuser">Actualizar Usuario</a></li>
-    <li><a href="/apidocs">Documentación</a></li>
-    
-    <br><br>
-    <li><a href="/">Index</a></li>
-    <li><a href="/productsmongoose">Ver Productos (con mongoose)</a></li>
-    <li><a href="/productsmongoose/create">Crear Productos (con mongoose)</a></li>
-    <li><a href="/realtimeproducts">Ver Productos ( realtimeproducts con filesystem)</a></li>
-    <li><a href="/chat">Chat (con filesystem)</a></li>
-    <li><a href="/chatmongoose">Chat (con mongoose)</a></li>
-    <li><a href="/loggertest">Logger Test</a></li>
-  </ul>
-</nav>
+
 
 
     {{{body}}}
 
-
-        
-    
     <script>
-       
-
-      
-    </script> 
-</body>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  </body>
 </html>

@@ -59,7 +59,14 @@ b{
   
     
   } 
-  
+  .menu_desplegable{
+    text-decoration: none;
+    background-color: rgb(13, 13, 75);
+    padding: 10px;
+    color: white;
+    border-radius: 5%;
+    margin: 5px;
+  }
 .logo{
   color: white;
   margin: 15px
