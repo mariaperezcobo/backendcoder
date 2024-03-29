@@ -137,14 +137,13 @@ app.use("/cartmongoose", cartMongoose);
 app.use("/api/session", Session);
 app.use("/", viewsRouter);
 app.get("/loggertest", pruebaErrores);
-app.use("/api/payments", paymentRouter);
 
 //rutas mongoose
 app.get("/api/userscollection", async (req, res) => {
   const userscollection = await UserModel.find();
   res.json({ status: "success", payload: userscollection });
 });
-
+app.use("/api/payments", paymentRouter);
 //agregar user a usercollection
 // app.post("/api/userscollection", async (req, res) => {
 //   try {

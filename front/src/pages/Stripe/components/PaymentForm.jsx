@@ -1,9 +1,8 @@
 import { PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { useEffect } from 'react';
-import { createAlert, createAlertWithCallback } from '../../../utils/alerts.js';
+import { createAlert, createAlertWithCallback } from '../../../utils/alerts';
 
 import styles from '../Stripe.module.scss';
-
 const PaymentForm = () => {
     const stripe = useStripe();
     const elements = useElements();

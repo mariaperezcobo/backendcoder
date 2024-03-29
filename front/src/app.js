@@ -1,11 +1,8 @@
-import React, { Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { Stripe } from "./pages/Stripe/Stripe";
-import { loadStripe } from "@stripe/stripe-js";
+import React, { Suspense } from "react";
+import "./App.css";
 
-// Carga la clave pública de Stripe
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
-
+const Home = React.lazy(() => import("./pages/Home"));
 const Stripe = React.lazy(() => import("./pages/Stripe"));
 
 function App() {

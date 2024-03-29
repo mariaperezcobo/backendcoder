@@ -22,6 +22,7 @@
 
         </div>
 <br>
+<div id="response"></div>
        <h5 class="margen margen-top2">Productos que quedaron pendientes:</h5>
        <div class="contenedorProductos" >
   {{#each carrito.otherProducts}}
@@ -55,7 +56,8 @@
       
       const id = `{{ticket._id}}`
 
-        fetch(`/api/payments/payment-intents/${id}`, {
+        try{
+        const response = await  fetch(`/api/payments/payment-intents/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -63,22 +65,25 @@
         
             body: JSON.stringify({ result })
         })
-
-         .then(response => {
-            if (!response.ok) {
-                throw new Error('La solicitud falló'); // Manejar errores de red u otros errores en la solicitud fetch
+        if (!response.ok) {
+            throw new Error('La solicitud falló'); // Manejar errores de red u otros errores en la solicitud fetch
             }
-            return response.json();
-         })
-     
-        .then(data => {
-            // Maneja la respuesta del servidor, por ejemplo, redireccionar al usuario a una nueva página
-            console.log('data',data); // Muestra la respuesta del servidor en la consola para propósitos de depuración
-             // Maneja la respuesta del servidor, por ejemplo, redirigiendo a otra página con JavaScript
- 
-        })
-        .catch(error => {
-            console.error('Error :', error); // Maneja errores en caso de que ocurran
-        });
+     const data = await response.json();
+
+
+    console.log('data', data);
+
+
+    window.location.href = '/checkout';
+
+        }catch (error){
+ console.error('Error:', error);
+        }
+
     });
+</script>
+<script>
+    
+    console.log(data);
+    document.getElementById('response').innerHTML = JSON.stringify(data); 
 </script>
