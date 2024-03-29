@@ -19,7 +19,7 @@
     {{!-- <form id="buyForm" action="/api/payments/payment-intents/{{ticket._id}}" method="POST">
       <button type="submit">Ir a pagar</button>
     </form> --}}
-    <a href="/api/payments/pagar/{{ticket._id}}" class="btn btn-primary">Pagar</a>
+    <a href="/api/payments/pagar?ticket={{ticket._id}}" class="btn btn-primary">Pagar</a>
         </div>
 <br>
 <div id="response"></div>

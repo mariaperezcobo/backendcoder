@@ -1,0 +1,39 @@
+.container {
+  width: 90%;
+  margin: auto;
+  background-color: #d9d9dd;
+  padding: 3rem 2rem;
+}
+
+.highlighted {
+  background-color: rgb(255, 255, 255);
+}
+
+.title {
+  font-size: 2rem;
+  color: #defd53;
+  text-align: center;
+}
+
+.buttonsContainer {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  padding: 3rem 1rem;
+}
+
+.genericButton {
+  width: 10rem;
+  padding: 10px 15px;
+  border-radius: 15px;
+  background-color: #defd53;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+.genericButton:hover {
+  background-color: black;
+  color: white;
+  border: 1px solid #defd53;
+  cursor: pointer;
+}/*# sourceMappingURL=Home.module.css.map */

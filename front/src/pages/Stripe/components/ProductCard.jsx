@@ -3,10 +3,19 @@ import styles from '../Stripe.module.scss'
 
 const ProductCard = ({ product, setCurrentProduct}) => {
     return (<>
-        <div className={styles.productCard} onClick={()=>setCurrentProduct(product.id)}>
+    <div className={styles.contenedorProductos}>
+        <div className={styles.contenedorProductos}>
+        <p className={styles.titulo_card2}>Se generó la orden con el siguiente número.</p>
+        <p className={styles.titulo_card2}>Seleccionala para ir a pagar</p>
+        </div>
+
+    <div className={styles.productCard2} onClick={()=>setCurrentProduct(product.id)}>
+           
             <p>{product.id}</p>
             <p>{product.price}</p>
         </div>
+    </div>
+     
     </>)
 }
 

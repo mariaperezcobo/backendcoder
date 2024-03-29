@@ -43,7 +43,37 @@ const Stripe = () => {
         console.log(err);
     }
     return (<>
-        <div className={styles.container}>
+
+<div className={styles.contenedorProductos}>
+<div className={styles.contenedorTituloPrincipal}>
+ <h2>Iniciar Pago</h2>
+  </div>
+  
+  
+        <div className={styles.contenedorProductos} >
+            <Wrapper hidden={currentProduct}>
+                <div className={styles.productsContainer}>
+
+                    {mockCart.map(product => <ProductCard key={product.id} product={product} setCurrentProduct={setCurrentProduct} />)}
+                </div>
+            </Wrapper>
+            <Wrapper hidden={!clientSecret||!stripePromise}>
+                <Elements stripe={stripePromise} options={{clientSecret:clientSecret}}>
+                    <PaymentForm/>
+                </Elements>
+            </Wrapper>
+        </div>       
+           
+          
+
+    
+
+
+
+
+</div>
+    
+        {/* <div className={styles.container}>
             <h1 className={styles.title}>Stripe</h1>
         </div>
         <div className={classnames([styles.container, styles.highlighted])}>
@@ -57,7 +87,7 @@ const Stripe = () => {
                     <PaymentForm/>
                 </Elements>
             </Wrapper>
-        </div>
+        </div> */}
     </>)
 }
 

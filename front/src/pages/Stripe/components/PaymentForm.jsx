@@ -14,7 +14,7 @@ const PaymentForm = () => {
             redirect: 'if_required'
         })
         if (!error) {
-            createAlertWithCallback('success','¡Pago completado!',"El pago ha sido procesado con éxito",()=>window.location.replace('/'))
+            createAlertWithCallback('success','¡Pago completado!',"El pago ha sido procesado con éxito",()=>window.location.replace('http://localhost:8080/productsmongoose'))
         } else {
             console.log(error);
            createAlert('error','Error al procesar el pago',error.message)
