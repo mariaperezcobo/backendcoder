@@ -1,8 +1,8 @@
 import Stripe from "stripe";
+import environmentConfig from "../enviroments.js";
 
 //private key
-const key =
-  "sk_test_51OvqE5P6ivAJFcXxx3RGgideVFuqIupAADPCjhfDQY95DI0tZ2kWMAJlMkcVXemAwCq08IlEYatko3Gj7otemutx00Kjzj4kEO";
+const key = environmentConfig.KEY;
 
 export default class PaymentService {
   constructor() {
