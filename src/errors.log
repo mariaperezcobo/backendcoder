@@ -3551,3 +3551,71 @@
 {"level":"debug","message":"Ticket guardado en la base de datos: {\n  \"code\": 19,\n  \"purchase_datatime\": \"2024-03-29T21:24:39.522Z\",\n  \"amount\": 50000,\n  \"purchaser\": \"mariaperezcobo@hotmail.com\",\n  \"_id\": \"66073197cc37678f862a516c\",\n  \"__v\": 0\n}"}
 {"level":"debug","message":"Stock actualizado en la base de datos."}
 {"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1711747541 c2-20020a170902d48200b001e03b2f7ab1sm3919270plg.92 - gsmtp"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 6561c202e29c2a725fa3a335"}
+{"level":"info","message":"Producto encontrado: Calzas Barcelona"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 655518ea9dd9bba2858e6f70"}
+{"level":"info","message":"Producto encontrado: Calzas Madrid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"error","message":"Error al crear el producto: E11000 duplicate key error collection: ecommerce.productsmongooses index: title_1 dup key: { title: \"Calzas Madrid\" }"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'Calzas ',\n  price: 28000,\n  thumbnail: '/static/imagenes/estirando.png',\n  description: 'Calza negra o blanca',\n  category: 'calzas',\n  code: '98',\n  status: 'true',\n  stock: 7,\n  owner: '660069d6f2450a49cfad57f3',\n  _id: new ObjectId('6607d7021040146121188369'),\n  __v: 0\n}"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 6607d7021040146121188369"}
+{"level":"info","message":"Producto encontrado: Calzas "}
+{"level":"debug","message":"ID para actualizar: 6607d7021040146121188369"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'Remera Miami',\n  price: 21000,\n  thumbnail: '/static/imagenes/mat(3).png',\n  description: 'Remera rosa',\n  category: 'remeras',\n  code: '322',\n  status: 'true',\n  stock: 15,\n  owner: '660069d6f2450a49cfad57f3',\n  _id: new ObjectId('6607d7841040146121188379'),\n  __v: 0\n}"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'Remera Roma',\n  price: 19000,\n  thumbnail: '/static/imagenes/remera1.png',\n  description: 'Remera blanca y negra',\n  category: 'remeras',\n  code: '98',\n  status: 'true',\n  stock: 12,\n  owner: '660069d6f2450a49cfad57f3',\n  _id: new ObjectId('6607d7ea1040146121188380'),\n  __v: 0\n}"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'Calzas Buenos Aires',\n  price: 2000,\n  thumbnail: '\"/static/imagenes/conperro.png\"',\n  description: 'Calza negra o blanca',\n  category: 'calzas',\n  code: '47',\n  status: 'true',\n  stock: 10,\n  owner: '660069d6f2450a49cfad57f3',\n  _id: new ObjectId('6607d84e1040146121188387'),\n  __v: 0\n}"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 6607d84e1040146121188387"}
+{"level":"info","message":"Producto encontrado: Calzas Buenos Aires"}
+{"level":"debug","message":"ID para actualizar: 6607d84e1040146121188387"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'Calzas Montevideo',\n  price: 23000,\n  thumbnail: '/static/imagenes/estirando.png',\n  description: 'Calza negra o blanca',\n  category: 'calzas',\n  code: '78',\n  status: 'true',\n  stock: 13,\n  owner: '660069d6f2450a49cfad57f3',\n  _id: new ObjectId('6607d8e61040146121188397'),\n  __v: 0\n}"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 6607d8e61040146121188397"}
+{"level":"info","message":"Producto encontrado: Calzas Montevideo"}
+{"level":"debug","message":"ID para eliminar: 6607d8e61040146121188397"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 6607d84e1040146121188387"}
+{"level":"info","message":"Producto encontrado: Calzas Buenos Aires"}
+{"level":"debug","message":"ID para eliminar: 6607d84e1040146121188387"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 6561c202e29c2a725fa3a335"}
+{"level":"info","message":"Producto encontrado: Calzas Barcelona"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
+{"level":"debug","message":"cid"}

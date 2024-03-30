@@ -17,40 +17,28 @@ import {
 import {
   isAdmin,
   isAdminEliminate,
+  requireAuth,
 } from "../middlewares/session.middlewares.js";
 import passport from "passport";
 
 const router = Router();
 
-router.get("/", passport.authenticate("jwt", { session: false }), getProducts);
+router.get("/", requireAuth, getProducts);
 
 //para documentacion - devuelve un json
 //router.get("/api", auth, getProductsView);
 
-router.get(
-  "/api",
-  passport.authenticate("jwt", { session: false }),
-  getProductsView
-);
+router.get("/api", requireAuth, getProductsView);
 
-router.post("/", passport.authenticate("jwt", { session: false }), addProduct);
+router.post("/", requireAuth, addProduct);
 
 //para documentacion - devuelve un json
 router.post("/api", addProductView);
 
-router.get(
-  "/create",
-  passport.authenticate("jwt", { session: false }),
-  isAdmin,
-  createProduct
-);
+router.get("/create", requireAuth, isAdmin, createProduct);
 
 //router.get('/:code', getProductsById)
-router.get(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  getProductsById
-);
+router.get("/:id", requireAuth, getProductsById);
 
 //para documentacion - devuelve un json
 router.get(
@@ -60,63 +48,26 @@ router.get(
 );
 
 //router.delete("/:id", isAdminEliminate, deleteProduct);
-router.delete(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  isAdminEliminate,
-  deleteProduct
-);
+router.delete("/:id", requireAuth, isAdminEliminate, deleteProduct);
 
 //para documentacion - devuelve un json
 //router.delete("/api/:id", isAdminEliminate, deleteProduct);
-router.delete(
-  "/api/:id",
-  passport.authenticate("jwt", { session: false }),
-  isAdminEliminate,
-  deleteProduct
-);
+router.delete("/api/:id", requireAuth, isAdminEliminate, deleteProduct);
 
 //router.post("/:cid/product/:pid", isUser, addProductInCart);
-router.post(
-  "/:cid/product/:pid",
-  passport.authenticate("jwt", { session: false }),
+router.post("/:cid/product/:pid", requireAuth, addProductInCart);
 
-  addProductInCart
-);
+router.get("/:id/update", requireAuth, isAdmin, updateProductForm);
 
-router.get(
-  "/:id/update",
-  passport.authenticate("jwt", { session: false }),
-  isAdmin,
-  updateProductForm
-);
+router.post("/:id/update", requireAuth, isAdmin, updateProductBase);
 
-router.post(
-  "/:id/update",
-  passport.authenticate("jwt", { session: false }),
-  isAdmin,
-  updateProductBase
-);
+router.get("/:id/update", requireAuth, updateProductForm);
 
-router.get(
-  "/:id/update",
-  passport.authenticate("jwt", { session: false }),
-  updateProductForm
-);
-
-router.post(
-  "/:id/update",
-  passport.authenticate("jwt", { session: false }),
-  updateProductBase
-);
+router.post("/:id/update", requireAuth, updateProductBase);
 
 //para documentacion - devuelve un json
 //router.post("/:id/api/update", isAdmin, updateProductBaseView);
 
-router.post(
-  "/:id/api/update",
-  passport.authenticate("jwt", { session: false }),
-  updateProductBaseView
-);
+router.post("/:id/api/update", requireAuth, updateProductBaseView);
 
 export default router;

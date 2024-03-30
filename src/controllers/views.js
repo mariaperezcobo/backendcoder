@@ -2,6 +2,8 @@ import { request, response } from "express";
 import ProductManager from "../dao/managers/productManager.js";
 import logger from "../logging/logger.js";
 import UserRegisterModel from "../dao/models/userregister.model.js";
+import jwt from "jsonwebtoken";
+import { transport } from "../utils.js";
 
 export const profileUser = async (req = request, res = response) => {
   try {
@@ -135,4 +137,38 @@ export const updateUserView = async (req = request, res = response) => {
     logger.error(`User error: ${error.message}`);
     // console.error('error', error)
   }
+};
+
+export const mail = async (req, res) => {
+  const email = req.body.email;
+
+  const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+
+  // const expiration = Date.now() + 120000; //3600000;
+  // req.session.passwordReset = { token, expiration, email };
+
+  const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
+
+  const result = await transport.sendMail({
+    from: "mariapcsalem@gmail.com.ar",
+    to: email,
+    subject: "Recuperacion de contraseña",
+    html: `
+            <div>
+                <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
+                <a href="${resetLink}">${resetLink}</a> 
+                
+            </div>
+        `,
+  });
+
+  console.log(result);
+  res.send(`Email sent! 😎`);
+};
+
+export const mailView = async (req, res) => {
+  res.render("password", {
+    style: "index.css",
+    title: "Fitness Ropa deportiva",
+  });
 };

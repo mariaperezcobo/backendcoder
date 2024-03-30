@@ -8,6 +8,8 @@ import {
   homeView,
   updateUserView,
   updateUser,
+  mail,
+  mailView,
 } from "../controllers/views.js";
 import {
   updateUserPassword,
@@ -17,10 +19,9 @@ import {
 } from "../controllers/sessions.js";
 import {
   auth,
+  requireAuth,
   justPublicWhitoutSession,
 } from "../middlewares/session.middlewares.js";
-import jwt from "jsonwebtoken";
-import { transport } from "../utils.js";
 
 const router = Router();
 
@@ -28,29 +29,17 @@ router.get("/home", homeView);
 
 //renders para sesiones
 
-router.get("/", auth, initUser);
+router.get("/", requireAuth, initUser);
 //router.get("/", initUser);
 
 router.get("/login", justPublicWhitoutSession, loginView);
 
 router.get("/registeruser", registerView);
 
-router.get(
-  "/profile",
-  passport.authenticate("jwt", { session: false }),
-  profileUser
-);
+router.get("/profile", requireAuth, profileUser);
 
-router.get(
-  "/updateuser",
-  passport.authenticate("jwt", { session: false }),
-  updateUserView
-);
-router.put(
-  "/updateuser/:id",
-  passport.authenticate("jwt", { session: false }),
-  updateUser
-);
+router.get("/updateuser", requireAuth, updateUserView);
+router.put("/updateuser/:id", requireAuth, updateUser);
 
 router.get("/updateuserpassword", updateUserPasswordView);
 
@@ -62,39 +51,43 @@ router.post("/deleteusers", deleteUsers);
 
 router.get("/error", (req, res) => res.send("pagina de error"));
 
-router.get("/mail", (req, res) => {
-  res.render("password", {
-    style: "index.css",
-    messages,
-  });
-});
+router.get("/mail", mailView);
 
-router.post("/mail", async (req, res) => {
-  const email = req.body.email;
+router.post("/mail", mail);
 
-  const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
+// router.get("/mail", (req, res) => {
+//   res.render("password", {
+//     style: "index.css",
+//     messages,
+//   });
+// });
 
-  // const expiration = Date.now() + 120000; //3600000;
-  // req.session.passwordReset = { token, expiration, email };
+// router.post("/mail", async (req, res) => {
+//   const email = req.body.email;
 
-  const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
+//   const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
 
-  const result = await transport.sendMail({
-    from: "mariapcsalem@gmail.com.ar",
-    to: email,
-    subject: "Recuperacion de contraseña",
-    html: `
-          <div>
-              <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
-              <a href="${resetLink}">${resetLink}</a> 
-              
-          </div>
-      `,
-  });
+//   // const expiration = Date.now() + 120000; //3600000;
+//   // req.session.passwordReset = { token, expiration, email };
 
-  console.log(result);
-  res.send(`Email sent! 😎`);
-});
+//   const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
+
+//   const result = await transport.sendMail({
+//     from: "mariapcsalem@gmail.com.ar",
+//     to: email,
+//     subject: "Recuperacion de contraseña",
+//     html: `
+//           <div>
+//               <h2> 'Haz clic en el siguiente enlace para restablecer tu contraseña: </h2>
+//               <a href="${resetLink}">${resetLink}</a>
+
+//           </div>
+//       `,
+//   });
+
+//   console.log(result);
+//   res.send(`Email sent! 😎`);
+// });
 
 //sesion login con github
 router.get(

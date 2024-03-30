@@ -1,4 +1,5 @@
 import logger from "../logging/logger.js";
+import passport from "passport";
 
 //Middleware para verificar el rol del usuario
 export function isAdmin(req, res, next) {
@@ -39,6 +40,26 @@ export function auth(req, res, next) {
   // Si hay un usuario adjunto al objeto `req`, continúa con la siguiente función middleware
   next();
 }
+
+export const requireAuth = (req, res, next) => {
+  // Utiliza Passport para autenticar la solicitud
+  passport.authenticate("jwt", { session: false }, (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      return res.send(`
+      <script>
+        alert('No está logueado. Serás redirigido a la página de login.');
+        window.location.href = '/login'; 
+      </script>
+    `);
+    }
+    // Si el usuario está autenticado, continúa con la siguiente función middleware
+    req.user = user;
+    next();
+  })(req, res, next);
+};
 
 export function isUser(req, res, next) {
   logger.info(`Estado de la sesión en isUser middleware: ${req.user}`);
