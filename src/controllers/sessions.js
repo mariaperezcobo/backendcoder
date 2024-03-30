@@ -41,10 +41,6 @@ export const register = async (req, res) => {
 
 //para jwt
 export const login = async (req, res, next) => {
-  // if (user) {
-  //   return res.redirect("/productsmongoose");
-  // }
-
   console.log("Solicitud POST recibida en /api/session/login");
   const { email, password } = req.body;
   const user = await UserService.getUsers(email);
@@ -148,11 +144,6 @@ export const registerUser = async (req, res) => {
       last_connection: result.last_connection,
     });
 
-    //const carrito = await CartModel.create({ productosagregados: [] })
-
-    //   console.log('Datos del nuevo usuario con carrito:', newUser);
-    // Generar el token JWT
-
     console.log("result de passport config", result);
 
     return res.redirect("/login");
@@ -249,61 +240,6 @@ export const updateUserPassword = async (req = request, res = response) => {
         return res.status(400).json({ error: "Token inválido o expirado" });
       }
     });
-
-    // // Verificar si el token proporcionado coincide con el token almacenado en la sesión del usuario
-    // if (
-    //   req.session.passwordReset &&
-    //   req.session.passwordReset.token === token
-    // ) {
-    //   // Verificar si el tiempo de expiración no ha pasado
-    //   if (req.session.passwordReset.expiration > Date.now()) {
-    //     // Procesar el restablecimiento de contraseña
-    //     const user = await UserService.getUsersByEmail(email);
-    //     console.log("user para password", user);
-    //     if (!user) {
-    //       return res.status(404).json({ error: "Usuario no encontrado" });
-    //     }
-
-    //     // Verificar si la nueva contraseña es igual a la contraseña actual del usuario
-    //     const isSamePassword = await bcrypt.compare(password, user.password);
-
-    //     console.log("isSame ", isSamePassword);
-
-    //     if (isSamePassword) {
-    //       return res.status(400).json({
-    //         error: "La nueva contraseña debe ser diferente de la anterior",
-    //       });
-    //     }
-
-    //     // Actualizar la contraseña del usuario
-    //     try {
-    //       const hashedPassword = await bcrypt.hash(password, 10);
-    //       user.password = hashedPassword;
-    //       const updatedUserResult = await UserService.updateUser(
-    //         user._id,
-    //         user,
-    //         { new: true }
-    //       );
-
-    //       if (updatedUserResult) {
-    //         delete req.session.passwordReset; // Limpiar la información de restablecimiento de contraseña de la sesión del usuario
-    //         req.session.user = updatedUserResult;
-    //         return res.redirect("/productsmongoose");
-    //       } else {
-    //         return res.status(404).json({
-    //           error: "Usuario no encontrado o no se realizaron modificaciones",
-    //         });
-    //       }
-    //     } catch (error) {
-    //       console.log("Error al hashear la clave");
-    //       return res.status(500).json({ error: "Error interno del servidor" });
-    //     }
-    //   } else {
-    //     return res.redirect("/mail");
-    //   }
-    // } else {
-    //   return res.status(400).send("El token proporcionado no es válido");
-    // }
   } catch (error) {
     console.log("Error al hashear la clave");
     return res.status(500).json({ error: "Error interno del servidor" });
@@ -366,11 +302,12 @@ export const deleteUsers = async (req, res, next) => {
         );
       }
 
-      const timeDifference = (currentTime - lastConnectionTime) / (1000 * 60);
+      const timeDifference =
+        (currentTime - lastConnectionTime) / (1000 * 60 * 60 * 24);
       console.log("time diference", timeDifference);
 
       console.log("user", user);
-      if (timeDifference > 10) {
+      if (timeDifference > 2) {
         await UserService.deleteUser(user._id);
         console.log(
           `Usuario ${user.id} eliminado debido a una conexión menor a 30 minutos.`

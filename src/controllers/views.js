@@ -163,7 +163,7 @@ export const mail = async (req, res) => {
   });
 
   console.log(result);
-  res.send(`Email sent! 😎`);
+  res.send(`Se envió un mail para que recupere su contraseña `);
 };
 
 export const mailView = async (req, res) => {

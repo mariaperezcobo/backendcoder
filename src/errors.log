@@ -3619,3 +3619,5 @@
 {"level":"info","message":"Producto encontrado: Calzas Barcelona"}
 {"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-30T08:55:42.355Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$NQGT77KNi20HOl.g3FdYKuC2IAWA1PrTKH/R.a5SyXoA.F3pc53SG","rol":"admin"}
 {"level":"debug","message":"cid"}
+{"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1711801320 c1-20020a17090ab28100b00299101c1341sm4500458pjr.18 - gsmtp"}
+{"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1711801320 c4-20020a170902d90400b001e02d9c05d8sm5117330plz.103 - gsmtp"}
