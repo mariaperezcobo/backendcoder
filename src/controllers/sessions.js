@@ -265,9 +265,26 @@ export const updateUserPasswordView = async (req = request, res = response) => {
 export const seeUsers = async (req = request, res = response) => {
   try {
     const users = await UserService.getAllUsers();
-
+    console.log("users", users);
     res.render("allusers", {
       users,
+      style: "index.css",
+      title: "Fitness Ropa deportiva",
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    // Renderiza una página de error o maneja el error de alguna otra manera
+    res.status(500).send("Error fetching users");
+  }
+};
+
+export const seeOneUser = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+    const user = await UserService.getUsersById({ _id: id });
+
+    res.render("usereliminate", {
+      user,
       style: "index.css",
       title: "Fitness Ropa deportiva",
     });
@@ -342,5 +359,27 @@ export const deleteUsers = async (req, res, next) => {
   } catch (error) {
     console.error("¡Error!", error);
     res.status(500).send("Error al eliminar usuarios");
+  }
+};
+
+export const deleteOneUser = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+    console.log("id a eliminar", id);
+    logger.debug(`ID para eliminar: ${id}`);
+
+    const userEliminated = await UserService.deleteUser({ _id: id });
+
+    console.log("user desde delete", userEliminated);
+    if (!userEliminated) {
+      return res.status(404).json({ error: "El user no fue encontrado" });
+    }
+
+    console.log("userEliminated  a eliminar", userEliminated);
+    return res.json({ status: "success" });
+  } catch (error) {
+    logger.error(`Error al eliminar el producto del carrito: ${error.message}`);
+    return res.status(500).json(error);
+    //console.log(error)
   }
 };

@@ -58,10 +58,6 @@ router.get("/:id/update", requireAuth, isAdmin, updateProductForm);
 
 router.post("/:id/update", requireAuth, isAdmin, updateProductBase);
 
-router.get("/:id/update", requireAuth, updateProductForm);
-
-router.post("/:id/update", requireAuth, updateProductBase);
-
 //para documentacion - devuelve un json
 //router.post("/:id/api/update", isAdmin, updateProductBaseView);
 

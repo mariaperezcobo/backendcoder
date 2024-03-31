@@ -4,17 +4,17 @@
  <h2>Actualizar Usuario</h2>
 
   </div>
-<form id="updateUserForm" action="/updateuser/{{user._id}}" method="post" class="margen">
+<form id="updateUserForm" action="/allusers/{{userUpdated._id}}/update" method="put" class="margen">
 <br>
 <h4>Usuario:</h4> <br>
-   First name:  {{user.first_name}}<br>
-    Last name:  {{user.last_name}}<br>
-    Id: {{user._id}}<br>
-    Age:  {{user.age}}<br>
-    Email:  {{user.email}}<br>
-    password: {{user.password}}<br><br>
+   First name:  {{userUpdated.first_name}}<br>
+    Last name:  {{userUpdated.last_name}}<br>
+    Id: {{userUpdated._id}}<br>
+    Age:  {{userUpdated.age}}<br>
+    Email:  {{userUpdated.email}}<br>
+    password: {{userUpdated.password}}<br><br>
 
-    Rol: <input name="rol" value="{{user.rol}}" placeholder="{{user.rol}}"><br>
+    Rol: <input name="rol" value="{{userUpdated.rol}}" placeholder="{{userUpdated.rol}}"><br>
     <br>
     
 <br>
@@ -29,18 +29,18 @@
 
 <script>
     document.getElementById("updateUserForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevenir el envío del formulario por defecto
+        event.preventDefault(); 
         
           const userData = {
         rol: document.querySelector('input[name="rol"]').value
-        // Agrega otros campos de usuario aquí si es necesario
+        
     };
+console.log('userdate', userData)
 
 
-
-        const userId = "{{user._id}}"; // Puedes obtener el ID del usuario de alguna manera
+        const userId = "{{userUpdated._id}}"; 
     console.log('userid', userId)
-        fetch(`/updateuser/${userId}`, {
+        fetch(`/allusers/${userId}/update`, {
            
              method: 'PUT',
         headers: {
@@ -51,7 +51,7 @@
         .then(response => {
             if (response.ok) {
                 alert('Usuario actualizado correctamente');
-                window.location.href = '/productsmongoose'; // Redirigir a alguna página después de la actualización
+                window.location.href = '/productsmongoose'; 
             } else {
                 alert('Hubo un problema al actualizar el usuario 1');
             }

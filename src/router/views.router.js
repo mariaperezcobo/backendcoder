@@ -16,11 +16,14 @@ import {
   updateUserPasswordView,
   seeUsers,
   deleteUsers,
+  deleteOneUser,
+  seeOneUser,
 } from "../controllers/sessions.js";
 import {
   auth,
   requireAuth,
   justPublicWhitoutSession,
+  isAdminOnly,
 } from "../middlewares/session.middlewares.js";
 import jwt from "jsonwebtoken";
 import { generateToken } from "../utils.js";
@@ -31,7 +34,7 @@ router.get("/home", homeView);
 
 //renders para sesiones
 
-router.get("/", requireAuth, initUser);
+router.get("/", initUser);
 //router.get("/", initUser);
 
 router.get("/login", justPublicWhitoutSession, loginView);
@@ -40,16 +43,24 @@ router.get("/registeruser", registerView);
 
 router.get("/profile", requireAuth, profileUser);
 
-router.get("/updateuser", requireAuth, updateUserView);
-router.put("/updateuser/:id", requireAuth, updateUser);
+// router.get("/updateuser", requireAuth, isAdminOnly, updateUserView);
+// router.put("/updateuser/:id", requireAuth, isAdminOnly, updateUser);
 
 router.get("/updateuserpassword", updateUserPasswordView);
 
 router.post("/updateuserpassword", updateUserPassword);
 
-router.get("/allusers", seeUsers);
+router.get("/allusers", requireAuth, isAdminOnly, seeUsers);
+
+router.get("/allusers/:id", requireAuth, isAdminOnly, seeOneUser);
+
+router.get("/allusers/:id/update", requireAuth, isAdminOnly, updateUserView);
+
+router.put("/allusers/:id/update", requireAuth, isAdminOnly, updateUser);
 
 router.post("/deleteusers", deleteUsers);
+
+router.delete("/allusers/:id", requireAuth, isAdminOnly, deleteOneUser);
 
 router.get("/error", (req, res) => res.send("pagina de error"));
 
@@ -80,18 +91,13 @@ router.get(
   }
 );
 
-router.post(
-  "/github",
-  passport.authenticate("github", { scope: ["user:email"] }),
-  async (req, res) => {}
-);
-
 const messages = [];
 router.get("/chat", (req, res) => {
   res.render("chat", {
     style: "index.css",
     messages,
   });
+  s;
 });
 
 export default router;

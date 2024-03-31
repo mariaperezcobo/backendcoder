@@ -4,6 +4,7 @@ import logger from "../logging/logger.js";
 import UserRegisterModel from "../dao/models/userregister.model.js";
 import jwt from "jsonwebtoken";
 import { transport } from "../utils.js";
+import { UserService } from "../services/index.js";
 
 export const profileUser = async (req = request, res = response) => {
   try {
@@ -31,7 +32,6 @@ export const initUser = async (req = request, res = response) => {
     });
   } catch (error) {
     logger.error(`EUser error from initUser: ${error.message}`);
-    // console.error('error', error)
   }
 };
 export const loginView = async (req = request, res = response) => {
@@ -88,19 +88,18 @@ export const homeView = async (req = request, res = response) => {
 
 export const updateUser = async (req = request, res = response) => {
   try {
-    // const user = req.session.user
-    // const id = req.session.user._id
+    console.log('Solicitud recibida en updateUser');
 
     const userId = req.params.id;
 
-    //        logger.debug(`ID para actualizar: ${id}`);
     console.log("user desde updateUser", userId);
 
     const updatedUser = req.body;
-
+console.log('req.body',req.body)
     console.log("req . body desde updateUser", updatedUser);
-    //const updatedProduct = await ProductService.updateUser(id, updatedUser);
-    const updatedUserResult = await UserRegisterModel.findByIdAndUpdate(
+  
+    //const updatedUserResult = await UserRegisterModel.findByIdAndUpdate(
+    const updatedUserResult = await UserService.updateUser(
       userId,
       updatedUser,
       { new: true }
@@ -108,7 +107,7 @@ export const updateUser = async (req = request, res = response) => {
 
     console.log("updatedUserResult desde updateUser", updatedUserResult);
     if (updatedUserResult) {
-      req.user = updatedUserResult;
+      
       res.status(200).json({ message: "Usuario actualizado correctamente" });
     } else {
       logger.warn(`Error al actualizar el user: ${error.message}`);
@@ -125,17 +124,19 @@ export const updateUser = async (req = request, res = response) => {
 
 export const updateUserView = async (req = request, res = response) => {
   try {
-    const user = req.user;
-    console.log("user desde updateview", user);
+    const userId = req.params.id;
+    const userUpdated = await UserService.getUsersById({ _id: userId });
+    console.log("user desde updateview", userUpdated);
+
+
 
     res.render("updateuser", {
-      user,
+      userUpdated,
       style: "index.css",
       title: "Fitness Ropa deportiva",
     });
   } catch (error) {
     logger.error(`User error: ${error.message}`);
-    // console.error('error', error)
   }
 };
 
