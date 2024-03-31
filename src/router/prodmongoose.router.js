@@ -32,12 +32,12 @@ router.get("/", requireAuth, getProducts);
 
 router.get("/api", requireAuth, getProductsView);
 
-router.post("/", requireAuth, isAdminOnly, addProduct);
+router.post("/", requireAuth, isAdmin, addProduct);
 
 //para documentacion - devuelve un json
 router.post("/api", addProductView);
 
-router.get("/create", requireAuth, isAdminOnly, createProduct);
+router.get("/create", requireAuth, isAdmin, createProduct);
 
 //router.get('/:code', getProductsById)
 router.get("/:id", requireAuth, getProductsById);
@@ -49,10 +49,10 @@ router.get(
   getProductsByIdView
 );
 
-router.delete("/:id", requireAuth, isAdminOnly, deleteProduct);
+router.delete("/:id", requireAuth, isAdmin, deleteProduct);
 
 //para documentacion - devuelve un json
-router.delete("/api/:id", requireAuth, isAdminOnly, deleteProduct);
+router.delete("/api/:id", requireAuth, isAdmin, deleteProduct);
 
 router.post("/:cid/product/:pid", requireAuth,noIsAdminOnly,  addProductInCart);
 

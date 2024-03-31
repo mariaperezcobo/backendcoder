@@ -7,8 +7,7 @@ export const pagar = async (req = request, res = response) => {
   console.log("ticket id", ticketId);
   // Puedes redirigir al usuario a la página de pago en el frontend
   res.redirect(
-    // `http://localhost:3000/pagar?ticket=${JSON.stringify(ticketId)}`
-    // `http://localhost:3000/pagar?ticket=${ticketId}`
+   
     `http://localhost:3000/pagar/${ticketId}`
   );
 };

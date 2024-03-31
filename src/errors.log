@@ -3885,3 +3885,81 @@
 {"level":"debug","message":"cid"}
 {"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
 {"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:20:18.706Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:20:18.706Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:20:18.706Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'hoka',\n  price: 22,\n  thumbnail: '',\n  description: '',\n  category: '',\n  code: '',\n  status: '',\n  stock: null,\n  owner: '66098d3cfac885ba5b5eb516',\n  _id: new ObjectId('6609925ac6aa2207e6aa7784'),\n  __v: 0\n}"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:20:18.706Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-31T16:42:19.358Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$o2kyQkSAMYzSC4CTJy9yruKAvuXocGCLLLKyhR77yhl8n9In34oeO","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Nuevo producto: [object Object]"}
+{"level":"info","message":"resultado de crear un nuevo producto: {\n  title: 'admin',\n  price: 34,\n  thumbnail: '',\n  description: '',\n  category: '',\n  code: '',\n  status: '',\n  stock: null,\n  owner: '660069d6f2450a49cfad57f3',\n  _id: new ObjectId('66099274c6aa2207e6aa7791'),\n  __v: 0\n}"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-03-31T16:42:19.358Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$o2kyQkSAMYzSC4CTJy9yruKAvuXocGCLLLKyhR77yhl8n9In34oeO","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"CID: 66098d3cfac885ba5b5eb518, PID: 6609925ac6aa2207e6aa7784"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"CID: 66098d3cfac885ba5b5eb518, PID: 66099274c6aa2207e6aa7791"}
+{"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [\n    {\n      \"product\": {\n        \"_id\": \"66099274c6aa2207e6aa7791\",\n        \"title\": \"admin\",\n        \"price\": 34,\n        \"thumbnail\": \"\",\n        \"description\": \"\",\n        \"category\": \"\",\n        \"code\": \"\",\n        \"status\": \"\",\n        \"stock\": null,\n        \"owner\": \"660069d6f2450a49cfad57f3\",\n        \"__v\": 0\n      },\n      \"quantity\": 1,\n      \"_id\": \"6609928bc6aa2207e6aa77a5\",\n      \"cid\": \"66098d3cfac885ba5b5eb518\"\n    }\n  ],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"level":"info","message":"Eliminación exitosa - CID: 66098d3cfac885ba5b5eb518, PID: 6609928bc6aa2207e6aa77a5"}
+{"level":"debug","message":"Carrito actualizado después de la eliminación: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 66099274c6aa2207e6aa7791"}
+{"level":"info","message":"Producto encontrado: admin"}
+{"level":"debug","message":"ID para eliminar: 66099274c6aa2207e6aa7791"}
+{"level":"error","message":"Error al eliminar el producto del carrito: error is not defined"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 6609925ac6aa2207e6aa7784"}
+{"level":"info","message":"Producto encontrado: hoka"}
+{"level":"debug","message":"ID para eliminar: 6609925ac6aa2207e6aa7784"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"level":"info","message":"Estado de la sesión en isUser middleware: [object Object]"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"CID: 66098d3cfac885ba5b5eb518, PID: 66099274c6aa2207e6aa7791"}
+{"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [\n    {\n      \"product\": {\n        \"_id\": \"66099274c6aa2207e6aa7791\",\n        \"title\": \"admin\",\n        \"price\": 34,\n        \"thumbnail\": \"\",\n        \"description\": \"\",\n        \"category\": \"\",\n        \"code\": \"\",\n        \"status\": \"\",\n        \"stock\": null,\n        \"owner\": \"660069d6f2450a49cfad57f3\",\n        \"__v\": 0\n      },\n      \"quantity\": 1,\n      \"_id\": \"660992efc6aa2207e6aa77d0\",\n      \"cid\": \"66098d3cfac885ba5b5eb518\"\n    }\n  ],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"level":"info","message":"CID desde getCartToBuy: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"productsToBuy despues de validar stock: []"}
+{"level":"debug","message":"No hay suficiente stock para 1 unidades de admin"}
+{"level":"info","message":"CID desde getCartToBuyStock: 66098d3cfac885ba5b5eb518"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"CID: 66098d3cfac885ba5b5eb518, PID: 6607d7ea1040146121188380"}
+{"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [\n    {\n      \"product\": {\n        \"_id\": \"66099274c6aa2207e6aa7791\",\n        \"title\": \"admin\",\n        \"price\": 34,\n        \"thumbnail\": \"\",\n        \"description\": \"\",\n        \"category\": \"\",\n        \"code\": \"\",\n        \"status\": \"\",\n        \"stock\": null,\n        \"owner\": \"660069d6f2450a49cfad57f3\",\n        \"__v\": 0\n      },\n      \"quantity\": 1,\n      \"_id\": \"660992efc6aa2207e6aa77d0\",\n      \"cid\": \"66098d3cfac885ba5b5eb518\"\n    },\n    {\n      \"product\": {\n        \"_id\": \"6607d7ea1040146121188380\",\n        \"title\": \"Remera Roma\",\n        \"price\": 19000,\n        \"thumbnail\": \"/static/imagenes/remera1.png\",\n        \"description\": \"Remera blanca y negra\",\n        \"category\": \"remeras\",\n        \"code\": \"98\",\n        \"status\": \"true\",\n        \"stock\": 10,\n        \"owner\": \"660069d6f2450a49cfad57f3\",\n        \"__v\": 0\n      },\n      \"quantity\": 1,\n      \"_id\": \"660992fbc6aa2207e6aa77e3\",\n      \"cid\": \"66098d3cfac885ba5b5eb518\"\n    }\n  ],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"level":"info","message":"CID desde getCartToBuy: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"productsToBuy despues de validar stock: []"}
+{"level":"debug","message":"No hay suficiente stock para 1 unidades de admin"}
+{"level":"debug","message":"Productos a comprar: [\n  {\n    \"product\": {\n      \"_id\": \"6607d7ea1040146121188380\",\n      \"title\": \"Remera Roma\",\n      \"price\": 19000,\n      \"thumbnail\": \"/static/imagenes/remera1.png\",\n      \"description\": \"Remera blanca y negra\",\n      \"category\": \"remeras\",\n      \"code\": \"98\",\n      \"status\": \"true\",\n      \"stock\": 10,\n      \"owner\": \"660069d6f2450a49cfad57f3\",\n      \"__v\": 0\n    },\n    \"quantity\": 1,\n    \"_id\": \"660992fbc6aa2207e6aa77e3\",\n    \"cid\": \"66098d3cfac885ba5b5eb518\"\n  }\n]"}
+{"level":"info","message":"Compra total - CID: 66098d3cfac885ba5b5eb518, Total de compra: 19000"}
+{"level":"info","message":"Usuario desde generateTicket: juana"}
+{"level":"debug","message":"Correo electrónico del usuario: juana@google.com"}
+{"level":"debug","message":"ID del carrito desde generate ticket: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"Datos del carrito de checkout: [\n  {\n    \"product\": {\n      \"_id\": \"6607d7ea1040146121188380\",\n      \"title\": \"Remera Roma\",\n      \"price\": 19000,\n      \"thumbnail\": \"/static/imagenes/remera1.png\",\n      \"description\": \"Remera blanca y negra\",\n      \"category\": \"remeras\",\n      \"code\": \"98\",\n      \"status\": \"true\",\n      \"stock\": 10,\n      \"owner\": \"660069d6f2450a49cfad57f3\",\n      \"__v\": 0\n    },\n    \"quantity\": 1,\n    \"_id\": \"660992fbc6aa2207e6aa77e3\"\n  }\n]"}
+{"level":"debug","message":"Total de compra desde ticket: 19000"}
+{"level":"debug","message":"Nuevo ticket creado: {\n  \"code\": 28,\n  \"purchase_datatime\": \"2024-03-31T16:45:41.947Z\",\n  \"amount\": 19000,\n  \"purchaser\": \"juana@google.com\"\n}"}
+{"level":"debug","message":"Ticket guardado en la base de datos: {\n  \"code\": 28,\n  \"purchase_datatime\": \"2024-03-31T16:45:41.947Z\",\n  \"amount\": 19000,\n  \"purchaser\": \"juana@google.com\",\n  \"_id\": \"6609933625f648c2f1dd1b4d\",\n  \"__v\": 0\n}"}
+{"level":"debug","message":"Stock actualizado en la base de datos."}
+{"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1711903602 w2-20020a1709029a8200b001db5b39635dsm7069462plp.277 - gsmtp"}
+{"level":"debug","message":"Mensaje de debug"}
+{"level":"info","message":"Mensaje de información"}
+{"level":"http","message":"Mensaje HTTP"}
+{"level":"error","message":"Mensaje de error"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
