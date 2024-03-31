@@ -47,14 +47,11 @@ router.get(
   getProductsByIdView
 );
 
-//router.delete("/:id", isAdminEliminate, deleteProduct);
 router.delete("/:id", requireAuth, isAdminEliminate, deleteProduct);
 
 //para documentacion - devuelve un json
-//router.delete("/api/:id", isAdminEliminate, deleteProduct);
 router.delete("/api/:id", requireAuth, isAdminEliminate, deleteProduct);
 
-//router.post("/:cid/product/:pid", isUser, addProductInCart);
 router.post("/:cid/product/:pid", requireAuth, addProductInCart);
 
 router.get("/:id/update", requireAuth, isAdmin, updateProductForm);

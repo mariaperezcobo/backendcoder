@@ -16,7 +16,7 @@ import cookieParser from "cookie-parser";
 import passport from "passport";
 import Session from "./router/sessionrouter.js";
 import initializePassport from "./config/passport.config.js";
-// import session from "express-session";
+import session from "express-session";
 import { generateToken } from "./utils.js";
 import MongoStore from "connect-mongo";
 import nodemailer from "nodemailer";
@@ -64,24 +64,24 @@ app.use(
 const url = process.env.MONGO_URL;
 const mongodbName = process.env.MONGO_DBNAME;
 
-//sesiones LO ELIMINE PARA PROBAR JWT
-// app.use(
-//   session({
-//     store: MongoStore.create({
-//       mongoUrl: url,
-//       dbName: mongodbName,
-//       ttl: 100,
-//     }),
-//     secret: "secret",
-//     resave: true,
-//     saveUninitialized: true,
-//   })
-// );
+//sesiones LO USP SOLO PARA GITHUB
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl: url,
+      dbName: mongodbName,
+      ttl: 100,
+    }),
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 //configurar passport
 initializePassport();
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 
 //conectamos a db y corremos el server
 // mongoose.connect(url, {dbName: mongodbName})

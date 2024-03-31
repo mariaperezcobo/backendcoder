@@ -8,6 +8,7 @@ import { CartService, UserService } from "../services/index.js";
 import UserInsertDTO from "../DTO/users.dto.js";
 import passportJWT from "passport-jwt";
 import { generateToken } from "../utils.js";
+import session from "express-session";
 
 const LocalStrategy = local.Strategy;
 
