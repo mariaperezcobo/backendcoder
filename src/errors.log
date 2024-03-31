@@ -3963,3 +3963,24 @@
 {"level":"error","message":"Mensaje de error"}
 {"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:42:42.396Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
 {"level":"debug","message":"cid"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:55:25.578Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-03-31T16:55:25.578Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"CID: 66098d3cfac885ba5b5eb518, PID: 6607d7ea1040146121188380"}
+{"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [\n    {\n      \"product\": {\n        \"_id\": \"6607d7ea1040146121188380\",\n        \"title\": \"Remera Roma\",\n        \"price\": 19000,\n        \"thumbnail\": \"/static/imagenes/remera1.png\",\n        \"description\": \"Remera blanca y negra\",\n        \"category\": \"remeras\",\n        \"code\": \"98\",\n        \"status\": \"true\",\n        \"stock\": 10,\n        \"owner\": \"660069d6f2450a49cfad57f3\",\n        \"__v\": 0\n      },\n      \"quantity\": 1,\n      \"_id\": \"660995993680713c54d4b2bb\",\n      \"cid\": \"66098d3cfac885ba5b5eb518\"\n    }\n  ],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"level":"info","message":"CID desde getCartToBuy: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"Productos a comprar: [\n  {\n    \"product\": {\n      \"_id\": \"6607d7ea1040146121188380\",\n      \"title\": \"Remera Roma\",\n      \"price\": 19000,\n      \"thumbnail\": \"/static/imagenes/remera1.png\",\n      \"description\": \"Remera blanca y negra\",\n      \"category\": \"remeras\",\n      \"code\": \"98\",\n      \"status\": \"true\",\n      \"stock\": 10,\n      \"owner\": \"660069d6f2450a49cfad57f3\",\n      \"__v\": 0\n    },\n    \"quantity\": 1,\n    \"_id\": \"660995993680713c54d4b2bb\",\n    \"cid\": \"66098d3cfac885ba5b5eb518\"\n  }\n]"}
+{"level":"info","message":"Compra total - CID: 66098d3cfac885ba5b5eb518, Total de compra: 19000"}
+{"level":"info","message":"Usuario desde generateTicket: juana"}
+{"level":"debug","message":"Correo electrónico del usuario: juana@google.com"}
+{"level":"debug","message":"ID del carrito desde generate ticket: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"Datos del carrito de checkout: [\n  {\n    \"product\": {\n      \"_id\": \"6607d7ea1040146121188380\",\n      \"title\": \"Remera Roma\",\n      \"price\": 19000,\n      \"thumbnail\": \"/static/imagenes/remera1.png\",\n      \"description\": \"Remera blanca y negra\",\n      \"category\": \"remeras\",\n      \"code\": \"98\",\n      \"status\": \"true\",\n      \"stock\": 10,\n      \"owner\": \"660069d6f2450a49cfad57f3\",\n      \"__v\": 0\n    },\n    \"quantity\": 1,\n    \"_id\": \"660995993680713c54d4b2bb\"\n  }\n]"}
+{"level":"debug","message":"Total de compra desde ticket: 19000"}
+{"level":"debug","message":"Nuevo ticket creado: {\n  \"code\": 30,\n  \"purchase_datatime\": \"2024-03-31T16:56:17.561Z\",\n  \"amount\": 19000,\n  \"purchaser\": \"juana@google.com\"\n}"}
+{"level":"debug","message":"Ticket guardado en la base de datos: {\n  \"code\": 30,\n  \"purchase_datatime\": \"2024-03-31T16:56:17.561Z\",\n  \"amount\": 19000,\n  \"purchaser\": \"juana@google.com\",\n  \"_id\": \"660995b13680713c54d4b2d2\",\n  \"__v\": 0\n}"}
+{"level":"debug","message":"Stock actualizado en la base de datos."}
+{"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1711904238 l9-20020a170903120900b001dee4a22c2bsm7054170plh.34 - gsmtp"}

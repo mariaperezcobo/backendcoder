@@ -5,10 +5,13 @@ import PaymentService from "../services/payment.services.js";
 export const pagar = async (req = request, res = response) => {
   const ticketId = req.query.ticket;
   console.log("ticket id", ticketId);
+
+  const redirectBaseUrl = process.env.REDIRECT_URL_BASE || 'http://localhost:3000';
+  
   // Puedes redirigir al usuario a la página de pago en el frontend
   res.redirect(
    
-    `http://localhost:3000/pagar/${ticketId}`
+    `${redirectBaseUrl}/pagar/${ticketId}`
   );
 };
 
