@@ -18,6 +18,8 @@ import {
   isAdmin,
   isAdminEliminate,
   requireAuth,
+  noIsAdminOnly,
+  isAdminOnly,
 } from "../middlewares/session.middlewares.js";
 import passport from "passport";
 
@@ -30,12 +32,12 @@ router.get("/", requireAuth, getProducts);
 
 router.get("/api", requireAuth, getProductsView);
 
-router.post("/", requireAuth, addProduct);
+router.post("/", requireAuth, isAdminOnly, addProduct);
 
 //para documentacion - devuelve un json
 router.post("/api", addProductView);
 
-router.get("/create", requireAuth, isAdmin, createProduct);
+router.get("/create", requireAuth, isAdminOnly, createProduct);
 
 //router.get('/:code', getProductsById)
 router.get("/:id", requireAuth, getProductsById);
@@ -47,12 +49,12 @@ router.get(
   getProductsByIdView
 );
 
-router.delete("/:id", requireAuth, isAdminEliminate, deleteProduct);
+router.delete("/:id", requireAuth, isAdminOnly, deleteProduct);
 
 //para documentacion - devuelve un json
-router.delete("/api/:id", requireAuth, isAdminEliminate, deleteProduct);
+router.delete("/api/:id", requireAuth, isAdminOnly, deleteProduct);
 
-router.post("/:cid/product/:pid", requireAuth, addProductInCart);
+router.post("/:cid/product/:pid", requireAuth,noIsAdminOnly,  addProductInCart);
 
 router.get("/:id/update", requireAuth, isAdmin, updateProductForm);
 

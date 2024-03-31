@@ -87,7 +87,13 @@ export const generateTicket = async (req, res) => {
     // const ticket = await TicketModel.create(nuevoTicket)
     // const ticketObject = ticket.toObject();
 
+    carrito.productosagregados =[] 
+    carrito.productsToBuy = []
+
+    await CartService.updateCart(cid, carrito);
+    
     const ticket = await TicketService.addTicket(nuevoTicket);
+
 
     //console.log(' ticket guardado en la base de datos', ticket)
     logger.debug(

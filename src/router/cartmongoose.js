@@ -11,7 +11,7 @@ import {
   getCartStock,
 } from "../controllers/carts.js";
 import { generateTicket, generateTicketView } from "../controllers/ticket.js";
-import { isUser } from "../middlewares/session.middlewares.js";
+import { isUser, noIsAdminOnly } from "../middlewares/session.middlewares.js";
 import passport from "passport";
 
 const router = Router();
@@ -23,7 +23,7 @@ const router = Router();
 router.get(
   "/:cid",
   passport.authenticate("jwt", { session: false }),
-
+  noIsAdminOnly,
   getCartById
 );
 

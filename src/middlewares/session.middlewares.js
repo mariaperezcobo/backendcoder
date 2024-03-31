@@ -32,7 +32,21 @@ export function isAdminOnly(req, res, next) {
       </script>
     `);
 }
+export function noIsAdminOnly(req, res, next) {
+  console.log(req.user);
+  // Verificar si el usuario está autenticado y tiene el rol de admin
+  if (req.user && req.user.rol !== "admin") {
+    return next();
+  }
 
+  // Si el usuario no es admin, redirigir a otra página o enviar un error
+  res.status(403).send(`
+    <script>
+        alert('Acceso denegado: no puedes realizar esta acción');
+        window.location.href = '/productsmongoose';
+      </script>
+    `);
+}
 export function isAdminEliminate(req, res, next) {
   // Verificar si el usuario está autenticado y tiene el rol de admin
 
