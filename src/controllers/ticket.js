@@ -5,6 +5,7 @@ import {
 } from "../services/index.js";
 import logger from "../logging/logger.js";
 import { transport } from "../utils.js";
+import environmentConfig from "../enviroments.js";
 
 export const generateTicket = async (req, res) => {
   try {
@@ -141,7 +142,10 @@ export const generateTicket = async (req, res) => {
       }
     });
 
+    const redirectBaseUrl2 = environmentConfig.REDIRECT_URL_LOCAL || 'http://localhost:8080';
+
     res.render("checkout", {
+      redirectBaseUrl2,
       carrito,
       ticket,
       style: "index.css",
