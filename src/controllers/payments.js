@@ -1,6 +1,7 @@
 import { request, response } from "express";
 import { TicketService } from "../services/index.js";
 import PaymentService from "../services/payment.services.js";
+import logger from "../logging/logger.js";
 
 export const pagar = async (req = request, res = response) => {
   const ticketId = req.query.ticket;
