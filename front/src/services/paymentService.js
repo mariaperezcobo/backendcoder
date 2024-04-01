@@ -6,7 +6,12 @@ export default class PaymentService {
   constructor() {
     this.client = new AxiosClient();
   }
+
+
   createPaymentIntent = ({ productId, callbackSuccess, callbackError }) => {
+    console.log('ver si entra en payment services')
+    console.log('REACT_APP_BASE_URL', REACT_APP_BASE_URL)
+
     const requestInfo = {
       url: `${REACT_APP_BASE_URL}${REACT_APP_PAYMENT_ENDPOINT}/payment-intents?id=${productId}`,
       callbackSuccess,
