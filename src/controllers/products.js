@@ -58,13 +58,12 @@ export const getProducts = async (req = request, res = response) => {
       sort: { price: sortDirection },
     };
 
-    //    console.log('ProductService:', ProductService);
+
     const result = await ProductService.getProductsPaginate(
       searchQuery,
       options
     );
 
-    //const result = await ProductsModel.paginate(searchQuery,options)
 
     result.query = query;
 
@@ -194,8 +193,7 @@ export const getProductsById = async (req = request, res = response) => {
     const { id } = req.params;
     logger.debug(`ID: ${id}`);
 
-    //const productmongoose = await ProductsModel.findOne({code}).lean().exec()
-    const productmongoose = await ProductService.getProductsById(id);
+     const productmongoose = await ProductService.getProductsById(id);
 
     if (!productmongoose) {
       logger.error("Producto no encontrado");
@@ -203,7 +201,6 @@ export const getProductsById = async (req = request, res = response) => {
     }
 
     logger.info(`Producto encontrado: ${productmongoose.title}`);
-    // console.log(productmongoose)
 
     res.render("one", {
       productmongoose,
@@ -213,7 +210,6 @@ export const getProductsById = async (req = request, res = response) => {
     });
   } catch (error) {
     logger.error(`Error al buscar el producto: ${error.message}`);
-    //console.error('Error al buscar el producto:', error);
     res.status(500).send("Error interno del servidor");
   }
 };
@@ -262,14 +258,13 @@ export const addProduct = async (req = request, res = response) => {
     const productmongooseNew = new ProductInsertDTO(productNew);
 
     const result = await ProductService.addProduct(productmongooseNew);
-    // const result = await ProductsModel.create(productmongooseNew)
 
     logger.info(`resultado de crear un nuevo producto: ${result}`);
-    //console.log('resultado de crear prod', result)
+ 
     res.redirect("/productsmongoose");
   } catch (error) {
     logger.error(`Error al crear el producto: ${error.message}`);
-    //console.log(error),
+    
     res
       .status(500)
       .send(
@@ -322,11 +317,11 @@ export const addProductView = async (req = request, res = response) => {
 export const deleteProduct = async (req = request, res = response) => {
   try {
     const { id } = req.params;
-    // const { user } = req.session;
+
     const user = req.user;
     console.log("user desde delete", user);
 
-    //console.log('id para elimnar', id)
+    
     logger.debug(`ID para eliminar: ${id}`);
 
     const product = await ProductService.getProductsById({ _id: id });
@@ -345,7 +340,7 @@ export const deleteProduct = async (req = request, res = response) => {
 
     if (user.rol === "admin") {
       // Si es un administrador, eliminar el producto directamente
-      // await ProductsModel.deleteOne({ _id: id });
+
       await ProductService.deleteProduct({ _id: id });
       console.log("producto eliminado. el user es admir");
 
@@ -356,11 +351,6 @@ export const deleteProduct = async (req = request, res = response) => {
       const owner = await UserService.getUsersById({ _id: idUserdelProduct });
       console.log("owner eliminando premium", owner);
 
-      // if (!owner) {
-      //   return res
-      //     .status(404)
-      //     .json({ error: "El propietario del producto no fue encontrado" });
-      // }
 
       // Verificar si el propietario del producto tiene rol premium
       if (owner.rol === "premium") {
@@ -391,14 +381,14 @@ export const deleteProduct = async (req = request, res = response) => {
       console.log("se elimino porque el user es admin");
       return res.json({ status: "success" });
     } else if (user.rol === "premium") {
-      console.log("el user es premium");
+      logger.info("el user es premium");
       // Verificar si el propietario del producto es el mismo que el usuario actual
 
       if (product.owner.toString() === user._id.toString()) {
         // Si es el propietario, eliminar el producto
         //await ProductsModel.deleteOne({ _id: id });
         await ProductService.deleteProduct({ _id: id });
-        console.log(
+        logger.info(
           "producto eliminado. el user es premium y creador del producto"
         );
         return res.json({ status: "success" });
@@ -417,7 +407,7 @@ export const deleteProduct = async (req = request, res = response) => {
   } catch (error) {
     logger.error(`Error al eliminar el producto del carrito: ${error.message}`);
     return res.status(500).json(error);
-    //console.log(error)
+
   }
 };
 
@@ -430,17 +420,17 @@ export const addProductInCart = async (req = request, res = response) => {
     logger.debug(`CID: ${cid}, PID: ${pid}`);
 
     let carrito = await CartService.getCartsById(cid);
-    console.log("carrito", carrito);
-    console.log("user desde addproducts", user);
+    
+    logger.info("user desde addproducts", user);
 
-    console.log("req.user._id.toString()", req.user._id.toString());
-    console.log("carrito", carrito);
+    //console.log("req.user._id.toString()", req.user._id.toString());
+    logger.info("carrito", carrito);
 
     if (req?.user && req.user.rol !== "admin") {
       const producto = await ProductService.getProductsById(pid);
 
-      console.log("producto", producto);
-      console.log("producto.owner.toString()", producto.owner.toString());
+     // console.log("producto", producto);
+    //  console.log("producto.owner.toString()", producto.owner.toString());
 
       if (!producto) {
         return res.status(404).json({ error: "Producto no encontrado" });
@@ -452,16 +442,12 @@ export const addProductInCart = async (req = request, res = response) => {
           `<script>alert('${alertMessage}'); window.location='/productsmongoose';</script>`
         );
 
-        // return res
-        //   .status(403)
-        //   .json({ error: "No puedes agregar tu propio producto al carrito" });
       }
 
       const productoInCart = carrito.productosagregados.find(
         (p) => p.product && p.product._id.toString() === pid
       );
 
-      //    console.log('productoincart',productoInCart)
       if (productoInCart) {
         productoInCart.quantity++;
       } else {
@@ -470,11 +456,11 @@ export const addProductInCart = async (req = request, res = response) => {
       }
 
       // Actualizar la base de datos con los cambios
-      // await CartModel.findByIdAndUpdate(cid, { productosagregados: carrito.productosagregados }, { new: true });
       await CartService.updateCart(cid, {
         productosagregados: carrito.productosagregados,
       });
       //console.log('carrito desp de actualizar',carrito)
+
     } else {
       logger.info(`Usuario no autorizado`);
       res.status(403).json({
@@ -499,7 +485,7 @@ export const updateProductBase = async (req = request, res = response) => {
       id,
       updatedProductData
     );
-    //const updatedProduct = await ProductsModel.findByIdAndUpdate(id, updatedProductData, { new: true });
+   
 
     if (updatedProduct) {
       res.redirect("/productsmongoose");
@@ -511,7 +497,7 @@ export const updateProductBase = async (req = request, res = response) => {
     }
   } catch (error) {
     logger.error(`Error al actualizar el producto: ${error.message}`);
-    //console.error('Error in update product route:', error);
+
     res.status(500).json({ error: "Error interno del servidor" });
   }
 };

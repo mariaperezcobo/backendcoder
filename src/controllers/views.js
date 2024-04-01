@@ -95,7 +95,7 @@ export const updateUser = async (req = request, res = response) => {
     console.log("user desde updateUser", userId);
 
     const updatedUser = req.body;
-console.log('req.body',req.body)
+    //console.log('req.body',req.body)
     console.log("req . body desde updateUser", updatedUser);
   
     //const updatedUserResult = await UserRegisterModel.findByIdAndUpdate(
@@ -128,8 +128,6 @@ export const updateUserView = async (req = request, res = response) => {
     const userUpdated = await UserService.getUsersById({ _id: userId });
     console.log("user desde updateview", userUpdated);
 
-
-
     res.render("updateuser", {
       userUpdated,
       style: "index.css",
@@ -145,8 +143,6 @@ export const mail = async (req, res) => {
 
   const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
 
-  // const expiration = Date.now() + 120000; //3600000;
-  // req.session.passwordReset = { token, expiration, email };
 
   const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
 

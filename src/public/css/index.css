@@ -23,12 +23,20 @@ b{
     align-items: center;
     /* background-color: blue; */
   }
+
+  .contenedorCompra{
+    display: flex;
+    flex-wrap: wrap;
+  justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+  }
+
   .contenedorCarrito{
     display: flex;
     flex-wrap: wrap;
-  
-    align-items: center;
-    /* background-color: blue; */
+ justify-content: flex-end;
+
   }
 
 

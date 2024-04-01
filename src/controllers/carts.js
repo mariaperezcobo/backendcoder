@@ -28,17 +28,11 @@ export const getCartById = async (req = request, res = response) => {
         cid: cid,
       };
     });
-    // carrito.productosagregados.forEach(product => {
-    //     product.cid = cid;
-    // });
+  
     logger.debug(
       `Datos del carrito desde getCartById: ${JSON.stringify(carrito, null, 2)}`
     );
 
-    // console.log ('carrito', carrito)
-    //console.log ('carrito.productosagregados', carrito.productosagregados)
-    // return res.json({carrito});
-    //res.status(400).json('el id del carrito no existe'),
 
     res.render("cartone", {
       carrito,
@@ -49,7 +43,7 @@ export const getCartById = async (req = request, res = response) => {
     });
   } catch (error) {
     logger.error(`Error al obtener el carrito: ${error.message}`);
-    // console.log('error')
+  
   }
 };
 
@@ -66,7 +60,7 @@ export const getCartByIdView = async (req = request, res = response) => {
     );
 
     const carrito = await CartService.getCartsById(cid);
-    //console.log('carrito', carrito)
+
 
     if (!carrito) {
       logger.debug(`Carrito no encontrado`);
@@ -80,21 +74,16 @@ export const getCartByIdView = async (req = request, res = response) => {
         cid: cid,
       };
     });
-    // carrito.productosagregados.forEach(product => {
-    //     product.cid = cid;
-    // });
+ 
     logger.debug(
       `Datos del carrito desde getCartById: ${JSON.stringify(carrito, null, 2)}`
     );
 
-    // console.log ('carrito', carrito)
-    //console.log ('carrito.productosagregados', carrito.productosagregados)
-    // return res.json({carrito});
-    //res.status(400).json('el id del carrito no existe'),
+
     return res.status(200).json(carrito);
   } catch (error) {
     logger.error(`Error al obtener el carrito: ${error.message}`);
-    // console.log('error')
+   
   }
 };
 
@@ -105,12 +94,11 @@ export const deleteProductInCart = async (req = request, res = response) => {
 
     const carrito = await CartService.getCartsById(cid);
 
-    //console.log(cid)
 
     carrito.productosagregados = carrito.productosagregados.filter(
       (p) => p._id.toString() !== pid
     );
-    // console.log('carrito actualizado antes de save', carrito)
+  
 
     logger.info(`Eliminación exitosa - CID: ${cid}, PID: ${pid}`);
     logger.debug(
@@ -129,7 +117,7 @@ export const deleteProductInCart = async (req = request, res = response) => {
       otherProducts: carrito.otherProducts,
       productsToBuy: carrito.productsToBuy,
     });
-    //await carrito.save()
+    
 
     return res.status(200).json({ message: "Eliminación exitosa" });
   } catch (error) {
@@ -156,7 +144,7 @@ export const deleteAllProductsInCart = async (
       otherProducts: carrito.otherProducts,
       productsToBuy: carrito.productsToBuy,
     });
-    //await carrito.save()
+    
 
     return res.json({ msg: "carrito actualizado!", carrito });
   } catch (error) {
@@ -170,7 +158,7 @@ export const getCartToBuy = async (req = request, res = response) => {
     const { cid } = req.params;
 
     logger.info(`CID desde getCartToBuy: ${cid}`);
-    //console.log('cid desde el controller', cid)
+  
 
     let carrito = await CartService.getCartsById(cid);
 
@@ -228,8 +216,7 @@ export const getCartToBuy = async (req = request, res = response) => {
             quantity: remainingUnits,
           });
 
-          //otherProducts.push(product)
-          // console.log("otherProducts", otherProducts);
+
           // Enviar un mensaje de alerta a la vista
           stockAlert =
             "No tenemos suficiente stock para algunos productos, ajustamos la cantidad en el carrito";
@@ -251,8 +238,8 @@ export const getCartToBuy = async (req = request, res = response) => {
       productsToBuy: productsToBuy,
       otherProducts: otherProducts,
     };
-    console.log("updatedCart", updatedCart);
-    //  await CartService.updateCart(cid, { productosagregados: carrito.productosagregados });
+    logger.info("updatedCart", updatedCart);
+ 
     await CartService.updateCart(cid, updatedCart);
     let totalCompra;
 
@@ -265,8 +252,7 @@ export const getCartToBuy = async (req = request, res = response) => {
     });
 
     logger.info(`Compra total - CID: ${cid}, Total de compra: ${totalCompra}`);
-    //console.log('total compra desde getcart', totalCompra)
-    console.log("carrito desp de filtrar stock", carrito);
+  
     res.render("purchase", {
       carrito,
       totalCompra,
@@ -278,7 +264,6 @@ export const getCartToBuy = async (req = request, res = response) => {
   } catch (error) {
     logger.error(`Error en getCartToBuy: ${error.message}`);
 
-    // console.log('error', error)
   }
 };
 
@@ -287,7 +272,6 @@ export const getCartStock = async (req = request, res = response) => {
     const { cid } = req.params;
 
     logger.info(`CID desde getCartToBuyStock: ${cid}`);
-    //console.log('cid desde el controller', cid)
 
     const carrito = await CartService.getCartsById(cid);
 
@@ -305,7 +289,6 @@ export const getCartStock = async (req = request, res = response) => {
   } catch (error) {
     logger.error(`Error en getCartToBuy: ${error.message}`);
 
-    // console.log('error', error)
   }
 };
 
@@ -444,7 +427,6 @@ export const createCart = async (req = request, res = response) => {
     res.redirect("/cartmongoose");
   } catch (error) {
     logger.error(`Error al el carrito: ${error.message}`);
-    // console.log(error),
     res.send("error al crear el carrito");
   }
 };
