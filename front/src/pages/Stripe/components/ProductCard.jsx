@@ -2,6 +2,8 @@
 import styles from '../Stripe.module.scss'
 
 const ProductCard = ({ product, setCurrentProduct}) => {
+    console.log('product:', product);
+
     return (<>
     <div className={styles.contenedorProductos2}>
         <div className={styles.contenedorProductos}>
