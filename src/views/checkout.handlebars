@@ -52,36 +52,3 @@
 <script>
   <script>
 
-
-    {{!-- document.getElementById('buyForm').addEventListener ('submit', function(event) {
-        event.preventDefault();
-        console.log('submit para ir a pagar')
-      
-      const id = `{{ticket._id}}`
-
-        try{
-        const response = await  fetch(`/api/payments/payment-intents/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        
-            body: JSON.stringify({ result })
-        })
-        if (!response.ok) {
-            throw new Error('La solicitud falló'); // Manejar errores de red u otros errores en la solicitud fetch
-            }
-     const data = await response.json();
-
-
-    console.log('data', data);
-
-
-    window.location.href = '/checkout';
-
-        }catch (error){
- console.error('Error:', error);
-        }
-
-    });
-</script> --}}
