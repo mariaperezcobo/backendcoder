@@ -95,7 +95,7 @@ export const generateTicket = async (req, res) => {
     const ticket = await TicketService.addTicket(nuevoTicket);
 
 
-    //console.log(' ticket guardado en la base de datos', ticket)
+    console.log(' ticket guardado en la base de datos', ticket)
     logger.debug(
       `Ticket guardado en la base de datos: ${JSON.stringify(ticket, null, 2)}`
     );

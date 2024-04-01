@@ -4417,3 +4417,32 @@
 {"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1712003684 x6-20020a17090a46c600b0029ba8f43336sm10183397pjg.20 - gsmtp"}
 {"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-04-01T20:33:24.527Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
 {"level":"debug","message":"cid"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-04-01T20:58:18.522Z","last_name":"perez","level":"debug","message":"user","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"CID: 66098d3cfac885ba5b5eb518, PID: 6607d7841040146121188379"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb516","age":32,"cart":"66098d3cfac885ba5b5eb518","email":"juana@google.com","first_name":"juana","last_connection":"2024-04-01T20:58:18.522Z","last_name":"perez","level":"info","message":"user desde addproducts","password":"$2b$10$kySwUMp5lZJeDAHq3qT5G.i4XWks3AZOK/QKhd81doj4zc5QuPJ0W","rol":"premium"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb518","level":"info","message":"carrito","otherProducts":[],"productosagregados":[],"productsToBuy":[]}
+{"level":"info","message":"CID desde getCartById: 66098d3cfac885ba5b5eb518, User: juana"}
+{"level":"debug","message":"Datos del carrito desde getCartById: {\n  \"_id\": \"66098d3cfac885ba5b5eb518\",\n  \"productosagregados\": [\n    {\n      \"product\": {\n        \"_id\": \"6607d7841040146121188379\",\n        \"title\": \"Remera Miami\",\n        \"price\": 21000,\n        \"thumbnail\": \"/static/imagenes/mat(3).png\",\n        \"description\": \"Remera rosa\",\n        \"category\": \"remeras\",\n        \"code\": \"322\",\n        \"status\": \"true\",\n        \"stock\": 13,\n        \"owner\": \"660069d6f2450a49cfad57f3\",\n        \"__v\": 0\n      },\n      \"quantity\": 1,\n      \"_id\": \"660b1fee05a59fc38b58f712\",\n      \"cid\": \"66098d3cfac885ba5b5eb518\"\n    }\n  ],\n  \"productsToBuy\": [],\n  \"otherProducts\": [],\n  \"__v\": 0\n}"}
+{"level":"info","message":"CID desde getCartToBuy: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"Productos a comprar: [\n  {\n    \"product\": {\n      \"_id\": \"6607d7841040146121188379\",\n      \"title\": \"Remera Miami\",\n      \"price\": 21000,\n      \"thumbnail\": \"/static/imagenes/mat(3).png\",\n      \"description\": \"Remera rosa\",\n      \"category\": \"remeras\",\n      \"code\": \"322\",\n      \"status\": \"true\",\n      \"stock\": 13,\n      \"owner\": \"660069d6f2450a49cfad57f3\",\n      \"__v\": 0\n    },\n    \"quantity\": 1,\n    \"_id\": \"660b1fee05a59fc38b58f712\",\n    \"cid\": \"66098d3cfac885ba5b5eb518\"\n  }\n]"}
+{"__v":0,"_id":"66098d3cfac885ba5b5eb518","level":"info","message":"updatedCart","otherProducts":[],"productosagregados":[{"_id":"660b1fee05a59fc38b58f712","cid":"66098d3cfac885ba5b5eb518","product":{"__v":0,"_id":"6607d7841040146121188379","category":"remeras","code":"322","description":"Remera rosa","owner":"660069d6f2450a49cfad57f3","price":21000,"status":"true","stock":13,"thumbnail":"/static/imagenes/mat(3).png","title":"Remera Miami"},"quantity":1}],"productsToBuy":[{"_id":"660b1fee05a59fc38b58f712","cid":"66098d3cfac885ba5b5eb518","product":{"__v":0,"_id":"6607d7841040146121188379","category":"remeras","code":"322","description":"Remera rosa","owner":"660069d6f2450a49cfad57f3","price":21000,"status":"true","stock":13,"thumbnail":"/static/imagenes/mat(3).png","title":"Remera Miami"},"quantity":1}]}
+{"level":"info","message":"Compra total - CID: 66098d3cfac885ba5b5eb518, Total de compra: 21000"}
+{"level":"info","message":"Usuario desde generateTicket: juana"}
+{"level":"debug","message":"Correo electrónico del usuario: juana@google.com"}
+{"level":"debug","message":"ID del carrito desde generate ticket: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"Datos del carrito de checkout: [\n  {\n    \"product\": {\n      \"_id\": \"6607d7841040146121188379\",\n      \"title\": \"Remera Miami\",\n      \"price\": 21000,\n      \"thumbnail\": \"/static/imagenes/mat(3).png\",\n      \"description\": \"Remera rosa\",\n      \"category\": \"remeras\",\n      \"code\": \"322\",\n      \"status\": \"true\",\n      \"stock\": 13,\n      \"owner\": \"660069d6f2450a49cfad57f3\",\n      \"__v\": 0\n    },\n    \"quantity\": 1,\n    \"_id\": \"660b1fee05a59fc38b58f712\"\n  }\n]"}
+{"level":"debug","message":"Total de compra desde ticket: 21000"}
+{"level":"debug","message":"Nuevo ticket creado: {\n  \"code\": 61,\n  \"purchase_datatime\": \"2024-04-01T20:59:00.701Z\",\n  \"amount\": 21000,\n  \"purchaser\": \"juana@google.com\"\n}"}
+{"level":"debug","message":"Ticket guardado en la base de datos: {\n  \"code\": 61,\n  \"purchase_datatime\": \"2024-04-01T20:59:00.701Z\",\n  \"amount\": 21000,\n  \"purchaser\": \"juana@google.com\",\n  \"_id\": \"660b201405a59fc38b58f729\",\n  \"__v\": 0\n}"}
+{"level":"debug","message":"Stock actualizado en la base de datos."}
+{"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1712005201 s8-20020a62e708000000b006e6adfb8897sm8357549pfh.156 - gsmtp"}
+{"level":"info","message":"Usuario desde generateTicket: juana"}
+{"level":"debug","message":"Correo electrónico del usuario: juana@google.com"}
+{"level":"debug","message":"ID del carrito desde generate ticket: 66098d3cfac885ba5b5eb518"}
+{"level":"debug","message":"Datos del carrito de checkout: []"}
+{"level":"debug","message":"Total de compra desde ticket: 0"}
+{"level":"debug","message":"Nuevo ticket creado: {\n  \"code\": 62,\n  \"purchase_datatime\": \"2024-04-01T21:02:53.507Z\",\n  \"amount\": 0,\n  \"purchaser\": \"juana@google.com\"\n}"}
+{"level":"debug","message":"Ticket guardado en la base de datos: {\n  \"code\": 62,\n  \"purchase_datatime\": \"2024-04-01T21:02:53.507Z\",\n  \"amount\": 0,\n  \"purchaser\": \"juana@google.com\",\n  \"_id\": \"660b20fd05a59fc38b58f72f\",\n  \"__v\": 0\n}"}
+{"level":"debug","message":"Stock actualizado en la base de datos."}
+{"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1712005433 p16-20020a170902e75000b001dd7a97a266sm9413222plf.282 - gsmtp"}
