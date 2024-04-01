@@ -5,7 +5,7 @@ import logger from "../logging/logger.js";
 
 export const pagar = async (req = request, res = response) => {
   const ticketId = req.query.ticket;
-  logger.info("ticket id", ticketId);
+ console.log("ticket id", ticketId);
 
   const redirectBaseUrl = process.env.REDIRECT_URL_BASE || 'http://localhost:3000';
   
@@ -39,7 +39,7 @@ export const paymentIntents = async (req = request, res = response) => {
 
     const service = new PaymentService();
     const result = await service.createPaymentIntent(data);
-    logger.info("result", result);
+    console.log("result", result);
     return res.send({ status: "success", payload: result });
   } catch (error) {
     logger.error("Error:", error);
