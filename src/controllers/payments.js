@@ -5,10 +5,11 @@ import logger from "../logging/logger.js";
 import environmentConfig from "../enviroments.js";
 
 export const pagar = async (req = request, res = response) => {
-  const ticketId = req.query.ticket;
+ // const ticketId = req.params.ticketId;
+ const ticketId = req.query.ticketId;
  console.log("ticket id", ticketId);
 
-  const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE || 'http://localhost:3030';
+  const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE ;
   console.log('redirectBaseUrl', redirectBaseUrl)
 
   // Puedes redirigir al usuario a la página de pago en el frontend
