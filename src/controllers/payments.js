@@ -5,8 +5,8 @@ import logger from "../logging/logger.js";
 import environmentConfig from "../enviroments.js";
 
 export const pagar = async (req = request, res = response) => {
- // const ticketId = req.params.ticketId;
- const ticketId = req.query.ticketId;
+ //const ticketId = req.params.ticketId;
+ const ticketId = req.query.ticket;
  console.log("ticket id", ticketId);
 
   const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE ;
@@ -20,7 +20,7 @@ export const pagar = async (req = request, res = response) => {
 };
 
 export const paymentIntents = async (req = request, res = response) => {
- 
+ // const productId = req.params.id;
   const productId = req.query.id;
   if (!productId) return res.status(400).send("No id");
   //console.log(`ID: ${id}`);

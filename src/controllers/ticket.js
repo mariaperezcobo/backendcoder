@@ -80,7 +80,7 @@ export const generateTicket = async (req, res) => {
       purchaser: email,
     };
 
-    //console.log('crear nuevo ticket', nuevoTicket)
+    console.log('crear nuevo ticket', nuevoTicket)
     logger.debug(
       `Nuevo ticket creado: ${JSON.stringify(nuevoTicket, null, 2)}`
     );
@@ -143,7 +143,7 @@ export const generateTicket = async (req, res) => {
     });
 
     const redirectBaseUrl2 = environmentConfig.REDIRECT_URL_LOCAL;
-console.log('redirectbase', redirectBaseUrl2)
+  console.log('redirectbase', redirectBaseUrl2)
     res.render("checkout", {
       redirectBaseUrl2,
       carrito,

@@ -13,7 +13,7 @@ export default class PaymentService {
     console.log('REACT_APP_BASE_URL', REACT_APP_BASE_URL)
 
     const requestInfo = {
-      url: `${REACT_APP_BASE_URL}${REACT_APP_PAYMENT_ENDPOINT}/payment-intents?id=${productId}`,
+      url: `${REACT_APP_BASE_URL}${REACT_APP_PAYMENT_ENDPOINT}/payment-intents/?id=${productId}`,
       callbackSuccess,
       callbackError,
     };
