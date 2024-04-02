@@ -8,7 +8,7 @@ export const pagar = async (req = request, res = response) => {
   const ticketId = req.query.ticket;
  console.log("ticket id", ticketId);
 
-  const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE || 'http://localhost:3000';
+  const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE || 'http://localhost:3030';
   
   // Puedes redirigir al usuario a la página de pago en el frontend
   res.redirect(

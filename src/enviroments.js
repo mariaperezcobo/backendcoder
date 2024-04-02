@@ -18,6 +18,7 @@ const environmentConfig = {
   MONGO_DBNAME: process.env.MONGO_DBNAME,
   KEY: process.env.KEY,
   REDIRECT_URL_BASE: process.env.REDIRECT_URL_BASE,
+  REDIRECT_URL_LOCAL: process.env.REDIRECT_URL_LOCAL,
 };
 
 export default environmentConfig;

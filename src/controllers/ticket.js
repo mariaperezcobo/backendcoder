@@ -142,7 +142,7 @@ export const generateTicket = async (req, res) => {
       }
     });
 
-    const redirectBaseUrl2 = environmentConfig.REDIRECT_URL_LOCAL || 'http://localhost:8080';
+    const redirectBaseUrl2 = environmentConfig.REDIRECT_URL_LOCAL;
 
     res.render("checkout", {
       redirectBaseUrl2,
