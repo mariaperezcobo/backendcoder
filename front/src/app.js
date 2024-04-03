@@ -5,8 +5,7 @@ import "./App.css";
 const Home = React.lazy(() => import("./pages/Home"));
 const Stripe = React.lazy(() => import("./pages/Stripe"));
 
-const redirectBaseUrlFront = process.env.REACT_APP_BASE_FRONT;
-console.log(' redirectBaseUrlFront',redirectBaseUrlFront )
+
 
 function App() {
   return (
