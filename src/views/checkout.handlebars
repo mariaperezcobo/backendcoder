@@ -16,8 +16,8 @@
         <p class="margen">El código de la operación es {{ticket.code}}</p>
         <p class="margen">El email del usuario que registró la compra es {{ticket.purchaser}}</p><br>
     
- {{!-- <a href="{{redirectBaseUrl2}}/api/payments/pagar?ticket={{ticket._id}}" class="btn btn-primary terminarCompra2">Pagar</a> --}}
-    <a href="/api/payments/pagar?ticket={{ticket._id}}" class="btn btn-primary terminarCompra2">Pagar</a>
+ <a href="{{redirectBaseUrl2}}/api/payments/pagar?ticket={{ticket._id}}" class="btn btn-primary terminarCompra2">Pagar</a>
+    {{!-- <a href="/api/payments/pagar?ticket={{ticket._id}}" class="btn btn-primary terminarCompra2">Pagar</a> --}}
         </div>
 <br>
 <div id="response"></div>
