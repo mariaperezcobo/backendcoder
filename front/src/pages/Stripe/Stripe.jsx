@@ -14,13 +14,14 @@ const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
 
 
 const Stripe = () => {
+    console.log('ver si entra en este codigo')
     const [currentProduct, setCurrentProduct] = useState(null);
    
     const [clientSecret,setClientSecret] = useState(null);
 
     const { ticketId } = useParams();
 
-    console.log('tikcetId',ticketId)
+    console.log('tikcetId desde front',ticketId)
 
 
     const mockCart = [
