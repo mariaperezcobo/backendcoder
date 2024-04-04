@@ -16,7 +16,7 @@ export const pagar = async (req = request, res = response) => {
   // Puedes redirigir al usuario a la página de pago en el frontend
   res.redirect(
    
-    `${redirectBaseUrl}/pagar/${ticketId}`
+    `${redirectBaseUrl}/pagarfront/${ticketId}`
   );
 };
 

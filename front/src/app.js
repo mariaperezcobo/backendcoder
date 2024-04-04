@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="" element={<Home />} />
         {/* <Route path="/stripe" element={<Stripe />} /> */}
-        <Route path="/pagar/:ticketId" element={<Stripe />} />
+        <Route path="/pagarfront/:ticketId" element={<Stripe />} />
       </Routes>
     </Suspense>
   );

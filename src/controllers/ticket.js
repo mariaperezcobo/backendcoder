@@ -143,6 +143,7 @@ export const generateTicket = async (req, res) => {
     });
 
     const redirectBaseUrl2 = environmentConfig.REDIRECT_URL_LOCAL;
+    
   console.log('redirectbase', redirectBaseUrl2)
     res.render("checkout", {
       redirectBaseUrl2,
