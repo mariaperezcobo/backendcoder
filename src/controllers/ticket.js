@@ -80,8 +80,6 @@ export const generateTicket = async (req, res) => {
  
 
   
-
-    await CartService.updateCart(cid, carrito);
     
     const ticket = await TicketService.addTicket(nuevoTicket);
 
@@ -106,10 +104,13 @@ export const generateTicket = async (req, res) => {
       });
       // console.log('acutualizar', actualizar)
     }
+
+    logger.debug("Stock actualizado en la base de datos.");
     carrito.productosagregados =[] 
     carrito.productsToBuy = []
-    logger.debug("Stock actualizado en la base de datos.");
 
+    await CartService.updateCart(cid, carrito);
+    
     const mailOptions = {
       from: "mariaperezcobo@gmail.com",
       to: email, // El correo electrónico del usuario obtenido del req.session.user.email
