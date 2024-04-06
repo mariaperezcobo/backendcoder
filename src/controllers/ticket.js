@@ -64,13 +64,6 @@ export const generateTicket = async (req, res) => {
     //console.log('total compra desde ticket', totalCompra)
     logger.debug(`Total de compra desde ticket: ${totalCompra}`);
 
-    // // Crea una nueva instancia del ticket
-    // const nuevoTicket = new TicketModel({
-    //   code: newCode,
-    //   purchase_datatime: new Date().toISOString(),
-    //   amount: totalCompra,
-    //   purchaser: email,
-    // });
 
     // Creas el objeto nuevoTicket
     const nuevoTicket = {
@@ -84,12 +77,9 @@ export const generateTicket = async (req, res) => {
     logger.debug(
       `Nuevo ticket creado: ${JSON.stringify(nuevoTicket, null, 2)}`
     );
-    // Guarda el ticket en la base de datos
-    // const ticket = await TicketModel.create(nuevoTicket)
-    // const ticketObject = ticket.toObject();
+ 
 
-    carrito.productosagregados =[] 
-    carrito.productsToBuy = []
+  
 
     await CartService.updateCart(cid, carrito);
     
@@ -107,16 +97,17 @@ export const generateTicket = async (req, res) => {
       const productId = productInfo.product._id; // Asume que tienes un campo _id en tu modelo de productos
       const purchasedQuantity = productInfo.quantity;
       const product = await ProductService.getProductsById(productId);
-      //console.log('producto a restar cantidas', product)
-      //console.log('id del producto a restar stock', productId)
+      console.log('producto a restar cantidas', product)
+      console.log('id del producto a restar stock', productId)
       const updatedStock = product.stock - purchasedQuantity;
-      //console.log('updatedStock', updatedStock)
+      console.log('updatedStock', updatedStock)
       const actualizar = await ProductService.updateProduct(productId, {
         stock: updatedStock,
       });
       // console.log('acutualizar', actualizar)
     }
-
+    carrito.productosagregados =[] 
+    carrito.productsToBuy = []
     logger.debug("Stock actualizado en la base de datos.");
 
     const mailOptions = {

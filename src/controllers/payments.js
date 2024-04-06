@@ -12,7 +12,6 @@ export const pagar = async (req = request, res = response) => {
   const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE ;
   console.log('redirectBaseUrl', redirectBaseUrl)
 
-  //`${redirectBaseUrl}/pagar/${ticketId}`
   // Puedes redirigir al usuario a la página de pago en el frontend
   res.redirect(
    
@@ -21,16 +20,13 @@ export const pagar = async (req = request, res = response) => {
 };
 
 export const paymentIntents = async (req = request, res = response) => {
- // const productId = req.params.id;
+
   const productId = req.query.id;
   if (!productId) return res.status(400).send("No id");
   //console.log(`ID: ${id}`);
 
   try {
-    // const product = products.find((p) => p.id == parseInt(productId));
-    // if (!product) return res.status(400).send("Product not found");
-
-
+ 
     const productRequested = await TicketService.getTicketById(productId);
     if (!productRequested) return res.status(404).send("ticket not found");
 
