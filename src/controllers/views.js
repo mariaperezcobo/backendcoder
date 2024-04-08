@@ -139,7 +139,7 @@ export const updateUserView = async (req = request, res = response) => {
 
 export const mail = async (req, res) => {
   const email = req.body.email;
-  const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE ;
+  const redirectBaseUrl = environmentConfig.REDIRECT_URL_LOCAL ;
 
   const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
 
