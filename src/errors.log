@@ -5540,3 +5540,10 @@
 {"level":"debug","message":"Ticket guardado en la base de datos: {\n  \"code\": 154,\n  \"purchase_datatime\": \"2024-04-06T10:50:37.073Z\",\n  \"amount\": 19000,\n  \"purchaser\": \"manu@google.com\",\n  \"_id\": \"661128fd56416f2c9199b9c4\",\n  \"__v\": 0\n}"}
 {"level":"debug","message":"Stock actualizado en la base de datos."}
 {"level":"info","message":"Correo electrónico enviado: 250 2.0.0 OK  1712400708 h2-20020a170902f54200b001ddc0bc5934sm3148282plf.249 - gsmtp"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-04-06T10:51:53.248Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$o2kyQkSAMYzSC4CTJy9yruKAvuXocGCLLLKyhR77yhl8n9In34oeO","rol":"admin"}
+{"level":"debug","message":"cid"}
+{"level":"debug","message":"ID: 65548d5fc3f09f05e9c4abf9"}
+{"level":"info","message":"Producto encontrado: Calzas Lisboa"}
+{"level":"debug","message":"ID para actualizar: 65548d5fc3f09f05e9c4abf9"}
+{"__v":0,"_id":"660069d6f2450a49cfad57f3","age":null,"cart":"660069d6f2450a49cfad57f5","email":"mariaperezcobo@hotmail.com","first_name":"MARIA","last_connection":"2024-04-06T10:51:53.248Z","last_name":"PEREZ COBO","level":"debug","message":"user","password":"$2b$10$o2kyQkSAMYzSC4CTJy9yruKAvuXocGCLLLKyhR77yhl8n9In34oeO","rol":"admin"}
+{"level":"debug","message":"cid"}

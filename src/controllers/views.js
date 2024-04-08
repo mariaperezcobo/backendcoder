@@ -1,10 +1,10 @@
 import { request, response } from "express";
 import ProductManager from "../dao/managers/productManager.js";
 import logger from "../logging/logger.js";
-import UserRegisterModel from "../dao/models/userregister.model.js";
 import jwt from "jsonwebtoken";
 import { transport } from "../utils.js";
 import { UserService } from "../services/index.js";
+import environmentConfig from "../enviroments.js";
 
 export const profileUser = async (req = request, res = response) => {
   try {
@@ -98,7 +98,6 @@ export const updateUser = async (req = request, res = response) => {
     //console.log('req.body',req.body)
     console.log("req . body desde updateUser", updatedUser);
   
-    //const updatedUserResult = await UserRegisterModel.findByIdAndUpdate(
     const updatedUserResult = await UserService.updateUser(
       userId,
       updatedUser,
@@ -140,11 +139,12 @@ export const updateUserView = async (req = request, res = response) => {
 
 export const mail = async (req, res) => {
   const email = req.body.email;
+  const redirectBaseUrl = environmentConfig.REDIRECT_URL_BASE ;
 
   const token = jwt.sign({ email }, "secret", { expiresIn: "1h" });
 
 
-  const resetLink = `http://localhost:8080/updateuserpassword?token=${token}`; // Construir el enlace con el token
+  const resetLink = `${redirectBaseUrl}/updateuserpassword?token=${token}`; // Construir el enlace con el token
 
   const result = await transport.sendMail({
     from: "mariapcsalem@gmail.com.ar",

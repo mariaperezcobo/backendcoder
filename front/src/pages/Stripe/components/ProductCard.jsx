@@ -7,7 +7,7 @@ const ProductCard = ({ product, setCurrentProduct}) => {
     return (<>
     <div className={styles.contenedorProductos2}>
         <div className={styles.contenedorProductos}>
-        <p className={styles.titulo_card2}>Se generó la orden con el siguiente número. </p>
+        <p className={styles.titulo_card2}>Se generó la orden con el siguiente número. </p><br></br>
         <p className={styles.titulo_card2}> Seleccionala para ir a pagar</p>
         </div>
 
